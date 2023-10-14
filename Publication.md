@@ -21,10 +21,28 @@ Sustainable Chem. Eng. 2022, 10, 14, 4561–4578
 Membrane Fuel Cells: A Review, Energy and AI , 2022, 9, 100170.
 10. Rui Ding, Yawen Chen,, Jia Li*, Jianguo Liu* et. al. Machine learning utilized for the development of proton exchange
 membrane electrolyzers, J. Power Sources , 2023, 556, 232389
-11. Rui Ding#, Wenjuan Yin#, Jia Li*, Jianguo Liu* et. al. Effectively Increasing Pt Utilization Efficiency of the Membrane
+11. Rui Ding, Wenjuan Yin, Jia Li*, Jianguo Liu* et. al. Effectively Increasing Pt Utilization Efficiency of the Membrane
 Electrode Assembly in Proton Exchange Membrane Fuel Cells through Multiparameter Optimization Guided by Machine
 Learning, ACS Appl. Mater. Interfaces , 2022, 14, 6, 8010–8024 (project leader, machine learning works)
-12. Rui Ding#, Wenjuan Yin#, Jia Li*, Jianguo Liu* et. al. Boosting the optimization of membrane electrode assembly in
+12. Rui Ding, Wenjuan Yin, Jia Li*, Jianguo Liu* et. al. Boosting the optimization of membrane electrode assembly in
 proton exchange membrane fuel cells guided by explainable artificial intelligence, Energy and AI , 2021, 5, 100098. (project
 leader, COMSOL modelling and machine learning works)
+## Second Author (including second co-first-author)
+1. (DFT calculation) Wang, Z., Ding, R., Zhang, J., Chen, L., Wang, Y., Liu, J., & Zou, Z. (2022). Biomimetic control of charge transfer in MOFs by solvent coordination for boosting photocatalysis. Chemical Communications, 58(70), 9830-9833.
+2. (Idea, Material Design, Drafting, Characterization) Chen, Y., Ding, R., Li, J., & Liu, J. (2022). Highly active atomically dispersed platinum-based electrocatalyst for hydrogen evolution reaction achieved by defect anchoring strategy. Applied Catalysis B: Environmental, 301, 120830.
+3. (Idea, Provide ML techniques, Drafting and Reviewing) Wang, J., Ding, R., Cao, F., Li, J., Dong, H., Shi, T., ... & Liu, J. (2022). Comparison of state-of-the-art machine learning algorithms and data-driven optimization methods for mitigating nitrogen crossover in PEM fuel cells. Chemical Engineering Journal, 442, 136064.
+4. (Drafting and Reviewing) Cao, F., Ding, R., Rui, Z., Wang, X., Meng, Z., Zhang, B., ... & Jiang, X. (2023). Advances in Low Pt Loading Membrane Electrode Assembly for Proton Exchange Membrane Fuel Cells. Molecules, 28(2), 773.
+5. (Idea, Provide ML techniques, Drafting and Reviewing) Rui, Z., Ding, R., Hua, K., Duan, X., Li, X., Wu, Y., ... & Liu, J. (2023). Design of proton exchange membranes with high durability for fuel cells: From the perspective of machine learning. Journal of Membrane Science, 121831.
+6. (DFT calculation) Wang, Z., Ding, R., Li, X., Zhang, J., Yang, L., Wang, Y., ... & Zhou, Z. (2023). Blocking Accretion Enables Dimension Reduction of Metal‐Organic Framework for Photocatalytic Performance. Small, 2305308.
+## Other Cooperation (Mainly DFT and experimental as well as characterization)
+1. Li, J., Zhu, X., Wang, J., Rui, Z., Zhang, S., Li, Y., ... & Zou, Z. (2020). Iron-containing porphyrins self-assembled on ZnO nanoparticles as electrocatalytic materials for oxygen reduction. ACS Applied Nano Materials, 3(1), 742-751.
+2. Duan, X., Cao, F., Ding, R., Li, X., Li, Q., Aisha, R., ... & Liu, J. (2022). Cobalt‐Doping Stabilized Active and Durable Sub‐2 nm Pt Nanoclusters for Low‐Pt‐Loading PEMFC Cathode. Advanced Energy Materials, 12(13), 2103144.
+3. Huo, Y., Li, Q., Rui, Z., Ding, R., Liu, J., Li, J., & Liu, J. (2021). A highly stable reinforced PEM assisted by resveratrol and polydopamine-treated PTFE. Journal of Membrane Science, 635, 119453.
+4. Zhao, X., Gunji, T., Lv, F., Huang, B., Ding, R., Liu, J., ... & Guo, S. (2021). Direct observation of heterogeneous surface reactivity and reconstruction on terminations of grain boundaries of platinum. ACS Materials Letters, 3(5), 622-629.
+5. Huo, Y., Li, Q., Rui, Z., Ding, R., Liu, J., Li, J., & Liu, J. (2021). A highly stable reinforced PEM assisted by resveratrol and polydopamine-treated PTFE. Journal of Membrane Science, 635, 119453.
+6. Wu, Y., Yuan, M., Li, X., Ding, R., Duan, X., Li, J., ... & Liu, J. (2022). Assistance of rearrangement of active sites in Fe/N/C catalyst for harvesting ultra-high power density PEMFCs. Applied Catalysis B: Environmental, 312, 121365.
+7. Cao, F., Zhang, H., Duan, X., Li, X., Ding, R., Hua, K., ... & Liu, J. (2022). Coating Porous TiO2 Films on Carbon Nanotubes to Enhance the Durability of Ultrafine PtCo/CNT Nanocatalysts for the Oxygen Reduction Reaction. ACS Applied Materials & Interfaces, 14(46), 51975-51982.
+8. Wu, Y., Li, X., Hua, K., Duan, X., Ding, R., Rui, Z., ... & Liu, J. (2023). Generalized Encapsulations of ZIF‐Based Fe–N–C Catalysts with Controllable Nitrogen‐Doped Carbon for Significantly‐Improved Stability Toward Oxygen Reduction Reaction. Small, 2207671.
+9. Wang, T., Zeng, J., Gu, X., Meng, Y., Yang, H., Zhu, H., ... & Wang, X. (2023). In-situ growth of nitrogen-doped carbon nanotubes on MXene nanosheets for efficient sodium/potassium-ion storage. Frontiers in Materials, 10, 1214543.
+10. Zeng, J., Wang, T., Gu, X., Zhu, H., Xu, C., Sun, D., ... & Jiang, X. (2023). Nickel-templated carbon foam anodes for sodium-ion batteries. FlatChem, 40, 100508.
 
