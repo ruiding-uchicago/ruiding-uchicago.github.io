@@ -1,3 +1,4 @@
+ - Schmidt AI in science Research Fellow (2023-)
  - China Optical Valley Scholarship for Doctoral Students (2022)
  - Bojiao Scholarship for Doctoral Students (2021)
  - National Scholarship for Doctoral Students in China (2020)
