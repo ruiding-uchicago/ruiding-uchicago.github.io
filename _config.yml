@@ -20,7 +20,7 @@ navigation:                # accepts {file, title, url, icon, sidebaricon}
   - {file: "ME.html", icon: user, title: "About Me"}
   - {file: "research.html", icon: atom, title: "Current Research"}
   - {file: "gallery.html", icon: inbox, title: "Gallery"}
-  - {file: "blog.html", icon: blogger, title: "Blog"}
+  - {file: "blog.md", icon: blogger, title: "Blog"}
   - {file: "Publication.html", icon: book, title: "Publication"}
   - {file: "Award.html", icon: award, title: "Awards"}
 
