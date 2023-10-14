@@ -16,9 +16,9 @@ minimal: false             # use a dark header
 # Menu
 
 navigation:                # accepts {file, title, url, icon, sidebaricon}
-  - {file: "index.md", icon: house, title: "Home"}
+  - {file: "index.html", icon: house, title: "Home"}
   - {file: "README.md", icon: user, title: "About Me"}
-  - {file: "Rui Ding.pdf", icon: user, title: "CV"}
+  - {file: "Rui_Ding.pdf", icon: user, title: "CV"}
   - {file: "blog.md", icon: blogger, title: "Blog"}
   - {file: "Publication.md", icon: book, title: "Publication"}
   - {file: "Awards.md", icon: award, title: "Awards"}
