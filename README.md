@@ -18,9 +18,12 @@ layout: page
  - -  Oct 2022 - Apr 2023 Host: Minhua Shao
  - Nanjing University/p.h.D→Material Science and Engineering
  -  - Sep 2018 - Jun 2023 Advisor: Jianguo Liu& Xuebin Wang
+ -  - (recommended for admission without entrance exams No.1 in the department)
  - Nanjing University/Bachelor→Renewable Science and Engineering
- -  - Sep 2014 - Jun 2018/GPA: 4.63/5.0 (top 2 in the department)
-
+ -  - Sep 2014 - Jun 2018/GPA: 4.63/5.0 (top 1 in the department)
+ -  - (independent recruitment through college entrance examination)
+ - Wuhan Foreign Languages School (senior high school)
+ -  - Sep 2011 - Jun 2014 (minored in German as a second foreign language)
 ## Advisors
 
  - Junhong Chen, Prof. Dr.
