@@ -21,7 +21,7 @@ navigation:                # accepts {file, title, url, icon, sidebaricon}
   - {file: "Rui_Ding.pdf", icon: user, title: "CV"}
   - {file: "blog.md", icon: blogger, title: "Blog"}
   - {file: "Publication.md", icon: book, title: "Publication"}
-  - {file: "Awards.md", icon: award, title: "Awards"}
+  - {file: "Award.md", icon: award, title: "Awards"}
 
 external:                  # shows a footer with social links - for available icons see fontawesome.com/icons
   - {title: Mail, icon: envelope, url: "mailto:ruiding@uchicago"}
