@@ -1,14 +1,38 @@
 ---
-title: "About"
+title: "About Me"
 permalink: "/about/"
 layout: page
 ---
 
-## Installation
+## Education
 
-Just fork this [repository](https://github.com/niklasbuschmann/contrast) and adjust the `_config.yml` to use with [Github Pages](https://pages.github.com/) and your page is done.
+Argonne National Laboratory
+Resident Associate
+Sep 2023
+Host: Junhong Chen
+The University of Chicago
+The Eric and Wendy Schmidt AI in Science Postdoctoral Fellowship
+Sep 2023
+Chicago
+Advisor: Junhong Chen& Yuxin Chen
+Hongkong University of Science and Technology
+Material Science Doctor Department of Chemical and Biological Engineering
+Oct 2022 - Apr 2023
+PG Visiting Internship Student Co-mentor: Minhua Shao (kemshao@ust.hk)
+Nanjing University
+Material Science and Engineering Doctor College of Engineering and Applied Science
+Sep 2018 - Jun 2023
+Nanjing
+China Optical Valley Scholarship for Doctoral Students (2022)
+Bojiao Scholarship for Doctoral Students (2021)
+National Scholarship for Doctoral Students in China (2020)
+Nanjing University
+Renewable Science and Engineering Bachelor College of Engineering and Applied Science
+Sep 2014 - Jun 2018
+Nanjing
+GPA: 4.63/5.0 (top 2 in the department)
 
-## Features
+## Advisors
 
  - supports dark mode on macOS Mojave
  - optional sidebar
@@ -21,79 +45,54 @@ Just fork this [repository](https://github.com/niklasbuschmann/contrast) and adj
  - syntax highlighting
  - supports comments via [disqus](https://disqus.com/) or [isso](http://posativ.org/isso/)
 
-## Based on
+## Research Experiences
 
-- [Hyde](https://github.com/poole/hyde)
-- [Minima](https://github.com/jekyll/minima)
-- [Lagrange](https://github.com/LeNPaul/Lagrange)
-- [Font Awesome](http://fontawesome.io/)
-- [KaTeX](https://katex.org/)
-- [Pygments](https://github.com/richleland/pygments-css)
+Development of Single-Atom Electrocatalyst:
+Material Design/Synthesis/Characterization/Electrochemical Test
+DFT Theoretical Simulation of Catalytic Process
 
-## Installation (jekyll-remote-theme method)
+Application of Machine Learning in PEMFC/PEMEC:
+Database Preparation&Data Preprocessing
+Script Writing for Training Machine Learning Models
+Interpretation of Machine Learning Prediction Results.
 
-You can use this theme with the `jekyll-remote-theme` plugin. Just create an empty repo, copy over the `index.html` file and add this to your `_config.yml`:
+Development of Organic Additives in Proton Exchange Membrane:
+DFT Simulation of Organic Molecues
 
-```yaml
-remote_theme: niklasbuschmann/contrast@v2.11
+## Skills
 
-plugins:
-  - jekyll-remote-theme
-```
+Machine Learning:
+Python Scripts; R Scripts; Linux Shell Scripts; Proficient in the Use of Machine Learning Related Packages and
+Frameworks: Tensorflow, Keras, Pytorch, Scikit-learn, XGBoost, CatBoost, LightGBM ect.
+Natural Language Processing Pipeline and Large Language Model Fine-Tuning
 
-Note: to enable icons you also need to copy over the `_data` folder.
+Experimental:
+Nano-material Synthesis, Electrochemical Testing; Material Characterization
 
-## Config
+Theoretical Simulation:
+First Principle Simulation: VASP ; Quantum Chemistry: Gassausian ; Multiphysics Simulation: COMSOL
 
-Your `_config.yml` could for example look like this:
+English Level:
+IELTS: 7.0 Listening/Reading/Writing/Speaking: 8.0/8.0/6.5/6.0 (2022/02/27)
 
-```yaml
-title: "Blog Title"
-author: "Blog Author"
-description: "My personal blog about ... something"
-permalink: /:title/
-lang: "en"
-excerpt_separator: "\n\n\n"
-date_format: "%B %d, %Y"
+## Academic Reports
+1. The 32nd Annual Meeting of the Chinese Chemical Society
+Oral Report
+Apr 2021
+Zhu Hai; China
+A New Generation of Electrochemical Energy Research Paradigm with Artificial Intelligence
 
-# Layout
+2. The 9th China Hydrogen Energy Doctoral Forum
+Oral Report
+Sep 2021
+Wu Han; China
+Machine learning's participation in the design of high-performance fuel cell membrane electrode assemblies
 
-show_excerpts: true        # show article excerpts on the home page
-show_frame: true           # adds a gray frame to the site
-show_sidebar: false        # show a sidebar instead of the usual header
+3. The 5th China Frontier Forum on Electrochemical Energy Technology Oct 2021
+fsTCwPnN202309270339
+The 5th China Frontier Forum on Electrochemical Energy Technology
+Oral Report
+Oct 2021
+Gui Yang; China
+Application of machine learning in the study of key materials for fuel cells
 
-# Menu
-
-navigation:                # accepts {file, title, url, icon, sidebaricon}
-  - {file: "index.html"}
-  - {file: "README.md"}
-
-external:                  # shows a footer with social links - for available icons see fontawesome.com/icons
-  - {title: Mail, icon: envelope, url: "mailto:niklasbuschmann@users.noreply.github.com"}
-  - {title: Github, icon: github, url: "https://github.com/niklasbuschmann/contrast"}
-  - {title: Subscribe, icon: rss, url: "/feed.xml"}
-
-comments:
-#  disqus_shortname: ""    # see https://disqus.com/
-#  isso_domain: ""         # see https://posativ.org/isso/
-
-plugins:
- - jekyll-feed
-
-```
-
-## MathJax
-
-Contrast comes preinstalled with a leightweight alternative to MathJax called [KaTeX](https://katex.org/). To display equations in a post simply set `mathjax: true` in the article's front matter.
-
-## License
-
-[public domain](http://unlicense.org/)
-
-## Screenshots
-
-![screenshot](https://user-images.githubusercontent.com/4943215/109431850-cd711780-7a08-11eb-8601-2763f2ee6bb4.png)
-
-![screenshot](https://user-images.githubusercontent.com/4943215/109431832-b6cac080-7a08-11eb-9c5e-a058680c23a1.png)
-
-![screenshot](https://user-images.githubusercontent.com/4943215/73125194-5f0b8b80-3fa4-11ea-805c-8387187503ad.png)
