@@ -4,7 +4,7 @@ electrocatalyst-based proton exchange membrane fuel cells, Angew. Chem. Int. Ed.
 2. Rui Ding, Jia Li*, Jianguo Liu* et. al. Machine Learning-Guided Discovery of Underlying Decisive Factors and New
 Mechanisms for the Design of Nonprecious Metal Electrocatalysts, ACS Catal. , 2021, 11, 9798
 3. Rui Ding, Jianguo Liu* et. al. Unlocking New Insights for Electrocatalyst Design: A Unique Data Science Workflow
-Leveraging Internet-Sourced Big Data, ACS Catal. , 2023, accepted
+Leveraging Internet-Sourced Big Data, ACS Catal. , 2023, 13, 13267-13281
 4. Rui Ding, Jia Li*, Jianguo Liu* et. al. Applying machine learning to boost the development of high-performance
 membrane electrode assembly for proton exchange membrane fuel cells, J. Mater. Chem. A , 2021, 9, 6841-6850 (inside
 cover)
