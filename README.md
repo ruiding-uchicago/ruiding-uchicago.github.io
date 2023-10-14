@@ -6,29 +6,28 @@ layout: page
 
 ## Education
 
- - Argonne National Laboratory | Resident Associate
+ - Argonne National Laboratory/Resident Associate
  -  - Sep 2023 Host: Junhong Chen
- - The University of Chicago | The Eric and Wendy Schmidt AI in Science Postdoctoral Fellowship
+ - The University of Chicago/The Eric and Wendy Schmidt AI in Science Postdoctoral Fellowship
  -  - Sep 2023 Advisor: Junhong Chen& Yuxin Chen
- - Hongkong University of Science and Technology | PG Visiting Internship Student
- - -  Oct 2022 - Apr 2023 | Host: Minhua Shao
- - Nanjing University | p.h.D→Material Science and Engineering
+ - Hongkong University of Science and Technology/PG Visiting Internship Student
+ - -  Oct 2022 - Apr 2023 Host: Minhua Shao
+ - Nanjing University/p.h.D→Material Science and Engineering
  -  - Sep 2018 - Jun 2023 Advisor: Jianguo Liu& Xuebin Wang
- - Nanjing University | Bachelor→Renewable Science and Engineering
- -  - Sep 2014 - Jun 2018
- - GPA: 4.63/5.0 (top 2 in the department)
+ - Nanjing University/Bachelor→Renewable Science and Engineering
+ -  - Sep 2014 - Jun 2018/GPA: 4.63/5.0 (top 2 in the department)
 
 ## Advisors
 
- - supports dark mode on macOS Mojave
- - optional sidebar
- - MathJax support
- - no external ressources
- - included archive page
- - supports pagination
- - feed generation
- - responsive
- - syntax highlighting
+ - Junhong Chen, Prof. Dr.
+junhongchen@uchicago.edu; junhongchen@anl.gov
+Crown Family Professor of Molecular Engineering and Lead Water Strategist at Argonne National Laboratory
+University of Chicago
+ - Yuxin Chen, Prof. Dr.
+chenyuxin@uchicago.edu
+Assistant Professor
+Department of Computer Science
+University of Chicago
 
 ## Research Experiences
 
