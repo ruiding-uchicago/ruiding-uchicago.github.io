@@ -6,31 +6,17 @@ layout: page
 
 ## Education
 
-Argonne National Laboratory
-Resident Associate
-Sep 2023
-Host: Junhong Chen
-The University of Chicago
-The Eric and Wendy Schmidt AI in Science Postdoctoral Fellowship
-Sep 2023
-Chicago
-Advisor: Junhong Chen& Yuxin Chen
-Hongkong University of Science and Technology
-Material Science Doctor Department of Chemical and Biological Engineering
-Oct 2022 - Apr 2023
-PG Visiting Internship Student Co-mentor: Minhua Shao (kemshao@ust.hk)
-Nanjing University
-Material Science and Engineering Doctor College of Engineering and Applied Science
-Sep 2018 - Jun 2023
-Nanjing
-China Optical Valley Scholarship for Doctoral Students (2022)
-Bojiao Scholarship for Doctoral Students (2021)
-National Scholarship for Doctoral Students in China (2020)
-Nanjing University
-Renewable Science and Engineering Bachelor College of Engineering and Applied Science
-Sep 2014 - Jun 2018
-Nanjing
-GPA: 4.63/5.0 (top 2 in the department)
+ - Argonne National Laboratory | Resident Associate
+ -  - Sep 2023 Host: Junhong Chen
+ - The University of Chicago | The Eric and Wendy Schmidt AI in Science Postdoctoral Fellowship
+ -  - Sep 2023 Advisor: Junhong Chen& Yuxin Chen
+ - Hongkong University of Science and Technology | PG Visiting Internship Student
+ - -  Oct 2022 - Apr 2023 | Host: Minhua Shao
+ - Nanjing University | p.h.D→Material Science and Engineering
+ -  - Sep 2018 - Jun 2023 Advisor: Jianguo Liu& Xuebin Wang
+ - Nanjing University | Bachelor→Renewable Science and Engineering
+ -  - Sep 2014 - Jun 2018
+ - GPA: 4.63/5.0 (top 2 in the department)
 
 ## Advisors
 
@@ -43,7 +29,6 @@ GPA: 4.63/5.0 (top 2 in the department)
  - feed generation
  - responsive
  - syntax highlighting
- - supports comments via [disqus](https://disqus.com/) or [isso](http://posativ.org/isso/)
 
 ## Research Experiences
 
