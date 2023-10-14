@@ -3,6 +3,10 @@ title: "About Me"
 permalink: "/about/"
 layout: page
 ---
+## Basic Information
+ - Male
+ - Married 2023
+ - Born in winter 1997
 
 ## Education
 
@@ -31,32 +35,32 @@ University of Chicago
 
 ## Research Experiences
 
-Development of Single-Atom Electrocatalyst:
+ - Development of Single-Atom Electrocatalyst:
 Material Design/Synthesis/Characterization/Electrochemical Test
 DFT Theoretical Simulation of Catalytic Process
 
-Application of Machine Learning in PEMFC/PEMEC:
+ - Application of Machine Learning in PEMFC/PEMEC:
 Database Preparation&Data Preprocessing
 Script Writing for Training Machine Learning Models
 Interpretation of Machine Learning Prediction Results.
 
-Development of Organic Additives in Proton Exchange Membrane:
+ - Development of Organic Additives in Proton Exchange Membrane:
 DFT Simulation of Organic Molecues
 
 ## Skills
 
-Machine Learning:
+ - Machine Learning:
 Python Scripts; R Scripts; Linux Shell Scripts; Proficient in the Use of Machine Learning Related Packages and
 Frameworks: Tensorflow, Keras, Pytorch, Scikit-learn, XGBoost, CatBoost, LightGBM ect.
 Natural Language Processing Pipeline and Large Language Model Fine-Tuning
 
-Experimental:
+ - Experimental:
 Nano-material Synthesis, Electrochemical Testing; Material Characterization
 
-Theoretical Simulation:
+ - Theoretical Simulation:
 First Principle Simulation: VASP ; Quantum Chemistry: Gassausian ; Multiphysics Simulation: COMSOL
 
-English Level:
+ - English Level:
 IELTS: 7.0 Listening/Reading/Writing/Speaking: 8.0/8.0/6.5/6.0 (2022/02/27)
 
 ## Academic Reports
