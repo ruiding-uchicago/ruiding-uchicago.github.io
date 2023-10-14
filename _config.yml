@@ -19,6 +19,7 @@ navigation:                # accepts {file, title, url, icon, sidebaricon}
   - {file: "index.html", icon: house, title: "Home"}
   - {file: "README.md", icon: user, title: "About Me"}
   - {file: "research.html", icon: user, title: "Current Research"}
+  - {file: "gallery.html", icon: gallery, title: "Gallery"}
   - {file: "blog.md", icon: blogger, title: "Blog"}
   - {file: "Publication.md", icon: book, title: "Publication"}
   - {file: "Award.md", icon: award, title: "Awards"}
