@@ -1,5 +1,5 @@
 ---
-title: "2023-07"
+title: "2024-07"
 layout: post
 ---
 We published a new paper on ArXiv:
