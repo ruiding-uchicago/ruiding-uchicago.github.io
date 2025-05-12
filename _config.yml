@@ -16,10 +16,10 @@ minimal: false             # use a dark header
 # Menu
 
 navigation:                # accepts {file, title, url, icon, sidebaricon}
-  - {url: "/", icon: "house", title: "Home"}
-  - {url: "/legacy/", icon: "folder", title: "Legacy (Before 2024)"}
-  - {url: "/blog/", icon: "blogger", title: "Blog"}
-  - {url: "/research-interests/", icon: "atom", title: "Research Interests"}
+  - {url: "https://ruiding-uchicago.github.io/", icon: "home", title: "Home"}
+  - {url: "https://ruiding-uchicago.github.io/legacy/", icon: "folder", title: "Legacy (Before 2024)"}
+  - {url: "https://ruiding-uchicago.github.io/blog/", icon: "blogger", title: "Blog"}
+  - {url: "https://ruiding-uchicago.github.io/research-interests/", icon: "flask", title: "Research Interests"}
   # The following links are now on the legacy/index.md page
   # - {file: "ME.html", icon: user, title: "About Me"}
   # - {file: "research.html", icon: atom, title: "Current Research"}
