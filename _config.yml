@@ -17,12 +17,14 @@ minimal: false             # use a dark header
 
 navigation:                # accepts {file, title, url, icon, sidebaricon}
   - {file: "index.html", icon: circle-info, title: "Home"}
-  - {file: "legacy/ME.html", icon: user, title: "About Me (Before 2024)"}
-  - {file: "legacy/research.html", icon: atom, title: "Research (Before 2024)"}
-  - {file: "legacy/gallery.html", icon: inbox, title: "Gallery (Before 2024)"}
-  - {file: "legacy/blog.html", icon: blogger, title: "Blog (Before 2024)"}
-  - {file: "legacy/Publication.html", icon: book, title: "Publication (Before 2024)"}
-  - {file: "legacy/Award.html", icon: award, title: "Awards (Before 2024)"}
+  - {file: "legacy/index.md", icon: "archive", title: "Legacy (Before 2024)"}
+  # The following links are now on the legacy/index.md page
+  # - {file: "ME.html", icon: user, title: "About Me"}
+  # - {file: "research.html", icon: atom, title: "Current Research"}
+  # - {file: "gallery.html", icon: inbox, title: "Gallery"}
+  # - {file: "blog.html", icon: blogger, title: "Blog"}
+  # - {file: "Publication.html", icon: book, title: "Publication"}
+  # - {file: "Award.html", icon: award, title: "Awards"}
 
 external:                  # shows a footer with social links - for available icons see fontawesome.com/icons
   - {title: Mail, icon: envelope, url: "mailto:ruiding@uchicago"}
