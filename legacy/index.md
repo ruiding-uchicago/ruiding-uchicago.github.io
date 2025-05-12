@@ -11,5 +11,4 @@ Here you can find content from before 2024:
 *   [Publications](Publication.html)
 *   [Awards](Award.html)
 *   [Gallery](gallery.html)
-*   [Blog Archive](blog.html)
 *   [Old Archive Page](archive.html) 
