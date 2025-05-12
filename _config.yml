@@ -17,7 +17,7 @@ minimal: false             # use a dark header
 
 navigation:                # accepts {file, title, url, icon, sidebaricon}
   - {file: "index.html", icon: circle-info, title: "Home"}
-  - {url: "/legacy/", icon: "archive", title: "Legacy (Before 2024)"}
+  - {url: "/legacy/", icon: "box-archive", title: "Legacy (Before 2024)"}
   # The following links are now on the legacy/index.md page
   # - {file: "ME.html", icon: user, title: "About Me"}
   # - {file: "research.html", icon: atom, title: "Current Research"}

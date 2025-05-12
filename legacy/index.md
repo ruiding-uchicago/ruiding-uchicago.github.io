@@ -6,10 +6,10 @@ permalink: /legacy/ # This makes the page accessible at yoursite.com/legacy/
 
 Here you can find content from before 2024:
 
-*   [About Me]({{ '/legacy/ME.html' | relative_url }})
-*   [Research]({{ '/legacy/research.html' | relative_url }})
-*   [Publications]({{ '/legacy/Publication.html' | relative_url }})
-*   [Awards]({{ '/legacy/Award.html' | relative_url }})
-*   [Gallery]({{ '/legacy/gallery.html' | relative_url }})
-*   [Blog Archive]({{ '/legacy/blog.html' | relative_url }})
-*   [Old Archive Page]({{ '/legacy/archive.html' | relative_url }}) 
+*   [About Me](ME.html)
+*   [Research](research.html)
+*   [Publications](Publication.html)
+*   [Awards](Award.html)
+*   [Gallery](gallery.html)
+*   [Blog Archive](blog.html)
+*   [Old Archive Page](archive.html) 
