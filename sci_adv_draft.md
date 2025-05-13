@@ -1,0 +1,3 @@
+In our Science Advances paper, we introduced a multistage machine learning framework that integrates data mining, active learning, and domain adaptation to streamline the discovery of multimetallic catalysts. By leveraging different data modalities through specialized ML modules, we objectively navigated an enormous candidate space and identified a promising catalyst with excellent wet-lab performance and commercial potential.
+PME press link:
+https://pme.uchicago.edu/news/ai-helps-scientists-design-better-sensors-pollutants-and-beyond
