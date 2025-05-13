@@ -2,6 +2,12 @@
 layout: default
 title: "Research Interests"
 permalink: /research-interests/
+navigation:
+  - {url: "https://ruiding-uchicago.github.io/", icon: "home", title: "Home"}
+  - {url: "https://ruiding-uchicago.github.io/blog/", icon: "blogger", title: "Blog"}
+  - {url: "https://ruiding-uchicago.github.io/research-interests/", icon: "flask", title: "Research Interests"}
+  - {url: "/updated CV 2025.pdf", icon: "file", title: "CV"}
+  - {url: "https://ruiding-uchicago.github.io/legacy/", icon: "folder", title: "Legacy"}
 ---
 <head>
     <style>
