@@ -19,6 +19,8 @@ navigation:                # accepts {file, title, url, icon, sidebaricon}
   - {url: "https://ruiding-uchicago.github.io/", icon: "home", title: "Home"}
   - {url: "https://ruiding-uchicago.github.io/blog/", icon: "blogger", title: "Blog"}
   - {url: "https://ruiding-uchicago.github.io/research-interests/", icon: "flask", title: "Research Interests"}
+  - {url: "/updated CV 2025.pdf", icon: "file", title: "CV"}
+  - {url: "https://ruiding-uchicago.github.io/legacy/", icon: "folder", title: "Legacy"}
   # The following links are now on the legacy/index.md page
   # - {file: "ME.html", icon: user, title: "About Me"}
   # - {file: "research.html", icon: atom, title: "Current Research"}
@@ -32,8 +34,6 @@ external:                  # shows a footer with social links - for available ic
   - {title: Group Website, icon: flask, url: "https://www.junhongchengroup.pme.uchicago.edu/"}
   - {title: Research Gate, icon: researchgate, url: "https://www.researchgate.net/profile/Rui-Ding-2"}
   - {title: Google Scholar, icon: google, url: "https://scholar.google.com/citations?user=Cfs4XWwAAAAJ&hl=en"}
-  - {title: CV, icon: file-pdf, url: "/updated CV 2025.pdf"}
-  - {title: Legacy (Before 2024), icon: folder, url: "https://ruiding-uchicago.github.io/legacy/"}
 
 comments:
 #  disqus_shortname: ""    # see https://disqus.com/
