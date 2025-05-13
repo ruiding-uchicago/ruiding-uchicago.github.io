@@ -41,8 +41,10 @@ navigation:
 <div class="publication">
     <h3>Leveraging Data Mining, Active Learning, and Domain Adaptation in a Multi-Stage, Machine Learning-Driven Approach for the Efficient Discovery of Advanced Acidic Oxygen Evolution Electrocatalysts</h3>
     <p><strong>Authors:</strong> Rui Ding, Jianguo Liu, Kang Hua, Xuebin Wang, Xiaoben Zhang, Minhua Shao, Yuxin Chen*, and Junhong Chen*</p>
-    <p><strong>Journal:</strong> Science Advances 2025, 11, eadr9038</p>
-    <p><strong>Preprint:</strong> arXiv:2407.04877</p>
+    <p><strong>Journal:</strong> <a href="https://www.science.org/doi/10.1126/sciadv.adr9038"
+    target="_blank"> Science Advances 2025, 11, eadr9038 </a></p>
+    <p><strong>Preprint:</strong> <a href="https://arxiv.org/abs/2407.04877"
+    target="_blank"> arXiv:2407.04877 </a></p> 
 </div>
 
 <div class="publication">
