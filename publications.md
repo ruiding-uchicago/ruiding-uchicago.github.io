@@ -62,11 +62,11 @@ navigation:
 </div>
 
 <div class="publication">
-    <h3>Machine Learning Approaches in Carbon-Based Nanomaterials for Electrochemical Sensing Applications</h3>
-    <p><strong>Authors:</strong> Rodrigo P. Ferreira, Rui Ding, Fengxue Zhang, Haihui Pu, Claire Donnat, Yuxin Chen, Junhong Chen*</p>
-    <p><strong>Journal:</strong> Molecular Systems Design & Engineering 2025</p>
+    <h3>Expediting field-effect transistor chemical sensor design with neuromorphic spiking graph neural networks</h3>
+    <p><strong>Authors:</strong> Rodrigo P. Ferreira‡, Rui Ding‡, Fengxue Zhang, Haihui Pu, Claire Donnat*, Yuxin Chen*, Junhong Chen*</p>
+    <p><strong>Journal:</strong> Molecular Systems Design & Engineering 2025, 10, 345-356</p>
     <p><strong>DOI:</strong> <a href="https://doi.org/10.1039/D4ME00203B" target="_blank">10.1039/D4ME00203B</a></p>
-    <p><strong>Note:</strong> Cover Art</p>
+    <p><strong>Note:</strong> Journal cover and part of MSDE Recent HOT Articles collection</p>
 </div>
 
 <div class="publication">
