@@ -34,6 +34,7 @@ navigation:                # accepts {file, title, url, icon, sidebaricon}
 external:                  # shows a footer with social links - for available icons see fontawesome.com/icons
   - {title: Mail, icon: envelope, url: "mailto:ruiding@uchicago"}
   - {title: Github, icon: github, url: "https://github.com/ruiding-uchicago"}
+  - {title: LinkedIn, icon: linkedin, url: "https://www.linkedin.com/in/rui-ding-018281255/"}
   - {title: PME Group Site, icon: flask, url: "https://www.junhongchengroup.pme.uchicago.edu/"}
   - {title: CS Group Site, icon: code, url: "https://yuxinchen.org/group.html"}
   - {title: Research Gate, icon: researchgate, url: "https://www.researchgate.net/profile/Rui-Ding-2"}
