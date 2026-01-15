@@ -47,6 +47,18 @@ permalink: /education/
 </div>
 
 <div class="publication-item">
+    <div class="publication-title">NeurIPS 2025 AI4Mat Workshop</div>
+    <div class="publication-authors">Poster: Deep Research with Local-Web RAG</div>
+    <div class="publication-venue">San Diego, CA &mdash; December 2025</div>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">NeurIPS 2025 ML4PS Workshop</div>
+    <div class="publication-authors">Poster: Neuromorphic Random Walk for Phosphate Adsorption</div>
+    <div class="publication-venue">San Diego, CA &mdash; December 2025</div>
+</div>
+
+<div class="publication-item">
     <div class="publication-title">248th ECS Meeting</div>
     <div class="publication-venue">Chicago, IL &mdash; October 2025</div>
 </div>
@@ -73,6 +85,12 @@ permalink: /education/
 
 <div class="section-header mt-8">
     <h2 class="section-title">Mentorship</h2>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">2025 AI Presidential Challenge</div>
+    <div class="publication-authors">Mentoring junior high school students on AI applications</div>
+    <div class="publication-venue">2025</div>
 </div>
 
 <div class="publication-item">
