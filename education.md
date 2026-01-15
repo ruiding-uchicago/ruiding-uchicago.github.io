@@ -2,61 +2,75 @@
 layout: default
 title: "Education and Research Experience"
 permalink: /education/
-navigation:
-  - {url: "https://ruiding-uchicago.github.io/", icon: "home", title: "Home"}
-  - {url: "https://ruiding-uchicago.github.io/blog/", icon: "blogger", title: "Blog"}
-  - {url: "https://ruiding-uchicago.github.io/research-interests/", icon: "flask", title: "Research Interests"}
-  - {url: "/updated CV 2025.pdf", icon: "file", title: "CV"}
-  - {url: "https://ruiding-uchicago.github.io/legacy/", icon: "folder", title: "Legacy"}
 ---
-<head>
-    <style>
-        body {
-            background-image: url('/background.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-        .container {
-            margin: 20px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.7); /* white background with some transparency */
-        }
-    </style>
-</head>
 
-<div class="container">
-<h1>Education and Research Experience</h1>
+<article class="page-container fade-in">
+<div class="section-header">
+    <h1 class="section-title">Education and Research Experience</h1>
+</div>
 
-<h2>Education</h2>
+<div class="section-header mt-8">
+    <h2 class="section-title">Education</h2>
+</div>
 
-<h3>The University of Chicago</h3>
-<p>The Eric and Wendy Schmidt AI in Science Postdoctoral Fellowship, Sept. 2023 – Present</p>
+<div class="card mb-4">
+    <h3 class="feature-title">The University of Chicago</h3>
+    <p class="text-muted mb-0">The Eric and Wendy Schmidt AI in Science Postdoctoral Fellowship, Sept. 2023 &ndash; Present</p>
+</div>
 
-<h3>Argonne National Laboratory</h3>
-<p>Resident Associate (Host: Junhong Chen), Sept. 2023 – Present</p>
+<div class="card mb-4">
+    <h3 class="feature-title">Argonne National Laboratory</h3>
+    <p class="text-muted mb-0">Resident Associate (Host: Junhong Chen), Sept. 2023 &ndash; Present</p>
+</div>
 
-<h3>Advisors</h3>
+<div class="feature-card mb-8">
+    <h3 class="feature-title">Advisors</h3>
+    <ul class="mb-0">
+        <li><strong>Junhong Chen</strong>, Prof. Dr. (The University of Chicago-Pritzker School of Molecular Engineering; Argonne National Laboratory)</li>
+        <li><strong>Yuxin Chen</strong>, Prof. Dr. (The University of Chicago-Department of Computer Science)</li>
+    </ul>
+</div>
+
+<div class="section-header mt-8">
+    <h2 class="section-title">Research Experience</h2>
+</div>
+
+<h3 class="font-semibold mb-4">Summary of Research Work at UChicago/Argonne (Sept. 2023 &ndash; Present)</h3>
 <ul>
-    <li>Junhong Chen, Prof. Dr. (The University of Chicago-Pritzker School of Molecular Engineering; Argonne National Laboratory)</li>
-    <li>Yuxin Chen, Prof. Dr. (The University of Chicago-Department of Computer Science)</li>
+    <li class="mb-4">Proposed the <strong>'Broad-scope Reasoning Artificial Intelligence for Nano-micro material and devices Identification, Assessment, and Categorization' (BRAINIAC)</strong> Project, which focuses on enhancing materials discovery and device innovation using advanced data collection and machine learning in collaborative experimental frameworks.</li>
+    <li class="mb-4">BRAINIAC aims to integrate a vast multi-fidelity dataset with sophisticated graph neural networks. BRAINIAC supports the identification and optimization of materials for various applications, typically including sensors and catalysts for renewable energy and environmental science. The project also fosters a collaborative scientific community, enabling continuous improvement and widespread adoption of AI-driven methodologies.</li>
+    <li>Participate in the NSF-funded <strong>Manufacturing ADvanced Electronics through Printing Using Bio-based and Locally Identifiable Compounds (MADE-PUBLIC)</strong> Project as the Designer of the Data Portal to Facilitate Knowledge Transfer as well as a cyber-manufacturing platform.</li>
 </ul>
 
-<h2>Research Experience</h2>
+<div class="section-header mt-8">
+    <h2 class="section-title">Conference Presentations</h2>
+</div>
 
-<h3>Summary of Research Work at UChicago/Argonne (Sept. 2023 – Present)</h3>
-<ul>
-    <li>Proposed the 'Broad-scope Reasoning Artificial Intelligence for Nano-micro material and devices Identification, Assessment, and Categorization' (BRAINIAC) Project, which focuses on enhancing materials discovery and device innovation using advanced data collection and machine learning in collaborative experimental frameworks.</li>
-    <li>BRAINIAC aims to integrate a vast multi-fidelity dataset with sophisticated graph neural networks. BRAINIAC supports the identification and optimization of materials for various applications, typically including sensors and catalysts for renewable energy and environmental science. The project also fosters a collaborative scientific community, enabling continuous improvement and widespread adoption of AI-driven methodologies.</li>
-    <li>Participate in the NSF-funded Manufacturing ADvanced Electronics through Printing Using Bio-based and Locally Identifiable Compounds (MADE-PUBLIC) Project as the Designer of the Data Portal to Facilitate Knowledge Transfer as well as a cyber-manufacturing platform.</li>
-</ul>
-
-<h3>Conference Presentations</h3>
 <ol>
-    <li>Rui Ding (2024) Hunting for Rare High-Performance Electrocatalysts: A Multi-Stage ML Approach to Discover Extreme Performers in Acidic Oxygen Evolution NSF Workshop on Data-driven Modeling and Prediction of Rare and Extreme Events, University of Chicago, Chicago, Illinois, United States</li>
-    <li>Rui Ding (2024) Leveraging Data Mining, Active Learning, and Domain Adaptation in a Multi-Stage, Machine Learning-Driven Approach for the Efficient Discovery of Advanced Acidic Oxygen Evolution Electrocatalysts Al for Multidisciplinary Exploration and Discovery Workshop-Heterogeneous Catalysis, Big Ten Conference Center, Rosemont, Illinois, United States</li>
-    <li>Rui Ding (2024) Leveraging Data Mining, Active Learning, and Domain Adaptation in a Multi-Stage, Machine Learning-Driven Approach for the Efficient Discovery of Advanced Acidic Oxygen Evolution Electrocatalysts AI+Science Summer School 2024, University of Chicago, Chicago, Illinois, United States</li>
-    <li>Rui Ding (2024) Cybermanufacturing Platform of MADE-PUBLIC Project NSF Future Manufacturing Research Grant on Manufacturing ADvanced Electronics through Printing Using Bio-based and Locally Identifiable Compounds (MADE-PUBLIC) Annual Retreat 2024, Northwestern University, Evanston, Illinois, United States</li>
-    <li>Rui Ding (2024) One of the University of Chicago host representatives for visiting speaker scholars 2024 AI+ Science Schmidt Fellows Speaker Series at University of Chicago</li>
+    <li class="publication-item">
+        <div class="publication-title">Hunting for Rare High-Performance Electrocatalysts: A Multi-Stage ML Approach to Discover Extreme Performers in Acidic Oxygen Evolution</div>
+        <div class="publication-authors">Rui Ding (2024)</div>
+        <div class="publication-venue">NSF Workshop on Data-driven Modeling and Prediction of Rare and Extreme Events, University of Chicago, Chicago, Illinois</div>
+    </li>
+    <li class="publication-item">
+        <div class="publication-title">Leveraging Data Mining, Active Learning, and Domain Adaptation in a Multi-Stage, Machine Learning-Driven Approach for the Efficient Discovery of Advanced Acidic Oxygen Evolution Electrocatalysts</div>
+        <div class="publication-authors">Rui Ding (2024)</div>
+        <div class="publication-venue">AI for Multidisciplinary Exploration and Discovery Workshop-Heterogeneous Catalysis, Big Ten Conference Center, Rosemont, Illinois</div>
+    </li>
+    <li class="publication-item">
+        <div class="publication-title">Leveraging Data Mining, Active Learning, and Domain Adaptation in a Multi-Stage, Machine Learning-Driven Approach for the Efficient Discovery of Advanced Acidic Oxygen Evolution Electrocatalysts</div>
+        <div class="publication-authors">Rui Ding (2024)</div>
+        <div class="publication-venue">AI+Science Summer School 2024, University of Chicago, Chicago, Illinois</div>
+    </li>
+    <li class="publication-item">
+        <div class="publication-title">Cybermanufacturing Platform of MADE-PUBLIC Project</div>
+        <div class="publication-authors">Rui Ding (2024)</div>
+        <div class="publication-venue">NSF Future Manufacturing Research Grant on MADE-PUBLIC Annual Retreat 2024, Northwestern University, Evanston, Illinois</div>
+    </li>
+    <li class="publication-item">
+        <div class="publication-title">One of the University of Chicago host representatives for visiting speaker scholars</div>
+        <div class="publication-authors">Rui Ding (2024)</div>
+        <div class="publication-venue">AI+ Science Schmidt Fellows Speaker Series at University of Chicago</div>
+    </li>
 </ol>
-</div> 
+</article>

@@ -3,46 +3,73 @@ layout: default
 title: "Home"
 ---
 
-<head>
-    <style>
-        body {
-            background-image: url('/background.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-        .container {
-            margin: 20px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.7); /* white background with some transparency */
-        }
-    </style>
-</head>
+<article class="page-container fade-in">
+    <div class="profile mb-8">
+        <img src="pic.jpg" alt="Rui Ding" class="profile-image">
+        <div class="profile-content">
+            <h1 class="profile-name">Rui Ding (Ray)</h1>
+            <p class="profile-title">Eric and Wendy Schmidt AI in Science Postdoctoral Fellow</p>
+            <p class="text-muted mb-4">University of Chicago | Argonne National Laboratory</p>
 
-<div class="container">
-    <!-- 添加图片和文字 -->
-    <img src="pic.jpg" alt="My Picture" style="display: block; margin: auto; width: 75%; height: auto;">
-    <p><b>Contact: ruiding@uchicago.edu; rding@anl.gov; Office address: A161, Building 200, Chemical Sciences and Engineering Division, Argonne National Laboratory 9700 S. Cass Avenue Lemont, IL</b></p>
-    <p>My name is Rui Ding and I go by "Ray" for my first name for exactly the same pronunciation.</p>
-    
+            <ul class="contact-list">
+                <li class="contact-item">
+                    <span>Email:</span>
+                    <a href="mailto:ruiding@uchicago.edu">ruiding@uchicago.edu</a> |
+                    <a href="mailto:rding@anl.gov">rding@anl.gov</a>
+                </li>
+                <li class="contact-item">
+                    <span>Office:</span>
+                    A161, Building 200, Chemical Sciences and Engineering Division, Argonne National Laboratory
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-header">
+        <h2 class="section-title">About Me</h2>
+    </div>
+
     <p>Since September 2023, I've been serving as an Eric and Wendy Schmidt AI in Science Postdoctoral Fellow at the University of Chicago under <a href="https://www.junhongchengroup.pme.uchicago.edu/junhongchen" target="_blank">Professor Junhong Chen</a>'s guidance, with a joint appointment as a Resident Associate at Argonne National Laboratory.</p>
-    
-    <p>I'm also co-advised by <a href="https://yuxinchen.org/" target="_blank">Professor Yuxin Chen</a> at the Computer Science Department at University of Chicago. We collaborate on the interactive learning side on bandit problems regarding chemistry/materials science fields, LLM applications, and more. </p>
-    <p>My current research focuses on the development of BRAINIAC (Broad-scope Reasoning Artificial Intelligence for Nano-micro material and devices Identification, Assessment, and Categorization), an ambitious project at the intersection of artificial intelligence and materials science. As the lead architect of this initiative, I'm pioneering innovative computational approaches including:</p>
-    
-    <ul>
-        <li>Neuromorphic Algorithms in collaboration with our group's outstanding phd candidate <a href="https://www.linkedin.com/in/rodrigo-pires-ferreira/" target="_blank">Rodrigo P. Ferreira</a> framework that mimic human cognitive processes for materials discovery</li>
-        <li>Large language model (LLM) applications for scientific knowledge extraction from research literature</li>
-        <li>Multi-modal AI frameworks that integrate diverse data types across scientific domains</li>
-    </ul>
-    
-    <p>Our recent breakthroughs have been published in prestigious journals including Science Advances and Molecular Systems Design & Engineering. </p>
-    <p>We propose the 'Broad-scope Reasoning Artificial Intelligence for Nano-micro material and devices Identification, Assessment, and Categorization' (BRAINIAC) framework to serve as a transformative approach to chemistry/materials informatics.</p>
-    
-    <p>The ambition is to process over large quantity of domain knowledge, creating a unified intelligent universal purpose framework that revolutionizes how we discover and optimize new chemical/materials. We envision a future where AI-driven methods dramatically accelerate scientific discovery across disciplines, reducing the time from concept to practical application by orders of magnitude.</p>
-    <p>Personally, I am also very interested in the post-training of LLMs, especially like active in-context learning of LLMs. I am trying both intrinsic self-correction and extrinsic fair-asymmetric. </p>
-    <p>I'm also contributing to the NSF-funded MADE-PUBLIC project (Manufacturing ADvanced Electronics through Printing Using Biobased and Locally Identifiable Compounds), developing advanced cyber-manufacturing platforms and data portals for knowledge transfer.</p>
-    <p>I also collaborate with numerous experimentalist for standard traditional chemistry and materials science research. Typical explainatory dry lab simulation and data analysis works.</p>
-    
-    <p>Researchers interested in collaborations at the intersection of AI, data science, and materials research are warmly welcomed to get in touch. Professors Junhong Chen and Yuxin Chen are also highly open to collaborative discussions and partnerships.</p>
-</div>
+
+    <p>I'm also co-advised by <a href="https://yuxinchen.org/" target="_blank">Professor Yuxin Chen</a> at the Computer Science Department at University of Chicago. We collaborate on the interactive learning side on bandit problems regarding chemistry/materials science fields, LLM applications, and more.</p>
+
+    <div class="section-header mt-8">
+        <h2 class="section-title">Current Research: BRAINIAC</h2>
+    </div>
+
+    <p>My current research focuses on the development of <strong>BRAINIAC</strong> (Broad-scope Reasoning Artificial Intelligence for Nano-micro material and devices Identification, Assessment, and Categorization), an ambitious project at the intersection of artificial intelligence and materials science.</p>
+
+    <div class="grid grid-cols-3 my-8">
+        <div class="feature-card">
+            <h3 class="feature-title">Neuromorphic Algorithms</h3>
+            <p class="feature-description">Framework that mimics human cognitive processes for materials discovery, in collaboration with <a href="https://www.linkedin.com/in/rodrigo-pires-ferreira/" target="_blank">Rodrigo P. Ferreira</a>.</p>
+        </div>
+        <div class="feature-card">
+            <h3 class="feature-title">LLM Applications</h3>
+            <p class="feature-description">Large language model applications for scientific knowledge extraction from research literature.</p>
+        </div>
+        <div class="feature-card">
+            <h3 class="feature-title">Multi-modal AI</h3>
+            <p class="feature-description">Frameworks that integrate diverse data types across scientific domains.</p>
+        </div>
+    </div>
+
+    <p>Our recent breakthroughs have been published in prestigious journals including <em>Science Advances</em> and <em>Molecular Systems Design & Engineering</em>.</p>
+
+    <p>The BRAINIAC framework serves as a transformative approach to chemistry/materials informatics. Our ambition is to process large quantities of domain knowledge, creating a unified intelligent universal purpose framework that revolutionizes how we discover and optimize new chemicals/materials.</p>
+
+    <div class="section-header mt-8">
+        <h2 class="section-title">Additional Research Interests</h2>
+    </div>
+
+    <p>Personally, I am very interested in the post-training of LLMs, especially active in-context learning. I am exploring both intrinsic self-correction and extrinsic fair-asymmetric approaches.</p>
+
+    <p>I'm also contributing to the NSF-funded <strong>MADE-PUBLIC</strong> project (Manufacturing ADvanced Electronics through Printing Using Biobased and Locally Identifiable Compounds), developing advanced cyber-manufacturing platforms and data portals for knowledge transfer.</p>
+
+    <p>I also collaborate with numerous experimentalists for standard traditional chemistry and materials science research, including explanatory dry lab simulation and data analysis work.</p>
+
+    <div class="card mt-8">
+        <h3 class="font-semibold mb-4">Interested in Collaboration?</h3>
+        <p class="text-muted mb-0">Researchers interested in collaborations at the intersection of AI, data science, and materials research are warmly welcomed to get in touch. Professors Junhong Chen and Yuxin Chen are also highly open to collaborative discussions and partnerships.</p>
+    </div>
+</article>

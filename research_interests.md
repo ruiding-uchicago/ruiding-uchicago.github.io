@@ -2,54 +2,43 @@
 layout: default
 title: "Research Interests"
 permalink: /research-interests/
-navigation:
-  - {url: "https://ruiding-uchicago.github.io/", icon: "home", title: "Home"}
-  - {url: "https://ruiding-uchicago.github.io/blog/", icon: "blogger", title: "Blog"}
-  - {url: "https://ruiding-uchicago.github.io/research-interests/", icon: "flask", title: "Research Interests"}
-  - {url: "/updated CV 2025.pdf", icon: "file", title: "CV"}
-  - {url: "https://ruiding-uchicago.github.io/legacy/", icon: "folder", title: "Legacy"}
 ---
-<head>
-    <style>
-        body {
-            background-image: url('/background.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-        .container {
-            margin: 20px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.7); /* white background with some transparency */
-        }
-    </style>
-</head>
 
-<div class="container">
-<h1>Research Interests</h1>
+<article class="page-container fade-in">
+<div class="section-header">
+    <h1 class="section-title">Research Interests</h1>
+</div>
 
-There are plenty of AI/ML in science applications today, especially for chemistry and material sciences.
-What are the challenges in methodology?
+<p>There are plenty of AI/ML in science applications today, especially for chemistry and material sciences. What are the challenges in methodology?</p>
 
-<h3>Traditional methods:</h3>
-In typical discovery, traditional trial-and-error methods are reliable but extremely time-consuming and expensive.
-While traditional methods often face significant theory-to-practice gaps, recent attempts using standard machine learning approaches still remain limited due to fragmented datasets and isolated methods.
+<div class="grid grid-cols-3 my-8">
+    <div class="feature-card">
+        <h3 class="feature-title">Traditional Methods</h3>
+        <p class="feature-description">In typical discovery, traditional trial-and-error methods are reliable but extremely time-consuming and expensive. While traditional methods often face significant theory-to-practice gaps, recent attempts using standard machine learning approaches still remain limited due to fragmented datasets and isolated methods.</p>
+    </div>
 
-<h3>Standard ML:</h3>
-Standard machine learning, although promising, tends to operate in isolation, relying on single-stage modeling and limited or fragmented data.
-This narrow scope makes it difficult to fully leverage available information, hindering comprehensive understanding and robust predictions.
+    <div class="feature-card">
+        <h3 class="feature-title">Standard ML</h3>
+        <p class="feature-description">Standard machine learning, although promising, tends to operate in isolation, relying on single-stage modeling and limited or fragmented data. This narrow scope makes it difficult to fully leverage available information, hindering comprehensive understanding and robust predictions.</p>
+    </div>
 
-<h3>Nature of Scientific Research:</h3>
-Recognizing these challenges, our work generally aligns machine learning closely with the iterative, exploratory, and inherently multi-modal nature of real scientific research.
-We want to develope fully integrated, multi-stage machine learning pipeline, specifically designed to bridge the gap between theory, computation, and experiments.
-Our approaches aim to leverage diverse datasets, iterative refinement, and structured data comprehension—addressing previous limitations directly.
+    <div class="feature-card">
+        <h3 class="feature-title">Nature of Scientific Research</h3>
+        <p class="feature-description">Recognizing these challenges, our work generally aligns machine learning closely with the iterative, exploratory, and inherently multi-modal nature of real scientific research.</p>
+    </div>
+</div>
 
-<img src="/2025_fig1.png" alt="Figure 1" style="max-width: 100%;">
+<p>We want to develop fully integrated, multi-stage machine learning pipelines, specifically designed to bridge the gap between theory, computation, and experiments. Our approaches aim to leverage diverse datasets, iterative refinement, and structured data comprehension&mdash;addressing previous limitations directly.</p>
 
-<h3>Future Directions:</h3>
-Moreoever, we also would like to attempt to make improvement 
-Represention the domain knowledge, most of existed work still use typical simplified manual encoding and treat in the ML modeling process.
-Our interest is also how to use LLM to process knowledge grpah, and potentially agent to automate the process to enable truly meaningful inverse design ability.
+<img src="/2025_fig1.png" alt="Research Framework Overview" class="img-responsive img-rounded img-shadow my-8">
 
-<img src="/2025_fig2.png" alt="Figure 2" style="max-width: 100%;">
-</div> 
+<div class="section-header mt-8">
+    <h2 class="section-title">Future Directions</h2>
+</div>
+
+<p>Moreover, we also would like to attempt to make improvements in representation of domain knowledge. Most existing work still uses typical simplified manual encoding in the ML modeling process.</p>
+
+<p>Our interest is also how to use LLM to process knowledge graphs, and potentially agents to automate the process to enable truly meaningful inverse design ability.</p>
+
+<img src="/2025_fig2.png" alt="Future Research Directions" class="img-responsive img-rounded img-shadow my-8">
+</article>

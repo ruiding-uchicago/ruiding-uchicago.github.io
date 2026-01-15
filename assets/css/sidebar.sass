@@ -24,13 +24,14 @@ aside
   display: block!important
   position: fixed
   overflow: auto
-  background: darken($dark, 2%)
+  background: linear-gradient(180deg, darken($primary-maroon, 15%) 0%, darken($primary-maroon, 25%) 100%)
   color: #fff
   padding: 2.25em
   width: 12em
   top: 0
   bottom: 0
   left: 0
+  box-shadow: $shadow-lg
 
 article header h1
   font-size: 2em
@@ -39,17 +40,73 @@ nav
   margin: 0 -2.25em
 
 nav a
-  display: block
+  display: flex
+  align-items: center
   margin: 0
-  padding: .5em 2.25em
+  padding: 0.75em 2.25em
+  color: rgba(255, 255, 255, 0.85)
+  transition: all $transition-base
+  border-left: 3px solid transparent
 
-nav a:hover, nav a.selected
-  background: lighten($dark, 2%)
-  text-decoration: inherit
+nav a:hover
+  background: rgba(255, 255, 255, 0.1)
+  color: #fff
+  text-decoration: none
+  border-left-color: $accent-gold
+
+nav a.selected
+  background: rgba(255, 255, 255, 0.15)
+  color: #fff
+  text-decoration: none
+  border-left-color: $accent-gold
+  font-weight: $font-weight-medium
 
 .icon
-  margin-right: 1.2em
-  color: inherit!important
+  margin-right: 1em
+  color: rgba(255, 255, 255, 0.7)
+  transition: color $transition-base
+
+nav a:hover .icon,
+nav a.selected .icon
+  color: $accent-gold
 
 .description
   margin: 2em 0
+  font-size: $font-size-sm
+  color: rgba(255, 255, 255, 0.7)
+  line-height: $line-height-relaxed
+
+// Mobile responsive sidebar
+@media (max-width: $breakpoint-lg)
+  body
+    margin: 0
+
+  aside
+    position: relative
+    width: 100%
+    padding: 1.5em
+    display: flex !important
+    flex-wrap: wrap
+    align-items: center
+
+  nav
+    margin: 0
+    display: flex
+    flex-wrap: wrap
+
+  nav a
+    padding: 0.5em 1em
+    border-left: none
+    border-bottom: 2px solid transparent
+
+  nav a:hover,
+  nav a.selected
+    border-left-color: transparent
+    border-bottom-color: $accent-gold
+
+  body > article
+    margin: 0 1.5em
+    padding: 1.5em 0
+
+  .description
+    display: none
