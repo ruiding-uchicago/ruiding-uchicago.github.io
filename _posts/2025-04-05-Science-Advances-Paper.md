@@ -1,34 +1,16 @@
 ---
 layout: post
-title: "Our Breakthrough Paper in Science Advances! 💫"
+title: "Paper Published in Science Advances"
+date: 2025-04-05
 ---
 
-## Big News: Our Research Published in Science Advances! 📣
+Our work on multi-stage machine learning for catalyst discovery is now published in Science Advances.
 
-I'm incredibly excited to announce that our latest work on multistage machine learning for catalyst discovery has been published in Science Advances! 🥂
+The paper presents an integrated framework combining data mining, active learning, and domain adaptation for efficient screening of acidic OER electrocatalysts. Starting from literature-mined data, the pipeline progressively narrows the candidate space through ML-guided selection, ultimately identifying experimentally validated high-performance materials.
 
-### What's the breakthrough? ⚡
+Key results:
+- Systematic navigation of multimetallic catalyst design space
+- Experimental validation of ML-predicted candidates
+- Demonstration of cross-domain transfer from alkaline to acidic conditions
 
-In this paper, we introduced a multistage machine learning framework that integrates three powerful techniques:
-- Data mining 🔍
-- Active learning 🔄
-- Domain adaptation 🔀
-
-This integrated approach helps us streamline the discovery of multimetallic catalysts - materials that are essential for clean energy technologies.
-
-### How does it work? 🤔
-
-Our framework leverages different data modalities through specialized ML modules. This allows us to objectively navigate an enormous candidate space of possible catalyst combinations.
-
-The result? We identified a promising catalyst with excellent performance in wet-lab testing and real commercial potential! 💰
-
-The whole paper is intuitive but relatively extensive in labor. So recommended to read the full text.
-
-### Read the full paper 📝
-
-Check out our paper: [Leveraging Data Mining, Active Learning, and Domain Adaptation in a Multi-Stage, Machine Learning-Driven Approach for the Efficient Discovery of Advanced Acidic Oxygen Evolution Electrocatalysts](https://www.science.org/doi/10.1126/sciadv.adr9038)
-
-Preprint available on arXiv: [arXiv:2407.04877](https://arxiv.org/abs/2407.04877)
-
-Huge thanks to my amazing collaborators especially my advisors Yuxin Chen, and Junhong Chen! 🙏
-
+[Science Advances 2025, 11, eadr9038](https://www.science.org/doi/10.1126/sciadv.adr9038)

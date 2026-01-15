@@ -21,7 +21,7 @@ navigation:                # accepts {file, title, url, icon, sidebaricon}
   - {url: "https://ruiding-uchicago.github.io/research-interests/", icon: "flask", title: "Research Interests"}
   - {url: "https://ruiding-uchicago.github.io/education/", icon: "graduation-cap", title: "Education & Experience"}
   - {url: "https://ruiding-uchicago.github.io/publications/", icon: "book", title: "Publications"}
-  - {url: "https://ruiding-uchicago.github.io/funding/", icon: "award", title: "Funding & Awards"}
+  - {url: "https://ruiding-uchicago.github.io/funding/", icon: "award", title: "Funding"}
   - {url: "/updated CV 2025.pdf", icon: "file", title: "CV"}
   - {url: "https://ruiding-uchicago.github.io/legacy/", icon: "folder", title: "Legacy"}
   # The following links are now on the legacy/index.md page

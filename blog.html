@@ -3,26 +3,21 @@ layout: default
 title: "Blog"
 permalink: /blog/
 ---
-<head>
-    <style>
-        body {
-            background-image: url('/background.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-        .container {
-            margin: 20px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.7); /* white background with some transparency */
-        }
-    </style>
-</head>
 
-<div class="container">
-    {% if site.show_excerpts %}
-      {% include home.html %}
-    {% else %}
-      {% include archive.html title="Posts" %}
-    {% endif %}
+<article class="page-container fade-in">
+<div class="section-header">
+    <h1 class="section-title">Updates</h1>
 </div>
+
+<div class="blog-list">
+{% for post in site.posts %}
+  <div class="blog-item">
+    <time class="blog-date">{{ post.date | date: "%b %Y" }}</time>
+    <div class="blog-content">
+      <a href="{{ post.url | relative_url }}" class="blog-title">{{ post.title }}</a>
+      <p class="blog-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+    </div>
+  </div>
+{% endfor %}
+</div>
+</article>
