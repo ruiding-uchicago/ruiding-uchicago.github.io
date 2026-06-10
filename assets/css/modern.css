@@ -1,0 +1,79 @@
+/* ============================================================
+   Modern CSS layer — deliberately OUTSIDE the Sass pipeline so
+   exotic at-rules survive any Sass version (GitHub Pages runs
+   Ruby Sass 3.x). Everything here is progressive enhancement:
+   unsupporting browsers skip rules silently.
+   ============================================================ */
+
+/* ---- Ambient glow drift (pairs with body::before in frame.css) ---- */
+@property --glow-x {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 50%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body::before {
+    animation: glow-drift 90s ease-in-out infinite alternate;
+  }
+  @keyframes glow-drift {
+    from { --glow-x: 38%; }
+    to   { --glow-x: 62%; }
+  }
+}
+
+/* ---- Cross-document View Transitions ----
+   Chrome/Edge 126+, Safari 18.2+. Firefox: classic instant
+   navigation until its cross-document support ships (Interop 2026). */
+@media (prefers-reduced-motion: no-preference) {
+
+  @view-transition {
+    navigation: auto;
+  }
+
+  /* Persistent chrome snaps: zero-duration groups = app-like stability */
+  aside           { view-transition-name: sidebar; }
+  body > header   { view-transition-name: site-header; }
+  body > footer   { view-transition-name: site-footer; }
+  body > article  { view-transition-name: main; }
+
+  ::view-transition-group(sidebar),
+  ::view-transition-group(site-header),
+  ::view-transition-group(site-footer) {
+    animation-duration: 0s;
+  }
+
+  /* Root crossfade kept tight */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.25s;
+  }
+
+  /* Content pane choreography: old exits fast, new slides up & settles */
+  ::view-transition-old(main) {
+    animation: 0.18s cubic-bezier(0.4, 0, 1, 1) both vt-out;
+  }
+  ::view-transition-new(main) {
+    animation: 0.38s cubic-bezier(0.16, 1, 0.3, 1) both vt-in;
+  }
+
+  /* Direction-aware reversal — types set by the pageswap/pagereveal script */
+  html:active-view-transition-type(backwards)::view-transition-old(main) {
+    animation-name: vt-out-back;
+  }
+  html:active-view-transition-type(backwards)::view-transition-new(main) {
+    animation-name: vt-in-back;
+  }
+
+  @keyframes vt-out      { to   { opacity: 0; transform: translateY(-10px); } }
+  @keyframes vt-in       { from { opacity: 0; transform: translateY(14px);  } }
+  @keyframes vt-out-back { to   { opacity: 0; transform: translateY(10px);  } }
+  @keyframes vt-in-back  { from { opacity: 0; transform: translateY(-14px); } }
+}
+
+/* When cross-document VT is driving entries, retire the legacy
+   per-load fade-in so the two don't fight. The .vt class is set by
+   the inline script only in browsers that fire pagereveal. */
+html.vt .fade-in {
+  animation: none;
+}

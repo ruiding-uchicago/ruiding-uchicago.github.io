@@ -11,6 +11,34 @@
 {% else %}
 <link rel="stylesheet" href="{{ "/assets/css/index.css" | relative_url }}">
 {% endif %}
+<link rel="stylesheet" href="{{ "/assets/css/modern.css" | relative_url }}">
+<script>
+// Direction-aware cross-document view transitions (no-op outside Chrome/Safari)
+(function () {
+  if (!('onpagereveal' in window)) return;
+  document.documentElement.classList.add('vt');
+  var order = ['/', '/blog/', '/research-interests/', '/education/', '/publications/', '/funding/'];
+  function rank(path) { var i = order.indexOf(path); return i < 0 ? 9 : i; }
+  function dir(from, to) {
+    try {
+      var f = rank(new URL(from, location.origin).pathname);
+      var t = rank(new URL(to, location.origin).pathname);
+      return t >= f ? 'forwards' : 'backwards';
+    } catch (e) { return 'forwards'; }
+  }
+  addEventListener('pageswap', function (e) {
+    if (!e.viewTransition) return;
+    var to = e.activation && e.activation.entry && e.activation.entry.url;
+    if (to) e.viewTransition.types.add(dir(location.href, to));
+  });
+  addEventListener('pagereveal', function (e) {
+    if (!e.viewTransition) return;
+    var act = window.navigation && navigation.activation;
+    var from = (act && act.from && act.from.url) || document.referrer;
+    if (from) e.viewTransition.types.add(dir(from, location.href));
+  });
+})();
+</script>
 {% if site.plugins contains "jekyll-feed" %}<link rel="alternate" href="{{ site.feed.path | default: "/feed.xml" | relative_url }}" type="application/atom+xml" title="{{ site.title }}">{% endif %}
 {% if page.mathjax or site.mathjax %}
 <link rel="stylesheet" href="{{ "/assets/katex/katex.min.css" | relative_url }}">

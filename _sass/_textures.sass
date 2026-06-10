@@ -3,31 +3,17 @@
 // All zero-JS; doubles as the reduced-motion / no-WebGL fallback.
 // ===========================================
 
-// Typed custom properties for the slow glow drift
-@property --glow-x
-  syntax: '<percentage>'
-  inherits: true
-  initial-value: 50%
-
 // Single atmospheric glow anchored at the top of the viewport.
 // Sits below the fluid canvas (z -1) and all content.
+// (The slow drift animation + @property registration live in
+// assets/css/modern.css, outside the Sass pipeline.)
 body::before
   content: ''
   position: fixed
   inset: 0
   z-index: -2
   pointer-events: none
-  background: radial-gradient(56% 42% at var(--glow-x) -6%, var(--glow-color), transparent 72%)
-
-@media (prefers-reduced-motion: no-preference)
-  body::before
-    animation: glow-drift 90s ease-in-out infinite alternate
-
-@keyframes glow-drift
-  from
-    --glow-x: 38%
-  to
-    --glow-x: 62%
+  background: radial-gradient(56% 42% at var(--glow-x, 50%) -6%, var(--glow-color), transparent 72%)
 
 // Film grain — static SVG turbulence, breaks digital flatness
 body::after

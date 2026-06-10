@@ -15,7 +15,7 @@ permalink: /blog/
   <div class="blog-item">
     <time class="blog-date">{{ post.date | date: "%b %Y" }}</time>
     <div class="blog-content">
-      <a href="{{ post.url | relative_url }}" class="blog-title">{{ post.title }}</a>
+      <a href="{{ post.url | relative_url }}" class="blog-title" style="view-transition-name: vt-{{ post.url | slugify }}">{{ post.title }}</a>
       <p class="blog-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
     </div>
   </div>
