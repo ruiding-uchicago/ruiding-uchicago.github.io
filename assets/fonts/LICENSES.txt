@@ -1,0 +1,3 @@
+Inter (variable) — SIL Open Font License 1.1 — https://github.com/rsms/inter
+JetBrains Mono — SIL Open Font License 1.1 — https://github.com/JetBrains/JetBrainsMono
+Subsets fetched from fontsource (npm @fontsource-variable/inter, @fontsource/jetbrains-mono).
