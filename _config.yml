@@ -46,3 +46,10 @@ comments:
 
 plugins:
  - jekyll-feed
+
+exclude:
+  - 2025_updates
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+  - UNLICENSE.txt
