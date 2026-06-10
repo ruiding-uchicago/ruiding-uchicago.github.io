@@ -38,7 +38,7 @@ body::after
 
 // Fluid canvas — whisper layer under content.
 // CSS double-gates what site.js also guards: dark scheme + motion-OK only.
-\#fluid-canvas
+#fluid-canvas
   position: fixed
   inset: 0
   width: 100%
@@ -51,9 +51,9 @@ body::after
 
 @media (prefers-color-scheme: dark)
   @media (prefers-reduced-motion: no-preference)
-    \#fluid-canvas
+    #fluid-canvas
       display: block
 
 @media print
-  body::before, body::after, \#fluid-canvas
+  body::before, body::after, #fluid-canvas
     display: none
