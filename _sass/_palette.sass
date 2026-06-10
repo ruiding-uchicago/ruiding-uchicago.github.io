@@ -1,0 +1,99 @@
+// ===========================================
+// ⌘K command palette
+// ===========================================
+
+.cmdk-overlay
+  position: fixed
+  inset: 0
+  z-index: 10000
+  display: none
+  background: rgba(12, 10, 10, 0.55)
+  -webkit-backdrop-filter: blur(6px) saturate(160%)
+  backdrop-filter: blur(6px) saturate(160%)
+  padding: 1rem
+
+.cmdk-overlay.open
+  display: block
+
+.cmdk
+  max-width: 580px
+  margin: 12vh auto 0
+  background: var(--color-bg-elevated)
+  border: 1px solid var(--color-border-strong)
+  border-radius: $radius-lg
+  overflow: hidden
+  box-shadow: 0 24px 64px -16px rgba(0, 0, 0, 0.5)
+
+@media (prefers-reduced-motion: no-preference)
+  .cmdk-overlay.open .cmdk
+    animation: cmdk-pop .22s $ease-out-expo
+
+@keyframes cmdk-pop
+  from
+    opacity: 0
+    transform: translateY(8px) scale(.985)
+
+.cmdk-input
+  width: 100%
+  box-sizing: border-box
+  padding: $spacing-4
+  font: inherit
+  font-size: 1.02em
+  color: var(--color-text)
+  background: transparent
+  border: 0
+  border-bottom: 1px solid var(--color-border)
+  outline: none
+
+.cmdk-list
+  list-style: none
+  margin: 0
+  padding: $spacing-2 0
+  max-height: 340px
+  overflow: auto
+
+.cmdk-item
+  display: flex
+  align-items: baseline
+  justify-content: space-between
+  gap: $spacing-4
+  padding: $spacing-2 $spacing-4
+  cursor: pointer
+  border-left: 2px solid transparent
+  margin: 0
+
+.cmdk-item.active
+  background: var(--color-bg-secondary)
+  border-left-color: var(--color-primary)
+
+.cmdk-title
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.cmdk-kind
+  flex-shrink: 0
+  font-family: var(--font-mono)
+  font-size: .65rem
+  letter-spacing: .08em
+  text-transform: uppercase
+  color: var(--color-text-light)
+
+.cmdk-foot
+  display: flex
+  justify-content: space-between
+  padding: $spacing-2 $spacing-4
+  border-top: 1px solid var(--color-border)
+  font-family: var(--font-mono)
+  font-size: .65rem
+  letter-spacing: .06em
+  color: var(--color-text-light)
+
+kbd
+  font-family: var(--font-mono)
+  font-size: .92em
+  padding: .05em .35em
+  border: 1px solid var(--color-border-strong)
+  border-bottom-width: 2px
+  border-radius: $radius-sm
+  background: var(--color-bg-secondary)

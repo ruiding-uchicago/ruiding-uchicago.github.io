@@ -2,6 +2,7 @@
 layout: default
 title: "Research"
 permalink: /research-interests/
+mathjax: true
 ---
 
 <article class="page-container fade-in">
@@ -25,6 +26,8 @@ permalink: /research-interests/
 </div>
 
 <p><strong>Text:</strong> a TextGrad-optimized agentic pipeline extracts structured knowledge graphs from unstructured publication corpora (21.8% BLEU improvement in knowledge extraction). <strong>Twin:</strong> a device-topology-aware graph neural network is trained as a digital twin of the coupled material&ndash;device system (92.3% sensitivity prediction accuracy on FET sensors). <strong>Translation:</strong> the twin screens candidates at scale&mdash;123.2 million PubChem compounds&mdash;for out-of-distribution downstream tasks such as PFAS-sensing probe design. Accepted at SIGKDD 2026 AI4Science; Spotlight Oral at ICLR 2026 AI4Mat.</p>
+
+<p class="text-muted text-sm">The Twin is a message-passing GNN over the device topology graph: $$h_v^{(k+1)}=\phi\Big(h_v^{(k)},\ \bigoplus_{u\in\mathcal{N}(v)}\psi\big(h_v^{(k)},h_u^{(k)},e_{uv}\big)\Big)$$ where edges $e_{uv}$ encode physical couplings between material, channel, and electrode nodes.</p>
 
 <img src="/2025_fig2.png" alt="Cross-Modal Device Digital Twin Framework" class="img-responsive img-rounded img-shadow my-8">
 

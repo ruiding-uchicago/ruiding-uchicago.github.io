@@ -5,7 +5,41 @@ layout: default
 sitemap: false
 ---
 
-<article>
-  <header><h1>404</h1></header>
-  <p>Page not found</p>
+<article class="page-container fade-in">
+  <header class="section-header">
+    <span class="eyebrow">HTTP 404</span>
+    <h1 class="section-title">Not synthesized yet</h1>
+  </header>
+
+  <pre class="ascii-mol" aria-hidden="true">
+          H       H
+           \     /
+            C = C
+           /     \
+      H - C       C - H
+           \\    //
+            C - C
+           /     \
+          H       404
+  </pre>
+
+  <p class="mono text-sm text-muted">$ this page has not been synthesized yet<span class="blink">&#9608;</span></p>
+
+  <p>The compound you requested is not in the library. Try the <a href="/">home page</a>, the <a href="/blog/">updates feed</a>, or press <kbd>&#8984;K</kbd> to search everything.</p>
 </article>
+
+<style>
+  .ascii-mol {
+    font-family: var(--font-mono);
+    font-size: .85rem;
+    line-height: 1.35;
+    color: var(--color-text-muted);
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .blink { animation: blink404 1.1s steps(2, start) infinite; }
+    @keyframes blink404 { to { visibility: hidden; } }
+  }
+</style>

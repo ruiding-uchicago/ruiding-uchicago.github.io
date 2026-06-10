@@ -1,0 +1,13 @@
+---
+layout: null
+sitemap: false
+---
+[
+{% for p in site.pages %}{% if p.title and p.url != "/404.html" and p.url != "/search.json" %}{"t":{{ p.title | jsonify }},"u":{{ p.url | relative_url | jsonify }},"k":"page"},
+{% endif %}{% endfor %}{% for post in site.posts %}{"t":{{ post.title | jsonify }},"u":{{ post.url | relative_url | jsonify }},"k":"post","d":{{ post.date | date: "%Y-%m" | jsonify }}},
+{% endfor %}{"t":"Google Scholar","u":"https://scholar.google.com/citations?user=Cfs4XWwAAAAJ&hl=en","k":"link"},
+{"t":"GitHub","u":"https://github.com/ruiding-uchicago","k":"link"},
+{"t":"LinkedIn","u":"https://www.linkedin.com/in/rui-ding-018281255/","k":"link"},
+{"t":"ResearchGate","u":"https://www.researchgate.net/profile/Rui-Ding-2","k":"link"},
+{"t":"CV (PDF)","u":"/Rui_2026_CV.pdf","k":"link"}
+]
