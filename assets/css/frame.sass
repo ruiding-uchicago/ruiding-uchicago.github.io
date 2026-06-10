@@ -1,7 +1,7 @@
 ---
 ---
 
-@import index, font, basic, layout, classes, utilities, textures
+@import index, font, basic, layout, classes, utilities, textures, motion, palette
 
 html
   background: var(--color-bg)
@@ -23,6 +23,15 @@ body > footer
   border-top: 1px solid var(--color-border)
   color: var(--color-text-muted)
   font-size: $font-size-sm
+
+.footer-meta
+  width: 100%
+  margin-top: .75em
+  font-family: var(--font-mono)
+  font-size: .62rem
+  letter-spacing: .12em
+  text-transform: uppercase
+  color: var(--color-text-light)
 
 @media (min-width: 32em)
   body > header, body > article, body > footer

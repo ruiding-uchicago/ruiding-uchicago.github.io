@@ -1,0 +1,45 @@
+// ===========================================
+// Motion — scroll reveals & micro-interactions
+// .reveal is applied BY site.js (no-JS users see content instantly)
+// and styled only under prefers-reduced-motion: no-preference.
+// ===========================================
+
+@media (prefers-reduced-motion: no-preference)
+  .reveal
+    opacity: 0
+    transform: translateY(14px)
+    transition: opacity .55s $ease-out-expo, transform .55s $ease-out-expo
+    transition-delay: calc(var(--i, 0) * 50ms)
+
+  .reveal.is-visible
+    opacity: 1
+    transform: none
+
+// Cursor spotlight on cards (coordinates fed by site.js)
+.feature-card, .card
+  position: relative
+  overflow: hidden
+
+.feature-card::after, .card::after
+  content: ''
+  position: absolute
+  inset: 0
+  pointer-events: none
+  opacity: 0
+  transition: opacity .3s ease
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), var(--color-selection), transparent 68%)
+
+.feature-card:hover::after, .card:hover::after
+  opacity: .55
+
+// Content links: underline draws in from the left
+article p a, article li a
+  background-image: linear-gradient(currentColor, currentColor)
+  background-size: 0% 1px
+  background-position: 0 100%
+  background-repeat: no-repeat
+  transition: background-size .25s $ease-out-expo
+  text-decoration: none
+  &:hover
+    text-decoration: none
+    background-size: 100% 1px

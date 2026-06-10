@@ -1,14 +1,14 @@
 /* site.js — Crimson Lab runtime
-   [1] ambient fluid layer (dark scheme, fine pointers, WebGL, motion-OK only)
-   Later sections: scroll reveals, command palette, console card. */
+   [1] ambient fluid layer   [2] scroll reveals + card spotlight
+   [3] ⌘K command palette    [4] console card */
+
+/* ---------- [1] ambient fluid (dark scheme, fine pointers, WebGL, motion-OK) ---------- */
 (function () {
   'use strict';
 
   var PRM = matchMedia('(prefers-reduced-motion: reduce)');
   var DARK = matchMedia('(prefers-color-scheme: dark)');
   var COARSE = matchMedia('(pointer: coarse)');
-
-  /* ---------- [1] ambient fluid ---------- */
   var fluidStarted = false;
 
   function webglOK() {
@@ -33,7 +33,6 @@
     if (fluidStarted) return;
     var canvas = document.getElementById('fluid-canvas');
     if (!canvas || !window.WebGLFluid) return;
-    /* guards: reduced motion, light scheme, touch devices, no WebGL */
     if (PRM.matches || !DARK.matches || COARSE.matches || !webglOK()) return;
     fluidStarted = true;
 
@@ -70,7 +69,7 @@
         }));
       });
     }, { passive: true });
-    /* tab hidden → rAF auto-throttles to zero; idle → dye fully dissipates */
+    /* tab hidden → rAF auto-throttles; idle → dye fully dissipates */
   }
 
   function bootFluid() {
@@ -82,4 +81,178 @@
   if (DARK.addEventListener) {
     DARK.addEventListener('change', function (e) { if (e.matches) bootFluid(); });
   }
+})();
+
+/* ---------- [2] scroll reveals + card spotlight ---------- */
+(function () {
+  'use strict';
+  var PRM = matchMedia('(prefers-reduced-motion: reduce)');
+
+  function init() {
+    /* spotlight coordinates for cards */
+    document.addEventListener('pointermove', function (e) {
+      var t = e.target && e.target.closest && e.target.closest('.feature-card, .card');
+      if (!t) return;
+      var r = t.getBoundingClientRect();
+      t.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      t.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    }, { passive: true });
+
+    /* below-the-fold reveals; above-the-fold content is never touched */
+    if (PRM.matches || !('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add('is-visible');
+          io.unobserve(en.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+
+    var els = document.querySelectorAll(
+      '.page-container .section-header, .grid > *, .publication-item, .blog-item, .card, .page-container img'
+    );
+    [].forEach.call(els, function (el) {
+      if (el.getBoundingClientRect().top < innerHeight * 0.92) return;
+      var p = el.parentElement;
+      var i = p.__ri = (p.__ri || 0);
+      p.__ri = i + 1;
+      el.classList.add('reveal');
+      el.style.setProperty('--i', i % 6);
+      io.observe(el);
+    });
+  }
+
+  if (document.readyState !== 'loading') init();
+  else document.addEventListener('DOMContentLoaded', init);
+})();
+
+/* ---------- [3] ⌘K command palette ---------- */
+(function () {
+  'use strict';
+  if (matchMedia('(pointer: coarse)').matches) return;
+
+  var overlay, listEl, inputEl, countEl, lastFocus;
+  var items = [], filtered = [], active = 0, loaded = false;
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  function build() {
+    overlay = document.createElement('div');
+    overlay.className = 'cmdk-overlay';
+    overlay.innerHTML =
+      '<div class="cmdk" role="dialog" aria-modal="true" aria-label="Site search">' +
+        '<input class="cmdk-input" type="text" placeholder="Jump to a page, paper, or post…" autocomplete="off" spellcheck="false">' +
+        '<ul class="cmdk-list" role="listbox"></ul>' +
+        '<div class="cmdk-foot"><span><kbd>↑↓</kbd> navigate · <kbd>↵</kbd> open · <kbd>esc</kbd> close</span><span class="cmdk-count"></span></div>' +
+      '</div>';
+    document.body.appendChild(overlay);
+    inputEl = overlay.querySelector('.cmdk-input');
+    listEl = overlay.querySelector('.cmdk-list');
+    countEl = overlay.querySelector('.cmdk-count');
+    overlay.addEventListener('pointerdown', function (e) { if (e.target === overlay) close(); });
+    inputEl.addEventListener('input', function () { filter(inputEl.value); });
+    inputEl.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); move(1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); }
+      else if (e.key === 'Enter') { e.preventDefault(); go(); }
+    });
+  }
+
+  function load() {
+    if (loaded) return Promise.resolve();
+    return fetch('/search.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) { items = d; loaded = true; })
+      .catch(function () { items = []; loaded = true; });
+  }
+
+  function filter(q) {
+    q = (q || '').trim().toLowerCase();
+    filtered = (!q ? items : items.filter(function (it) {
+      return (it.t + ' ' + (it.k || '')).toLowerCase().indexOf(q) > -1;
+    })).slice(0, 9);
+    active = 0;
+    render();
+  }
+
+  function render() {
+    listEl.innerHTML = filtered.map(function (it, i) {
+      return '<li class="cmdk-item' + (i === active ? ' active' : '') + '" role="option">' +
+        '<span class="cmdk-title">' + esc(it.t) + '</span>' +
+        '<span class="cmdk-kind">' + esc(it.d || it.k || '') + '</span></li>';
+    }).join('');
+    countEl.textContent = items.length ? filtered.length + '/' + items.length : '';
+    [].forEach.call(listEl.children, function (li, i) {
+      li.addEventListener('pointerenter', function () { active = i; paint(); });
+      li.addEventListener('click', go);
+    });
+  }
+
+  function paint() {
+    [].forEach.call(listEl.children, function (li, i) {
+      li.classList.toggle('active', i === active);
+    });
+  }
+
+  function move(d) {
+    if (!filtered.length) return;
+    active = (active + d + filtered.length) % filtered.length;
+    paint();
+    if (listEl.children[active]) listEl.children[active].scrollIntoView({ block: 'nearest' });
+  }
+
+  function go() {
+    var it = filtered[active];
+    if (it) location.href = it.u;
+  }
+
+  function open() {
+    if (!overlay) build();
+    lastFocus = document.activeElement;
+    load().then(function () {
+      overlay.classList.add('open');
+      inputEl.value = '';
+      filter('');
+      inputEl.focus();
+    });
+  }
+
+  function close() {
+    if (overlay && overlay.classList.contains('open')) {
+      overlay.classList.remove('open');
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+  }
+
+  addEventListener('keydown', function (e) {
+    if ((e.metaKey || e.ctrlKey) && String(e.key).toLowerCase() === 'k') {
+      e.preventDefault();
+      (overlay && overlay.classList.contains('open')) ? close() : open();
+    } else if (e.key === 'Escape') {
+      close();
+    }
+  });
+})();
+
+/* ---------- [4] console card ---------- */
+(function () {
+  'use strict';
+  if (typeof console === 'undefined' || !console.log) return;
+  try {
+    console.log(
+      '%cRui Ding%c  AI × Materials Discovery',
+      'color:#e5484d;font-weight:700;font-size:16px',
+      'color:#d7c69d;font-size:12px;letter-spacing:.08em'
+    );
+    console.log(
+      '%cDToR proposes → T³ screens → RAPIDS verifies → the wet lab confirms.\n' +
+      'You found the easter egg — say hi: ruiding@uchicago.edu',
+      'color:#8a847b'
+    );
+  } catch (e) { /* no-op */ }
 })();
