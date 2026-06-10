@@ -1,5 +1,9 @@
 <link rel="stylesheet" href="{{ "/assets/css/sidebar.css" | relative_url }}" media="screen and (min-width: 70em)">
 <aside style="display: none">
+  <div class="brand">
+    <a href="{{ "/" | relative_url }}">Rui Ding</a>
+    <span class="brand-sub">AI &times; Materials</span>
+  </div>
   <nav>
   {%- for item in site.navigation -%}
     {%- assign node = site.pages | where: "name", item.file | first -%}
