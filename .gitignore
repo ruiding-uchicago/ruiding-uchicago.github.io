@@ -5,3 +5,10 @@
 Gemfile.lock
 _site
 *.gem
+
+# local working materials & dev env
+_local/
+2025_updates/
+.beads/
+vendor/
+.bundle/
