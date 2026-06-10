@@ -1,25 +1,29 @@
 ---
 ---
 
-@import index, font, basic, layout, classes, utilities
+@import index, font, basic, layout, classes, utilities, textures
 
 html
-  background: lighten($dark, 70%)
-  padding: 0 calc(38% - 22em)
+  background: var(--color-bg)
+  padding: 0
 
 body
-  box-shadow: 0 0 .3em lighten($dark, 65%)
+  box-shadow: none
 
-body > header, body > footer
-  background: lighten($dark, 5%)
-  color: $light
+body > header
+  background: transparent
+  border-bottom: 1px solid var(--color-border)
+
+body > header .title
+  font-weight: 600
+  letter-spacing: -0.02em
+
+body > footer
+  background: transparent
+  border-top: 1px solid var(--color-border)
+  color: var(--color-text-muted)
+  font-size: $font-size-sm
 
 @media (min-width: 32em)
   body > header, body > article, body > footer
     padding: 1.75em calc(22% - 6em)
-
-@media (prefers-color-scheme: dark)
-  body, body > header, body > footer
-    box-shadow: 0 0 0 1px lighten($dark, 8%)
-  html, body > header, body > footer
-    background: $dark
