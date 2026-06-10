@@ -16,12 +16,12 @@ minimal: false             # use a dark header
 # Menu
 
 navigation:                # accepts {file, title, url, icon, sidebaricon}
-  - {url: "https://ruiding-uchicago.github.io/", icon: "home", title: "Home"}
-  - {url: "https://ruiding-uchicago.github.io/blog/", icon: "blogger", title: "Blog"}
-  - {url: "https://ruiding-uchicago.github.io/research-interests/", icon: "flask", title: "Research Interests"}
-  - {url: "https://ruiding-uchicago.github.io/education/", icon: "graduation-cap", title: "Education & Experience"}
-  - {url: "https://ruiding-uchicago.github.io/publications/", icon: "book", title: "Publications"}
-  - {url: "https://ruiding-uchicago.github.io/funding/", icon: "award", title: "Funding"}
+  - {url: "/", icon: "home", title: "Home"}
+  - {url: "/blog/", icon: "blogger", title: "Blog"}
+  - {url: "/research-interests/", icon: "flask", title: "Research Interests"}
+  - {url: "/education/", icon: "graduation-cap", title: "Education & Experience"}
+  - {url: "/publications/", icon: "book", title: "Publications"}
+  - {url: "/funding/", icon: "award", title: "Funding"}
   - {url: "/Rui_2026_CV.pdf", icon: "file", title: "CV"}
   # The following links are now on the legacy/index.md page
   # - {file: "ME.html", icon: user, title: "About Me"}
@@ -31,7 +31,7 @@ navigation:                # accepts {file, title, url, icon, sidebaricon}
   # - {file: "Award.html", icon: award, title: "Awards"}
 
 external:                  # shows a footer with social links - for available icons see fontawesome.com/icons
-  - {title: Mail, icon: envelope, url: "mailto:ruiding@uchicago"}
+  - {title: Mail, icon: envelope, url: "mailto:ruiding@uchicago.edu"}
   - {title: Github, icon: github, url: "https://github.com/ruiding-uchicago"}
   - {title: LinkedIn, icon: linkedin, url: "https://www.linkedin.com/in/rui-ding-018281255/"}
   - {title: PME Group Site, icon: flask, url: "https://www.junhongchengroup.pme.uchicago.edu/"}
