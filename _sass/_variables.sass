@@ -1,17 +1,23 @@
 // ===========================================
-// CSS Variables & Theme Configuration
-// Modern academic color palette
+// Crimson Lab — Design Tokens
+// Dark: maroon-tinted near-black + crimson/rose + champagne
+// Light: warm cream "Collegiate" + full-strength maroon
+// Runtime theming via CSS custom properties;
+// Sass variables remain as compile-time anchors & legacy bridge.
 // ===========================================
 
-// Primary Colors - UChicago inspired
+// Brand Colors
 $primary-maroon: #800000
-$primary-dark: #212121
-$primary-light: #ffffff
+$crimson: #e5484d
+$rose: #ff9592
+$champagne: #d7c69d
+$primary-dark: #141413
+$primary-light: #faf9f5
 
-// Accent Colors
-$accent-gold: #9A8C38
-$accent-blue: #396E9A
-$accent-teal: #5E9A9A
+// Accent Colors (legacy names kept, values re-pointed)
+$accent-gold: $champagne
+$accent-blue: #396e9a
+$accent-teal: #5e9a9a
 
 // Neutral Colors
 $gray-100: #f8f9fa
@@ -25,7 +31,7 @@ $gray-800: #343a40
 $gray-900: #212529
 
 // Typography Scale
-$font-size-base: calc(0.9rem + 0.15vw)
+$font-size-base: calc(0.95rem + 0.1vw)
 $font-size-sm: 0.875rem
 $font-size-lg: 1.125rem
 $font-size-xl: 1.25rem
@@ -34,9 +40,9 @@ $font-size-3xl: 1.875rem
 $font-size-4xl: 2.25rem
 
 // Font Families
-$font-family-sans: "Inter", "PT Sans", -apple-system, "Helvetica Neue", "Segoe UI", "Roboto", sans-serif
+$font-family-sans: "Inter", -apple-system, "Helvetica Neue", "Segoe UI", "Roboto", sans-serif
 $font-family-serif: "Georgia", "Times New Roman", serif
-$font-family-mono: "SF Mono", "Consolas", "Liberation Mono", monospace
+$font-family-mono: "JetBrains Mono", "SF Mono", "Consolas", "Liberation Mono", monospace
 
 // Font Weights
 $font-weight-light: 300
@@ -69,16 +75,17 @@ $radius-lg: 0.75rem
 $radius-xl: 1rem
 $radius-full: 9999px
 
-// Shadows
-$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05)
-$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)
-$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)
-$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)
+// Shadows (light mode only — dark mode uses surface ladder, no shadows)
+$shadow-sm: 0 1px 2px 0 rgba(20, 19, 19, 0.04)
+$shadow-md: 0 1px 2px rgba(20, 19, 19, 0.04), 0 6px 16px -8px rgba(20, 19, 19, 0.08)
+$shadow-lg: 0 2px 4px rgba(20, 19, 19, 0.04), 0 12px 24px -10px rgba(20, 19, 19, 0.10)
+$shadow-xl: 0 2px 4px rgba(20, 19, 19, 0.05), 0 20px 40px -12px rgba(20, 19, 19, 0.12)
 
-// Transitions
-$transition-fast: 0.15s ease-in-out
-$transition-base: 0.2s ease-in-out
-$transition-slow: 0.3s ease-in-out
+// Motion (premium grammar: fast entries, ease-out-expo)
+$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1)
+$transition-fast: 0.15s $ease-out-expo
+$transition-base: 0.2s $ease-out-expo
+$transition-slow: 0.35s $ease-out-expo
 
 // Breakpoints
 $breakpoint-sm: 640px
@@ -98,7 +105,7 @@ $font-weight: $font-weight-normal
 $font-family: $font-family-sans
 $heading-weight: $font-weight-semibold
 $line-height: $line-height-normal
-$link-color: $accent-blue
+$link-color: $primary-maroon
 $dark: $primary-dark
 $light: $primary-light
 
@@ -106,33 +113,48 @@ $light: $primary-light
 @function reduce ($percent)
   @return rgba(mix($dark, $light), $percent / 100)
 
-// CSS Custom Properties (for runtime theming)
+// ===========================================
+// CSS Custom Properties — LIGHT (Collegiate Cream)
+// ===========================================
 \:root
-  // Colors
+  color-scheme: light dark
+
+  // Brand & interaction
   --color-primary: #{$primary-maroon}
-  --color-primary-dark: #{darken($primary-maroon, 10%)}
-  --color-primary-light: #{lighten($primary-maroon, 10%)}
-  --color-accent: #{$accent-gold}
+  --color-primary-dark: #5c0000
+  --color-primary-light: #a33333
+  --color-accent: #7d6b2f
   --color-accent-blue: #{$accent-blue}
   --color-accent-teal: #{$accent-teal}
 
-  // Text colors
-  --color-text: #{$gray-900}
-  --color-text-muted: #{$gray-600}
-  --color-text-light: #{$gray-500}
+  // Text ladder
+  --color-text: #141413
+  --color-text-muted: #5d574f
+  --color-text-light: #8a847b
 
-  // Background colors
-  --color-bg: #{$primary-light}
-  --color-bg-secondary: #{$gray-100}
-  --color-bg-tertiary: #{$gray-200}
+  // Surfaces
+  --color-bg: #faf9f5
+  --color-bg-secondary: #f1ece2
+  --color-bg-tertiary: #e9e2d6
+  --color-bg-elevated: #fffdf8
 
-  // Border colors
-  --color-border: #{$gray-300}
-  --color-border-light: #{$gray-200}
+  // Hairlines
+  --color-border: #e6dfd8
+  --color-border-light: #efe9e0
+  --color-border-strong: #d8cfc4
 
-  // Link colors
-  --color-link: #{$accent-blue}
-  --color-link-hover: #{darken($accent-blue, 15%)}
+  // Links
+  --color-link: #{$primary-maroon}
+  --color-link-hover: #5c0000
+
+  // Award / venue metals
+  --award-fg: #6d5e28
+  --award-bg: rgba(125, 107, 47, 0.08)
+  --award-border: rgba(125, 107, 47, 0.35)
+
+  // Atmosphere
+  --glow-color: rgba(128, 0, 0, 0.05)
+  --color-selection: rgba(128, 0, 0, 0.14)
 
   // Spacing
   --spacing-page: #{$spacing-6}
@@ -147,16 +169,43 @@ $light: $primary-light
   --shadow-card: #{$shadow-md}
   --shadow-hover: #{$shadow-lg}
 
-  // Transitions
-  --transition: #{$transition-base}
+  // Motion
+  --ease-out-expo: #{$ease-out-expo}
+  --transition: 0.2s #{$ease-out-expo}
 
-// Dark mode support
+// ===========================================
+// CSS Custom Properties — DARK (Crimson Lab)
+// ===========================================
 @media (prefers-color-scheme: dark)
   \:root
-    --color-text: #{$gray-100}
-    --color-text-muted: #{$gray-400}
-    --color-bg: #{$gray-900}
-    --color-bg-secondary: #{$gray-800}
-    --color-bg-tertiary: #{$gray-700}
-    --color-border: #{$gray-700}
-    --color-border-light: #{$gray-800}
+    --color-primary: #{$crimson}
+    --color-primary-dark: #c73a3f
+    --color-primary-light: #{$rose}
+    --color-accent: #{$champagne}
+    --color-accent-blue: #a39d96
+
+    --color-text: #f2efea
+    --color-text-muted: #b3aca3
+    --color-text-light: #847d74
+
+    --color-bg: #0c0a0a
+    --color-bg-secondary: #161112
+    --color-bg-tertiary: #1e1517
+    --color-bg-elevated: #161112
+
+    --color-border: rgba(255, 255, 255, 0.08)
+    --color-border-light: rgba(255, 255, 255, 0.05)
+    --color-border-strong: rgba(255, 255, 255, 0.16)
+
+    --color-link: #{$rose}
+    --color-link-hover: #ffb4b1
+
+    --award-fg: #{$champagne}
+    --award-bg: rgba(215, 198, 157, 0.08)
+    --award-border: rgba(215, 198, 157, 0.32)
+
+    --glow-color: rgba(128, 0, 0, 0.15)
+    --color-selection: rgba(229, 72, 77, 0.32)
+
+    --shadow-card: none
+    --shadow-hover: none
