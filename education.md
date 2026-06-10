@@ -20,6 +20,13 @@ permalink: /education/
     <p class="mt-4"><strong>Advisors:</strong> Prof. Junhong Chen (PME/Argonne) &amp; Prof. Yuxin Chen (CS)</p>
 </div>
 
+<div class="card mb-4">
+    <span class="tag tag-primary mb-4">Incoming</span>
+    <h3 class="feature-title">University of Chicago</h3>
+    <p class="text-muted mb-2">Joint Appointed Research Scientist &mdash; Pritzker School of Molecular Engineering &amp; Department of Computer Science</p>
+    <p class="text-sm">Sept. 2026 &ndash; Sept. 2027</p>
+</div>
+
 <div class="section-header mt-8">
     <h2 class="section-title">Education</h2>
 </div>
@@ -43,7 +50,13 @@ permalink: /education/
 </div>
 
 <div class="section-header mt-8">
-    <h2 class="section-title">Selected Presentations (2024&ndash;2025)</h2>
+    <h2 class="section-title">Selected Presentations (2024&ndash;2026)</h2>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">ICLR 2026 AI4Mat Workshop</div>
+    <div class="publication-authors">Spotlight Oral: Text-Twin-Translation (T<sup>3</sup>)</div>
+    <div class="publication-venue">Brazil &mdash; 2026</div>
 </div>
 
 <div class="publication-item">
@@ -84,7 +97,25 @@ permalink: /education/
 </div>
 
 <div class="section-header mt-8">
-    <h2 class="section-title">Mentorship</h2>
+    <h2 class="section-title">Mentorship &amp; Service</h2>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">2026 Schmidt AI in Science Faculty Fellowship</div>
+    <div class="publication-authors">Mentoring Omolola Ogbolumani (faculty, University of Lagos, Nigeria) &mdash; Human-in-the-Loop AI Design for Food, Energy, and Water Nexus (FEW-N) Optimization</div>
+    <div class="publication-venue">University of Chicago, Jan.&ndash;Jun. 2026</div>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">2026 AI+Science Hackathon</div>
+    <div class="publication-authors">Judge; source code &amp; dataset provider for the multi-agent framework track</div>
+    <div class="publication-venue">University of Chicago, April 2026</div>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">AI+Science Schmidt Fellows Speaker Series</div>
+    <div class="publication-authors">Host Representative</div>
+    <div class="publication-venue">University of Chicago, 2024&ndash;2026</div>
 </div>
 
 <div class="publication-item">
@@ -97,6 +128,12 @@ permalink: /education/
     <div class="publication-title">Research Experience for Nigerian Undergraduates (RENEU)</div>
     <div class="publication-authors">Mentee: Covenant Amoo &mdash; LLM for FET Sensor Knowledge Extraction</div>
     <div class="publication-venue">University of Chicago, 2025</div>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">Research Experience for Nigerian Undergraduates (RENEU), Cohort 2024</div>
+    <div class="publication-authors">Assisted mentoring: Abdulafeez Olaitan &mdash; Dynamic Reshaping of Nanodroplets Under Electron Beam Radiation</div>
+    <div class="publication-venue">University of Chicago, 2024</div>
 </div>
 
 <div class="publication-item">

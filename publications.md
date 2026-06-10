@@ -9,7 +9,7 @@ permalink: /publications/
     <h1 class="section-title">Publications</h1>
 </div>
 
-<p class="text-muted mb-8">Selected first-author and co-first-author publications only. For the complete list, see <a href="/Rui_2025_CV.pdf">CV</a> or <a href="https://scholar.google.com/citations?user=Cfs4XWwAAAAJ" target="_blank">Google Scholar</a>.</p>
+<p class="text-muted mb-8">Selected first-author and co-first-author publications only. For the complete list, see <a href="/Rui_2026_CV.pdf">CV</a> or <a href="https://scholar.google.com/citations?user=Cfs4XWwAAAAJ" target="_blank">Google Scholar</a>.</p>
 
 <div class="section-header mt-8">
     <h2 class="section-title">Schmidt Fellowship Period (2023&ndash;Present)</h2>
@@ -17,10 +17,17 @@ permalink: /publications/
 
 <div class="publication-item">
     <div class="publication-title">Text-Twin-Translation (T<sup>3</sup>): A Full-Stack Machine Learning Framework for Functional Material-Device Systems Discovery</div>
-    <div class="publication-authors">Rui Ding, Zixin Ding, Rodrigo P. Ferreira, Yuxin Chen, Junhong Chen</div>
+    <div class="publication-authors">Rui Ding*, Zixin Ding*, Rodrigo P. Ferreira*, Yuxin Chen, Junhong Chen</div>
     <div class="publication-venue">SIGKDD 2026, AI4Science Track &middot; Spotlight Oral at ICLR 2026 AI4Mat Workshop</div>
     <span class="tag tag-primary">Spotlight Oral</span>
     <p class="text-sm mt-2"><a href="https://openreview.net/forum?id=7QfGX651NZ" target="_blank">OpenReview</a> &middot; <a href="https://github.com/ruiding-uchicago/T3_FET_sensor" target="_blank">Code</a></p>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">Geometry, Not Energy Surface, Drives the Neutral MLIP&ndash;DFT Gap in Atomistic Interaction Surrogates (RAPIDS)</div>
+    <div class="publication-authors">Rui Ding*, Zixin Ding*, Rodrigo P. Ferreira*, Yuxin Chen, Junhong Chen</div>
+    <div class="publication-venue">ICML 2026 AI4Physics Workshop</div>
+    <p class="text-sm mt-2"><a href="https://openreview.net/forum?id=r2NSBJ4ip7" target="_blank">OpenReview</a></p>
 </div>
 
 <div class="publication-item">

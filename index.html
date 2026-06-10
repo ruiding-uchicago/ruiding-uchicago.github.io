@@ -20,28 +20,30 @@ title: "Home"
         </div>
     </div>
 
-    <p>I develop AI systems that autonomously conduct scientific research in materials and chemistry. My work focuses on building agents that can read literature, design experiments, and discover new materials with minimal human intervention.</p>
+    <p>I build <strong>AI co-scientist systems</strong> for complex materials and device discovery in the <strong>no-database regime</strong>&mdash;systems that mine literature, construct device digital twins, propose candidates, and validate them through simulations and experiments.</p>
+
+    <p class="text-muted">Trained as a materials scientist and electrochemist, I became interested in AI after seeing how much of materials discovery still depends on costly trial-and-error experiments.</p>
 
     <div class="section-header mt-8">
-        <h2 class="section-title">Research Focus</h2>
+        <h2 class="section-title">The AI Co-Scientist Stack</h2>
     </div>
 
     <div class="grid grid-cols-3 my-8">
         <div class="feature-card">
-            <h3 class="feature-title">Autonomous Discovery Agents</h3>
-            <p class="feature-description">LLM-based agents that orchestrate end-to-end research workflows&mdash;from literature review to hypothesis generation to experimental validation.</p>
+            <h3 class="feature-title">Agentic Hypothesis Generation</h3>
+            <p class="feature-description"><strong>DToR</strong>&mdash;a tree-structured deep-research agent running entirely on local hardware, with a ~79% win rate against commercial deep-research systems across 27 nanomaterials/device topics.</p>
         </div>
         <div class="feature-card">
-            <h3 class="feature-title">Cross-Modal Scientific AI</h3>
-            <p class="feature-description">Integrating text, molecular and device structures, images, and experimental data for unified materials understanding.</p>
+            <h3 class="feature-title">Device Digital Twins</h3>
+            <p class="feature-description"><strong>T<sup>3</sup></strong>&mdash;translating literature into topology-aware device digital twins: 92.3% sensitivity prediction accuracy and screening of 123 million PubChem candidates.</p>
         </div>
         <div class="feature-card">
-            <h3 class="feature-title">Local-First AI Infrastructure</h3>
-            <p class="feature-description">Deploying open-source models on institutional hardware for secure, reproducible scientific computing.</p>
+            <h3 class="feature-title">Rapid Physical Validation</h3>
+            <p class="feature-description"><strong>RAPIDS</strong>&mdash;benchmarking MLIPs against DFT across 5,567 probe&ndash;target dimers, packaged as a validation tool that autonomous LLM agents can call.</p>
         </div>
     </div>
 
-    <p>Current project: <strong>BRAINIAC</strong>&mdash;a framework for AI-driven nano/micro materials discovery. Recent work includes <strong>DToR</strong>, a deep-research agent that outperforms commercial systems on materials topics (<a href="https://arxiv.org/abs/2511.18303">arXiv</a>), and <strong>T<sup>3</sup></strong> (Text-Twin-Translation), an agentic + topology-aware GNN framework for data-scarce materials/device design, accepted at SIGKDD 2026 AI4Science (<a href="https://openreview.net/forum?id=7QfGX651NZ">OpenReview</a>, <a href="https://github.com/ruiding-uchicago/T3_FET_sensor">code</a>).</p>
+    <p>Under the <strong>BRAINIAC</strong> umbrella, these pieces are converging into one autonomous discovery loop: <strong>DToR</strong> generates research hypotheses (<a href="https://arxiv.org/abs/2511.18303">arXiv</a>), <strong>T<sup>3</sup></strong> turns literature into device digital twins for candidate screening&mdash;SIGKDD 2026 AI4Science, Spotlight Oral at ICLR 2026 AI4Mat (<a href="https://openreview.net/forum?id=7QfGX651NZ">OpenReview</a>, <a href="https://github.com/ruiding-uchicago/T3_FET_sensor">code</a>)&mdash;and <strong>RAPIDS</strong> validates candidates at the atomistic level&mdash;ICML 2026 AI4Physics (<a href="https://openreview.net/forum?id=r2NSBJ4ip7">OpenReview</a>).</p>
 
     <p class="text-muted mt-8">Advised by <a href="https://www.junhongchengroup.pme.uchicago.edu/junhongchen">Prof. Junhong Chen</a> (PME/Argonne) and <a href="https://yuxinchen.org/">Prof. Yuxin Chen</a> (CS).</p>
 </article>
