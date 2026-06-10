@@ -6,6 +6,7 @@ permalink: /funding/
 
 <article class="page-container fade-in">
 <div class="section-header">
+    <span class="eyebrow">Support &amp; Recognition</span>
     <h1 class="section-title">Research Funding &amp; Awards</h1>
 </div>
 

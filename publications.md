@@ -6,6 +6,7 @@ permalink: /publications/
 
 <article class="page-container fade-in">
 <div class="section-header">
+    <span class="eyebrow">Selected &middot; First / Co-First Author</span>
     <h1 class="section-title">Publications</h1>
 </div>
 

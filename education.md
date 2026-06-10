@@ -6,6 +6,7 @@ permalink: /education/
 
 <article class="page-container fade-in">
 <div class="section-header">
+    <span class="eyebrow">Curriculum Vitae</span>
     <h1 class="section-title">Education & Experience</h1>
 </div>
 
