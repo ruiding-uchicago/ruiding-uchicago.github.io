@@ -36,6 +36,24 @@ body::after
   background-image: radial-gradient(var(--color-border-strong) 1px, transparent 1.5px)
   background-size: 18px 18px
 
+// Fluid canvas — whisper layer under content.
+// CSS double-gates what site.js also guards: dark scheme + motion-OK only.
+\#fluid-canvas
+  position: fixed
+  inset: 0
+  width: 100%
+  height: 100%
+  z-index: -1
+  pointer-events: none
+  opacity: .3
+  mix-blend-mode: screen
+  display: none
+
+@media (prefers-color-scheme: dark)
+  @media (prefers-reduced-motion: no-preference)
+    \#fluid-canvas
+      display: block
+
 @media print
-  body::before, body::after
+  body::before, body::after, \#fluid-canvas
     display: none
