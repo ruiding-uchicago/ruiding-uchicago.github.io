@@ -70,41 +70,43 @@ title: "Home"
 
     {% include fid-slider.html %}
 
-    <figure class="disc-loop anim-onview" id="disc-loop" role="img" aria-label="A circular diagram of the autonomous discovery loop: DToR hypothesis generation, T3 screening, RAPIDS validation, wet-lab experiment, and feedback, running as a closed cycle under BRAINIAC.">
-    <svg class="loop-svg" viewBox="0 0 560 320" aria-hidden="true">
-      <circle class="loop-flow" cx="280" cy="165" r="110"/>
-      <path class="loop-arc la1" pathLength="1" d="M302.9 57.4 A110 110 0 0 1 375.3 110"/>
-      <path class="loop-arc la2" pathLength="1" d="M389.4 153.5 A110 110 0 0 1 361.7 238.6"/>
-      <path class="loop-arc la3" pathLength="1" d="M324.7 265.5 A110 110 0 0 1 235.3 265.5"/>
-      <path class="loop-arc la4" pathLength="1" d="M198.3 238.6 A110 110 0 0 1 170.6 153.5"/>
-      <path class="loop-arc la5" pathLength="1" d="M184.7 110 A110 110 0 0 1 257.1 57.4"/>
+    <figure class="disc-loop anim-onview" id="disc-loop" role="img" aria-label="A diagram of the autonomous discovery loop: DToR hypothesis generation, T3 data-driven surrogate twins, RAPIDS numerical-simulation validation, wet-lab experiment, and feedback, running as a closed cycle under BRAINIAC.">
+    <svg class="loop-svg" viewBox="0 0 720 260" aria-hidden="true">
+      <!-- forward pipeline along the top -->
+      <path class="loop-arc la1" pathLength="1" d="M116 72 H 250 l -7 -5 m 7 5 l -7 5"/>
+      <path class="loop-arc la2" pathLength="1" d="M302 72 H 436 l -7 -5 m 7 5 l -7 5"/>
+      <path class="loop-arc la3" pathLength="1" d="M488 72 H 622 l -7 -5 m 7 5 l -7 5"/>
+      <!-- feedback return through FB along the bottom -->
+      <path class="loop-arc la4" pathLength="1" d="M648 98 C 648 178, 528 212, 397 212 l 7 -5 m -7 5 l 7 5"/>
+      <path class="loop-arc la5" pathLength="1" d="M341 212 C 198 212, 90 178, 90 98 l -5 7 m 5 -7 l 5 7"/>
       <g class="loop-node ln1" data-k="dtor" tabindex="0">
-        <circle cx="280" cy="55" r="24"/>
-        <text x="280" y="59" text-anchor="middle">DToR</text>
-        <text class="loop-sub" x="280" y="16" text-anchor="middle">hypothesis</text>
+        <circle cx="90" cy="72" r="26"/>
+        <text x="90" y="76" text-anchor="middle">DToR</text>
+        <text class="loop-sub" x="90" y="119" text-anchor="middle">hypothesis</text>
       </g>
       <g class="loop-node ln2" data-k="t3" tabindex="0">
-        <circle cx="384.6" cy="131" r="24"/>
-        <text x="384.6" y="135" text-anchor="middle">T&#179;</text>
-        <text class="loop-sub" x="424" y="106" text-anchor="middle">screening</text>
+        <circle cx="276" cy="72" r="26"/>
+        <text x="276" y="76" text-anchor="middle">T&#179;</text>
+        <text class="loop-sub" x="276" y="119" text-anchor="middle">data-driven surrogates</text>
       </g>
       <g class="loop-node ln3" data-k="rapids" tabindex="0">
-        <circle cx="344.7" cy="254" r="24"/>
-        <text x="344.7" y="258" text-anchor="middle">RAPIDS</text>
-        <text class="loop-sub" x="344.7" y="298" text-anchor="middle">validation</text>
+        <circle cx="462" cy="72" r="26"/>
+        <text x="462" y="76" text-anchor="middle">RAPIDS</text>
+        <text class="loop-sub" x="462" y="119" text-anchor="middle">numerical simulation</text>
+        <text class="loop-sub" x="462" y="130" text-anchor="middle">computational oracle</text>
       </g>
       <g class="loop-node ln4" data-k="exp" tabindex="0">
-        <circle cx="215.3" cy="254" r="24"/>
-        <text x="215.3" y="258" text-anchor="middle">LAB</text>
-        <text class="loop-sub" x="215.3" y="298" text-anchor="middle">experiment</text>
+        <circle cx="648" cy="72" r="26"/>
+        <text x="648" y="76" text-anchor="middle">LAB</text>
+        <text class="loop-sub" x="648" y="119" text-anchor="middle">experiment</text>
       </g>
       <g class="loop-node ln5" data-k="fb" tabindex="0">
-        <circle cx="175.4" cy="131" r="24"/>
-        <text x="175.4" y="135" text-anchor="middle">FB</text>
-        <text class="loop-sub" x="136" y="106" text-anchor="middle">feedback</text>
+        <circle cx="369" cy="212" r="26"/>
+        <text x="369" y="216" text-anchor="middle">FB</text>
+        <text class="loop-sub" x="369" y="253" text-anchor="middle">feedback</text>
       </g>
-      <text class="loop-center" x="280" y="158" text-anchor="middle">BRAINIAC</text>
-      <text class="loop-center-sub" x="280" y="176" text-anchor="middle">autonomous discovery loop</text>
+      <text class="loop-center" x="369" y="150" text-anchor="middle">BRAINIAC</text>
+      <text class="loop-center-sub" x="369" y="167" text-anchor="middle">autonomous discovery loop</text>
     </svg>
     <figcaption class="loop-cap">Click any stage.</figcaption>
     </figure>
@@ -115,8 +117,8 @@ title: "Home"
       var cap = fig.querySelector('.loop-cap');
       var caps = {
         dtor: 'DToR generates and organizes research hypotheses from local scientific corpora.',
-        t3: 'T³ builds device-level digital twins and turns them into candidate rankings.',
-        rapids: 'RAPIDS runs fast atomistic checks so weak candidates die cheaply.',
+        t3: 'T³ distills literature into data-driven surrogate twins, then ranks candidates against them.',
+        rapids: 'RAPIDS is a fast numerical-simulation oracle — atomistic checks so weak candidates die cheaply.',
         exp: 'The wet lab closes the loop with physical reality.',
         fb: 'Results feed back and update the knowledge state.'
       };

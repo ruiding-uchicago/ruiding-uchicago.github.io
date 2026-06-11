@@ -303,7 +303,7 @@
     ctx.globalAlpha = 1;
 
     var showLabels = W > 480;
-    ctx.font = '500 8.5px "JetBrains Mono", monospace';
+    ctx.font = '500 9.5px "JetBrains Mono", monospace';
 
     /* teal: charted, benchmarked */
     ctx.textAlign = 'left';
@@ -524,5 +524,21 @@
   var mq = matchMedia('(prefers-color-scheme: dark)');
   if (mq.addEventListener) {
     mq.addEventListener('change', function () { colors(); if (PRM) draw(0, 1, 0, 0); });
+  }
+
+  /* idle region tour: light each zone label in turn (benchmark-rich ->
+     materials discovery -> the hard region). Pure DOM-class work on the
+     HTML labels, independent of the canvas auto-survey probe so the two
+     never collide; pauses while the visitor is on the map. */
+  if (!PRM) {
+    var zones = fig.querySelectorAll('.hr-label');
+    var zi = -1;
+    setInterval(function () {
+      if (!visible) return;
+      var z;
+      if (mouse.on) { for (z = 0; z < zones.length; z++) zones[z].classList.remove('lit'); return; }
+      zi = (zi + 1) % zones.length;
+      for (z = 0; z < zones.length; z++) zones[z].classList.toggle('lit', z === zi);
+    }, 1900);
   }
 })();

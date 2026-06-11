@@ -32,13 +32,20 @@
   position: absolute
   transform: translate(-50%, -50%)
   font-family: var(--font-mono)
-  font-size: 0.625rem
+  font-size: 0.74rem
   letter-spacing: 0.1em
   text-transform: uppercase
   color: var(--color-text-light)
   white-space: nowrap
   pointer-events: none
   z-index: 2
+  transition: transform .45s $ease-out-expo, text-shadow .45s ease
+
+// idle region tour highlight (cycled by hard-region.js); glows in each zone's own colour
+.hr-label.lit
+  transform: translate(-50%, -50%) scale(1.22)
+  text-shadow: 0 0 12px currentColor
+  z-index: 3
 
 .hr-label.hard
   color: var(--color-primary)
@@ -169,7 +176,7 @@
 
 @media (max-width: $breakpoint-sm)
   .hr-label
-    font-size: 0.55rem
+    font-size: 0.64rem
   .hr-label:nth-of-type(2)
     display: none
 
@@ -349,8 +356,11 @@
 
 // ---------- Autonomous Discovery Loop ----------
 .disc-loop
-  margin: $spacing-8 auto
-  max-width: 620px
+  margin: $spacing-8 0
+  padding: $spacing-4
+  border: 1px solid var(--color-border)
+  border-radius: $radius-lg
+  background: var(--color-bg-secondary)
 
 .loop-svg
   display: block
@@ -388,10 +398,10 @@
   pointer-events: none
 
 .loop-node .loop-sub
-  font-size: 8px
+  font-size: 7.5px
   fill: var(--color-text-light)
   text-transform: uppercase
-  letter-spacing: 1px
+  letter-spacing: 0.4px
 
 .loop-node:hover circle,
 .loop-node:focus circle
