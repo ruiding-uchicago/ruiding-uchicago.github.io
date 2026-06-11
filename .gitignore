@@ -15,3 +15,6 @@ vendor/
 
 # Cloudflare Wrangler local state
 worker/.wrangler/
+
+# personal GIF/MP4 exports — video assets, not part of the website
+gif-exports/

@@ -13,6 +13,7 @@
   var info = document.getElementById('hr-info');
 
   var PRM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NO_PROBE = !!window.__HR_NO_PROBE;   // GIF/export mode: drop the roaming probe + intro zoom for a clean loop
 
   /* ---------- seeded Perlin noise ---------- */
   function makeNoise(seed) {
@@ -409,7 +410,7 @@
 
   /* ---------- auto-survey probe ---------- */
   function autoOn(now) {
-    return !PRM && !mouse.on && visible && (now - lastUserT > 4000);
+    return !PRM && !NO_PROBE && !mouse.on && visible && (now - lastUserT > 4000);
   }
   function advanceAuto(now) {
     if (!autoOn(now)) return;
@@ -446,7 +447,7 @@
     /* when the survey resumes, retire the why-card back to initial state */
     if (info && !info.hidden && autoOn(now)) info.hidden = true;
     var dt = now - enterT0, scale = 1, ox = 0, oy = 0;
-    if (dt < 1500) {
+    if (!NO_PROBE && dt < 1500) {
       var e = easeOutExpo(dt / 1500);
       scale = 1.3 - 0.3 * e;
       ox = -0.06 * W * (1 - e);
