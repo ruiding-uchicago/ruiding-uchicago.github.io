@@ -4,20 +4,6 @@ title: "Home"
 ---
 
 <article class="page-container fade-in">
-    <figure class="hard-region" id="hard-region" role="img" aria-label="A stylized phase diagram: dense benchmark data points in the easy lowlands, sparse rugged terrain with a crimson glow in the hard region of high complexity and high data cost.">
-        <canvas id="hr-canvas" aria-hidden="true"></canvas>
-        <figcaption class="hr-head eyebrow">Mapping the hard region</figcaption>
-        <span class="hr-label" style="left:17%;top:79%">benchmark-rich problems</span>
-        <span class="hr-label" style="left:47%;top:57%">materials discovery</span>
-        <span class="hr-label" style="left:63%;top:38%">functional devices</span>
-        <span class="hr-label hard" style="left:79%;top:17%" tabindex="0">the hard region
-            <span class="hr-tip">Where trial-and-error gets too expensive.</span>
-        </span>
-        <span class="hr-axis hr-axis-x">system complexity &rarr;</span>
-        <span class="hr-axis hr-axis-y">data cost &rarr;</span>
-    </figure>
-    <script defer src="/assets/js/hard-region.js"></script>
-
     <div class="profile dot-grid p-6 mb-8">
         <img src="headshot.jpg" alt="Rui Ding" class="profile-image">
         <div class="profile-content">
@@ -43,6 +29,19 @@ title: "Home"
         <h2 class="section-title">The AI Co-Scientist Stack</h2>
     </div>
 
+    <figure class="hard-region" id="hard-region" role="img" aria-label="An interactive phase diagram: dense benchmark data points in the easy lowlands; fuel cells, electrolyzers, FET sensors, PFAS membranes, and OER catalysts glowing in the hard region of high complexity and high data cost. Click anywhere to sample the space.">
+        <canvas id="hr-canvas" aria-hidden="true"></canvas>
+        <figcaption class="hr-head eyebrow">Mapping the hard region &middot; click to sample</figcaption>
+        <span class="hr-label" style="left:17%;top:79%">benchmark-rich problems</span>
+        <span class="hr-label" style="left:42%;top:55%">materials discovery</span>
+        <span class="hr-label hard" style="left:79%;top:14%" tabindex="0">the hard region
+            <span class="hr-tip">Where trial-and-error gets too expensive.</span>
+        </span>
+        <span class="hr-axis hr-axis-x">system complexity &rarr;</span>
+        <span class="hr-axis hr-axis-y">data cost &rarr;</span>
+    </figure>
+    <script defer src="/assets/js/hard-region.js"></script>
+
     <div class="grid grid-cols-3 my-8">
         <div class="feature-card">
             <h3 class="feature-title">Agentic Hypothesis Generation</h3>
@@ -57,6 +56,10 @@ title: "Home"
             <p class="feature-description"><strong>RAPIDS</strong> benchmarks MLIPs against DFT across 5,567 probe&ndash;target dimers. Packaged as a validation tool that autonomous LLM agents can call.</p>
         </div>
     </div>
+
+    {% include t3-strip.html %}
+
+    {% include fid-slider.html %}
 
     <figure class="disc-loop anim-onview" id="disc-loop" role="img" aria-label="A circular diagram of the autonomous discovery loop: DToR hypothesis generation, T3 screening, RAPIDS validation, wet-lab experiment, and feedback, running as a closed cycle under BRAINIAC.">
     <svg class="loop-svg" viewBox="0 0 560 320" aria-hidden="true">

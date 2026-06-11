@@ -256,7 +256,34 @@
   });
 })();
 
-/* ---------- [4] console card ---------- */
+/* ---------- [4] fidelity slider (shared include; one per page) ---------- */
+(function () {
+  'use strict';
+  function init() {
+    var fig = document.getElementById('fid');
+    if (!fig) return;
+    var input = fig.querySelector('input');
+    var names = fig.querySelectorAll('.fid-stage');
+    var bars = { cost: [12, 30, 55, 85, 100], acc: [15, 35, 65, 90, 100], thr: [100, 80, 55, 25, 10] };
+    var alive = [40, 24, 12, 5, 2];
+    function set(s) {
+      fig.setAttribute('data-s', s);
+      for (var i = 0; i < names.length; i++) names[i].classList.toggle('active', i === s);
+      fig.querySelector('.fb-cost i').style.width = bars.cost[s] + '%';
+      fig.querySelector('.fb-acc i').style.width = bars.acc[s] + '%';
+      fig.querySelector('.fb-thr i').style.width = bars.thr[s] + '%';
+      fig.querySelector('.fid-n').textContent = 'n = ' + alive[s];
+    }
+    input.addEventListener('input', function () { set(+input.value); });
+    [].forEach.call(names, function (n, i) {
+      n.addEventListener('click', function () { input.value = i; set(i); });
+    });
+  }
+  if (document.readyState !== 'loading') init();
+  else document.addEventListener('DOMContentLoaded', init);
+})();
+
+/* ---------- [5] console card ---------- */
 (function () {
   'use strict';
   if (typeof console === 'undefined' || !console.log) return;
