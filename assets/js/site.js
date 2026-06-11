@@ -348,13 +348,17 @@
   'use strict';
   var els = document.querySelectorAll('.gc-visits');
   if (!els.length || !window.fetch) return;
+  /* baseline for 2023–2026 traffic predating the counter (GoatCounter
+     installed 2026-06; the site had been live for ~3 years before) */
+  var BASE = 647;
   fetch('https://ruiding.goatcounter.com/counter/TOTAL.json')
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (d) {
       if (!d || !d.count) return;
-      var n = String(d.count).trim();
+      var n = parseInt(String(d.count).replace(/[^\d]/g, ''), 10) || 0;
+      var total = (BASE + n).toLocaleString('en-US');
       [].forEach.call(els, function (el) {
-        el.textContent = (el.getAttribute('data-sep') || '') + n + ' visits';
+        el.textContent = (el.getAttribute('data-sep') || '') + total + ' visits';
       });
     })
     .catch(function () { /* adblock or offline: stay quiet */ });
