@@ -8,6 +8,21 @@
   var meta = document.querySelector('meta[name="assistant-endpoint"]');
   var ENDPOINT = meta ? (meta.getAttribute('content') || '').trim() : '';
   var panel, logEl, inputEl, sendEl, tailEl, history = [], busy = false, built = false;
+  var STORE = 'ask-chat';
+  var GREETING = "Vex-7 online. I keep the technical archive of the keeper — Rui Ding. Ask about his research, papers, funding, or how to reach him.";
+
+  /* keep the conversation alive across page navigations within the tab */
+  function persist() {
+    try {
+      sessionStorage.setItem(STORE, JSON.stringify({
+        h: history.slice(-24),
+        open: !!(panel && panel.classList.contains('open'))
+      }));
+    } catch (e) {}
+  }
+  function loadSaved() {
+    try { return JSON.parse(sessionStorage.getItem(STORE) || 'null'); } catch (e) { return null; }
+  }
 
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
@@ -64,7 +79,12 @@
     });
     addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
     addEventListener('resize', function () { if (panel.classList.contains('open')) position(); });
-    add('bot', "Vex-7 online. I keep the technical archive of the keeper — Rui Ding. Ask about his research, papers, funding, or how to reach him.");
+    add('bot', GREETING);
+    var saved = loadSaved();                          // replay this session's conversation across page loads
+    if (saved && saved.h && saved.h.length) {
+      history = saved.h.slice();
+      history.forEach(function (m) { add(m.role === 'user' ? 'user' : 'bot', m.content); });
+    }
   }
 
   function add(who, text) {
@@ -74,6 +94,7 @@
     row.innerHTML = '<span>' + html + '</span>';
     logEl.appendChild(row);
     logEl.scrollTop = logEl.scrollHeight;
+    if (panel && panel.classList.contains('open')) position();   // re-anchor as the chat grows
     return row;
   }
 
@@ -87,6 +108,7 @@
     inputEl.value = '';
     add('user', q);
     history.push({ role: 'user', content: q });
+    persist();
     busy = true;
     sendEl.disabled = true;
     var typing = add('bot', '…');
@@ -108,6 +130,7 @@
         if (res.ok && res.d && res.d.answer) {
           add('bot', res.d.answer);
           history.push({ role: 'assistant', content: res.d.answer });
+          persist();
           return;
         }
         var code = res.d && res.d.code, msg;
@@ -131,17 +154,18 @@
       });
   }
 
-  /* anchor the panel to the pet's current spot, growing toward open space */
+  /* anchor the panel near the pet, pinning its BOTTOM and growing UPWARD so
+     a long conversation never spills past the bottom edge of the window */
   function position() {
     if (!panel) return;
-    var vw = innerWidth, vh = innerHeight, gap = 14, pad = 8;
+    var vw = innerWidth, vh = innerHeight, gap = 14, pad = 12;
     var pw = panel.offsetWidth, ph = panel.offsetHeight;
     panel.style.right = 'auto';
-    panel.style.bottom = 'auto';
     var pr = (window.__pet && window.__pet.rect) ? window.__pet.rect() : null;
     if (!pr || pr.width === 0) {                       // no pet (touch / dismissed): bottom-right
       panel.style.left = (vw - pw - 16) + 'px';
-      panel.style.top = (vh - ph - 16) + 'px';
+      panel.style.top = 'auto';
+      panel.style.bottom = '16px';
       if (tailEl) tailEl.style.display = 'none';
       return;
     }
@@ -149,13 +173,17 @@
     var toRight = pcx <= vw / 2;                        // pet on left half -> open rightward
     var left = toRight ? pr.right + gap : pr.left - pw - gap;
     left = Math.max(pad, Math.min(vw - pw - pad, left));
-    var top = Math.max(pad, Math.min(vh - ph - pad, pcy - 64));
     panel.style.left = left + 'px';
-    panel.style.top = top + 'px';
+    // pin the bottom just below the pet's middle, clamped fully on-screen
+    var botY = Math.min(vh - pad, pcy + 70);
+    botY = Math.max(ph + pad, botY);
+    var topY = botY - ph;
+    panel.style.top = 'auto';
+    panel.style.bottom = (vh - botY) + 'px';
     if (tailEl) {                                       // tail on the edge facing the pet
       tailEl.style.display = 'block';
       tailEl.className = 'ask-tail ask-tail-' + (toRight ? 'left' : 'right');
-      tailEl.style.top = Math.max(16, Math.min(ph - 24, pcy - top)) + 'px';
+      tailEl.style.top = Math.max(16, Math.min(ph - 24, pcy - topY)) + 'px';
     }
   }
 
@@ -164,11 +192,13 @@
     if (window.__pet && window.__pet.park) window.__pet.park(true);   // freeze pet so the panel stays put
     panel.classList.add('open');
     position();
+    persist();
     setTimeout(function () { inputEl.focus(); }, 50);
   }
   function close() {
     if (panel) panel.classList.remove('open');
     if (window.__pet && window.__pet.park) window.__pet.park(false);  // let the pet roam again
+    persist();
   }
   function toggle() {
     if (panel && panel.classList.contains('open')) close();
@@ -177,4 +207,10 @@
 
   /* the pet (and anything else) opens chat through this */
   window.__askRui = { open: open, toggle: toggle, enabled: !!ENDPOINT };
+
+  // if the chat was open on the previous page, reopen it (with its history)
+  (function () {
+    var s = loadSaved();
+    if (s && s.open && ENDPOINT) addEventListener('load', function () { setTimeout(open, 450); });
+  })();
 })();

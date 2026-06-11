@@ -20,7 +20,7 @@ const PX        = 4;      // pixel cell size (smaller than the standalone's 5 to
 const SPEED     = 40;     // walk speed, px/s
 const WALK_FPS  = 7;      // walk animation rate
 const MARGIN    = 90;     // patrol margin from screen edges
-const FLOOR_PAD = 58;     // floor distance from window bottom
+const FLOOR_PAD = 84;     // floor distance from window bottom (lifted so the chat clears the bottom edge)
 const SOUND     = false;  // OFF on the website — no surprise audio on a content page
 const VOLUME    = 0.07;
 
