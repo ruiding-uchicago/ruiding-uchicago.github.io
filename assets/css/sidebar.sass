@@ -187,6 +187,25 @@ nav a.selected .icon
   border-radius: 3px
   background: rgba(255, 255, 255, 0.06)
 
+.cmdk-trigger
+  display: inline-flex
+  align-items: center
+  gap: .45em
+  padding: 0
+  background: none
+  border: 0
+  font: inherit
+  letter-spacing: inherit
+  text-transform: inherit
+  color: inherit
+  cursor: pointer
+  text-align: left
+  transition: color $transition-base
+  &:hover
+    color: #fff
+  &:hover kbd
+    border-color: rgba(215, 198, 157, 0.6)
+
 // Mobile responsive sidebar
 @media (max-width: $breakpoint-lg)
   body

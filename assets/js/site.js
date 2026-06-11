@@ -177,7 +177,6 @@
 /* ---------- [3] ⌘K command palette ---------- */
 (function () {
   'use strict';
-  if (matchMedia('(pointer: coarse)').matches) return;
 
   var overlay, listEl, inputEl, countEl, lastFocus;
   var items = [], filtered = [], active = 0, loaded = false;
@@ -284,6 +283,15 @@
       close();
     }
   });
+
+  /* clickable triggers (sidebar "site search" button etc.) */
+  function bindTriggers() {
+    [].forEach.call(document.querySelectorAll('.cmdk-trigger'), function (b) {
+      b.addEventListener('click', open);
+    });
+  }
+  if (document.readyState !== 'loading') bindTriggers();
+  else document.addEventListener('DOMContentLoaded', bindTriggers);
 })();
 
 /* ---------- [4] fidelity slider (shared include; one per page) ---------- */
