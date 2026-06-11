@@ -79,6 +79,11 @@
     });
     addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
     addEventListener('resize', function () { if (panel.classList.contains('open')) position(); });
+    if (window.visualViewport) {                        // keep the panel above the mobile keyboard
+      var vvSync = function () { if (panel.classList.contains('open')) position(); };
+      visualViewport.addEventListener('resize', vvSync);
+      visualViewport.addEventListener('scroll', vvSync);
+    }
     add('bot', GREETING);
     var saved = loadSaved();                          // replay this session's conversation across page loads
     if (saved && saved.h && saved.h.length) {
@@ -159,13 +164,17 @@
   function position() {
     if (!panel) return;
     var vw = innerWidth, vh = innerHeight, gap = 14, pad = 12;
-    var pw = panel.offsetWidth, ph = panel.offsetHeight;
     panel.style.right = 'auto';
+    panel.style.maxHeight = '';                         // reset; the no-pet branch may re-cap it
+    var pw = panel.offsetWidth, ph = panel.offsetHeight;
     var pr = (window.__pet && window.__pet.rect) ? window.__pet.rect() : null;
-    if (!pr || pr.width === 0) {                       // no pet (touch / dismissed): bottom-right
-      panel.style.left = (vw - pw - 16) + 'px';
+    if (!pr || pr.width === 0) {                       // no pet (mobile / dismissed): bottom-right, above the keyboard
+      var vv = window.visualViewport;
+      var inset = vv ? Math.max(0, innerHeight - vv.height - vv.offsetTop) : 0;
+      panel.style.maxHeight = Math.min(540, (vv ? vv.height : vh) - 24) + 'px';
+      panel.style.left = Math.max(pad, vw - pw - pad) + 'px';
       panel.style.top = 'auto';
-      panel.style.bottom = '16px';
+      panel.style.bottom = (inset + pad) + 'px';
       if (tailEl) tailEl.style.display = 'none';
       return;
     }
