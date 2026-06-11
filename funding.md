@@ -7,7 +7,7 @@ permalink: /funding/
 <article class="page-container fade-in">
 <div class="section-header">
     <span class="eyebrow">Support &amp; Recognition</span>
-    <h1 class="section-title">Research Funding &amp; Awards</h1>
+    <h1 class="section-title">Involved Research Funding &amp; Awards</h1>
 </div>
 
 <div class="card mt-8 mb-4">

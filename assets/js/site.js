@@ -60,16 +60,20 @@
       DYE_RESOLUTION: 512
     });
 
-    /* canvas stays pointer-events:none — forward window movement, rAF-throttled */
+    /* canvas stays pointer-events:none — forward window movement, rAF-throttled.
+       The lib reads offsetX/offsetY, which Chrome reports as 0 on synthetic
+       events (Safari computes them) — so define them explicitly; the canvas
+       is full-viewport at (0,0), making offset == client coords. */
     var pending = false;
     addEventListener('pointermove', function (e) {
       if (pending) return;
       pending = true;
       requestAnimationFrame(function () {
         pending = false;
-        canvas.dispatchEvent(new MouseEvent('mousemove', {
-          clientX: e.clientX, clientY: e.clientY
-        }));
+        var ev = new MouseEvent('mousemove', { clientX: e.clientX, clientY: e.clientY });
+        Object.defineProperty(ev, 'offsetX', { value: e.clientX, enumerable: true });
+        Object.defineProperty(ev, 'offsetY', { value: e.clientY, enumerable: true });
+        canvas.dispatchEvent(ev);
       });
     }, { passive: true });
     /* tab hidden → rAF auto-throttles; idle → dye fully dissipates */
