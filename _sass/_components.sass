@@ -175,10 +175,10 @@
   transform-origin: left bottom
 
 @media (max-width: $breakpoint-sm)
+  .hard-region
+    height: unquote("clamp(360px, 96vw, 460px)")   // taller / squarer so the phase diagram isn't a cramped strip
   .hr-label
     font-size: 0.64rem
-  .hr-label:nth-of-type(2)
-    display: none
 
 // ---------- T³ Text → Twin → Translation strip ----------
 .t3-strip
@@ -281,40 +281,40 @@
   .t3-strip.play
     .t3-paper
       opacity: 0
-      animation: t3-fade .6s $ease-out-expo forwards
+      animation: t3-fade .85s $ease-out-expo forwards
     .tp2
-      animation-delay: .15s
+      animation-delay: .21s
     .tf
       transform: scale(0)
-      animation: t3-pop .35s $ease-out-expo forwards
+      animation: t3-pop .5s $ease-out-expo forwards
     @for $i from 1 through 12
       .tf:nth-of-type(#{$i})
-        animation-delay: #{.4 + $i * 0.05}s
+        animation-delay: #{.55 + $i * 0.07}s
     .t3-edge
       stroke-dasharray: 1
       stroke-dashoffset: 1
-      animation: t3-draw .5s $ease-out-expo forwards
+      animation: t3-draw .7s $ease-out-expo forwards
     @for $i from 1 through 5
       .t3-edge:nth-of-type(#{$i})
-        animation-delay: #{1.1 + $i * 0.12}s
+        animation-delay: #{1.5 + $i * 0.17}s
     .t3-node
       transform-box: fill-box
       transform-origin: center
       transform: scale(0)
-      animation: t3-pop .4s $ease-out-expo forwards
+      animation: t3-pop .55s $ease-out-expo forwards
     @for $i from 1 through 5
       .tn#{$i}
-        animation-delay: #{1.0 + $i * 0.1}s
+        animation-delay: #{1.4 + $i * 0.14}s
     .t3-nlabel
       opacity: 0
-      animation: t3-fade .4s ease-out forwards
-      animation-delay: 1.8s
+      animation: t3-fade .55s ease-out forwards
+      animation-delay: 2.5s
     .t3-scan
-      animation: t3-scan 1s ease-in-out 2.3s both
+      animation: t3-scan 1.4s ease-in-out 3.2s both
     .t3-c
-      animation: t3-dim .5s ease-out 2.6s both
+      animation: t3-dim .7s ease-out 3.6s both
     .t3-c.win
-      animation: t3-win .6s $ease-out-expo 2.7s both
+      animation: t3-win .85s $ease-out-expo 3.7s both
 
 @keyframes t3-fade
   from

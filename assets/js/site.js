@@ -336,7 +336,7 @@
         else if (cur <= 0) { cur = 0; dir = 1; }
         input.value = cur;
         set(cur);
-      }, 1500);
+      }, 2600);
     }
   }
   if (document.readyState !== 'loading') init();

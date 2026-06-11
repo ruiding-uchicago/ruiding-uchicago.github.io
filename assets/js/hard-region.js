@@ -142,7 +142,7 @@
   var mouse = { x: 0, y: 0, on: false };
   var ripples = [], samples = [];
   var enterT0 = 0, running = false, visible = false, lastFrame = 0;
-  var lastUserT = -1e9;
+  var lastUserT = -1e9, tourZone = -1;
   var auto = { x: 0, y: 0, tx: 0, ty: 0, nextMove: 0, nextPing: 0, seed: 7, init: false };
 
   function arnd() { auto.seed = (auto.seed * 1664525 + 1013904223) >>> 0; return auto.seed / 4294967296; }
@@ -303,6 +303,7 @@
     ctx.globalAlpha = 1;
 
     var showLabels = W > 480;
+    var aZone = mouse.on ? -1 : tourZone;   // region tour: which point group to emphasise
     ctx.font = '500 9.5px "JetBrains Mono", monospace';
 
     /* teal: charted, benchmarked */
@@ -310,13 +311,17 @@
     for (k = 0; k < benchPts.length; k++) {
       var bp = benchPts[k];
       var bx = bp.u * W, by = (1 - bp.v) * H;
+      var bAct = aZone === 0;
       ctx.fillStyle = COL.teal;
+      ctx.shadowColor = COL.teal;
+      ctx.shadowBlur = bAct ? 10 : 0;
       ctx.globalAlpha = 0.95;
       ctx.beginPath();
-      ctx.arc(bx, by, 2.6, 0, 6.2832);
+      ctx.arc(bx, by, bAct ? 4 : 2.6, 0, 6.2832);
       ctx.fill();
-      if (showLabels) {
-        ctx.globalAlpha = 0.8;
+      ctx.shadowBlur = 0;
+      if (showLabels || bAct) {
+        ctx.globalAlpha = bAct ? 1 : 0.8;
         ctx.fillText(bp.label, bx + 8, by + 3);
       }
     }
@@ -324,11 +329,15 @@
     for (k = 0; k < discPts.length; k++) {
       var dp = discPts[k];
       var dxx = dp.u * W, dyy = (1 - dp.v) * H;
+      var dAct = aZone === 1;
       ctx.fillStyle = COL.champ;
+      ctx.shadowColor = COL.champ;
+      ctx.shadowBlur = dAct ? 10 : 0;
       ctx.globalAlpha = 0.95;
-      diamond(dxx, dyy, 3.4);
-      if (showLabels) {
-        ctx.globalAlpha = 0.8;
+      diamond(dxx, dyy, dAct ? 4.8 : 3.4);
+      ctx.shadowBlur = 0;
+      if (showLabels || dAct) {
+        ctx.globalAlpha = dAct ? 1 : 0.8;
         ctx.fillText(dp.label, dxx + 8, dyy + 3);
       }
     }
@@ -338,17 +347,18 @@
     for (k = 0; k < hardPts.length; k++) {
       var hp = hardPts[k];
       var hx = hp.u * W, hy = (1 - hp.v) * H;
+      var hAct = aZone === 2;
       var tw = PRM ? 1 : 0.65 + 0.35 * Math.sin(now / 640 + k * 1.7);
       ctx.fillStyle = COL.hard;
       ctx.shadowColor = COL.hard;
-      ctx.globalAlpha = tw;
-      ctx.shadowBlur = 8 + 6 * tw;
+      ctx.globalAlpha = hAct ? 1 : tw;
+      ctx.shadowBlur = (hAct ? 14 : 8) + 6 * tw;
       ctx.beginPath();
-      ctx.arc(hx, hy, 2.8, 0, 6.2832);
+      ctx.arc(hx, hy, hAct ? 4 : 2.8, 0, 6.2832);
       ctx.fill();
       ctx.shadowBlur = 0;
-      if (showLabels) {
-        ctx.globalAlpha = 0.6 + 0.3 * tw;
+      if (showLabels || hAct) {
+        ctx.globalAlpha = hAct ? 1 : 0.6 + 0.3 * tw;
         ctx.fillStyle = COL.hard;
         ctx.textAlign = hp.align;
         ctx.fillText(hp.label, hx + hp.dx, hy + hp.dy);
@@ -536,9 +546,10 @@
     setInterval(function () {
       if (!visible) return;
       var z;
-      if (mouse.on) { for (z = 0; z < zones.length; z++) zones[z].classList.remove('lit'); return; }
+      if (mouse.on) { for (z = 0; z < zones.length; z++) zones[z].classList.remove('lit'); tourZone = -1; return; }
       zi = (zi + 1) % zones.length;
+      tourZone = zi;
       for (z = 0; z < zones.length; z++) zones[z].classList.toggle('lit', z === zi);
-    }, 1900);
+    }, 4000);
   }
 })();

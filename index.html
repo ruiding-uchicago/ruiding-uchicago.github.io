@@ -70,7 +70,7 @@ title: "Home"
 
     {% include fid-slider.html %}
 
-    <figure class="disc-loop anim-onview" id="disc-loop" role="img" aria-label="A diagram of the autonomous discovery loop: DToR hypothesis generation, T3 data-driven surrogate twins, RAPIDS numerical-simulation validation, wet-lab experiment, and feedback, running as a closed cycle under BRAINIAC.">
+    <figure class="disc-loop anim-onview" id="disc-loop" role="img" aria-label="A diagram of the discovery loop: DToR hypothesis generation, T3 data-driven surrogate twins, RAPIDS numerical-simulation validation, wet-lab experiment, and feedback, running as a closed cycle.">
     <svg class="loop-svg" viewBox="0 0 720 260" aria-hidden="true">
       <!-- forward pipeline along the top -->
       <path class="loop-arc la1" pathLength="1" d="M116 72 H 250 l -7 -5 m 7 5 l -7 5"/>
@@ -105,8 +105,7 @@ title: "Home"
         <text x="369" y="216" text-anchor="middle">FB</text>
         <text class="loop-sub" x="369" y="253" text-anchor="middle">feedback</text>
       </g>
-      <text class="loop-center" x="369" y="150" text-anchor="middle">BRAINIAC</text>
-      <text class="loop-center-sub" x="369" y="167" text-anchor="middle">autonomous discovery loop</text>
+      <text class="loop-center-sub" x="369" y="156" text-anchor="middle">discovery loop</text>
     </svg>
     <figcaption class="loop-cap">Click any stage.</figcaption>
     </figure>
@@ -141,7 +140,7 @@ title: "Home"
           }
           ai = (ai + 1) % nodes.length;
           [].forEach.call(nodes, function (m, idx) { m.classList.toggle('cycle', idx === ai); });
-        }, 1300);
+        }, 2200);
       }
       function pick(n) {
         mark();
