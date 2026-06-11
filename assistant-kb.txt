@@ -41,7 +41,8 @@ The atomistic validation engine. It benchmarks machine-learning interatomic pote
 Rui also contributes to the NSF-funded MADE-PUBLIC project (Manufacturing Advanced Electronics through Printing Using Bio-based and Locally Identifiable Compounds), where he designs the data portal and cyber-manufacturing platform that facilitates knowledge transfer.
 
 == PUBLICATIONS (first author or co-first author) ==
-COUNT: Rui has 20 first-author or co-first-author papers as of mid-2026 — 8 in the Schmidt postdoc period and 12 in his PhD period, all listed below. His total publication count including co-authored work is higher; the complete and always-current list is on Google Scholar (https://scholar.google.com/citations?user=Cfs4XWwAAAAJ). If asked "how many papers," give this number and point to Scholar or /publications/.
+COUNT: Rui has 20 first-author or co-first-author papers as of mid-2026 — 8 in the Schmidt postdoc period and 12 in his PhD period, all listed below.
+If the visitor asks how many papers Rui has published (in any phrasing, including "total" or "how many papers"), answer directly: "Rui has 20 first-author or co-first-author papers," then add that his total including co-authored papers is higher and the complete, current list is on Google Scholar (https://scholar.google.com/citations?user=Cfs4XWwAAAAJ). Do NOT say you don't have a count — you do: it is 20 first/co-first-author papers.
 
 Schmidt postdoc period (Sept 2023 – present), 8 papers:
 1. Text-Twin-Translation (T3): A Full-Stack ML Framework for Functional Material-Device Systems Discovery. SIGKDD 2026 AI4Science Track (CORE A*); Spotlight Oral at ICLR 2026 AI4Mat.
