@@ -38,6 +38,8 @@ The atomistic validation engine. It benchmarks machine-learning interatomic pote
 
 4) Experiments — the wet lab closes the loop: nanomaterial synthesis, device fabrication, electrochemical testing.
 
+Rui also contributes to the NSF-funded MADE-PUBLIC project (Manufacturing Advanced Electronics through Printing Using Bio-based and Locally Identifiable Compounds), where he designs the data portal and cyber-manufacturing platform that facilitates knowledge transfer.
+
 == PUBLICATIONS (first author or co-first author) ==
 COUNT: Rui has 20 first-author or co-first-author papers as of mid-2026 — 8 in the Schmidt postdoc period and 12 in his PhD period, all listed below. His total publication count including co-authored work is higher; the complete and always-current list is on Google Scholar (https://scholar.google.com/citations?user=Cfs4XWwAAAAJ). If asked "how many papers," give this number and point to Scholar or /publications/.
 
@@ -78,10 +80,26 @@ The selected highlights are also on /publications/, and the full record (includi
 Electrocatalysis (OER/HER catalysts, fuel cell and electrolyzer components, clean hydrogen); chemical sensing (FET sensors, environmental monitoring); water and environment (PFAS sensing/adsorption materials, PFAS-selective membranes).
 
 == SKILLS ==
-Machine learning (TensorFlow, PyTorch, scikit-learn); NLP and LLM agent / pipeline building; wet-lab materials science (nanomaterial synthesis, electrochemical testing, characterization); simulation (VASP for DFT, Gaussian and ORCA for quantum chemistry, COMSOL for multiphysics).
+- Machine learning: TensorFlow, PyTorch, scikit-learn; deep learning, active learning, domain adaptation, explainable AI.
+- Graph neural networks (GNNs), including device-topology-aware GNNs and neuromorphic spiking GNNs.
+- LLM agents and agentic pipelines: RAG systems, tree-structured research agents, automated prompt optimization with TextGrad; NLP and LLM fine-tuning.
+- Knowledge graphs: automated construction and extraction of structured knowledge graphs from scientific literature.
+- Wet-lab materials science: nanomaterial synthesis, electrochemical testing, materials characterization.
+- Simulation: VASP for DFT, Gaussian and ORCA for quantum chemistry, COMSOL for multiphysics.
+- Programming: Python, R, Linux shell.
 
 == COLLABORATION ==
 Rui is open to collaboration. Two kinds especially: (1) materials/device experimental scientists who want AI to accelerate their discovery, and (2) ML/AI researchers who want a real, high-impact downstream application for their methods. The best way to start a conversation is email: ruiding@uchicago.edu.
+
+== SELECTED TALKS & PRESENTATIONS ==
+- ICLR 2026 AI4Mat workshop (Spotlight Oral, T3), Brazil, 2026.
+- NeurIPS 2025 AI4Mat (DToR) and ML4PS (Neuromorphic Random Walk), San Diego, Dec 2025.
+- 248th Electrochemical Society (ECS) Meeting, Chicago, Oct 2025.
+- Gordon Research Seminar on Nanomaterials for Energy Technology, Ventura CA, Feb 2025.
+- ACM ICONS 2025 (International Conference on Neuromorphic Systems), Seattle, July 2025.
+- Knowledge-Guided Machine Learning Workshop, University of Michigan, Aug 2025.
+- Schmidt Sciences Entrepreneurship Retreat, Cold Spring Harbor Laboratory, Sept 2025.
+- Earlier talks (2024): NSF Data-driven Modeling workshop, AI for Multidisciplinary Exploration & Discovery (Heterogeneous Catalysis) workshop, AI+Science Summer School, NSF MADE-PUBLIC Annual Retreat.
 
 == MENTORSHIP & SERVICE ==
 Research Experience for Nigerian Undergraduates (RENEU) mentor (2024, 2025); 2026 AI+Science Hackathon judge and dataset provider; 2026 Schmidt AI in Science Faculty Fellowship mentor; host representative, AI+Science Schmidt Fellows Speaker Series (2024–2026).
