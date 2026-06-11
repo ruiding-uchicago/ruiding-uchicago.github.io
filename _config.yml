@@ -58,3 +58,4 @@ exclude:
   - Gemfile.lock
   - UNLICENSE.txt
   - worker
+  - magos_pixel_pet.html   # kept as the pet's source-of-truth, not published (it's a fullscreen, sound-on standalone). The site uses assets/js/magos-pet.js instead.

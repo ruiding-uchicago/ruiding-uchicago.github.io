@@ -12,3 +12,6 @@ _local/
 .beads/
 vendor/
 .bundle/
+
+# Cloudflare Wrangler local state
+worker/.wrangler/
