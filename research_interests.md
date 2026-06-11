@@ -104,6 +104,53 @@ mathjax: true
 
 <p><strong>RAPIDS</strong> is the atomistic validation engine of the stack. It benchmarks machine-learning interatomic potentials against DFT on 5,567 probe&ndash;target dimer interactions across 18 benchmarks; the result is that geometry, not the energy surface, drives the neutral MLIP&ndash;DFT gap. It is also packaged as a tool autonomous LLM agents can call for fast physical sanity checks. The last gate is the one I was trained for: nanomaterial synthesis, device fabrication, and electrochemical testing in the wet lab.</p>
 
+<figure class="fid" id="fid" data-s="0">
+  <svg class="fid-field" viewBox="0 0 280 170" aria-hidden="true">
+    <circle class="fc" data-die="1" cx="16" cy="12" r="4"/><circle class="fc" data-die="2" cx="51" cy="16" r="4"/><circle class="fc" data-die="1" cx="86" cy="20" r="4"/><circle class="fc" data-die="3" cx="121" cy="12" r="4"/><circle class="fc" data-die="1" cx="156" cy="16" r="4"/><circle class="fc" data-die="2" cx="191" cy="20" r="4"/><circle class="fc" data-die="1" cx="226" cy="12" r="4"/><circle class="fc" data-die="4" cx="261" cy="16" r="4"/>
+    <circle class="fc" data-die="2" cx="23" cy="45" r="4"/><circle class="fc" data-die="1" cx="58" cy="49" r="4"/><circle class="fc" data-die="3" cx="93" cy="53" r="4"/><circle class="fc" data-die="2" cx="128" cy="45" r="4"/><circle class="fc" data-die="1" cx="163" cy="49" r="4"/><circle class="fc" data-die="9" cx="198" cy="53" r="4"/><circle class="fc" data-die="2" cx="233" cy="45" r="4"/><circle class="fc" data-die="1" cx="268" cy="49" r="4"/>
+    <circle class="fc" data-die="3" cx="16" cy="78" r="4"/><circle class="fc" data-die="1" cx="51" cy="82" r="4"/><circle class="fc" data-die="2" cx="86" cy="86" r="4"/><circle class="fc" data-die="4" cx="121" cy="78" r="4"/><circle class="fc" data-die="1" cx="156" cy="82" r="4"/><circle class="fc" data-die="3" cx="191" cy="86" r="4"/><circle class="fc" data-die="2" cx="226" cy="78" r="4"/><circle class="fc" data-die="1" cx="261" cy="82" r="4"/>
+    <circle class="fc" data-die="2" cx="23" cy="111" r="4"/><circle class="fc" data-die="1" cx="58" cy="115" r="4"/><circle class="fc" data-die="3" cx="93" cy="119" r="4"/><circle class="fc" data-die="2" cx="128" cy="111" r="4"/><circle class="fc" data-die="1" cx="163" cy="115" r="4"/><circle class="fc" data-die="4" cx="198" cy="119" r="4"/><circle class="fc" data-die="1" cx="233" cy="111" r="4"/><circle class="fc" data-die="2" cx="268" cy="115" r="4"/>
+    <circle class="fc" data-die="3" cx="16" cy="144" r="4"/><circle class="fc" data-die="1" cx="51" cy="148" r="4"/><circle class="fc" data-die="2" cx="86" cy="152" r="4"/><circle class="fc" data-die="9" cx="121" cy="144" r="4"/><circle class="fc" data-die="1" cx="156" cy="148" r="4"/><circle class="fc" data-die="2" cx="191" cy="152" r="4"/><circle class="fc" data-die="1" cx="226" cy="144" r="4"/><circle class="fc" data-die="3" cx="261" cy="148" r="4"/>
+  </svg>
+  <div class="fid-stages">
+    <button type="button" class="fid-stage active">heuristic</button>
+    <button type="button" class="fid-stage">surrogate</button>
+    <button type="button" class="fid-stage">MLIP</button>
+    <button type="button" class="fid-stage">DFT</button>
+    <button type="button" class="fid-stage">experiment</button>
+  </div>
+  <input type="range" min="0" max="4" step="1" value="0" aria-label="Validation fidelity level">
+  <div class="fid-bars">
+    <div class="fid-bar fb-cost"><span>cost</span><div class="fid-track"><i style="width:12%"></i></div></div>
+    <div class="fid-bar fb-acc"><span>accuracy</span><div class="fid-track"><i style="width:15%"></i></div></div>
+    <div class="fid-bar fb-thr"><span>throughput</span><div class="fid-track"><i style="width:100%"></i></div></div>
+    <span class="fid-n mono">n = 40</span>
+  </div>
+  <figcaption class="text-sm text-muted">Not every candidate deserves full-cost validation. Drag the fidelity up and watch the field thin out.</figcaption>
+</figure>
+<script>
+(function () {
+  var fig = document.getElementById('fid');
+  if (!fig) return;
+  var input = fig.querySelector('input');
+  var names = fig.querySelectorAll('.fid-stage');
+  var bars = { cost: [12, 30, 55, 85, 100], acc: [15, 35, 65, 90, 100], thr: [100, 80, 55, 25, 10] };
+  var alive = [40, 24, 12, 5, 2];
+  function set(s) {
+    fig.setAttribute('data-s', s);
+    for (var i = 0; i < names.length; i++) names[i].classList.toggle('active', i === s);
+    fig.querySelector('.fb-cost i').style.width = bars.cost[s] + '%';
+    fig.querySelector('.fb-acc i').style.width = bars.acc[s] + '%';
+    fig.querySelector('.fb-thr i').style.width = bars.thr[s] + '%';
+    fig.querySelector('.fid-n').textContent = 'n = ' + alive[s];
+  }
+  input.addEventListener('input', function () { set(+input.value); });
+  [].forEach.call(names, function (n, i) {
+    n.addEventListener('click', function () { input.value = i; set(i); });
+  });
+})();
+</script>
+
 <div class="section-header mt-8">
     <span class="eyebrow">Where It Lands</span>
     <h2 class="section-title">Application Domains</h2>
