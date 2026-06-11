@@ -78,6 +78,12 @@ permalink: /education/
 </div>
 
 <div class="publication-item">
+    <div class="publication-title">ICML 2026 AI4Physics Workshop</div>
+    <div class="publication-authors">Poster: Geometry, Not Energy Surface, Drives the Neutral MLIP&ndash;DFT Gap (RAPIDS)</div>
+    <div class="publication-venue">July 2026 &mdash; upcoming</div>
+</div>
+
+<div class="publication-item">
     <div class="publication-title">ICLR 2026 AI4Mat Workshop</div>
     <div class="publication-authors">Spotlight Oral: Text-Twin-Translation (T<sup>3</sup>)</div>
     <div class="publication-venue">Brazil &mdash; 2026</div>
