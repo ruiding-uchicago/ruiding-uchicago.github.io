@@ -72,7 +72,7 @@ export default {
       return new Response("POST only", { status: 405, headers });
     }
     if (!env.OPENAI_API_KEY) {
-      return new Response(JSON.stringify({ error: "Assistant not configured." }),
+      return new Response(JSON.stringify({ error: "Assistant not configured.", code: "unconfigured" }),
         { status: 503, headers: { ...headers, "Content-Type": "application/json" } });
     }
 
@@ -106,13 +106,18 @@ export default {
         })
       });
     } catch (e) {
-      return new Response(JSON.stringify({ error: "Upstream error." }),
+      return new Response(JSON.stringify({ error: "Upstream error.", code: "upstream" }),
         { status: 502, headers: { ...headers, "Content-Type": "application/json" } });
     }
 
     if (!resp.ok) {
-      return new Response(JSON.stringify({ error: "Model error (" + resp.status + ")." }),
-        { status: 502, headers: { ...headers, "Content-Type": "application/json" } });
+      // 429 = rate limit OR exhausted quota/billing -> "temporarily unavailable"
+      var quota = resp.status === 429;
+      return new Response(JSON.stringify({
+        error: "Model error (" + resp.status + ").",
+        code: quota ? "quota" : "upstream",
+        status: resp.status
+      }), { status: quota ? 503 : 502, headers: { ...headers, "Content-Type": "application/json" } });
     }
 
     const data = await resp.json();

@@ -94,18 +94,32 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question: q, messages: history.slice(-6) })
     })
-      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (r) {
+        return r.json().then(
+          function (d) { return { ok: r.ok, status: r.status, d: d }; },
+          function () { return { ok: r.ok, status: r.status, d: {} }; }
+        );
+      })
       .then(function (res) {
         typing.remove();
-        var a = res.ok && res.d && res.d.answer
-          ? res.d.answer
-          : (res.d && res.d.error) || "Sorry, something went wrong. Try again, or email ruiding@uchicago.edu.";
-        add('bot', a);
-        history.push({ role: 'assistant', content: a });
+        if (res.ok && res.d && res.d.answer) {
+          add('bot', res.d.answer);
+          history.push({ role: 'assistant', content: res.d.answer });
+          return;
+        }
+        var code = res.d && res.d.code, msg;
+        if (code === 'quota' || res.status === 429 || res.status === 503) {
+          msg = "The assistant is temporarily unavailable right now (usage limit reached). Please try again later, or email Rui at ruiding@uchicago.edu.";
+        } else if (code === 'unconfigured') {
+          msg = "The assistant isn’t switched on yet. Email Rui at ruiding@uchicago.edu.";
+        } else {
+          msg = "Sorry, something went wrong. Please try again, or email ruiding@uchicago.edu.";
+        }
+        add('bot', msg);
       })
       .catch(function () {
         typing.remove();
-        add('bot', "I couldn’t reach the assistant. Please email ruiding@uchicago.edu.");
+        add('bot', "The assistant is temporarily unavailable. Please try again later, or email Rui at ruiding@uchicago.edu.");
       })
       .then(function () {
         busy = false;
