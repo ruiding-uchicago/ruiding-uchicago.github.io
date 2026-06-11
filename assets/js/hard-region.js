@@ -14,6 +14,7 @@
 
   var PRM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var NO_PROBE = !!window.__HR_NO_PROBE;   // GIF/export mode: drop the roaming probe + intro zoom for a clean loop
+  var DIM = !!window.__HR_DIM;             // GIF/export mode: fade the non-active zone clusters during the tour
 
   /* ---------- seeded Perlin noise ---------- */
   function makeNoise(seed) {
@@ -305,6 +306,7 @@
 
     var showLabels = W > 480;
     var aZone = mouse.on ? -1 : tourZone;   // region tour: which point group to emphasise
+    var dimOther = (DIM && aZone >= 0) ? 0.14 : 1;
     ctx.font = '500 9.5px "JetBrains Mono", monospace';
 
     /* teal: charted, benchmarked */
@@ -316,13 +318,13 @@
       ctx.fillStyle = COL.teal;
       ctx.shadowColor = COL.teal;
       ctx.shadowBlur = bAct ? 10 : 0;
-      ctx.globalAlpha = 0.95;
+      ctx.globalAlpha = 0.95 * (bAct ? 1 : dimOther);
       ctx.beginPath();
       ctx.arc(bx, by, bAct ? 4 : 2.6, 0, 6.2832);
       ctx.fill();
       ctx.shadowBlur = 0;
       if (showLabels || bAct) {
-        ctx.globalAlpha = bAct ? 1 : 0.8;
+        ctx.globalAlpha = bAct ? 1 : 0.8 * dimOther;
         ctx.fillText(bp.label, bx + 8, by + 3);
       }
     }
@@ -334,11 +336,11 @@
       ctx.fillStyle = COL.champ;
       ctx.shadowColor = COL.champ;
       ctx.shadowBlur = dAct ? 10 : 0;
-      ctx.globalAlpha = 0.95;
+      ctx.globalAlpha = 0.95 * (dAct ? 1 : dimOther);
       diamond(dxx, dyy, dAct ? 4.8 : 3.4);
       ctx.shadowBlur = 0;
       if (showLabels || dAct) {
-        ctx.globalAlpha = dAct ? 1 : 0.8;
+        ctx.globalAlpha = dAct ? 1 : 0.8 * dimOther;
         ctx.fillText(dp.label, dxx + 8, dyy + 3);
       }
     }
@@ -352,14 +354,14 @@
       var tw = PRM ? 1 : 0.65 + 0.35 * Math.sin(now / 640 + k * 1.7);
       ctx.fillStyle = COL.hard;
       ctx.shadowColor = COL.hard;
-      ctx.globalAlpha = hAct ? 1 : tw;
+      ctx.globalAlpha = hAct ? 1 : tw * dimOther;
       ctx.shadowBlur = (hAct ? 14 : 8) + 6 * tw;
       ctx.beginPath();
       ctx.arc(hx, hy, hAct ? 4 : 2.8, 0, 6.2832);
       ctx.fill();
       ctx.shadowBlur = 0;
       if (showLabels || hAct) {
-        ctx.globalAlpha = hAct ? 1 : 0.6 + 0.3 * tw;
+        ctx.globalAlpha = hAct ? 1 : (0.6 + 0.3 * tw) * dimOther;
         ctx.fillStyle = COL.hard;
         ctx.textAlign = hp.align;
         ctx.fillText(hp.label, hx + hp.dx, hy + hp.dy);
