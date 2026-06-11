@@ -58,6 +58,73 @@ title: "Home"
         </div>
     </div>
 
+    <figure class="disc-loop anim-onview" id="disc-loop" role="img" aria-label="A circular diagram of the autonomous discovery loop: DToR hypothesis generation, T3 screening, RAPIDS validation, wet-lab experiment, and feedback, running as a closed cycle under BRAINIAC.">
+    <svg class="loop-svg" viewBox="0 0 560 320" aria-hidden="true">
+      <circle class="loop-flow" cx="280" cy="165" r="110"/>
+      <path class="loop-arc la1" pathLength="1" d="M302.9 57.4 A110 110 0 0 1 375.3 110"/>
+      <path class="loop-arc la2" pathLength="1" d="M389.4 153.5 A110 110 0 0 1 361.7 238.6"/>
+      <path class="loop-arc la3" pathLength="1" d="M324.7 265.5 A110 110 0 0 1 235.3 265.5"/>
+      <path class="loop-arc la4" pathLength="1" d="M198.3 238.6 A110 110 0 0 1 170.6 153.5"/>
+      <path class="loop-arc la5" pathLength="1" d="M184.7 110 A110 110 0 0 1 257.1 57.4"/>
+      <g class="loop-node ln1" data-k="dtor" tabindex="0">
+        <circle cx="280" cy="55" r="24"/>
+        <text x="280" y="59" text-anchor="middle">DToR</text>
+        <text class="loop-sub" x="280" y="16" text-anchor="middle">hypothesis</text>
+      </g>
+      <g class="loop-node ln2" data-k="t3" tabindex="0">
+        <circle cx="384.6" cy="131" r="24"/>
+        <text x="384.6" y="135" text-anchor="middle">T&#179;</text>
+        <text class="loop-sub" x="424" y="106" text-anchor="middle">screening</text>
+      </g>
+      <g class="loop-node ln3" data-k="rapids" tabindex="0">
+        <circle cx="344.7" cy="254" r="24"/>
+        <text x="344.7" y="258" text-anchor="middle">RAPIDS</text>
+        <text class="loop-sub" x="344.7" y="298" text-anchor="middle">validation</text>
+      </g>
+      <g class="loop-node ln4" data-k="exp" tabindex="0">
+        <circle cx="215.3" cy="254" r="24"/>
+        <text x="215.3" y="258" text-anchor="middle">LAB</text>
+        <text class="loop-sub" x="215.3" y="298" text-anchor="middle">experiment</text>
+      </g>
+      <g class="loop-node ln5" data-k="fb" tabindex="0">
+        <circle cx="175.4" cy="131" r="24"/>
+        <text x="175.4" y="135" text-anchor="middle">FB</text>
+        <text class="loop-sub" x="136" y="106" text-anchor="middle">feedback</text>
+      </g>
+      <text class="loop-center" x="280" y="158" text-anchor="middle">BRAINIAC</text>
+      <text class="loop-center-sub" x="280" y="176" text-anchor="middle">autonomous discovery loop</text>
+    </svg>
+    <figcaption class="loop-cap">Click any stage.</figcaption>
+    </figure>
+    <script>
+    (function () {
+      var fig = document.getElementById('disc-loop');
+      if (!fig) return;
+      var cap = fig.querySelector('.loop-cap');
+      var caps = {
+        dtor: 'DToR generates and organizes research hypotheses from local scientific corpora.',
+        t3: 'T³ builds device-level digital twins and turns them into candidate rankings.',
+        rapids: 'RAPIDS runs fast atomistic checks so weak candidates die cheaply.',
+        exp: 'The wet lab closes the loop with physical reality.',
+        fb: 'Results feed back and update the knowledge state.'
+      };
+      function pick(n) {
+        var all = fig.querySelectorAll('.loop-node');
+        [].forEach.call(all, function (m) { m.classList.toggle('active', m === n); });
+        cap.textContent = caps[n.getAttribute('data-k')] || '';
+      }
+      fig.addEventListener('click', function (e) {
+        var n = e.target.closest ? e.target.closest('.loop-node') : null;
+        if (n) pick(n);
+      });
+      fig.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        var n = e.target.closest ? e.target.closest('.loop-node') : null;
+        if (n) { e.preventDefault(); pick(n); }
+      });
+    })();
+    </script>
+
     <p>These pieces are being wired together under <strong>BRAINIAC</strong> into one autonomous discovery loop. <strong>DToR</strong> generates research hypotheses (<a href="https://arxiv.org/abs/2511.18303">arXiv</a>). <strong>T<sup>3</sup></strong> turns literature into device digital twins for candidate screening; accepted at SIGKDD 2026 AI4Science, with a Spotlight Oral at ICLR 2026 AI4Mat (<a href="https://openreview.net/forum?id=7QfGX651NZ">OpenReview</a>, <a href="https://github.com/ruiding-uchicago/T3_FET_sensor">code</a>). <strong>RAPIDS</strong> validates candidates at the atomistic level (ICML 2026 AI4Physics: <a href="https://openreview.net/forum?id=r2NSBJ4ip7">OpenReview</a>).</p>
 
     <p class="text-muted mt-8">Advised by <a href="https://www.junhongchengroup.pme.uchicago.edu/junhongchen">Prof. Junhong Chen</a> (PME/Argonne) and <a href="https://yuxinchen.org/">Prof. Yuxin Chen</a> (CS).</p>

@@ -268,3 +268,118 @@
     opacity: .4
   to
     opacity: 1
+
+// ---------- Autonomous Discovery Loop ----------
+.disc-loop
+  margin: $spacing-8 auto
+  max-width: 620px
+
+.loop-svg
+  display: block
+  width: 100%
+  height: auto
+
+.loop-arc
+  fill: none
+  stroke: var(--color-text-muted)
+  stroke-width: 1.4
+  opacity: .85
+
+.loop-flow
+  fill: none
+  stroke: var(--color-primary)
+  stroke-width: 1.2
+  stroke-dasharray: 2 9
+  opacity: 0
+
+.loop-node
+  cursor: pointer
+  outline: none
+
+.loop-node circle
+  fill: var(--color-bg-elevated)
+  stroke: var(--color-primary)
+  stroke-width: 1.5
+  transition: stroke $transition-base, stroke-width $transition-base
+
+.loop-node text
+  font-family: var(--font-mono)
+  font-size: 9px
+  letter-spacing: .5px
+  fill: var(--color-text)
+  pointer-events: none
+
+.loop-node .loop-sub
+  font-size: 8px
+  fill: var(--color-text-light)
+  text-transform: uppercase
+  letter-spacing: 1px
+
+.loop-node:hover circle,
+.loop-node:focus circle
+  stroke-width: 2.5
+
+.loop-node.active circle
+  stroke: var(--color-accent)
+  stroke-width: 2.5
+
+.loop-center
+  font-family: var(--font-mono)
+  font-size: 11px
+  letter-spacing: 2.5px
+  fill: var(--color-text)
+
+.loop-center-sub
+  font-family: var(--font-mono)
+  font-size: 7.5px
+  letter-spacing: 1.5px
+  text-transform: uppercase
+  fill: var(--color-text-light)
+
+.loop-cap
+  text-align: center
+  font-size: $font-size-sm
+  color: var(--color-text-muted)
+  min-height: 1.6em
+  margin: $spacing-2 0 0
+
+// playback: nodes pop and arcs draw in sequence, then the current flows
+@media (prefers-reduced-motion: no-preference)
+  .disc-loop.play
+    .loop-node circle, .loop-node text
+      opacity: 0
+      animation: t3-fade .45s $ease-out-expo forwards
+    @for $i from 1 through 5
+      .ln#{$i} circle, .ln#{$i} text
+        animation-delay: #{($i - 1) * 0.5}s
+    .loop-arc
+      stroke-dasharray: 1
+      stroke-dashoffset: 1
+      animation: t3-draw .5s $ease-out-expo forwards
+    @for $i from 1 through 5
+      .la#{$i}
+        animation-delay: #{($i - 1) * 0.5 + 0.25}s
+    .loop-center, .loop-center-sub
+      opacity: 0
+      animation: t3-fade .6s ease-out forwards
+      animation-delay: 2.6s
+    .loop-flow
+      animation: loop-run 7s linear 3s infinite
+  // idle breath before playback so the figure never looks dead
+  .disc-loop:not(.play) .loop-arc
+    animation: loop-breathe 4s ease-in-out infinite alternate
+
+@keyframes loop-run
+  0%
+    opacity: .4
+    stroke-dashoffset: 0
+  100%
+    opacity: .4
+    stroke-dashoffset: -110
+  // 2+9=11 dash period; -110 = 10 periods → seamless loop
+
+@keyframes loop-breathe
+  from
+    opacity: .5
+  to
+    opacity: .85
