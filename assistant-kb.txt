@@ -9,9 +9,9 @@ To update the bot: edit this file, commit, and redeploy the site. No other step.
 Last reviewed: 2026-06.
 
 == WHO ==
-Rui Ding — English name "Ray", Chinese name 丁睿 — publishes and is professionally known as "Rui Ding"; treat "Ray" and 丁睿 as the same person. Eric and Wendy Schmidt AI in Science Postdoctoral Fellow at the University of Chicago, and Resident Associate at Argonne National Laboratory, since September 2023.
+Rui Ding — English name "Ray", Chinese name 丁睿 — publishes and is professionally known as "Rui Ding"; treat "Ray" and 丁睿 as the same person. Eric and Wendy Schmidt AI in Science Fellow at the University of Chicago, and Resident Associate at Argonne National Laboratory, since September 2023.
 Incoming (Sept 2026 – Sept 2027): Joint Appointed Research Scientist, Pritzker School of Molecular Engineering (PME) and Department of Computer Science (CS), University of Chicago.
-Advisors (current postdoc, the ones to emphasize): Prof. Junhong Chen (PME / Argonne) and Prof. Yuxin Chen (CS).
+Advisors (current, the ones to emphasize): Prof. Junhong Chen (PME / Argonne) and Prof. Yuxin Chen (CS).
 PhD advisors (secondary; mention only if specifically asked about his PhD): Prof. Jianguo Liu, Prof. Minhua Shao, and Prof. Xuebin Wang.
 Contact: ruiding@uchicago.edu and rding@anl.gov.
 Links: Google Scholar https://scholar.google.com/citations?user=Cfs4XWwAAAAJ ; GitHub https://github.com/ruiding-uchicago ; LinkedIn https://www.linkedin.com/in/rui-ding-018281255/ ; CV https://ruiding-uchicago.github.io/Rui_2026_CV.pdf .
@@ -41,10 +41,10 @@ The atomistic validation engine. It benchmarks machine-learning interatomic pote
 Rui also contributes to the NSF-funded MADE-PUBLIC project (Manufacturing Advanced Electronics through Printing Using Bio-based and Locally Identifiable Compounds), where he designs the data portal and cyber-manufacturing platform that facilitates knowledge transfer.
 
 == PUBLICATIONS (first author or co-first author) ==
-COUNT: Rui has 20 first-author or co-first-author papers as of mid-2026 — 8 in the Schmidt postdoc period and 12 in his PhD period, all listed below.
+COUNT: Rui has 20 first-author or co-first-author papers as of mid-2026 — 8 in the Schmidt Fellowship period and 12 in his PhD period, all listed below.
 If the visitor asks how many papers Rui has published (in any phrasing, including "total" or "how many papers"), answer directly: "Rui has 20 first-author or co-first-author papers," then add that his total including co-authored papers is higher and the complete, current list is on Google Scholar (https://scholar.google.com/citations?user=Cfs4XWwAAAAJ). Do NOT say you don't have a count — you do: it is 20 first/co-first-author papers.
 
-Schmidt postdoc period (Sept 2023 – present), 8 papers:
+Schmidt Fellowship period (Sept 2023 – present), 8 papers:
 1. Text-Twin-Translation (T3): A Full-Stack ML Framework for Functional Material-Device Systems Discovery. SIGKDD 2026 AI4Science Track (CORE A*); Spotlight Oral at ICLR 2026 AI4Mat.
 2. Geometry, Not Energy Surface, Drives the Neutral MLIP-DFT Gap in Atomistic Interaction Surrogates (RAPIDS). ICML 2026 AI4Physics.
 3. Deep Research with Local-Web RAG: Toward Automated System-Level Materials Discovery (DToR). NeurIPS 2025 AI4Mat. arXiv: https://arxiv.org/abs/2511.18303 .
@@ -71,7 +71,7 @@ PhD period (2018–2023), 12 papers (mostly on PEM fuel cells, water electrolyze
 The selected highlights are also on /publications/, and the full record (including co-authored papers) is on Google Scholar and in the CV at https://ruiding-uchicago.github.io/Rui_2026_CV.pdf .
 
 == FUNDING & AWARDS ==
-- 2026 AI in Science Schmidt Postdoctoral Fellowship Seed Fund, $33K, as PI: "AI-Guided Discovery of PFAS-Selective Membrane Interfaces: From Autonomous Design to Experimental Validation."
+- 2026 AI in Science Schmidt Fellowship Seed Fund, $33K, as PI: "AI-Guided Discovery of PFAS-Selective Membrane Interfaces: From Autonomous Design to Experimental Validation."
 - 2025 UChicago AI Research Area, "Science Labs that Only AI Can Build" (T3 for PFAS chemical FET sensors and bio-FET platforms).
 - 2025 NSF Supplemental Award (FMRG 2037026 and DMREF 2323296).
 - 2024 AI+Science Research Initiative, Data Science Institute, UChicago: BRAINIAC.

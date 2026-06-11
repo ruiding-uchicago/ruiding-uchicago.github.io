@@ -14,12 +14,12 @@ permalink: /funding/
     <span class="tag tag-primary mb-4">2023&ndash;2026</span>
     <h3 class="feature-title">Eric and Wendy Schmidt AI in Science Fellowship</h3>
     <p class="text-muted mb-2">Schmidt Sciences &mdash; Cohort 2</p>
-    <p class="feature-description">Postdoctoral fellowship supporting AI-driven scientific research at the University of Chicago.</p>
+    <p class="feature-description">Fellowship supporting AI-driven scientific research at the University of Chicago.</p>
 </div>
 
 <div class="card mb-4">
     <span class="tag tag-primary mb-4">2026 &middot; PI</span>
-    <h3 class="feature-title">AI in Science Schmidt Postdoctoral Fellowship Seed Fund ($33K)</h3>
+    <h3 class="feature-title">AI in Science Schmidt Fellowship Seed Fund ($33K)</h3>
     <p class="text-muted mb-2">University of Chicago</p>
     <p class="feature-description"><strong>Project:</strong> AI-Guided Discovery of PFAS-Selective Membrane Interfaces: From Autonomous Design to Experimental Validation</p>
 </div>

@@ -4,7 +4,7 @@ title: "Schmidt Seed Fund Award: PFAS-Selective Membrane Interfaces"
 date: 2026-06-01
 ---
 
-I've been awarded a **2026 AI in Science Schmidt Postdoctoral Fellowship Seed Fund** ($33K, as PI) for the project **"AI-Guided Discovery of PFAS-Selective Membrane Interfaces: From Autonomous Design to Experimental Validation."**
+I've been awarded a **2026 AI in Science Schmidt Fellowship Seed Fund** ($33K, as PI) for the project **"AI-Guided Discovery of PFAS-Selective Membrane Interfaces: From Autonomous Design to Experimental Validation."**
 
 This project is an end-to-end test of the autonomous discovery stack we have been building: hypothesis generation with DToR, candidate screening through T<sup>3</sup>-style device digital twins, atomistic sanity checks with RAPIDS, and finally wet-lab synthesis and electrochemical validation of the designed membrane interfaces.
 

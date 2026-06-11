@@ -39,7 +39,7 @@ permalink: /education/
 
 <div class="card mb-4">
     <h3 class="feature-title">University of Chicago &amp; Argonne National Laboratory</h3>
-    <p class="text-muted mb-2">Eric and Wendy Schmidt AI in Science Postdoctoral Fellow | Resident Associate</p>
+    <p class="text-muted mb-2">Eric and Wendy Schmidt AI in Science Fellow | Resident Associate</p>
     <p class="text-sm">Sept. 2023 &ndash; Present</p>
     <p class="mt-4"><strong>Advisors:</strong> Prof. Junhong Chen (PME/Argonne) &amp; Prof. Yuxin Chen (CS)</p>
 </div>
