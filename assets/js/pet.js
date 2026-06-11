@@ -105,6 +105,15 @@
     pet.remove();
   });
 
+  /* let the chat anchor to the pet and freeze it in place while open */
+  window.__pet = {
+    rect: function () { return pet.getBoundingClientRect(); },
+    park: function (on) {
+      sitting = !!on;
+      if (!on) lastMove = performance.now();   // resume normal behavior on close
+    }
+  };
+
   function stepToward(tx, ty, speed, now) {
     var dx = tx - px, dy = ty - py;
     var d = Math.sqrt(dx * dx + dy * dy);

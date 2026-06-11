@@ -652,8 +652,8 @@
 // ---------- assistant chat panel ----------
 .ask-panel
   position: fixed
-  right: $spacing-4
-  bottom: $spacing-4
+  left: $spacing-4
+  top: $spacing-4
   width: unquote("min(360px, calc(100vw - 2rem))")
   max-height: unquote("min(540px, 76vh)")
   display: none
@@ -663,14 +663,37 @@
   border-radius: $radius-lg
   box-shadow: 0 24px 64px -16px rgba(0, 0, 0, 0.45)
   z-index: 10001
-  overflow: hidden
 
 .ask-panel.open
   display: flex
 
 @media (prefers-reduced-motion: no-preference)
   .ask-panel.open
-    animation: cmdk-pop .22s $ease-out-expo
+    animation: ask-pop .2s $ease-out-expo
+
+@keyframes ask-pop
+  from
+    opacity: 0
+    transform: translateY(6px) scale(.96)
+
+// little tail pointing back at the pet
+.ask-tail
+  position: absolute
+  width: 0
+  height: 0
+  display: none
+
+.ask-tail-left
+  left: -7px
+  border-top: 7px solid transparent
+  border-bottom: 7px solid transparent
+  border-right: 7px solid var(--color-border-strong)
+
+.ask-tail-right
+  right: -7px
+  border-top: 7px solid transparent
+  border-bottom: 7px solid transparent
+  border-left: 7px solid var(--color-border-strong)
 
 .ask-head
   display: flex

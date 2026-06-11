@@ -7,7 +7,7 @@
 
   var meta = document.querySelector('meta[name="assistant-endpoint"]');
   var ENDPOINT = meta ? (meta.getAttribute('content') || '').trim() : '';
-  var panel, logEl, inputEl, sendEl, history = [], busy = false, built = false;
+  var panel, logEl, inputEl, sendEl, tailEl, history = [], busy = false, built = false;
 
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
@@ -50,17 +50,20 @@
         '<button class="ask-send" type="submit">Send</button>' +
       '</form>' +
       '<div class="ask-foot">AI assistant · may be wrong · ' +
-        '<a href="mailto:ruiding@uchicago.edu">email Rui</a> for anything that matters</div>';
+        '<a href="mailto:ruiding@uchicago.edu">email Rui</a> for anything that matters</div>' +
+      '<span class="ask-tail"></span>';
     document.body.appendChild(panel);
     logEl = panel.querySelector('.ask-log');
     inputEl = panel.querySelector('.ask-input');
     sendEl = panel.querySelector('.ask-send');
+    tailEl = panel.querySelector('.ask-tail');
     panel.querySelector('.ask-x').addEventListener('click', close);
     panel.querySelector('.ask-form').addEventListener('submit', function (e) {
       e.preventDefault();
       ask(inputEl.value);
     });
     addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    addEventListener('resize', function () { if (panel.classList.contains('open')) position(); });
     add('bot', "Hi — I can answer questions about Rui’s research, papers, and how to reach him. What would you like to know?");
   }
 
@@ -128,12 +131,45 @@
       });
   }
 
+  /* anchor the panel to the pet's current spot, growing toward open space */
+  function position() {
+    if (!panel) return;
+    var vw = innerWidth, vh = innerHeight, gap = 14, pad = 8;
+    var pw = panel.offsetWidth, ph = panel.offsetHeight;
+    panel.style.right = 'auto';
+    panel.style.bottom = 'auto';
+    var pr = (window.__pet && window.__pet.rect) ? window.__pet.rect() : null;
+    if (!pr || pr.width === 0) {                       // no pet (touch / dismissed): bottom-right
+      panel.style.left = (vw - pw - 16) + 'px';
+      panel.style.top = (vh - ph - 16) + 'px';
+      if (tailEl) tailEl.style.display = 'none';
+      return;
+    }
+    var pcx = pr.left + pr.width / 2, pcy = pr.top + pr.height / 2;
+    var toRight = pcx <= vw / 2;                        // pet on left half -> open rightward
+    var left = toRight ? pr.right + gap : pr.left - pw - gap;
+    left = Math.max(pad, Math.min(vw - pw - pad, left));
+    var top = Math.max(pad, Math.min(vh - ph - pad, pcy - 64));
+    panel.style.left = left + 'px';
+    panel.style.top = top + 'px';
+    if (tailEl) {                                       // tail on the edge facing the pet
+      tailEl.style.display = 'block';
+      tailEl.className = 'ask-tail ask-tail-' + (toRight ? 'left' : 'right');
+      tailEl.style.top = Math.max(16, Math.min(ph - 24, pcy - top)) + 'px';
+    }
+  }
+
   function open() {
     build();
+    if (window.__pet && window.__pet.park) window.__pet.park(true);   // freeze pet so the panel stays put
     panel.classList.add('open');
+    position();
     setTimeout(function () { inputEl.focus(); }, 50);
   }
-  function close() { if (panel) panel.classList.remove('open'); }
+  function close() {
+    if (panel) panel.classList.remove('open');
+    if (window.__pet && window.__pet.park) window.__pet.park(false);  // let the pet roam again
+  }
   function toggle() {
     if (panel && panel.classList.contains('open')) close();
     else open();
