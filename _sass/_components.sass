@@ -608,3 +608,39 @@
   margin: 0
   font-size: .95em
   color: var(--color-text-muted)
+
+// ---------- pixel lab-bot pet ----------
+#pixel-pet
+  position: fixed
+  top: 0
+  left: 0
+  width: 36px
+  height: 30px
+  z-index: 9990
+  cursor: pointer
+  user-select: none
+
+#pixel-pet canvas
+  width: 100%
+  height: 100%
+  image-rendering: pixelated
+  image-rendering: crisp-edges
+
+.pet-z
+  position: absolute
+  top: -14px
+  right: -4px
+  font-family: var(--font-mono)
+  font-size: 11px
+  color: var(--color-text-light)
+  animation: pet-z 2s ease-in-out infinite
+
+@keyframes pet-z
+  0%
+    opacity: 0
+    transform: translateY(4px)
+  40%
+    opacity: 1
+  100%
+    opacity: 0
+    transform: translateY(-6px)
