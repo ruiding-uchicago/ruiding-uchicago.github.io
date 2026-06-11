@@ -335,7 +335,20 @@
   else document.addEventListener('DOMContentLoaded', init);
 })();
 
-/* ---------- [5] console card ---------- */
+/* ---------- [5] public visit counter (GoatCounter, fails silently) ---------- */
+(function () {
+  'use strict';
+  var el = document.getElementById('gc-visits');
+  if (!el || !window.fetch) return;
+  fetch('https://ruiding.goatcounter.com/counter/TOTAL.json')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) {
+      if (d && d.count) el.textContent = ' · ' + String(d.count).trim() + ' visits';
+    })
+    .catch(function () { /* adblock or offline: stay quiet */ });
+})();
+
+/* ---------- [6] console card ---------- */
 (function () {
   'use strict';
   if (typeof console === 'undefined' || !console.log) return;
