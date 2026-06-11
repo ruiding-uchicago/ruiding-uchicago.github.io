@@ -433,6 +433,8 @@
     if (now - lastFrame < 30) { requestAnimationFrame(tick); return; }
     lastFrame = now;
     advanceAuto(now);
+    /* when the survey resumes, retire the why-card back to initial state */
+    if (info && !info.hidden && autoOn(now)) info.hidden = true;
     var dt = now - enterT0, scale = 1, ox = 0, oy = 0;
     if (dt < 1500) {
       var e = easeOutExpo(dt / 1500);

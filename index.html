@@ -120,23 +120,32 @@ title: "Home"
         exp: 'The wet lab closes the loop with physical reality.',
         fb: 'Results feed back and update the knowledge state.'
       };
-      /* idle demo: stages take turns lighting up until the user picks one */
-      var auto = null, ai = -1;
+      /* idle demo: stages take turns; any interaction pauses it, and 6s
+         after the user stops, the figure resets and the demo resumes */
+      var lastUser = -1e9, userMode = false, ai = -1;
+      function mark() { lastUser = performance.now(); }
+      fig.addEventListener('pointermove', mark, { passive: true });
       if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        auto = setInterval(function () {
+        setInterval(function () {
           if (!fig.classList.contains('play')) return;
+          if (performance.now() - lastUser < 6000) return;
           var nodes = fig.querySelectorAll('.loop-node');
+          if (userMode) {
+            userMode = false;
+            ai = -1;
+            [].forEach.call(nodes, function (m) { m.classList.remove('active'); });
+            cap.textContent = 'Click any stage.';
+            return;
+          }
           ai = (ai + 1) % nodes.length;
           [].forEach.call(nodes, function (m, idx) { m.classList.toggle('cycle', idx === ai); });
         }, 1300);
       }
       function pick(n) {
-        if (auto) {
-          clearInterval(auto);
-          auto = null;
-          [].forEach.call(fig.querySelectorAll('.loop-node'), function (m) { m.classList.remove('cycle'); });
-        }
+        mark();
+        userMode = true;
         var all = fig.querySelectorAll('.loop-node');
+        [].forEach.call(all, function (m) { m.classList.remove('cycle'); });
         [].forEach.call(all, function (m) { m.classList.toggle('active', m === n); });
         cap.textContent = caps[n.getAttribute('data-k')] || '';
       }

@@ -117,14 +117,25 @@
             el.classList.add('play');
             if (el.classList.contains('auto-cycle') && !PRM.matches) {
               var ms = parseInt(el.getAttribute('data-cycle'), 10) || 8000;
+              el.__lastUser = -1e9;
+              el.__lastPlay = performance.now();
+              var mark = function () { el.__lastUser = performance.now(); };
+              ['pointermove', 'pointerdown', 'keydown'].forEach(function (ev) {
+                el.addEventListener(ev, mark, { passive: true });
+              });
+              el.addEventListener('toggle', mark, true);
               setInterval(function () {
                 if (!el.__vis) return;
                 if (el.matches(':hover')) return;
-                if (el.querySelector('details[open]')) return;
+                if (performance.now() - el.__lastUser < ms) return;
+                if (performance.now() - el.__lastPlay < ms) return;
+                /* reset to initial state (close any opened details), replay */
+                [].forEach.call(el.querySelectorAll('details[open]'), function (d) { d.open = false; });
                 el.classList.remove('play');
                 void el.offsetWidth;
                 el.classList.add('play');
-              }, ms);
+                el.__lastPlay = performance.now();
+              }, 2000);
             } else if (!el.classList.contains('auto-cycle')) {
               avIO.unobserve(el);
             }
@@ -298,24 +309,26 @@
       n.addEventListener('click', function () { input.value = i; set(i); });
     });
 
-    /* idle demo: ping-pong through the fidelity ladder until the user
-       touches anything — then hands over control for good */
+    /* idle demo: ping-pong through the fidelity ladder; pauses while the
+       user is around and resets to rung 0 + resumes after 6s of quiet */
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
-      var vis = false, dir = 1;
+      var vis = false, dir = 1, lastUser = -1e9, userMode = false;
       new IntersectionObserver(function (en) { vis = en[0].isIntersecting; }).observe(fig);
-      var auto = setInterval(function () {
-        if (!vis || !auto) return;
+      var mark = function () { lastUser = performance.now(); userMode = true; };
+      ['pointerdown', 'keydown', 'pointermove'].forEach(function (ev) {
+        fig.addEventListener(ev, mark, { passive: true, capture: true });
+      });
+      input.addEventListener('input', mark);
+      setInterval(function () {
+        if (!vis) return;
+        if (performance.now() - lastUser < 6000) return;
+        if (userMode) { userMode = false; dir = 1; input.value = 0; set(0); return; }
         var cur = (+fig.getAttribute('data-s') || 0) + dir;
         if (cur >= 4) { cur = 4; dir = -1; }
         else if (cur <= 0) { cur = 0; dir = 1; }
         input.value = cur;
         set(cur);
       }, 1500);
-      function stopAuto() {
-        if (auto) { clearInterval(auto); auto = null; }
-      }
-      fig.addEventListener('pointerdown', stopAuto, true);
-      fig.addEventListener('keydown', stopAuto, true);
     }
   }
   if (document.readyState !== 'loading') init();
