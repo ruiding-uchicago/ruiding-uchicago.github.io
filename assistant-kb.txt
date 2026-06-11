@@ -48,7 +48,7 @@ Schmidt postdoc period (Sept 2023 – present), 8 papers:
 1. Text-Twin-Translation (T3): A Full-Stack ML Framework for Functional Material-Device Systems Discovery. SIGKDD 2026 AI4Science Track (CORE A*); Spotlight Oral at ICLR 2026 AI4Mat.
 2. Geometry, Not Energy Surface, Drives the Neutral MLIP-DFT Gap in Atomistic Interaction Surrogates (RAPIDS). ICML 2026 AI4Physics.
 3. Deep Research with Local-Web RAG: Toward Automated System-Level Materials Discovery (DToR). NeurIPS 2025 AI4Mat. arXiv: https://arxiv.org/abs/2511.18303 .
-4. Neuromorphic Random Walk for Experimental Phosphate Adsorption Modeling. NeurIPS 2025 ML4PS (co-first with Rodrigo P. Ferreira).
+4. Neuromorphic Random Walk for Experimental Phosphate Adsorption Modeling. NeurIPS 2025 ML4PS (co-first with Rodrigo P. Ferreira). Paper: https://ml4physicalsciences.github.io/2025/files/NeurIPS_ML4PS_2025_54.pdf .
 5. Leveraging Data Mining, Active Learning, and Domain Adaptation for Efficient Discovery of Advanced Acidic Oxygen Evolution (OER) Electrocatalysts. Science Advances 2025, 11, eadr9038.
 6. Unlocking the Potential: ML Applications in Electrocatalyst Design for Electrochemical Hydrogen Energy Transformation (review). Chemical Society Reviews 2024, 53, 11390-11461. Journal cover.
 7. Expediting FET Chemical Sensor Design with Neuromorphic Spiking Graph Neural Networks. Molecular Systems Design & Engineering 2025, 10, 345-356 (co-first with Rodrigo P. Ferreira). Journal cover.

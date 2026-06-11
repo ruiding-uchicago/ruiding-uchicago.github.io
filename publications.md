@@ -42,6 +42,7 @@ permalink: /publications/
     <div class="publication-title">Neuromorphic Random Walk for Experimental Phosphate Adsorption Modeling</div>
     <div class="publication-authors">Rodrigo P. Ferreira*, Rui Ding*, Rapti Ghosh, Haihui Pu, Junhong Chen</div>
     <div class="publication-venue">NeurIPS 2025 ML4PS Workshop</div>
+    <p class="text-sm mt-2"><a href="https://ml4physicalsciences.github.io/2025/files/NeurIPS_ML4PS_2025_54.pdf" target="_blank">Paper (PDF)</a></p>
 </div>
 
 <div class="publication-item">
@@ -95,7 +96,7 @@ permalink: /publications/
     <div class="publication-title">Unlocking New Insights for Electrocatalyst Design: A Unique Data Science Workflow Leveraging Internet-Sourced Big Data</div>
     <div class="publication-authors">Rui Ding, Xuebin Wang, Aidong Tan, Jia Li, Jianguo Liu</div>
     <div class="publication-venue">ACS Catalysis 2023, 13, 13267-13281</div>
-    <p class="text-sm mt-2"><a href="https://doi.org/10.1021/acscatal.3c03453" target="_blank">DOI: 10.1021/acscatal.3c03453</a></p>
+    <p class="text-sm mt-2"><a href="https://doi.org/10.1021/acscatal.3c01914" target="_blank">DOI: 10.1021/acscatal.3c01914</a></p>
 </div>
 
 <div class="publication-item">
@@ -111,7 +112,7 @@ permalink: /publications/
     <div class="publication-authors">Rui Ding, Yide Liu, Zhiyan Rui, Jia Li, Jianguo Liu, Zhigang Zou</div>
     <div class="publication-venue">Nano Research 2020, 13, 1519-1526</div>
     <span class="tag tag-primary">Back Cover</span>
-    <p class="text-sm mt-2"><a href="https://doi.org/10.1007/s12274-020-2764-0" target="_blank">DOI: 10.1007/s12274-020-2764-0</a></p>
+    <p class="text-sm mt-2"><a href="https://doi.org/10.1007/s12274-020-2768-y" target="_blank">DOI: 10.1007/s12274-020-2768-y</a></p>
 </div>
 
 <div class="publication-item">
@@ -132,7 +133,7 @@ permalink: /publications/
     <div class="publication-title">Guiding the Optimization of Membrane Electrode Assembly in a Proton Exchange Membrane Water Electrolyzer by Machine Learning Modeling and Black-Box Interpretation</div>
     <div class="publication-authors">Rui Ding, Yawen Chen, Zhiyan Rui, Kang Hua, et al.</div>
     <div class="publication-venue">ACS Sustainable Chemistry &amp; Engineering 2022, 10, 4561-4578</div>
-    <p class="text-sm mt-2"><a href="https://doi.org/10.1021/acssuschemeng.1c08139" target="_blank">DOI: 10.1021/acssuschemeng.1c08139</a></p>
+    <p class="text-sm mt-2"><a href="https://doi.org/10.1021/acssuschemeng.1c08522" target="_blank">DOI: 10.1021/acssuschemeng.1c08522</a></p>
 </div>
 
 <div class="publication-item">
@@ -153,7 +154,7 @@ permalink: /publications/
     <div class="publication-title">Effectively Increasing Pt Utilization Efficiency of the Membrane Electrode Assembly in Proton Exchange Membrane Fuel Cells through Multiparameter Optimization Guided by Machine Learning</div>
     <div class="publication-authors">Rui Ding*, Wenjuan Yin*, Gang Cheng, Yawen Chen, et al.</div>
     <div class="publication-venue">ACS Applied Materials &amp; Interfaces 2022, 14, 8010-8024</div>
-    <p class="text-sm mt-2"><a href="https://doi.org/10.1021/acsami.1c21956" target="_blank">DOI: 10.1021/acsami.1c21956</a></p>
+    <p class="text-sm mt-2"><a href="https://doi.org/10.1021/acsami.1c23221" target="_blank">DOI: 10.1021/acsami.1c23221</a></p>
 </div>
 
 <div class="publication-item">
