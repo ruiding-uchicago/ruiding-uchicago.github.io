@@ -15,6 +15,19 @@
     });
   }
 
+  /* turn URLs and known site paths into clickable links (input already escaped) */
+  function linkify(s) {
+    // full external URLs (new tab); trim trailing sentence punctuation off the href
+    s = s.replace(/https?:\/\/[^\s<]+/g, function (u) {
+      var clean = u.replace(/[.,;:!?)\]]+$/, ''), tail = u.slice(clean.length);
+      return '<a href="' + clean + '" target="_blank" rel="noopener">' + clean + '</a>' + tail;
+    });
+    // internal pages — whitelist only, so nothing bogus becomes a link
+    s = s.replace(/\/(?:research-interests|publications|education|funding|blog|legacy)\/|\/Rui_2026_CV\.pdf/g,
+      function (p) { return '<a href="' + p + '">' + p + '</a>'; });
+    return s;
+  }
+
   function build() {
     if (built) return;
     built = true;
@@ -51,7 +64,8 @@
   function add(who, text) {
     var row = document.createElement('div');
     row.className = 'ask-msg ask-' + who;
-    row.innerHTML = '<span>' + esc(text) + '</span>';
+    var html = who === 'bot' ? linkify(esc(text)) : esc(text);
+    row.innerHTML = '<span>' + html + '</span>';
     logEl.appendChild(row);
     logEl.scrollTop = logEl.scrollHeight;
     return row;

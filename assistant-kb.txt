@@ -13,7 +13,8 @@ Rui Ding (丁锐). Eric and Wendy Schmidt AI in Science Postdoctoral Fellow at t
 Incoming (Sept 2026 – Sept 2027): Joint Appointed Research Scientist, Pritzker School of Molecular Engineering (PME) and Department of Computer Science (CS), University of Chicago.
 Advisors: Prof. Junhong Chen (PME / Argonne) and Prof. Yuxin Chen (CS).
 Contact: ruiding@uchicago.edu and rding@anl.gov.
-Links: Google Scholar (user Cfs4XWwAAAAJ), GitHub github.com/ruiding-uchicago, LinkedIn, ResearchGate. CV: /Rui_2026_CV.pdf.
+Links: Google Scholar https://scholar.google.com/citations?user=Cfs4XWwAAAAJ ; GitHub https://github.com/ruiding-uchicago ; LinkedIn https://www.linkedin.com/in/rui-ding-018281255/ ; CV https://ruiding-uchicago.github.io/Rui_2026_CV.pdf .
+When you cite a link, always write the full URL exactly as it appears here so the visitor can click it.
 
 == BACKGROUND ==
 Trained as a materials scientist and electrochemist before moving into AI. PhD in Engineering, Nanjing University, 2018–2023. Visiting internship, Hong Kong University of Science and Technology, 2022–2023. B.Eng., Nanjing University, 2014–2018.
@@ -26,13 +27,13 @@ Rui builds AI co-scientist systems for complex materials and device discovery in
 The stack runs: hypothesis generation -> device digital twins -> rapid atomistic validation -> wet-lab experiment -> feedback, under the umbrella project BRAINIAC.
 
 1) DToR (Deep Tree of Research) — hypothesis generation.
-A local-first deep-research agent with a tree-structured orchestrator that adaptively expands and prunes research branches. Across 27 nanomaterials/device topics in a 44-agent benchmark, its reports reached a ~79% mean pairwise win rate against commercial deep-research systems, running entirely on in-house consumer-level hardware with open-source LLMs. arXiv:2511.18303. Presented at NeurIPS 2025 AI4Mat workshop.
+A local-first deep-research agent with a tree-structured orchestrator that adaptively expands and prunes research branches. Across 27 nanomaterials/device topics in a 44-agent benchmark, its reports reached a ~79% mean pairwise win rate against commercial deep-research systems, running entirely on in-house consumer-level hardware with open-source LLMs. Paper: https://arxiv.org/abs/2511.18303 . Presented at NeurIPS 2025 AI4Mat workshop.
 
 2) T3 (Text-Twin-Translation) — device digital twins.
-Text: an agentic pipeline, prompt-optimized with TextGrad, extracts structured knowledge graphs from raw publication corpora (21.8% BLEU improvement in knowledge extraction). Twin: a graph neural network that knows the device topology, trained as a digital twin of the coupled material-device system; on FET sensors it predicts sensitivity with 92.3% accuracy. Translation: the twin screens 123.2 million PubChem compounds for out-of-distribution tasks such as PFAS-sensing probe design. Accepted at SIGKDD 2026 AI4Science Track (CORE A*); Spotlight Oral at ICLR 2026 AI4Mat workshop. Code: github.com/ruiding-uchicago/T3_FET_sensor. OpenReview id 7QfGX651NZ.
+Text: an agentic pipeline, prompt-optimized with TextGrad, extracts structured knowledge graphs from raw publication corpora (21.8% BLEU improvement in knowledge extraction). Twin: a graph neural network that knows the device topology, trained as a digital twin of the coupled material-device system; on FET sensors it predicts sensitivity with 92.3% accuracy. Translation: the twin screens 123.2 million PubChem compounds for out-of-distribution tasks such as PFAS-sensing probe design. Accepted at SIGKDD 2026 AI4Science Track (CORE A*); Spotlight Oral at ICLR 2026 AI4Mat workshop. Code: https://github.com/ruiding-uchicago/T3_FET_sensor . OpenReview: https://openreview.net/forum?id=7QfGX651NZ .
 
 3) RAPIDS — rapid physical validation.
-The atomistic validation engine. It benchmarks machine-learning interatomic potentials (MLIPs) against DFT on 5,567 probe-target dimer interactions across 18 benchmarks, and finds that geometry, not the energy surface, drives the neutral MLIP-DFT gap. Packaged as a tool autonomous LLM agents can call for fast physical sanity checks. Accepted at ICML 2026 AI4Physics workshop. OpenReview id r2NSBJ4ip7.
+The atomistic validation engine. It benchmarks machine-learning interatomic potentials (MLIPs) against DFT on 5,567 probe-target dimer interactions across 18 benchmarks, and finds that geometry, not the energy surface, drives the neutral MLIP-DFT gap. Packaged as a tool autonomous LLM agents can call for fast physical sanity checks. Accepted at ICML 2026 AI4Physics workshop. OpenReview: https://openreview.net/forum?id=r2NSBJ4ip7 .
 
 4) Experiments — the wet lab closes the loop: nanomaterial synthesis, device fabrication, electrochemical testing.
 
@@ -66,4 +67,4 @@ Research Experience for Nigerian Undergraduates (RENEU) mentor (2024, 2025); 202
 == ANSWERING NOTES (for the assistant) ==
 - Everything factual must come from the text above. Do not invent papers, numbers, venues, awards, or affiliations.
 - If a question is outside Rui's research/career/contact, or the answer is not in this file, say you do not have that information and suggest emailing ruiding@uchicago.edu.
-- Keep answers brief and concrete. Point to a page when useful: /research-interests/, /publications/, /funding/, /education/, /blog/, /Rui_2026_CV.pdf.
+- Keep answers brief and concrete. Point to a page when useful: /research-interests/, /publications/, /funding/, /education/, /blog/, /Rui_2026_CV.pdf. Site pages may be written as root-relative paths (e.g. /publications/); external links must be full URLs.
