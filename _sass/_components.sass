@@ -635,6 +635,144 @@
   color: var(--color-text-light)
   animation: pet-z 2s ease-in-out infinite
 
+.pet-bubble
+  position: absolute
+  bottom: 110%
+  left: 50%
+  transform: translateX(-50%)
+  white-space: nowrap
+  padding: 5px 9px
+  background: var(--color-bg-elevated)
+  border: 1px solid var(--color-border-strong)
+  border-radius: $radius-md
+  font-size: 11px
+  color: var(--color-text-muted)
+  box-shadow: var(--shadow-card)
+
+// ---------- assistant chat panel ----------
+.ask-panel
+  position: fixed
+  right: $spacing-4
+  bottom: $spacing-4
+  width: unquote("min(360px, calc(100vw - 2rem))")
+  max-height: unquote("min(540px, 76vh)")
+  display: none
+  flex-direction: column
+  background: var(--color-bg-elevated)
+  border: 1px solid var(--color-border-strong)
+  border-radius: $radius-lg
+  box-shadow: 0 24px 64px -16px rgba(0, 0, 0, 0.45)
+  z-index: 10001
+  overflow: hidden
+
+.ask-panel.open
+  display: flex
+
+@media (prefers-reduced-motion: no-preference)
+  .ask-panel.open
+    animation: cmdk-pop .22s $ease-out-expo
+
+.ask-head
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: $spacing-3 $spacing-4
+  border-bottom: 1px solid var(--color-border)
+
+.ask-title
+  font-family: var(--font-mono)
+  font-size: .72rem
+  letter-spacing: .08em
+  text-transform: uppercase
+  color: var(--color-text-muted)
+
+.ask-x
+  background: none
+  border: 0
+  font-size: 1.2rem
+  line-height: 1
+  color: var(--color-text-light)
+  cursor: pointer
+  padding: 0 .2em
+  &:hover
+    color: var(--color-primary)
+
+.ask-log
+  flex: 1
+  overflow-y: auto
+  padding: $spacing-3 $spacing-4
+  display: flex
+  flex-direction: column
+  gap: $spacing-2
+
+.ask-msg
+  display: flex
+  font-size: .85rem
+  line-height: 1.5
+
+.ask-msg span
+  padding: $spacing-2 $spacing-3
+  border-radius: $radius-md
+  max-width: 85%
+
+.ask-user
+  justify-content: flex-end
+
+.ask-user span
+  background: var(--color-primary)
+  color: #fff
+
+.ask-bot span
+  background: var(--color-bg-secondary)
+  color: var(--color-text)
+
+.ask-typing span
+  color: var(--color-text-light)
+  letter-spacing: .15em
+
+.ask-form
+  display: flex
+  gap: $spacing-2
+  padding: $spacing-3
+  border-top: 1px solid var(--color-border)
+
+.ask-input
+  flex: 1
+  min-width: 0
+  padding: $spacing-2 $spacing-3
+  font: inherit
+  font-size: .88rem
+  color: var(--color-text)
+  background: var(--color-bg)
+  border: 1px solid var(--color-border-strong)
+  border-radius: $radius-md
+  outline: none
+  &:focus
+    border-color: var(--color-primary)
+
+.ask-send
+  flex-shrink: 0
+  padding: $spacing-2 $spacing-4
+  font: inherit
+  font-size: .85rem
+  font-weight: $font-weight-medium
+  color: #fff
+  background: var(--color-primary)
+  border: 0
+  border-radius: $radius-md
+  cursor: pointer
+  &:disabled
+    opacity: .5
+    cursor: default
+
+.ask-foot
+  padding: 0 $spacing-4 $spacing-3
+  font-size: .68rem
+  color: var(--color-text-light)
+
+.ask-foot a
+  color: var(--color-link)
+
 @keyframes pet-z
   0%
     opacity: 0

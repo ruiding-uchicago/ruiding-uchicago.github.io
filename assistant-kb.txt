@@ -1,0 +1,69 @@
+---
+permalink: /assistant-kb.txt
+layout: null
+sitemap: false
+---
+KNOWLEDGE BASE — Rui Ding
+This is the ONLY source of facts the website assistant may use.
+To update the bot: edit this file, commit, and redeploy the site. No other step.
+Last reviewed: 2026-06.
+
+== WHO ==
+Rui Ding (丁锐). Eric and Wendy Schmidt AI in Science Postdoctoral Fellow at the University of Chicago, and Resident Associate at Argonne National Laboratory, since September 2023.
+Incoming (Sept 2026 – Sept 2027): Joint Appointed Research Scientist, Pritzker School of Molecular Engineering (PME) and Department of Computer Science (CS), University of Chicago.
+Advisors: Prof. Junhong Chen (PME / Argonne) and Prof. Yuxin Chen (CS).
+Contact: ruiding@uchicago.edu and rding@anl.gov.
+Links: Google Scholar (user Cfs4XWwAAAAJ), GitHub github.com/ruiding-uchicago, LinkedIn, ResearchGate. CV: /Rui_2026_CV.pdf.
+
+== BACKGROUND ==
+Trained as a materials scientist and electrochemist before moving into AI. PhD in Engineering, Nanjing University, 2018–2023. Visiting internship, Hong Kong University of Science and Technology, 2022–2023. B.Eng., Nanjing University, 2014–2018.
+He became interested in AI after seeing how much of materials discovery still depends on costly trial-and-error experiments.
+
+== RESEARCH PHILOSOPHY — the "no-database regime" ==
+Rui builds AI co-scientist systems for complex materials and device discovery in the no-database regime: problems with high system complexity, high data cost, and no existing database or benchmark. Complex functional materials and devices (FET sensors, membranes, electrocatalytic assemblies, fuel cell and electrolyzer components) are multi-component and strongly coupled across scales, and one data point can cost days of synthesis and testing. Instead of waiting for big data that will not arrive, he designs AI that works like an experimentalist: pull priors from the literature, build physics-constrained surrogates, and spend the experimental budget where it counts.
+
+== THE AI CO-SCIENTIST STACK (four pillars) ==
+The stack runs: hypothesis generation -> device digital twins -> rapid atomistic validation -> wet-lab experiment -> feedback, under the umbrella project BRAINIAC.
+
+1) DToR (Deep Tree of Research) — hypothesis generation.
+A local-first deep-research agent with a tree-structured orchestrator that adaptively expands and prunes research branches. Across 27 nanomaterials/device topics in a 44-agent benchmark, its reports reached a ~79% mean pairwise win rate against commercial deep-research systems, running entirely on in-house consumer-level hardware with open-source LLMs. arXiv:2511.18303. Presented at NeurIPS 2025 AI4Mat workshop.
+
+2) T3 (Text-Twin-Translation) — device digital twins.
+Text: an agentic pipeline, prompt-optimized with TextGrad, extracts structured knowledge graphs from raw publication corpora (21.8% BLEU improvement in knowledge extraction). Twin: a graph neural network that knows the device topology, trained as a digital twin of the coupled material-device system; on FET sensors it predicts sensitivity with 92.3% accuracy. Translation: the twin screens 123.2 million PubChem compounds for out-of-distribution tasks such as PFAS-sensing probe design. Accepted at SIGKDD 2026 AI4Science Track (CORE A*); Spotlight Oral at ICLR 2026 AI4Mat workshop. Code: github.com/ruiding-uchicago/T3_FET_sensor. OpenReview id 7QfGX651NZ.
+
+3) RAPIDS — rapid physical validation.
+The atomistic validation engine. It benchmarks machine-learning interatomic potentials (MLIPs) against DFT on 5,567 probe-target dimer interactions across 18 benchmarks, and finds that geometry, not the energy surface, drives the neutral MLIP-DFT gap. Packaged as a tool autonomous LLM agents can call for fast physical sanity checks. Accepted at ICML 2026 AI4Physics workshop. OpenReview id r2NSBJ4ip7.
+
+4) Experiments — the wet lab closes the loop: nanomaterial synthesis, device fabrication, electrochemical testing.
+
+== SELECTED PUBLICATIONS (first / co-first author) ==
+- T3: Text-Twin-Translation, SIGKDD 2026 AI4Science (Spotlight Oral, ICLR 2026 AI4Mat).
+- Geometry, Not Energy Surface, Drives the Neutral MLIP-DFT Gap (RAPIDS), ICML 2026 AI4Physics.
+- Deep Research with Local-Web RAG (DToR), NeurIPS 2025 AI4Mat. arXiv:2511.18303.
+- Neuromorphic Random Walk for Experimental Phosphate Adsorption Modeling, NeurIPS 2025 ML4PS.
+- Multi-Stage ML for Advanced Acidic Oxygen Evolution (OER) Electrocatalysts, Science Advances 2025, 11, eadr9038.
+- ML Applications in Electrocatalyst Design for Hydrogen Energy (review), Chemical Society Reviews 2024, 53, 11390-11461. Journal cover.
+- Neuromorphic Spiking GNNs for FET Chemical Sensor Design, Molecular Systems Design & Engineering 2025, 10, 345-356. Journal cover.
+- AI/ML to Accelerate Material Discovery in Water Applications, under review at Nature Water.
+PhD-period work (2018–2023): fuel cells, electrolyzers, membrane electrode assemblies, single-atom catalysts — published in Angewandte Chemie, ACS Catalysis, J. Mater. Chem. A, Small, Nano Research, ACS Applied Materials & Interfaces, Energy and AI, J. Power Sources, ACS Sustainable Chemistry & Engineering. Full list: Google Scholar or the CV.
+
+== FUNDING & AWARDS ==
+- 2026 AI in Science Schmidt Postdoctoral Fellowship Seed Fund, $33K, as PI: "AI-Guided Discovery of PFAS-Selective Membrane Interfaces: From Autonomous Design to Experimental Validation."
+- 2025 UChicago AI Research Area, "Science Labs that Only AI Can Build" (T3 for PFAS chemical FET sensors and bio-FET platforms).
+- 2025 NSF Supplemental Award (FMRG 2037026 and DMREF 2323296).
+- 2024 AI+Science Research Initiative, Data Science Institute, UChicago: BRAINIAC.
+- Computing: NSF ACCESS (2024–2026, MAT240097), Argonne ALCF, Center for Nanoscale Materials service awards.
+
+== APPLICATION DOMAINS ==
+Electrocatalysis (OER/HER catalysts, fuel cell and electrolyzer components, clean hydrogen); chemical sensing (FET sensors, environmental monitoring); water and environment (PFAS sensing/adsorption materials, PFAS-selective membranes).
+
+== SKILLS ==
+Machine learning (TensorFlow, PyTorch, scikit-learn); NLP and LLM agent / pipeline building; wet-lab materials science (nanomaterial synthesis, electrochemical testing, characterization); simulation (VASP for DFT, Gaussian and ORCA for quantum chemistry, COMSOL for multiphysics).
+
+== MENTORSHIP & SERVICE ==
+Research Experience for Nigerian Undergraduates (RENEU) mentor (2024, 2025); 2026 AI+Science Hackathon judge and dataset provider; 2026 Schmidt AI in Science Faculty Fellowship mentor; host representative, AI+Science Schmidt Fellows Speaker Series (2024–2026).
+
+== ANSWERING NOTES (for the assistant) ==
+- Everything factual must come from the text above. Do not invent papers, numbers, venues, awards, or affiliations.
+- If a question is outside Rui's research/career/contact, or the answer is not in this file, say you do not have that information and suggest emailing ruiding@uchicago.edu.
+- Keep answers brief and concrete. Point to a page when useful: /research-interests/, /publications/, /funding/, /education/, /blog/, /Rui_2026_CV.pdf.

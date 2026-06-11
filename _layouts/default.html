@@ -6,6 +6,8 @@
 <meta name="author" content="{{ page.author | default: site.author | escape }}">
 <meta name="generator" content="Jekyll v{{ jekyll.version }}">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
+<meta name="assistant-endpoint" content="{{ site.assistant_endpoint }}">
+<link rel="preconnect" href="https://ruiding.goatcounter.com">
 {% if site.show_frame %}
 <link rel="stylesheet" href="{{ "/assets/css/frame.css" | relative_url }}">
 {% else %}
@@ -51,6 +53,7 @@
 <canvas id="fluid-canvas" aria-hidden="true"></canvas>
 <script defer src="{{ "/assets/js/webgl-fluid.umd.js" | relative_url }}"></script>
 <script defer src="{{ "/assets/js/site.js" | relative_url }}"></script>
+<script defer src="{{ "/assets/js/assistant.js" | relative_url }}"></script>
 <script defer src="{{ "/assets/js/pet.js" | relative_url }}"></script>
 <script data-goatcounter="https://ruiding.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 

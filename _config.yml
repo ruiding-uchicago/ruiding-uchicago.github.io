@@ -13,6 +13,10 @@ show_frame: true           # adds a gray frame to the site
 show_sidebar: true        # show a sidebar instead of the usual header
 minimal: false             # use a dark header
 
+# Website assistant — paste your deployed Cloudflare Worker URL here to switch
+# the chat bot on. Leave empty and the pet just shows a friendly speech bubble.
+assistant_endpoint: ""
+
 # Menu
 
 navigation:                # accepts {file, title, url, icon, sidebaricon}
@@ -53,3 +57,4 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - UNLICENSE.txt
+  - worker

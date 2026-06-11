@@ -1,0 +1,7 @@
+name = "rui-assistant"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+# The OpenAI key is NOT here. It is set as a secret, separately:
+#   npx wrangler secret put OPENAI_API_KEY
+# (or pasted in the Cloudflare dashboard under the Worker's Settings -> Variables).

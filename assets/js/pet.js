@@ -75,8 +75,30 @@
     lastMove = performance.now();
   }, { passive: true });
 
+  var bubble = null, bubbleT = 0;
+  var LINES = [
+    'DToR proposes, T³ screens, RAPIDS verifies.',
+    'Ask me about Rui’s work!',
+    'Mapping the hard region…',
+    'No database? Build one.'
+  ];
+  function speak(now) {
+    if (!bubble) {
+      bubble = document.createElement('div');
+      bubble.className = 'pet-bubble';
+      pet.appendChild(bubble);
+    }
+    bubble.textContent = LINES[Math.floor(Math.random() * LINES.length)];
+    bubble.style.display = 'block';
+    bubbleT = now + 3200;
+  }
   pet.addEventListener('click', function () {
-    sitting = !sitting;
+    /* if the assistant is switched on, open chat; otherwise a friendly bubble */
+    if (window.__askRui && window.__askRui.enabled) {
+      window.__askRui.toggle();
+    } else {
+      speak(performance.now());
+    }
   });
   pet.addEventListener('dblclick', function () {
     sessionStorage.setItem('pet-off', '1');
@@ -148,6 +170,7 @@
     drawFrame(body, legs);
 
     zEl.style.display = asleep && !sitting ? 'block' : 'none';
+    if (bubble && now > bubbleT) { bubble.style.display = 'none'; }
     pet.style.transform = 'translate(' + Math.round(px) + 'px,' + Math.round(py) + 'px)';
     cv.style.transform = facing === 1 ? 'none' : 'scaleX(-1)';
   }
