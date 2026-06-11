@@ -9,7 +9,7 @@ To update the bot: edit this file, commit, and redeploy the site. No other step.
 Last reviewed: 2026-06.
 
 == WHO ==
-Rui Ding (丁锐). Eric and Wendy Schmidt AI in Science Postdoctoral Fellow at the University of Chicago, and Resident Associate at Argonne National Laboratory, since September 2023.
+Rui Ding — English name "Ray", Chinese name 丁睿 — publishes and is professionally known as "Rui Ding"; treat "Ray" and 丁睿 as the same person. Eric and Wendy Schmidt AI in Science Postdoctoral Fellow at the University of Chicago, and Resident Associate at Argonne National Laboratory, since September 2023.
 Incoming (Sept 2026 – Sept 2027): Joint Appointed Research Scientist, Pritzker School of Molecular Engineering (PME) and Department of Computer Science (CS), University of Chicago.
 Advisors (current postdoc, the ones to emphasize): Prof. Junhong Chen (PME / Argonne) and Prof. Yuxin Chen (CS).
 PhD advisors (secondary; mention only if specifically asked about his PhD): Prof. Jianguo Liu, Prof. Minhua Shao, and Prof. Xuebin Wang.
