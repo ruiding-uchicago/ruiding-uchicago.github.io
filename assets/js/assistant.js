@@ -168,13 +168,13 @@
     panel.style.maxHeight = '';                         // reset; the no-pet branch may re-cap it
     var pw = panel.offsetWidth, ph = panel.offsetHeight;
     var pr = (window.__pet && window.__pet.rect) ? window.__pet.rect() : null;
-    if (!pr || pr.width === 0) {                       // no pet (mobile / dismissed): bottom-right, above the keyboard
-      var vv = window.visualViewport;
-      var inset = vv ? Math.max(0, innerHeight - vv.height - vv.offsetTop) : 0;
+    var vv = window.visualViewport;
+    var kbd = vv ? Math.max(0, innerHeight - vv.height - vv.offsetTop) : 0;   // mobile keyboard height
+    if (kbd > 0 || !pr || pr.width === 0) {            // keyboard up, or no pet: pin bottom-right above the keyboard
       panel.style.maxHeight = Math.min(540, (vv ? vv.height : vh) - 24) + 'px';
       panel.style.left = Math.max(pad, vw - pw - pad) + 'px';
       panel.style.top = 'auto';
-      panel.style.bottom = (inset + pad) + 'px';
+      panel.style.bottom = (kbd + pad) + 'px';
       if (tailEl) tailEl.style.display = 'none';
       return;
     }

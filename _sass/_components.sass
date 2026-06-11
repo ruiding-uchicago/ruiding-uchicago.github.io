@@ -831,47 +831,6 @@
 .ask-foot a
   color: var(--color-link)
 
-// ---------- mobile-only "Ask Vex-7" launcher (touch; desktop has the pet) ----------
-.ask-fab
-  position: fixed
-  right: 14px
-  bottom: 14px
-  z-index: 9991
-  display: flex
-  align-items: center
-  gap: 8px
-  padding: 7px 14px 7px 8px
-  background: var(--color-bg-elevated)
-  border: 1px solid rgba(229, 72, 77, 0.42)
-  border-radius: 999px
-  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.5)
-  cursor: pointer
-  -webkit-tap-highlight-color: transparent
-
-.ask-fab canvas
-  width: 30px
-  height: 26px
-  image-rendering: pixelated
-  flex-shrink: 0
-
-.ask-fab span
-  font-family: var(--font-mono)
-  font-size: .72rem
-  font-weight: $font-weight-medium
-  letter-spacing: .06em
-  text-transform: uppercase
-  color: var(--color-primary)
-
-@media (prefers-reduced-motion: no-preference)
-  .ask-fab
-    animation: ask-fab-pulse 2.6s ease-in-out infinite
-
-@keyframes ask-fab-pulse
-  0%, 100%
-    box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.5)
-  50%
-    box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.5), 0 0 14px 1px rgba(229, 72, 77, 0.4)
-
 @keyframes pet-z
   0%
     opacity: 0

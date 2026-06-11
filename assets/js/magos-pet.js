@@ -11,12 +11,12 @@
 (function () {
 'use strict';
 if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-if (matchMedia('(pointer: coarse)').matches) return;
+var TOUCH = matchMedia('(pointer: coarse)').matches;   // phones run a smaller, finger-dragged Vex-7 (no cursor to follow)
 
 /* ════════════════════════════════════════════════════════════
    CONFIG · the knobs you are most likely to touch
    ════════════════════════════════════════════════════════════ */
-const PX        = 4;      // pixel cell size (smaller than the standalone's 5 to suit a page mascot)
+const PX        = TOUCH ? 3 : 4;   // smaller on phones; 4 on desktop (the standalone used 5)
 const SPEED     = 40;     // walk speed, px/s
 const WALK_FPS  = 7;      // walk animation rate
 const MARGIN    = 90;     // patrol margin from screen edges
@@ -305,7 +305,7 @@ document.body.appendChild(hit);
 // faint, theme-tinted hint that follows him so visitors know what a click does
 const label = document.createElement('div');
 label.id = 'magos-label';
-label.textContent = 'click: ask \u00b7 double-click: hide';
+label.textContent = TOUCH ? 'tap: ask \u00b7 drag: move' : 'click: ask \u00b7 double-click: hide';
 label.style.cssText = 'position:fixed;z-index:9991;pointer-events:none;white-space:nowrap;'
   + "font:600 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;"
   + 'color:var(--color-primary);opacity:.4;text-shadow:0 1px 2px rgba(0,0,0,.6);transition:opacity .2s';
