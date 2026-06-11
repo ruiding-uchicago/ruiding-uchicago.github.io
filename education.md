@@ -10,6 +10,29 @@ permalink: /education/
     <h1 class="section-title">Education & Experience</h1>
 </div>
 
+<ol class="journey">
+    <li>
+        <span class="eyebrow">2014 &ndash; 2023 &middot; Nanjing</span>
+        <p>Materials engineering, then a PhD on fuel cells and electrolyzers: synthesis, electrochemical testing, characterization. I learned how expensive trial-and-error can be.</p>
+    </li>
+    <li>
+        <span class="eyebrow">2020 &ndash; 2023 &middot; First ML work</span>
+        <p>ML papers on electrocatalysts and membrane assemblies. The hard part was never just the material. It was the whole system.</p>
+    </li>
+    <li>
+        <span class="eyebrow">2023 &middot; Chicago &amp; Argonne</span>
+        <p>Schmidt AI in Science Fellowship. I switched from running experiments to building AI that decides which experiments are worth running.</p>
+    </li>
+    <li>
+        <span class="eyebrow">2024 &ndash; 2026 &middot; The stack</span>
+        <p>DToR for hypotheses, T<sup>3</sup> for screening, RAPIDS for validation.</p>
+    </li>
+    <li>
+        <span class="eyebrow">2026 &rarr; &middot; Co-scientist</span>
+        <p>Joint PME/CS appointment. The Seed Fund project runs the full loop on a real membrane problem.</p>
+    </li>
+</ol>
+
 <div class="section-header mt-8">
     <h2 class="section-title">Current Position</h2>
 </div>

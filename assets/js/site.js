@@ -127,7 +127,7 @@
     }, { rootMargin: '0px 0px -8% 0px' });
 
     var els = document.querySelectorAll(
-      '.page-container .section-header, .grid > *, .publication-item, .blog-item, .card, .page-container img'
+      '.page-container .section-header, .grid > *, .publication-item, .blog-item, .card, .page-container img, .journey > li'
     );
     [].forEach.call(els, function (el) {
       if (el.getBoundingClientRect().top < innerHeight * 0.92) return;

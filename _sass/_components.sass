@@ -492,3 +492,38 @@
     grid-template-columns: 1fr 1fr
   .fid-stage
     font-size: .55rem
+
+// ---------- Wet-lab → AI journey timeline ----------
+.journey
+  list-style: none
+  margin: 0 0 $spacing-8
+  padding: 0 0 0 $spacing-6
+  border-left: 1px solid var(--color-border-strong)
+
+.journey li
+  position: relative
+  margin: 0 0 $spacing-6
+  max-width: 60ch
+
+.journey li::before
+  content: ''
+  position: absolute
+  left: -1.79rem
+  top: .3em
+  width: 8px
+  height: 8px
+  border-radius: 50%
+  background: var(--color-bg)
+  border: 1.5px solid var(--color-primary)
+
+.journey li:last-child::before
+  background: var(--color-accent)
+  border-color: var(--color-accent)
+
+.journey .eyebrow
+  margin-bottom: 2px
+
+.journey p
+  margin: 0
+  font-size: .95em
+  color: var(--color-text-muted)
