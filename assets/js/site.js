@@ -102,6 +102,19 @@
       t.style.setProperty('--my', (e.clientY - r.top) + 'px');
     }, { passive: true });
 
+    /* component playback trigger: .anim-onview gets .play on first sight */
+    if ('IntersectionObserver' in window) {
+      var avEls = document.querySelectorAll('.anim-onview');
+      if (avEls.length) {
+        var avIO = new IntersectionObserver(function (es) {
+          es.forEach(function (en) {
+            if (en.isIntersecting) { en.target.classList.add('play'); avIO.unobserve(en.target); }
+          });
+        }, { threshold: 0.35 });
+        [].forEach.call(avEls, function (el) { avIO.observe(el); });
+      }
+    }
+
     /* below-the-fold reveals; above-the-fold content is never touched */
     if (PRM.matches || !('IntersectionObserver' in window)) return;
     var io = new IntersectionObserver(function (entries) {
