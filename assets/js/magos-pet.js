@@ -298,9 +298,32 @@ const g  = cv.getContext('2d');
 // small click target that follows his body; the canvas stays click-through
 const hit = document.createElement('div');
 hit.id = 'magos-hit';
-hit.title = "Archmagos Vex-7 \u00b7 click: ask about Rui's work \u00b7 drag: carry \u00b7 double-click: lance";
+hit.title = "Archmagos Vex-7 \u00b7 click: ask about Rui's work \u00b7 drag: carry \u00b7 double-click: hide";
 hit.style.cssText = 'position:fixed;z-index:9991;cursor:grab;touch-action:none';
 document.body.appendChild(hit);
+
+// faint, theme-tinted hint that follows him so visitors know what a click does
+const label = document.createElement('div');
+label.id = 'magos-label';
+label.textContent = 'click: ask \u00b7 double-click: hide';
+label.style.cssText = 'position:fixed;z-index:9991;pointer-events:none;white-space:nowrap;'
+  + "font:600 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;"
+  + 'color:var(--color-primary);opacity:.4;text-shadow:0 1px 2px rgba(0,0,0,.6);transition:opacity .2s';
+document.body.appendChild(label);
+
+// if a visitor dismisses him, this tiny chip summons him back (never trapped)
+const summon = document.createElement('button');
+summon.id = 'magos-summon';
+summon.type = 'button';
+summon.textContent = '\u2699 summon Vex-7';
+summon.title = 'Bring the tech-priest back';
+summon.style.cssText = 'position:fixed;left:14px;bottom:12px;z-index:9991;display:none;'
+  + "font:600 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.04em;"
+  + 'color:var(--color-primary);background:rgba(12,10,10,.72);border:1px solid rgba(229,72,77,.45);'
+  + 'border-radius:999px;padding:5px 11px;cursor:pointer;opacity:.62;backdrop-filter:blur(4px)';
+summon.addEventListener('mouseenter', () => { summon.style.opacity = '1'; });
+summon.addEventListener('mouseleave', () => { summon.style.opacity = '.62'; });
+document.body.appendChild(summon);
 
 const pv = document.createElement('canvas');   // character layer
 pv.width = LW; pv.height = LH;
@@ -1353,7 +1376,7 @@ function rollNext() {
 function startWalk() {
   pet.dir = pet.x < W * 0.18 ? 1 : pet.x > W * 0.82 ? -1 : (Math.random() < 0.5 ? -1 : 1);
   pet.wf = 0;
-  pet.voxT = 0.8 + Math.random() * 1.5;
+  pet.voxT = 3 + Math.random() * 3;
   setState('walk', 2.5 + Math.random() * 3.5);
 }
 
@@ -1436,7 +1459,7 @@ function update(dt) {
       // idle chatter
       pet.voxT -= dt;
       if (pet.voxT < 0) {
-        pet.voxT = 8 + Math.random() * 7;
+        pet.voxT = 16 + Math.random() * 14;
         const r2 = Math.random();
         say(r2 < 0.28 ? VOX.idle : r2 < 0.48 ? VOX.patrol : r2 < 0.68 ? VOX.ai
           : r2 < 0.84 ? VOX.terra : VOX.keeper);
@@ -1473,7 +1496,7 @@ function update(dt) {
       // patrol chatter: aphorisms + AI creed + Terra digs + keeper lore
       pet.voxT -= dt;
       if (pet.voxT < 0) {
-        pet.voxT = 2.8 + Math.random() * 2.6;
+        pet.voxT = 8 + Math.random() * 8;
         const r2 = Math.random();
         say(r2 < 0.42 ? VOX.patrol : r2 < 0.62 ? VOX.ai : r2 < 0.8 ? VOX.terra : VOX.keeper);
       }
@@ -1907,21 +1930,46 @@ function render() {
 }
 
 /* --------------------------------------------------------------
-   INPUT · click = ask about Rui (open chat) · drag = carry ·
-   double-click = fire his lance. He's a permanent companion — there
-   is deliberately no "hide forever", so a refresh always brings him
-   back. A small hit-box <div> tracks his body so clicks land on him
-   and pass THROUGH the rest of the page (canvas is pointer-events:none).
+   INPUT · single click = ask about Rui (opens the chat) ·
+   drag = carry him · double-click = hide him. Hiding persists for
+   the browsing session (sessionStorage) and pops a "summon" chip,
+   so he's gone when you want quiet but is one click from returning;
+   a fresh session (or the chip) brings him back. The hit-box <div>
+   tracks his body so only HE is clickable — the canvas itself is
+   pointer-events:none and never blocks the page.
    -------------------------------------------------------------- */
 let pDown = false, pMoved = false, sx0 = 0, sy0 = 0, clickTimer = null;
-let running = true;
 let parked = false;
+let hidden = !!sessionStorage.getItem('pet-hidden');
+let labelW = 0;
 
 // the visible figure's box in viewport coords (not the wide tentacle reach)
 function bodyBox() {
   const w = 18 * PX, h = 40 * PX;
   return { left: pet.x - w / 2, top: pet.feetY - h, width: w, height: h };
 }
+
+function applyHidden() {
+  const d = hidden ? 'none' : 'block';
+  cv.style.display = d; hit.style.display = d; label.style.display = d;
+  summon.style.display = hidden ? 'block' : 'none';
+}
+function hide() {
+  hidden = true;
+  try { sessionStorage.setItem('pet-hidden', '1'); } catch (e) {}
+  const open = document.querySelector('.ask-panel.open');
+  if (open && window.__askRui && window.__askRui.toggle) window.__askRui.toggle();  // close the chat too
+  applyHidden();
+}
+function show() {
+  hidden = false;
+  try { sessionStorage.removeItem('pet-hidden'); } catch (e) {}
+  applyHidden();
+}
+summon.addEventListener('click', show);
+
+hit.addEventListener('pointerenter', () => { label.style.opacity = '.85'; });
+hit.addEventListener('pointerleave', () => { label.style.opacity = '.4'; });
 
 function petAction() {
   if (window.__askRui && window.__askRui.enabled) window.__askRui.toggle();
@@ -1970,8 +2018,8 @@ window.addEventListener('pointerup', () => {
 });
 
 hit.addEventListener('dblclick', () => {
-  clearTimeout(clickTimer);   // a double-click is his lance, never a chat-open
-  if (pet.state !== 'drag' && pet.state !== 'fall' && pet.state !== 'blast') startBlast();
+  clearTimeout(clickTimer);   // a double-click hides him; the summon chip or a fresh session brings him back
+  hide();
 });
 
 /* the chat anchors to him and freezes him in place while it's open */
@@ -1989,20 +2037,20 @@ window.__pet = {
 };
 
 /* --------------------------------------------------------------
-   MAIN LOOP · ~32fps cap, pauses with the tab, glues the hit-box
-   to the body each frame.
+   MAIN LOOP · ~32fps cap; pauses with the tab and while hidden;
+   glues the hit-box and the hint label to his body each frame.
    -------------------------------------------------------------- */
 window.addEventListener('resize', resize);
 resize();
 pet.feetY = FLOOR;
 pet.t = 0.56;   // start mid-translocation: he materialises in
+applyHidden();  // honour a hidden state carried over from an earlier page
 
 const FRAME = 1000 / 32;
 let last = performance.now();
 function loop(now) {
-  if (!running) return;
   requestAnimationFrame(loop);
-  if (document.hidden) { last = now; return; }
+  if (hidden || document.hidden) { last = now; return; }
   if (now - last < FRAME) return;
   const dt = Math.min(0.05, (now - last) / 1000);
   last = now;
@@ -2013,6 +2061,9 @@ function loop(now) {
   hit.style.top    = Math.round(b.top) + 'px';
   hit.style.width  = Math.round(b.width) + 'px';
   hit.style.height = Math.round(b.height) + 'px';
+  if (!labelW) labelW = label.offsetWidth || 150;
+  label.style.left = Math.round(Math.max(6, Math.min(W - labelW - 6, pet.x - labelW / 2))) + 'px';
+  label.style.top  = Math.round(Math.min(pet.feetY + 6, H - 15)) + 'px';
 }
 requestAnimationFrame(loop);
 

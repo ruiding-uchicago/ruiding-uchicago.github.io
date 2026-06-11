@@ -40,16 +40,16 @@
     panel.setAttribute('aria-label', "Ask about Rui Ding's work");
     panel.innerHTML =
       '<div class="ask-head">' +
-        '<span class="ask-title">Ask about Rui’s work</span>' +
+        '<span class="ask-title">Vox-Cogitator · Vex-7</span>' +
         '<button class="ask-x" aria-label="Close">×</button>' +
       '</div>' +
       '<div class="ask-log"></div>' +
       '<form class="ask-form">' +
         '<input class="ask-input" type="text" autocomplete="off" ' +
-          'placeholder="e.g. What is T³? How to contact?" maxlength="600" aria-label="Your question">' +
+          'placeholder="Query the archive · e.g. What is T³?" maxlength="600" aria-label="Your question">' +
         '<button class="ask-send" type="submit">Send</button>' +
       '</form>' +
-      '<div class="ask-foot">AI assistant · may be wrong · ' +
+      '<div class="ask-foot">Familiar-cogitator · may err · ' +
         '<a href="mailto:ruiding@uchicago.edu">email Rui</a> for anything that matters</div>' +
       '<span class="ask-tail"></span>';
     document.body.appendChild(panel);
@@ -64,7 +64,7 @@
     });
     addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
     addEventListener('resize', function () { if (panel.classList.contains('open')) position(); });
-    add('bot', "Hi — I can answer questions about Rui’s research, papers, and how to reach him. What would you like to know?");
+    add('bot', "Vex-7 online. I keep the technical archive of the keeper — Rui Ding. Ask about his research, papers, funding, or how to reach him.");
   }
 
   function add(who, text) {
