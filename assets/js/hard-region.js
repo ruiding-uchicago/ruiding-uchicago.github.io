@@ -100,7 +100,7 @@
   }
 
   /* ---------- data points ---------- */
-  var pts = [], hardPts = [];
+  var pts = [], hardPts = [], refPts = [];
   function buildPoints() {
     pts = []; hardPts = [];
     var s = 99, n = 0, guard = 0;
@@ -112,11 +112,20 @@
     }
     /* the systems I actually work on — all living deep in the hard region */
     hardPts = [
-      { u: 0.63, v: 0.74, label: 'fuel cells',     dx: -8,  dy: 14,  align: 'right' },
-      { u: 0.76, v: 0.92, label: 'electrolyzers',  dx: -10, dy: 4,   align: 'right' },
-      { u: 0.90, v: 0.69, label: 'FET sensors',    dx: -10, dy: 4,   align: 'right' },
-      { u: 0.71, v: 0.59, label: 'PFAS membranes', dx: 10,  dy: 4,   align: 'left'  },
-      { u: 0.94, v: 0.84, label: 'OER catalysts',  dx: -10, dy: 14,  align: 'right' }
+      { u: 0.63, v: 0.74, label: 'fuel cell components',             dx: -8,  dy: 14, align: 'right' },
+      { u: 0.76, v: 0.92, label: 'electrolyzer components',          dx: -10, dy: 4,  align: 'right' },
+      { u: 0.90, v: 0.69, label: 'FET sensors',                      dx: -10, dy: 4,  align: 'right' },
+      { u: 0.71, v: 0.59, label: 'PFAS sensing/adsorption materials', dx: -10, dy: 4,  align: 'right' },
+      { u: 0.94, v: 0.84, label: 'complex nanomaterials',            dx: -10, dy: 14, align: 'right' }
+    ];
+    /* classic landmarks in the charted territory */
+    refPts = [
+      { u: 0.10, v: 0.10,  label: 'QM9' },
+      { u: 0.17, v: 0.165, label: 'Materials Project' },
+      { u: 0.30, v: 0.085, label: 'OC20' },
+      { u: 0.36, v: 0.36,  label: 'perovskites' },
+      { u: 0.50, v: 0.30,  label: 'MOFs' },
+      { u: 0.55, v: 0.44,  label: 'high-entropy alloys' }
     ];
   }
 
@@ -224,8 +233,26 @@
     }
     ctx.globalAlpha = 1;
 
-    /* hard-won systems twinkle, each carrying its name */
+    /* classic landmarks: quiet gray anchors in charted territory */
     ctx.font = '500 8.5px "JetBrains Mono", monospace';
+    if (W > 480) {
+      ctx.textAlign = 'left';
+      for (k = 0; k < refPts.length; k++) {
+        var rf = refPts[k];
+        var rx = rf.u * W, ry = (1 - rf.v) * H;
+        ctx.fillStyle = COL.pt;
+        ctx.globalAlpha = 0.85;
+        ctx.beginPath();
+        ctx.arc(rx, ry, 2, 0, 6.2832);
+        ctx.fill();
+        ctx.globalAlpha = 0.6;
+        ctx.fillStyle = COL.text;
+        ctx.fillText(rf.label, rx + 7, ry + 3);
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    /* hard-won systems twinkle, each carrying its name */
     for (k = 0; k < hardPts.length; k++) {
       var hp = hardPts[k];
       var hx = hp.u * W, hy = (1 - hp.v) * H;
