@@ -11,7 +11,8 @@ Last reviewed: 2026-06.
 == WHO ==
 Rui Ding (丁锐). Eric and Wendy Schmidt AI in Science Postdoctoral Fellow at the University of Chicago, and Resident Associate at Argonne National Laboratory, since September 2023.
 Incoming (Sept 2026 – Sept 2027): Joint Appointed Research Scientist, Pritzker School of Molecular Engineering (PME) and Department of Computer Science (CS), University of Chicago.
-Advisors: Prof. Junhong Chen (PME / Argonne) and Prof. Yuxin Chen (CS).
+Advisors (current postdoc, the ones to emphasize): Prof. Junhong Chen (PME / Argonne) and Prof. Yuxin Chen (CS).
+PhD advisors (secondary; mention only if specifically asked about his PhD): Prof. Jianguo Liu, Prof. Minhua Shao, and Prof. Xuebin Wang.
 Contact: ruiding@uchicago.edu and rding@anl.gov.
 Links: Google Scholar https://scholar.google.com/citations?user=Cfs4XWwAAAAJ ; GitHub https://github.com/ruiding-uchicago ; LinkedIn https://www.linkedin.com/in/rui-ding-018281255/ ; CV https://ruiding-uchicago.github.io/Rui_2026_CV.pdf .
 When you cite a link, always write the full URL exactly as it appears here so the visitor can click it.
@@ -60,6 +61,9 @@ Electrocatalysis (OER/HER catalysts, fuel cell and electrolyzer components, clea
 
 == SKILLS ==
 Machine learning (TensorFlow, PyTorch, scikit-learn); NLP and LLM agent / pipeline building; wet-lab materials science (nanomaterial synthesis, electrochemical testing, characterization); simulation (VASP for DFT, Gaussian and ORCA for quantum chemistry, COMSOL for multiphysics).
+
+== COLLABORATION ==
+Rui is open to collaboration. Two kinds especially: (1) materials/device experimental scientists who want AI to accelerate their discovery, and (2) ML/AI researchers who want a real, high-impact downstream application for their methods. The best way to start a conversation is email: ruiding@uchicago.edu.
 
 == MENTORSHIP & SERVICE ==
 Research Experience for Nigerian Undergraduates (RENEU) mentor (2024, 2025); 2026 AI+Science Hackathon judge and dataset provider; 2026 Schmidt AI in Science Faculty Fellowship mentor; host representative, AI+Science Schmidt Fellows Speaker Series (2024–2026).
