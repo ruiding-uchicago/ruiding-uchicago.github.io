@@ -45,14 +45,18 @@ body::after
   height: 100%
   z-index: -1
   pointer-events: none
-  opacity: .3
-  mix-blend-mode: screen
+  opacity: .22
+  mix-blend-mode: multiply
   display: none
 
+@media (prefers-reduced-motion: no-preference)
+  #fluid-canvas
+    display: block
+
 @media (prefers-color-scheme: dark)
-  @media (prefers-reduced-motion: no-preference)
-    #fluid-canvas
-      display: block
+  #fluid-canvas
+    opacity: .38
+    mix-blend-mode: screen
 
 @media print
   body::before, body::after, #fluid-canvas

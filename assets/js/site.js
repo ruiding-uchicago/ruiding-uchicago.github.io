@@ -33,10 +33,13 @@
     if (fluidStarted) return;
     var canvas = document.getElementById('fluid-canvas');
     if (!canvas || !window.WebGLFluid) return;
-    if (PRM.matches || !DARK.matches || COARSE.matches || !webglOK()) return;
+    if (PRM.matches || COARSE.matches || !webglOK()) return;
     fluidStarted = true;
 
+    /* dark: dim crimson dye through screen blend;
+       light: maroon ink-wash through multiply blend */
     var accent = getComputedStyle(document.documentElement).getPropertyValue('--color-primary');
+    var dye = DARK.matches ? dimColor(accent, 0.25) : dimColor('#800000', 0.85);
 
     window.WebGLFluid(canvas, {
       TRIGGER: 'hover',
@@ -46,13 +49,13 @@
       BLOOM: false,
       SUNRAYS: false,
       COLORFUL: false,
-      SPLAT_COLOR: dimColor(accent, 0.22),
-      SPLAT_RADIUS: 0.12,
-      SPLAT_FORCE: 2200,
-      DENSITY_DISSIPATION: 2.2,
-      VELOCITY_DISSIPATION: 1.1,
+      SPLAT_COLOR: dye,
+      SPLAT_RADIUS: 0.16,
+      SPLAT_FORCE: 2600,
+      DENSITY_DISSIPATION: 1.6,
+      VELOCITY_DISSIPATION: 1.0,
       PRESSURE_ITERATIONS: 14,
-      CURL: 12,
+      CURL: 14,
       SIM_RESOLUTION: 96,
       DYE_RESOLUTION: 512
     });
@@ -78,9 +81,6 @@
 
   if (document.readyState === 'complete') bootFluid();
   else addEventListener('load', bootFluid);
-  if (DARK.addEventListener) {
-    DARK.addEventListener('change', function (e) { if (e.matches) bootFluid(); });
-  }
 })();
 
 /* ---------- [2] scroll reveals + card spotlight ---------- */
@@ -245,7 +245,7 @@
   if (typeof console === 'undefined' || !console.log) return;
   try {
     console.log(
-      '%cRui Ding%c  AI × Materials Discovery',
+      '%cRui Ding%c  AI × Complex Functional Materials/Devices',
       'color:#e5484d;font-weight:700;font-size:16px',
       'color:#d7c69d;font-size:12px;letter-spacing:.08em'
     );

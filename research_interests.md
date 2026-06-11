@@ -29,16 +29,12 @@ mathjax: true
 
 <p class="text-muted text-sm">The Twin is a message-passing GNN over the device topology graph: $$h_v^{(k+1)}=\phi\Big(h_v^{(k)},\ \bigoplus_{u\in\mathcal{N}(v)}\psi\big(h_v^{(k)},h_u^{(k)},e_{uv}\big)\Big)$$ where edges $e_{uv}$ encode physical couplings between material, channel, and electrode nodes.</p>
 
-<img src="/2025_fig2.png" alt="Cross-Modal Device Digital Twin Framework" class="img-responsive img-rounded img-shadow my-8">
-
 <div class="section-header mt-8">
     <span class="eyebrow">Pillar 03</span>
     <h2 class="section-title">Agentic Hypothesis Generation with DToR</h2>
 </div>
 
 <p><strong>Deep Tree of Research (DToR)</strong> is a hypothesis-generation engine, not a chat agent: a local-first RAG system with a tree-structured orchestrator that adaptively expands and prunes research branches for coverage, depth, and coherence. Benchmarked across 27 nanomaterials/device topics against 44 agent configurations, DToR reports achieved a ~79% mean pairwise win rate against commercial deep-research systems&mdash;running entirely on in-house, consumer-level hardware with open-source LLMs.</p>
-
-<img src="/2025_fig1.png" alt="DToR Research Framework" class="img-responsive img-rounded img-shadow my-8">
 
 <div class="section-header mt-8">
     <span class="eyebrow">Pillar 04</span>
