@@ -11,21 +11,21 @@ mathjax: true
     <h1 class="section-title">Four Pillars</h1>
 </div>
 
-<p>Complex functional materials and devices live in a regime that mainstream ML-for-science rarely touches: <strong>high system complexity, high data cost, and no existing database or benchmark</strong>. My research builds a complete AI co-scientist stack for exactly this regime&mdash;from hypothesis generation, to device digital twins, to rapid physical validation.</p>
+<p>Complex functional materials and devices sit in a regime mainstream ML-for-science rarely touches: the systems are complicated, every data point is expensive, and there is no database or benchmark to start from. That regime is what my research targets, with an AI co-scientist stack running from hypothesis generation through device digital twins to physical validation.</p>
 
 <div class="section-header mt-8">
     <span class="eyebrow">Pillar 01</span>
     <h2 class="section-title">No-Database Materials &amp; Device Discovery</h2>
 </div>
 
-<p>Public databases and benchmarks cover only a thin slice of materials science: single crystals, small molecules, idealized surfaces. Real functional systems&mdash;FET sensors, membranes, electrocatalytic assemblies&mdash;are multi-component, multi-scale, and strongly coupled, and each data point costs days of synthesis and testing. Instead of waiting for big data that will never arrive, I design AI systems that work the way experimentalists do: extract priors from literature, build physics-constrained surrogates, and spend the experimental budget only where it matters.</p>
+<p>Public databases and benchmarks cover a thin slice of materials science: mostly single crystals, small molecules, idealized surfaces. The systems I work on (FET sensors, membranes, electrocatalytic assemblies) are multi-component and strongly coupled across scales, and one data point can cost days of synthesis and testing. The big data is not coming. So I design AI systems that work the way experimentalists do: pull priors from the literature, build physics-constrained surrogates, and spend the experimental budget where it counts.</p>
 
 <div class="section-header mt-8">
     <span class="eyebrow">Pillar 02</span>
     <h2 class="section-title">Text-Twin-Translation (T<sup>3</sup>) for Device Digital Twins</h2>
 </div>
 
-<p><strong>Text:</strong> a TextGrad-optimized agentic pipeline extracts structured knowledge graphs from unstructured publication corpora (21.8% BLEU improvement in knowledge extraction). <strong>Twin:</strong> a device-topology-aware graph neural network is trained as a digital twin of the coupled material&ndash;device system (92.3% sensitivity prediction accuracy on FET sensors). <strong>Translation:</strong> the twin screens candidates at scale&mdash;123.2 million PubChem compounds&mdash;for out-of-distribution downstream tasks such as PFAS-sensing probe design. Accepted at SIGKDD 2026 AI4Science; Spotlight Oral at ICLR 2026 AI4Mat.</p>
+<p><strong>Text:</strong> an agentic pipeline, prompt-optimized with TextGrad, extracts structured knowledge graphs from raw publication corpora (21.8% BLEU improvement in knowledge extraction). <strong>Twin:</strong> a graph neural network that knows the device topology, trained as a digital twin of the coupled material&ndash;device system; on FET sensors it predicts sensitivity with 92.3% accuracy. <strong>Translation:</strong> the twin then screens 123.2 million PubChem compounds for out-of-distribution tasks such as PFAS-sensing probe design. Accepted at SIGKDD 2026 AI4Science; Spotlight Oral at ICLR 2026 AI4Mat.</p>
 
 <p class="text-muted text-sm">The Twin is a message-passing GNN over the device topology graph: $$h_v^{(k+1)}=\phi\Big(h_v^{(k)},\ \bigoplus_{u\in\mathcal{N}(v)}\psi\big(h_v^{(k)},h_u^{(k)},e_{uv}\big)\Big)$$ where edges $e_{uv}$ encode physical couplings between material, channel, and electrode nodes.</p>
 
@@ -34,14 +34,14 @@ mathjax: true
     <h2 class="section-title">Agentic Hypothesis Generation with DToR</h2>
 </div>
 
-<p><strong>Deep Tree of Research (DToR)</strong> is a hypothesis-generation engine, not a chat agent: a local-first RAG system with a tree-structured orchestrator that adaptively expands and prunes research branches for coverage, depth, and coherence. Benchmarked across 27 nanomaterials/device topics against 44 agent configurations, DToR reports achieved a ~79% mean pairwise win rate against commercial deep-research systems&mdash;running entirely on in-house, consumer-level hardware with open-source LLMs.</p>
+<p><strong>Deep Tree of Research (DToR)</strong> is a hypothesis-generation engine, not a chat agent: a local-first RAG system with a tree-structured orchestrator that adaptively expands and prunes research branches for coverage, depth, and coherence. Benchmarked on 27 nanomaterials/device topics against 44 agent configurations, its reports achieved a ~79% mean pairwise win rate against commercial deep-research systems, while running entirely on in-house, consumer-level hardware with open-source LLMs.</p>
 
 <div class="section-header mt-8">
     <span class="eyebrow">Pillar 04</span>
     <h2 class="section-title">Rapid Physical Validation with RAPIDS &amp; Experiments</h2>
 </div>
 
-<p><strong>RAPIDS</strong> is the atomistic validation engine of the stack: it systematically benchmarks machine-learning interatomic potentials against DFT&mdash;5,567 probe&ndash;target dimer interactions across 18 benchmarks&mdash;showing that geometry, not the energy surface, drives the neutral MLIP&ndash;DFT gap. Critically, RAPIDS is packaged as a tool that autonomous LLM agents can call for fast physical sanity checks. The loop then closes where I started: wet-lab validation through nanomaterial synthesis, device fabrication, and electrochemical testing.</p>
+<p><strong>RAPIDS</strong> is the atomistic validation engine of the stack. It benchmarks machine-learning interatomic potentials against DFT on 5,567 probe&ndash;target dimer interactions across 18 benchmarks; the result is that geometry, not the energy surface, drives the neutral MLIP&ndash;DFT gap. It is also packaged as a tool autonomous LLM agents can call for fast physical sanity checks. The last gate is the one I was trained for: nanomaterial synthesis, device fabrication, and electrochemical testing in the wet lab.</p>
 
 <div class="section-header mt-8">
     <span class="eyebrow">Where It Lands</span>

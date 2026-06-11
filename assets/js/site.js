@@ -255,7 +255,7 @@
     );
     console.log(
       '%cDToR proposes → T³ screens → RAPIDS verifies → the wet lab confirms.\n' +
-      'You found the easter egg — say hi: ruiding@uchicago.edu',
+      'You found the easter egg. Say hi: ruiding@uchicago.edu',
       'color:#8a847b'
     );
   } catch (e) { /* no-op */ }
