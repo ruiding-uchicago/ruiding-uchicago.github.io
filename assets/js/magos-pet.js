@@ -3,7 +3,7 @@
    into a transparent, click-through overlay for the live site:
      - fullscreen canvas at pointer-events:none, so it NEVER blocks the page
      - click the Magos  -> opens the "Ask about Rui" chat (window.__askRui)
-     - drag to carry, double-click to dismiss for the session
+     - drag to carry, double-click fires his lance (he never vanishes)
      - exposes window.__pet {rect,park} so the chat panel anchors to him
      - sound OFF, ~32fps cap, pauses with the tab; skipped on touch / PRM
    Sprite art, behaviour FSM, skull familiar, weapon rites and vox chatter
@@ -12,7 +12,6 @@
 'use strict';
 if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 if (matchMedia('(pointer: coarse)').matches) return;
-if (sessionStorage.getItem('pet-off')) return;
 
 /* ════════════════════════════════════════════════════════════
    CONFIG · the knobs you are most likely to touch
@@ -299,7 +298,7 @@ const g  = cv.getContext('2d');
 // small click target that follows his body; the canvas stays click-through
 const hit = document.createElement('div');
 hit.id = 'magos-hit';
-hit.title = "Archmagos Vex-7 \u00b7 click: ask about Rui's work \u00b7 drag: carry \u00b7 double-click: dismiss";
+hit.title = "Archmagos Vex-7 \u00b7 click: ask about Rui's work \u00b7 drag: carry \u00b7 double-click: lance";
 hit.style.cssText = 'position:fixed;z-index:9991;cursor:grab;touch-action:none';
 document.body.appendChild(hit);
 
@@ -1909,9 +1908,10 @@ function render() {
 
 /* --------------------------------------------------------------
    INPUT · click = ask about Rui (open chat) · drag = carry ·
-   double-click = dismiss for this session. A small hit-box <div>
-   tracks his body so clicks land on him and pass THROUGH the rest
-   of the page (the canvas itself is pointer-events:none).
+   double-click = fire his lance. He's a permanent companion — there
+   is deliberately no "hide forever", so a refresh always brings him
+   back. A small hit-box <div> tracks his body so clicks land on him
+   and pass THROUGH the rest of the page (canvas is pointer-events:none).
    -------------------------------------------------------------- */
 let pDown = false, pMoved = false, sx0 = 0, sy0 = 0, clickTimer = null;
 let running = true;
@@ -1926,14 +1926,6 @@ function bodyBox() {
 function petAction() {
   if (window.__askRui && window.__askRui.enabled) window.__askRui.toggle();
   else { startSurge(); say(VOX.keeper); }            // chat off: a flourish + a kind word
-}
-
-function dismiss() {
-  sessionStorage.setItem('pet-off', '1');
-  running = false;
-  if (cv.parentNode) cv.remove();
-  if (hit.parentNode) hit.remove();
-  window.__pet = null;
 }
 
 hit.addEventListener('pointerdown', e => {
@@ -1978,8 +1970,8 @@ window.addEventListener('pointerup', () => {
 });
 
 hit.addEventListener('dblclick', () => {
-  clearTimeout(clickTimer);
-  dismiss();
+  clearTimeout(clickTimer);   // a double-click is his lance, never a chat-open
+  if (pet.state !== 'drag' && pet.state !== 'fall' && pet.state !== 'blast') startBlast();
 });
 
 /* the chat anchors to him and freezes him in place while it's open */
