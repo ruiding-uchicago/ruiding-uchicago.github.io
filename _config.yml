@@ -15,7 +15,7 @@ minimal: false             # use a dark header
 
 # Website assistant — paste your deployed Cloudflare Worker URL here to switch
 # the chat bot on. Leave empty and the pet just shows a friendly speech bubble.
-assistant_endpoint: ""
+assistant_endpoint: "https://rui-assistant.ruiding.workers.dev"
 
 # Menu
 
