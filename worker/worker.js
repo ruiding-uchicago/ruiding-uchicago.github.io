@@ -8,8 +8,8 @@
  */
 
 // ----- config you can edit -----
-const MODEL = "gpt-4o-mini";          // change to your preferred model; verify the exact id at
-                                      // platform.openai.com/docs/models (e.g. a newer GPT).
+const MODEL = "gpt-5.5";              // flagship; available on chat completions ($5/$30 per 1M).
+                                      // verify ids at platform.openai.com/docs/models.
 const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
 const KB_URL = "https://ruiding-uchicago.github.io/assistant-kb.txt";
 const ALLOW_ORIGINS = [
@@ -102,8 +102,7 @@ export default {
         body: JSON.stringify({
           model: MODEL,
           messages,
-          max_tokens: MAX_OUTPUT_TOKENS,
-          temperature: 0.3
+          max_completion_tokens: MAX_OUTPUT_TOKENS
         })
       });
     } catch (e) {
