@@ -38,16 +38,34 @@ The atomistic validation engine. It benchmarks machine-learning interatomic pote
 
 4) Experiments — the wet lab closes the loop: nanomaterial synthesis, device fabrication, electrochemical testing.
 
-== SELECTED PUBLICATIONS (first / co-first author) ==
-- T3: Text-Twin-Translation, SIGKDD 2026 AI4Science (Spotlight Oral, ICLR 2026 AI4Mat).
-- Geometry, Not Energy Surface, Drives the Neutral MLIP-DFT Gap (RAPIDS), ICML 2026 AI4Physics.
-- Deep Research with Local-Web RAG (DToR), NeurIPS 2025 AI4Mat. arXiv:2511.18303.
-- Neuromorphic Random Walk for Experimental Phosphate Adsorption Modeling, NeurIPS 2025 ML4PS.
-- Multi-Stage ML for Advanced Acidic Oxygen Evolution (OER) Electrocatalysts, Science Advances 2025, 11, eadr9038.
-- ML Applications in Electrocatalyst Design for Hydrogen Energy (review), Chemical Society Reviews 2024, 53, 11390-11461. Journal cover.
-- Neuromorphic Spiking GNNs for FET Chemical Sensor Design, Molecular Systems Design & Engineering 2025, 10, 345-356. Journal cover.
-- AI/ML to Accelerate Material Discovery in Water Applications, under review at Nature Water.
-PhD-period work (2018–2023): fuel cells, electrolyzers, membrane electrode assemblies, single-atom catalysts — published in Angewandte Chemie, ACS Catalysis, J. Mater. Chem. A, Small, Nano Research, ACS Applied Materials & Interfaces, Energy and AI, J. Power Sources, ACS Sustainable Chemistry & Engineering. Full list: Google Scholar or the CV.
+== PUBLICATIONS (first author or co-first author) ==
+COUNT: Rui has 20 first-author or co-first-author papers as of mid-2026 — 8 in the Schmidt postdoc period and 12 in his PhD period, all listed below. His total publication count including co-authored work is higher; the complete and always-current list is on Google Scholar (https://scholar.google.com/citations?user=Cfs4XWwAAAAJ). If asked "how many papers," give this number and point to Scholar or /publications/.
+
+Schmidt postdoc period (Sept 2023 – present), 8 papers:
+1. Text-Twin-Translation (T3): A Full-Stack ML Framework for Functional Material-Device Systems Discovery. SIGKDD 2026 AI4Science Track (CORE A*); Spotlight Oral at ICLR 2026 AI4Mat.
+2. Geometry, Not Energy Surface, Drives the Neutral MLIP-DFT Gap in Atomistic Interaction Surrogates (RAPIDS). ICML 2026 AI4Physics.
+3. Deep Research with Local-Web RAG: Toward Automated System-Level Materials Discovery (DToR). NeurIPS 2025 AI4Mat. arXiv: https://arxiv.org/abs/2511.18303 .
+4. Neuromorphic Random Walk for Experimental Phosphate Adsorption Modeling. NeurIPS 2025 ML4PS (co-first with Rodrigo P. Ferreira).
+5. Leveraging Data Mining, Active Learning, and Domain Adaptation for Efficient Discovery of Advanced Acidic Oxygen Evolution (OER) Electrocatalysts. Science Advances 2025, 11, eadr9038.
+6. Unlocking the Potential: ML Applications in Electrocatalyst Design for Electrochemical Hydrogen Energy Transformation (review). Chemical Society Reviews 2024, 53, 11390-11461. Journal cover.
+7. Expediting FET Chemical Sensor Design with Neuromorphic Spiking Graph Neural Networks. Molecular Systems Design & Engineering 2025, 10, 345-356 (co-first with Rodrigo P. Ferreira). Journal cover.
+8. Leveraging AI and ML to Accelerate Material Discovery in Water Applications. Under review at Nature Water.
+
+PhD period (2018–2023), 12 papers (mostly on PEM fuel cells, water electrolyzers, membrane electrode assemblies, and electrocatalysts):
+9. Designing AI-Aided Analysis and Prediction Models for Nonprecious Metal Electrocatalyst-Based PEM Fuel Cells. Angewandte Chemie Int. Ed. 2020, 59, 19175-19183.
+10. ML-Guided Discovery of Underlying Decisive Factors and New Mechanisms for Nonprecious Metal Electrocatalysts. ACS Catalysis 2021, 11, 9798-9808.
+11. Unlocking New Insights for Electrocatalyst Design: A Data Science Workflow Leveraging Internet-Sourced Big Data. ACS Catalysis 2023, 13, 13267-13281.
+12. Applying ML to Boost High-Performance Membrane Electrode Assembly for PEM Fuel Cells. J. Materials Chemistry A 2021, 9, 6841-6850 (inside cover).
+13. Facile Grafting Strategy Synthesis of Single-Atom Electrocatalyst with Enhanced ORR Performance. Nano Research 2020, 13, 1519-1526 (back cover).
+14. Inspecting Design Rules of Metal-Nitrogen-Carbon Catalysts for CO2 Reduction: A Data Science Perspective. Nano Research 2023, 16, 264-280.
+15. Atomically Dispersed Low-Coordinate Co-N Sites on Carbon Nanotubes for Hydrogen Evolution. Small 2022, 18, 2105335.
+16. Guiding the Optimization of a PEM Water Electrolyzer MEA by ML Modeling and Black-Box Interpretation. ACS Sustainable Chemistry & Engineering 2022, 10, 4561-4578.
+17. Application of ML in Optimizing PEM Fuel Cells: A Review. Energy and AI 2022, 9, 100170.
+18. ML Utilized for the Development of PEM Electrolyzers. J. Power Sources 2023, 556, 232389.
+19. Effectively Increasing Pt Utilization Efficiency of the MEA in PEM Fuel Cells via ML-Guided Multiparameter Optimization. ACS Applied Materials & Interfaces 2022, 14, 8010-8024.
+20. Boosting the Optimization of MEA in PEM Fuel Cells Guided by Explainable AI. Energy and AI 2021, 5, 100098.
+
+The selected highlights are also on /publications/, and the full record (including co-authored papers) is on Google Scholar and in the CV at https://ruiding-uchicago.github.io/Rui_2026_CV.pdf .
 
 == FUNDING & AWARDS ==
 - 2026 AI in Science Schmidt Postdoctoral Fellowship Seed Fund, $33K, as PI: "AI-Guided Discovery of PFAS-Selective Membrane Interfaces: From Autonomous Design to Experimental Validation."

@@ -15,16 +15,19 @@
     });
   }
 
-  /* turn URLs and known site paths into clickable links (input already escaped) */
+  /* turn URLs and known site paths into clickable links (input already escaped).
+     External URLs are linkified FIRST; the internal-path pass then skips any
+     path that sits inside an href="..." we just created, so no double-wrap. */
   function linkify(s) {
-    // full external URLs (new tab); trim trailing sentence punctuation off the href
     s = s.replace(/https?:\/\/[^\s<]+/g, function (u) {
       var clean = u.replace(/[.,;:!?)\]]+$/, ''), tail = u.slice(clean.length);
       return '<a href="' + clean + '" target="_blank" rel="noopener">' + clean + '</a>' + tail;
     });
-    // internal pages — whitelist only, so nothing bogus becomes a link
-    s = s.replace(/\/(?:research-interests|publications|education|funding|blog|legacy)\/|\/Rui_2026_CV\.pdf/g,
-      function (p) { return '<a href="' + p + '">' + p + '</a>'; });
+    s = s.replace(/(href="[^"]*"[^>]*>)?(\/(?:research-interests|publications|education|funding|blog|legacy)\/|\/Rui_2026_CV\.pdf)/g,
+      function (m, insideTag, p) {
+        if (insideTag) return m;                 // already part of a link — leave it
+        return '<a href="' + p + '">' + p + '</a>';
+      });
     return s;
   }
 
