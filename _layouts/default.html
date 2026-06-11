@@ -70,7 +70,7 @@
 <footer>
   <div>{{ site.description | default: site.title }}</div>
   {% include menu.html menu=site.external %}
-  <div class="footer-meta">Built {{ site.time | date: "%Y-%m-%d" }} &middot; Jekyll &middot; no cookies<span id="gc-visits"></span> &middot; <kbd>&#8984;K</kbd> to search</div>
+  <div class="footer-meta">Built {{ site.time | date: "%Y-%m-%d" }} &middot; Jekyll &middot; no cookies<span class="gc-visits" data-sep=" &middot; "></span> &middot; <kbd>&#8984;K</kbd> to search</div>
 </footer>
 {% endif %}
 

@@ -160,13 +160,32 @@ nav a.selected .icon
 
 .description
   position: relative
-  margin: 2em 0
+  margin: 2em 0 .75em
   font-family: $font-family-mono
   font-size: .68em
   letter-spacing: .08em
   text-transform: uppercase
   color: rgba(242, 239, 234, 0.45)
   line-height: 1.8
+
+.sidebar-meta
+  position: relative
+  display: flex
+  flex-direction: column
+  gap: .4em
+  font-family: $font-family-mono
+  font-size: .62em
+  letter-spacing: .08em
+  text-transform: uppercase
+  color: rgba(242, 239, 234, 0.4)
+
+.sidebar-meta kbd
+  font-size: .95em
+  padding: .02em .3em
+  border: 1px solid rgba(255, 255, 255, 0.2)
+  border-bottom-width: 2px
+  border-radius: 3px
+  background: rgba(255, 255, 255, 0.06)
 
 // Mobile responsive sidebar
 @media (max-width: $breakpoint-lg)

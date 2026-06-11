@@ -338,12 +338,16 @@
 /* ---------- [5] public visit counter (GoatCounter, fails silently) ---------- */
 (function () {
   'use strict';
-  var el = document.getElementById('gc-visits');
-  if (!el || !window.fetch) return;
+  var els = document.querySelectorAll('.gc-visits');
+  if (!els.length || !window.fetch) return;
   fetch('https://ruiding.goatcounter.com/counter/TOTAL.json')
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (d) {
-      if (d && d.count) el.textContent = ' · ' + String(d.count).trim() + ' visits';
+      if (!d || !d.count) return;
+      var n = String(d.count).trim();
+      [].forEach.call(els, function (el) {
+        el.textContent = (el.getAttribute('data-sep') || '') + n + ' visits';
+      });
     })
     .catch(function () { /* adblock or offline: stay quiet */ });
 })();
