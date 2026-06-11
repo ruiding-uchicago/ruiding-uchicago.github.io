@@ -32,8 +32,17 @@ title: "Home"
     <figure class="hard-region" id="hard-region" role="img" aria-label="An interactive phase diagram: dense benchmark data points in the easy lowlands; fuel cells, electrolyzers, FET sensors, PFAS membranes, and OER catalysts glowing in the hard region of high complexity and high data cost. Click anywhere to sample the space.">
         <canvas id="hr-canvas" aria-hidden="true"></canvas>
         <figcaption class="hr-head eyebrow">Mapping the hard region &middot; click to sample</figcaption>
-        <span class="hr-label" style="left:17%;top:79%">benchmark-rich problems</span>
-        <span class="hr-label" style="left:42%;top:55%">materials discovery</span>
+        <div class="hr-legend" aria-hidden="true">
+            <span class="hl hl-bench">data-rich &middot; benchmarked</span>
+            <span class="hl hl-disc">active discovery</span>
+            <span class="hl hl-hard">no database yet &middot; my focus</span>
+        </div>
+        <div class="hr-info" id="hr-info" hidden>
+            <strong></strong>
+            <p></p>
+        </div>
+        <span class="hr-label z-easy" style="left:17%;top:79%">benchmark-rich problems</span>
+        <span class="hr-label z-mid" style="left:42%;top:55%">materials discovery</span>
         <span class="hr-label hard" style="left:79%;top:14%" tabindex="0">the hard region
             <span class="hr-tip">Where trial-and-error gets too expensive.</span>
         </span>
@@ -111,7 +120,22 @@ title: "Home"
         exp: 'The wet lab closes the loop with physical reality.',
         fb: 'Results feed back and update the knowledge state.'
       };
+      /* idle demo: stages take turns lighting up until the user picks one */
+      var auto = null, ai = -1;
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        auto = setInterval(function () {
+          if (!fig.classList.contains('play')) return;
+          var nodes = fig.querySelectorAll('.loop-node');
+          ai = (ai + 1) % nodes.length;
+          [].forEach.call(nodes, function (m, idx) { m.classList.toggle('cycle', idx === ai); });
+        }, 1300);
+      }
       function pick(n) {
+        if (auto) {
+          clearInterval(auto);
+          auto = null;
+          [].forEach.call(fig.querySelectorAll('.loop-node'), function (m) { m.classList.remove('cycle'); });
+        }
         var all = fig.querySelectorAll('.loop-node');
         [].forEach.call(all, function (m) { m.classList.toggle('active', m === n); });
         cap.textContent = caps[n.getAttribute('data-k')] || '';

@@ -102,13 +102,32 @@
       t.style.setProperty('--my', (e.clientY - r.top) + 'px');
     }, { passive: true });
 
-    /* component playback trigger: .anim-onview gets .play on first sight */
+    /* component playback trigger: .anim-onview gets .play on first sight.
+       .auto-cycle elements replay every data-cycle ms while visible, but
+       never while hovered or while a <details> inside them is open. */
     if ('IntersectionObserver' in window) {
       var avEls = document.querySelectorAll('.anim-onview');
       if (avEls.length) {
         var avIO = new IntersectionObserver(function (es) {
           es.forEach(function (en) {
-            if (en.isIntersecting) { en.target.classList.add('play'); avIO.unobserve(en.target); }
+            var el = en.target;
+            el.__vis = en.isIntersecting;
+            if (!en.isIntersecting || el.__played) return;
+            el.__played = true;
+            el.classList.add('play');
+            if (el.classList.contains('auto-cycle') && !PRM.matches) {
+              var ms = parseInt(el.getAttribute('data-cycle'), 10) || 8000;
+              setInterval(function () {
+                if (!el.__vis) return;
+                if (el.matches(':hover')) return;
+                if (el.querySelector('details[open]')) return;
+                el.classList.remove('play');
+                void el.offsetWidth;
+                el.classList.add('play');
+              }, ms);
+            } else if (!el.classList.contains('auto-cycle')) {
+              avIO.unobserve(el);
+            }
           });
         }, { threshold: 0.35 });
         [].forEach.call(avEls, function (el) { avIO.observe(el); });
@@ -278,6 +297,26 @@
     [].forEach.call(names, function (n, i) {
       n.addEventListener('click', function () { input.value = i; set(i); });
     });
+
+    /* idle demo: ping-pong through the fidelity ladder until the user
+       touches anything — then hands over control for good */
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+      var vis = false, dir = 1;
+      new IntersectionObserver(function (en) { vis = en[0].isIntersecting; }).observe(fig);
+      var auto = setInterval(function () {
+        if (!vis || !auto) return;
+        var cur = (+fig.getAttribute('data-s') || 0) + dir;
+        if (cur >= 4) { cur = 4; dir = -1; }
+        else if (cur <= 0) { cur = 0; dir = 1; }
+        input.value = cur;
+        set(cur);
+      }, 1500);
+      function stopAuto() {
+        if (auto) { clearInterval(auto); auto = null; }
+      }
+      fig.addEventListener('pointerdown', stopAuto, true);
+      fig.addEventListener('keydown', stopAuto, true);
+    }
   }
   if (document.readyState !== 'loading') init();
   else document.addEventListener('DOMContentLoaded', init);

@@ -1,8 +1,7 @@
-/* hard-region.js v2 — interactive phase-diagram terrain.
-   x: system complexity, y: data cost. Cursor = exploring probe: crosshair
-   reticle with live coordinates, contour lens highlight, click to sample
-   the space (sampling in the hard region leaves a permanent crimson point).
-   Canvas2D + inline Perlin + marching squares. No dependencies. */
+/* hard-region.js v3 — interactive phase-diagram terrain.
+   Three point classes (teal: benchmarked / champagne: active discovery /
+   crimson: no-database hard region), idle auto-survey probe, click-to-sample,
+   click a hard system to read why it is hard. Canvas2D, no dependencies. */
 (function () {
   'use strict';
 
@@ -11,6 +10,7 @@
   if (!fig || !canvas || !canvas.getContext) return;
   var ctx = canvas.getContext('2d');
   if (!ctx) return;
+  var info = document.getElementById('hr-info');
 
   var PRM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -99,10 +99,10 @@
     }
   }
 
-  /* ---------- data points ---------- */
-  var pts = [], hardPts = [], refPts = [];
+  /* ---------- point classes ---------- */
+  var pts = [], hardPts = [], benchPts = [], discPts = [];
   function buildPoints() {
-    pts = []; hardPts = [];
+    pts = [];
     var s = 99, n = 0, guard = 0;
     function rnd() { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }
     while (n < 150 && guard++ < 4000) {
@@ -110,22 +110,30 @@
       var density = (1 - u) * (1 - v) * 1.25 + 0.015;
       if (rnd() < density) { pts.push([u, v]); n++; }
     }
-    /* the systems I actually work on — all living deep in the hard region */
-    hardPts = [
-      { u: 0.63, v: 0.74, label: 'fuel cell components',             dx: -8,  dy: 14, align: 'right' },
-      { u: 0.76, v: 0.92, label: 'electrolyzer components',          dx: -10, dy: 4,  align: 'right' },
-      { u: 0.90, v: 0.69, label: 'FET sensors',                      dx: -10, dy: 4,  align: 'right' },
-      { u: 0.71, v: 0.59, label: 'PFAS sensing/adsorption materials', dx: -10, dy: 4,  align: 'right' },
-      { u: 0.94, v: 0.84, label: 'complex nanomaterials',            dx: -10, dy: 14, align: 'right' }
-    ];
-    /* classic landmarks in the charted territory */
-    refPts = [
+    /* charted territory: big public databases & benchmarks */
+    benchPts = [
       { u: 0.10, v: 0.10,  label: 'QM9' },
       { u: 0.17, v: 0.165, label: 'Materials Project' },
-      { u: 0.30, v: 0.085, label: 'OC20' },
-      { u: 0.36, v: 0.36,  label: 'perovskites' },
-      { u: 0.50, v: 0.30,  label: 'MOFs' },
-      { u: 0.55, v: 0.44,  label: 'high-entropy alloys' }
+      { u: 0.30, v: 0.085, label: 'OC20' }
+    ];
+    /* half-charted: active discovery fields with partial data */
+    discPts = [
+      { u: 0.36, v: 0.36, label: 'perovskites' },
+      { u: 0.50, v: 0.30, label: 'MOFs' },
+      { u: 0.55, v: 0.44, label: 'high-entropy alloys' }
+    ];
+    /* the systems I actually work on, and why each is hard */
+    hardPts = [
+      { u: 0.63, v: 0.74, label: 'fuel cell components', dx: -8, dy: 14, align: 'right',
+        why: 'Catalyst, ionomer, membrane and GDL all couple. One data point means building and testing a full assembly.' },
+      { u: 0.76, v: 0.92, label: 'electrolyzer components', dx: -10, dy: 4, align: 'right',
+        why: 'Same coupling as fuel cells, plus degradation that only shows up after hundreds of hours.' },
+      { u: 0.90, v: 0.69, label: 'FET sensors', dx: -10, dy: 4, align: 'right',
+        why: 'Response depends on probe, channel, geometry and the water matrix at once. Published curves are rarely comparable.' },
+      { u: 0.71, v: 0.59, label: 'PFAS sensing/adsorption materials', dx: -10, dy: 4, align: 'right',
+        why: 'ppt-level targets in real matrices full of competing ions. Public datasets: nearly none.' },
+      { u: 0.94, v: 0.84, label: 'complex nanomaterials', dx: -10, dy: 14, align: 'right',
+        why: 'Long synthesis-structure-property chains, dozens of coupled variables, no standard descriptors.' }
     ];
   }
 
@@ -134,6 +142,17 @@
   var mouse = { x: 0, y: 0, on: false };
   var ripples = [], samples = [];
   var enterT0 = 0, running = false, visible = false, lastFrame = 0;
+  var lastUserT = -1e9;
+  var auto = { x: 0, y: 0, tx: 0, ty: 0, nextMove: 0, nextPing: 0, seed: 7, init: false };
+
+  function arnd() { auto.seed = (auto.seed * 1664525 + 1013904223) >>> 0; return auto.seed / 4294967296; }
+
+  function hexA(hex, a) {
+    var m = /^#?([0-9a-f]{6})$/i.exec((hex || '').trim());
+    if (!m) return 'rgba(94,154,154,' + a + ')';
+    var n = parseInt(m[1], 16);
+    return 'rgba(' + ((n >> 16) & 255) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
+  }
 
   function colors() {
     var cs = getComputedStyle(document.documentElement);
@@ -142,7 +161,9 @@
       pt: cs.getPropertyValue('--color-text-light').trim() || '#888',
       hard: cs.getPropertyValue('--color-primary').trim() || '#e5484d',
       glow: cs.getPropertyValue('--glow-color').trim() || 'rgba(128,0,0,.12)',
-      text: cs.getPropertyValue('--color-text-muted').trim() || '#999'
+      text: cs.getPropertyValue('--color-text-muted').trim() || '#999',
+      teal: cs.getPropertyValue('--color-accent-teal').trim() || '#5e9a9a',
+      champ: cs.getPropertyValue('--color-accent').trim() || '#d7c69d'
     };
   }
   function resize() {
@@ -155,13 +176,58 @@
   }
   function easeOutExpo(t) { return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t); }
 
+  /* ---------- reticle (shared by user cursor and auto probe) ---------- */
+  function reticle(x, y, alpha, tag) {
+    ctx.strokeStyle = COL.contour;
+    ctx.globalAlpha = 0.6 * alpha;
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 5]);
+    ctx.beginPath();
+    ctx.moveTo(0, y); ctx.lineTo(W, y);
+    ctx.moveTo(x, 0); ctx.lineTo(x, H);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = COL.hard;
+    ctx.beginPath();
+    ctx.arc(x, y, 11, 0, 6.2832);
+    ctx.stroke();
+    var u = x / W, v = 1 - y / H;
+    ctx.fillStyle = COL.text;
+    ctx.font = '600 9px "JetBrains Mono", monospace';
+    ctx.textAlign = 'left';
+    var label = (tag ? tag + ' · ' : '') + 'CX ' + u.toFixed(2) + ' · COST ' + v.toFixed(2);
+    var lx = x + 16, ly = y - 12;
+    if (lx > W - 150) lx = x - 150;
+    if (ly < 14) ly = y + 22;
+    ctx.fillText(label, lx, ly);
+    ctx.globalAlpha = 1;
+  }
+
+  function diamond(x, y, r) {
+    ctx.beginPath();
+    ctx.moveTo(x, y - r);
+    ctx.lineTo(x + r, y);
+    ctx.lineTo(x, y + r);
+    ctx.lineTo(x - r, y);
+    ctx.closePath();
+    ctx.fill();
+  }
+
   /* ---------- draw ---------- */
   function draw(now, scale, ox, oy) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
     ctx.setTransform(dpr * scale, 0, 0, dpr * scale, dpr * ox, dpr * oy);
 
-    /* breathing glow over the hard region */
+    /* cool wash over charted territory (bottom-left) */
+    var sg2 = ctx.createRadialGradient(0.08 * W, 0.96 * H, 0, 0.08 * W, 0.96 * H, 0.6 * W);
+    sg2.addColorStop(0, hexA(COL.teal, 0.09));
+    sg2.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = sg2;
+    ctx.fillRect(0, 0, W, H);
+
+    /* breathing crimson glow over the hard region (top-right) */
     var gx = 0.86 * W, gy = 0.12 * H;
     var g = ctx.createRadialGradient(gx, gy, 0, gx, gy, 0.55 * W);
     g.addColorStop(0, COL.glow);
@@ -171,7 +237,7 @@
     ctx.fillRect(0, 0, W, H);
     ctx.globalAlpha = 1;
 
-    /* contours, batched per level */
+    /* contours */
     ctx.lineWidth = 1;
     ctx.strokeStyle = COL.contour;
     var k, sg;
@@ -188,14 +254,17 @@
     }
     ctx.globalAlpha = 1;
 
-    /* contour lens: lines near the cursor heat up */
-    if (mouse.on) {
+    /* contour lens near the active probe (user or auto) */
+    var probeX = -1, probeY = -1;
+    if (mouse.on) { probeX = mouse.x; probeY = mouse.y; }
+    else if (autoOn(now)) { probeX = auto.x; probeY = auto.y; }
+    if (probeX >= 0) {
       var R2a = 45 * 45, R2b = 80 * 80, R2c = 115 * 115;
       var buckets = [[], [], []];
       for (k = 0; k < segments.length; k++) {
         sg = segments[k];
         var mx = (sg[0] + sg[2]) / 2 * W, my = (1 - (sg[1] + sg[3]) / 2) * H;
-        var dx = mx - mouse.x, dy = my - mouse.y, d2 = dx * dx + dy * dy;
+        var dx = mx - probeX, dy = my - probeY, d2 = dx * dx + dy * dy;
         if (d2 < R2a) buckets[0].push(sg);
         else if (d2 < R2b) buckets[1].push(sg);
         else if (d2 < R2c) buckets[2].push(sg);
@@ -217,42 +286,55 @@
       ctx.globalAlpha = 1;
     }
 
-    /* benchmark points (grow slightly near the cursor) */
+    /* anonymous benchmark dust (grows slightly near the probe) */
     ctx.fillStyle = COL.pt;
     for (k = 0; k < pts.length; k++) {
       var px = pts[k][0] * W, py = (1 - pts[k][1]) * H, r = 1.6;
-      if (mouse.on) {
-        var ddx = px - mouse.x, ddy = py - mouse.y;
+      if (probeX >= 0) {
+        var ddx = px - probeX, ddy = py - probeY;
         var dd = ddx * ddx + ddy * ddy;
         if (dd < 4900) r = 1.6 + 1.6 * (1 - Math.sqrt(dd) / 70);
       }
-      ctx.globalAlpha = 0.55;
+      ctx.globalAlpha = 0.45;
       ctx.beginPath();
       ctx.arc(px, py, r, 0, 6.2832);
       ctx.fill();
     }
     ctx.globalAlpha = 1;
 
-    /* classic landmarks: quiet gray anchors in charted territory */
+    var showLabels = W > 480;
     ctx.font = '500 8.5px "JetBrains Mono", monospace';
-    if (W > 480) {
-      ctx.textAlign = 'left';
-      for (k = 0; k < refPts.length; k++) {
-        var rf = refPts[k];
-        var rx = rf.u * W, ry = (1 - rf.v) * H;
-        ctx.fillStyle = COL.pt;
-        ctx.globalAlpha = 0.85;
-        ctx.beginPath();
-        ctx.arc(rx, ry, 2, 0, 6.2832);
-        ctx.fill();
-        ctx.globalAlpha = 0.6;
-        ctx.fillStyle = COL.text;
-        ctx.fillText(rf.label, rx + 7, ry + 3);
-      }
-      ctx.globalAlpha = 1;
-    }
 
-    /* hard-won systems twinkle, each carrying its name */
+    /* teal: charted, benchmarked */
+    ctx.textAlign = 'left';
+    for (k = 0; k < benchPts.length; k++) {
+      var bp = benchPts[k];
+      var bx = bp.u * W, by = (1 - bp.v) * H;
+      ctx.fillStyle = COL.teal;
+      ctx.globalAlpha = 0.95;
+      ctx.beginPath();
+      ctx.arc(bx, by, 2.6, 0, 6.2832);
+      ctx.fill();
+      if (showLabels) {
+        ctx.globalAlpha = 0.8;
+        ctx.fillText(bp.label, bx + 8, by + 3);
+      }
+    }
+    /* champagne diamonds: active discovery */
+    for (k = 0; k < discPts.length; k++) {
+      var dp = discPts[k];
+      var dxx = dp.u * W, dyy = (1 - dp.v) * H;
+      ctx.fillStyle = COL.champ;
+      ctx.globalAlpha = 0.95;
+      diamond(dxx, dyy, 3.4);
+      if (showLabels) {
+        ctx.globalAlpha = 0.8;
+        ctx.fillText(dp.label, dxx + 8, dyy + 3);
+      }
+    }
+    ctx.globalAlpha = 1;
+
+    /* crimson: the hard systems, twinkling, named */
     for (k = 0; k < hardPts.length; k++) {
       var hp = hardPts[k];
       var hx = hp.u * W, hy = (1 - hp.v) * H;
@@ -262,19 +344,20 @@
       ctx.globalAlpha = tw;
       ctx.shadowBlur = 8 + 6 * tw;
       ctx.beginPath();
-      ctx.arc(hx, hy, 2.4, 0, 6.2832);
+      ctx.arc(hx, hy, 2.8, 0, 6.2832);
       ctx.fill();
       ctx.shadowBlur = 0;
-      ctx.globalAlpha = 0.55 + 0.3 * tw;
-      ctx.fillStyle = COL.text;
-      ctx.textAlign = hp.align;
-      ctx.fillText(hp.label, hx + hp.dx, hy + hp.dy);
+      if (showLabels) {
+        ctx.globalAlpha = 0.6 + 0.3 * tw;
+        ctx.fillStyle = COL.hard;
+        ctx.textAlign = hp.align;
+        ctx.fillText(hp.label, hx + hp.dx, hy + hp.dy);
+      }
     }
     ctx.textAlign = 'left';
-    ctx.shadowBlur = 0;
     ctx.globalAlpha = 1;
 
-    /* user samples: crimson survivors in the hard region, fading grays elsewhere */
+    /* user samples */
     for (k = samples.length - 1; k >= 0; k--) {
       var sm = samples[k];
       if (sm.hard) {
@@ -296,7 +379,7 @@
     ctx.shadowBlur = 0;
     ctx.globalAlpha = 1;
 
-    /* sampling ripples */
+    /* ripples */
     for (k = ripples.length - 1; k >= 0; k--) {
       var rp = ripples[k], a = (now - rp.t) / 850;
       if (a >= 1) { ripples.splice(k, 1); continue; }
@@ -309,30 +392,38 @@
     }
     ctx.globalAlpha = 1;
 
-    /* reticle + live coordinates */
-    if (mouse.on) {
-      ctx.strokeStyle = COL.contour;
-      ctx.globalAlpha = 0.6;
-      ctx.lineWidth = 1;
-      ctx.setLineDash([3, 5]);
-      ctx.beginPath();
-      ctx.moveTo(0, mouse.y); ctx.lineTo(W, mouse.y);
-      ctx.moveTo(mouse.x, 0); ctx.lineTo(mouse.x, H);
-      ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.globalAlpha = 1;
-      ctx.strokeStyle = COL.hard;
-      ctx.beginPath();
-      ctx.arc(mouse.x, mouse.y, 11, 0, 6.2832);
-      ctx.stroke();
-      var u = mouse.x / W, v = 1 - mouse.y / H;
-      ctx.fillStyle = COL.text;
-      ctx.font = '600 9px "JetBrains Mono", monospace';
-      var label = 'CX ' + u.toFixed(2) + ' · COST ' + v.toFixed(2);
-      var lx = mouse.x + 16, ly = mouse.y - 12;
-      if (lx > W - 110) lx = mouse.x - 110;
-      if (ly < 14) ly = mouse.y + 22;
-      ctx.fillText(label, lx, ly);
+    /* probe reticle */
+    if (mouse.on) reticle(mouse.x, mouse.y, 1, '');
+    else if (autoOn(now)) reticle(auto.x, auto.y, 0.45, 'AUTO');
+  }
+
+  /* ---------- auto-survey probe ---------- */
+  function autoOn(now) {
+    return !PRM && !mouse.on && visible && (now - lastUserT > 4000);
+  }
+  function advanceAuto(now) {
+    if (!autoOn(now)) return;
+    if (!auto.init) {
+      auto.init = true;
+      auto.x = 0.25 * W; auto.y = 0.7 * H;
+      auto.tx = auto.x; auto.ty = auto.y;
+      auto.nextMove = 0; auto.nextPing = now + 2500;
+    }
+    if (now > auto.nextMove) {
+      if (arnd() < 0.6) { /* bias toward the hard region */
+        auto.tx = (0.6 + 0.34 * arnd()) * W;
+        auto.ty = (1 - (0.55 + 0.4 * arnd())) * H;
+      } else {
+        auto.tx = (0.05 + 0.9 * arnd()) * W;
+        auto.ty = (0.05 + 0.9 * arnd()) * H;
+      }
+      auto.nextMove = now + 2600 + 1600 * arnd();
+    }
+    auto.x += (auto.tx - auto.x) * 0.045;
+    auto.y += (auto.ty - auto.y) * 0.045;
+    if (now > auto.nextPing) {
+      ripples.push({ x: auto.x, y: auto.y, t: now });
+      auto.nextPing = now + 3200 + 1800 * arnd();
     }
   }
 
@@ -341,6 +432,7 @@
     if (!visible) { running = false; return; }
     if (now - lastFrame < 30) { requestAnimationFrame(tick); return; }
     lastFrame = now;
+    advanceAuto(now);
     var dt = now - enterT0, scale = 1, ox = 0, oy = 0;
     if (dt < 1500) {
       var e = easeOutExpo(dt / 1500);
@@ -362,18 +454,37 @@
     var r = canvas.getBoundingClientRect();
     return { x: e.clientX - r.left, y: e.clientY - r.top };
   }
+  function hardHit(x, y) {
+    for (var k = 0; k < hardPts.length; k++) {
+      var hx = hardPts[k].u * W, hy = (1 - hardPts[k].v) * H;
+      var dx = x - hx, dy = y - hy;
+      if (dx * dx + dy * dy < 196) return hardPts[k];
+    }
+    return null;
+  }
   if (!PRM) {
     fig.addEventListener('pointermove', function (e) {
       var p = localXY(e);
       mouse.x = p.x; mouse.y = p.y; mouse.on = true;
+      fig.style.cursor = hardHit(p.x, p.y) ? 'pointer' : 'crosshair';
     }, { passive: true });
-    fig.addEventListener('pointerleave', function () { mouse.on = false; });
+    fig.addEventListener('pointerleave', function () {
+      mouse.on = false;
+      lastUserT = performance.now();
+    });
     fig.addEventListener('pointerdown', function (e) {
       var p = localXY(e);
+      var hit = hardHit(p.x, p.y);
+      if (hit && info) {
+        info.hidden = false;
+        info.querySelector('strong').textContent = hit.label;
+        info.querySelector('p').textContent = hit.why;
+        return;
+      }
+      if (info) info.hidden = true;
       var u = p.x / W, v = 1 - p.y / H;
       ripples.push({ x: p.x, y: p.y, t: performance.now() });
-      var hard = (u + v) / 2 > 0.6;
-      samples.push({ x: p.x, y: p.y, hard: hard, t: performance.now() });
+      samples.push({ x: p.x, y: p.y, hard: (u + v) / 2 > 0.6, t: performance.now() });
       var nHard = 0, k;
       for (k = 0; k < samples.length; k++) if (samples[k].hard) nHard++;
       for (k = 0; nHard > 6 && k < samples.length; k++) {
@@ -406,7 +517,7 @@
   var rt;
   addEventListener('resize', function () {
     clearTimeout(rt);
-    rt = setTimeout(function () { resize(); if (PRM) draw(0, 1, 0, 0); }, 150);
+    rt = setTimeout(function () { resize(); auto.init = false; if (PRM) draw(0, 1, 0, 0); }, 150);
   });
   var mq = matchMedia('(prefers-color-scheme: dark)');
   if (mq.addEventListener) {
