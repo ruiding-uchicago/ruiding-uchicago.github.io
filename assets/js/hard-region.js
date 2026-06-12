@@ -122,7 +122,7 @@
     discPts = [
       { u: 0.36, v: 0.36, label: 'perovskites' },
       { u: 0.50, v: 0.30, label: 'MOFs' },
-      { u: 0.55, v: 0.44, label: 'high-entropy alloys' }
+      { u: 0.55, v: 0.44, label: 'alloys' }
     ];
     /* the systems I actually work on, and why each is hard */
     hardPts = [
@@ -170,7 +170,7 @@
   }
   function resize() {
     var r = fig.getBoundingClientRect();
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    dpr = Math.min(window.devicePixelRatio || 1, NO_PROBE ? 4 : 2);
     W = Math.max(1, Math.round(r.width));
     H = Math.max(1, Math.round(r.height));
     canvas.width = W * dpr;
@@ -549,10 +549,11 @@
     setInterval(function () {
       if (!visible) return;
       var z;
-      if (mouse.on) { for (z = 0; z < zones.length; z++) zones[z].classList.remove('lit'); tourZone = -1; return; }
+      if (mouse.on) { for (z = 0; z < zones.length; z++) zones[z].classList.remove('lit'); tourZone = -1; fig.classList.remove('hr-hard-active'); return; }
       zi = (zi + 1) % zones.length;
       tourZone = zi;
       for (z = 0; z < zones.length; z++) zones[z].classList.toggle('lit', z === zi);
+      fig.classList.toggle('hr-hard-active', zi === 2);
     }, 4000);
   }
 })();
