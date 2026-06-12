@@ -545,15 +545,21 @@
      never collide; pauses while the visitor is on the map. */
   if (!PRM) {
     var zones = fig.querySelectorAll('.hr-label');
-    var zi = -1;
-    setInterval(function () {
-      if (!visible) return;
+    var zi = -1, DWELL = [3500, 3500, 7000];   // the hard region dwells longest
+    var step = function () {
       var z;
-      if (mouse.on) { for (z = 0; z < zones.length; z++) zones[z].classList.remove('lit'); tourZone = -1; fig.classList.remove('hr-hard-active'); return; }
+      if (!visible || mouse.on) {
+        for (z = 0; z < zones.length; z++) zones[z].classList.remove('lit');
+        tourZone = -1; fig.classList.remove('hr-hard-active');
+        setTimeout(step, 1200);
+        return;
+      }
       zi = (zi + 1) % zones.length;
       tourZone = zi;
       for (z = 0; z < zones.length; z++) zones[z].classList.toggle('lit', z === zi);
       fig.classList.toggle('hr-hard-active', zi === 2);
-    }, 4000);
+      setTimeout(step, DWELL[zi]);
+    };
+    setTimeout(step, 2800);
   }
 })();
