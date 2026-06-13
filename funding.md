@@ -46,7 +46,7 @@ permalink: /funding/
 </div>
 
 <div class="section-header mt-8">
-    <h2 class="section-title">Computing &amp; Service Awards</h2>
+    <h2 class="section-title">External Computing Awards</h2>
 </div>
 
 <div class="publication-item">
@@ -63,7 +63,7 @@ permalink: /funding/
 
 <div class="publication-item">
     <div class="publication-title">Service Unit Award, Argonne Leadership Computing Facility</div>
-    <div class="publication-authors">BRAINIAC (MAT240097)</div>
+    <div class="publication-authors">BRAINIAC (ID16430)</div>
     <div class="publication-venue">2024</div>
 </div>
 </article>
