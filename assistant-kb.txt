@@ -21,8 +21,8 @@ When you cite a link, always write the full URL exactly as it appears here so th
 Trained as a materials scientist and electrochemist before moving into AI. PhD in Engineering, Nanjing University, 2018–2023. Visiting internship, Hong Kong University of Science and Technology, 2022–2023. B.Eng., Nanjing University, 2014–2018.
 He became interested in AI after seeing how much of materials discovery still depends on costly trial-and-error experiments.
 
-== RESEARCH PHILOSOPHY — the "no-database regime" ==
-Rui builds AI co-scientist systems for complex materials and device discovery in the no-database regime: problems with high system complexity, high data cost, and no existing database or benchmark. Complex functional materials and devices (FET sensors, membranes, electrocatalytic assemblies, fuel cell and electrolyzer components) are multi-component and strongly coupled across scales, and one data point can cost days of synthesis and testing. Instead of waiting for big data that will not arrive, he designs AI that works like an experimentalist: pull priors from the literature, build physics-constrained surrogates, and spend the experimental budget where it counts.
+== RESEARCH PHILOSOPHY — the "data-scarce, unbenchmarked regime" ==
+Rui builds AI co-scientist systems for complex materials and device discovery in the data-scarce, unbenchmarked regime: problems with high system complexity, high data cost, and no existing database or benchmark. Complex functional materials and devices (FET sensors, membranes, electrocatalytic assemblies, fuel cell and electrolyzer components) are multi-component and strongly coupled across scales, and one data point can cost days of synthesis and testing. Instead of waiting for big data that will not arrive, he designs AI that works like an experimentalist: pull priors from the literature, build physics-constrained surrogates, and spend the experimental budget where it counts.
 
 == THE AI CO-SCIENTIST STACK (four pillars) ==
 The stack runs: hypothesis generation -> device digital twins -> rapid atomistic validation -> wet-lab experiment -> feedback, under the umbrella project BRAINIAC.

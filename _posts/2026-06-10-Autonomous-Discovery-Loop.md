@@ -4,7 +4,7 @@ title: "Building an Autonomous Discovery Loop: DToR + T³ + RAPIDS"
 date: 2026-06-10
 ---
 
-Three threads of our work from the past two years are now mature enough to wire together into one **autonomous discovery loop** for the no-database regime of materials and device discovery.
+Three threads of our work from the past two years are now mature enough to wire together into one **autonomous discovery loop** for the data-scarce, unbenchmarked regime of materials and device discovery.
 
 **1. Hypothesis generation: DToR.** A local-first deep-research agent with a tree-structured orchestrator that adaptively expands and prunes research branches. Across 27 nanomaterials/device topics in a 44-agent benchmark, its reports achieved a ~79% mean pairwise win rate against commercial deep-research systems, running entirely on consumer-level hardware with open-source LLMs ([arXiv](https://arxiv.org/abs/2511.18303)).
 

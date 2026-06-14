@@ -15,7 +15,7 @@ mathjax: true
 
 <div class="section-header mt-8">
     <span class="eyebrow">Pillar 01</span>
-    <h2 class="section-title">No-Database Materials &amp; Device Discovery</h2>
+    <h2 class="section-title">Data-Scarce, Unbenchmarked Materials &amp; Device Discovery</h2>
 </div>
 
 <p>Public databases and benchmarks cover a thin slice of materials science: mostly single crystals, small molecules, idealized surfaces. The systems I work on (FET sensors, membranes, electrocatalytic assemblies) are multi-component and strongly coupled across scales, and one data point can cost days of synthesis and testing. The big data is not coming. So I design AI systems that work the way experimentalists do: pull priors from the literature, build physics-constrained surrogates, and spend the experimental budget where it counts.</p>
