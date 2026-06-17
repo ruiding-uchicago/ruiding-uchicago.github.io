@@ -50,6 +50,12 @@ permalink: /funding/
 </div>
 
 <div class="publication-item">
+    <div class="publication-title">Compute Allocation Award, NERSC &mdash; DOE Office of Science (ERCAP0039011)</div>
+    <div class="publication-authors">AI-Guided Multi-Fidelity Discovery of PFAS Sensor Materials &mdash; Project m5358</div>
+    <div class="publication-venue">2026 &middot; AY 2026 Exploratory</div>
+</div>
+
+<div class="publication-item">
     <div class="publication-title">Service Unit Award, NSF ACCESS Program (MAT240097)</div>
     <div class="publication-authors">BRAINIAC: An AI-Driven Framework for Accelerating Nano-Micro Materials Discovery and Device Innovation</div>
     <div class="publication-venue">2024&ndash;2026</div>

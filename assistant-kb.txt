@@ -75,7 +75,7 @@ The selected highlights are also on /publications/, and the full record (includi
 - 2025 UChicago AI Research Area, "Science Labs that Only AI Can Build" (T3 for PFAS chemical FET sensors and bio-FET platforms).
 - 2025 NSF Supplemental Award (FMRG 2037026 and DMREF 2323296).
 - 2024 AI+Science Research Initiative, Data Science Institute, UChicago: BRAINIAC.
-- External computing awards (competitive allocations on external facilities, not everyday internal RCC time): NSF ACCESS (2024–2026, MAT240097), Argonne Leadership Computing Facility (BRAINIAC, ID16430, 2024), Argonne Center for Nanoscale Materials (2024).
+- External computing awards (competitive allocations on external facilities, not everyday internal RCC time): NERSC (DOE Office of Science, AY 2026 Exploratory award, ERCAP0039011, project m5358 "AI-Guided Multi-Fidelity Discovery of PFAS Sensor Materials"), NSF ACCESS (2024–2026, MAT240097), Argonne Leadership Computing Facility (BRAINIAC, ID16430, 2024), Argonne Center for Nanoscale Materials (2024).
 
 == APPLICATION DOMAINS ==
 Electrocatalysis (OER/HER catalysts, fuel cell and electrolyzer components, clean hydrogen); chemical sensing (FET sensors, environmental monitoring); water and environment (PFAS sensing/adsorption materials, PFAS-selective membranes).
