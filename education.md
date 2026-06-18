@@ -29,7 +29,7 @@ permalink: /education/
     </li>
     <li>
         <span class="eyebrow">2026 &rarr; &middot; Co-scientist</span>
-        <p>Joint PME/CS appointment. The Seed Fund project runs the full loop on a real membrane problem.</p>
+        <p>The Seed Fund project runs the full loop on a real membrane problem.</p>
     </li>
 </ol>
 
