@@ -44,13 +44,6 @@ permalink: /education/
     <p class="mt-4"><strong>Advisors:</strong> Prof. Junhong Chen (PME/Argonne) &amp; Prof. Yuxin Chen (CS)</p>
 </div>
 
-<div class="card mb-4">
-    <span class="tag tag-primary mb-4">Incoming</span>
-    <h3 class="feature-title">University of Chicago</h3>
-    <p class="text-muted mb-2">Joint Appointed Research Scientist &mdash; Pritzker School of Molecular Engineering &amp; Department of Computer Science</p>
-    <p class="text-sm">Sept. 2026 &ndash; Sept. 2027</p>
-</div>
-
 <div class="section-header mt-8">
     <h2 class="section-title">Education</h2>
 </div>
