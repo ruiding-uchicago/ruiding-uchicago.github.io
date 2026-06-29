@@ -78,7 +78,7 @@ The selected highlights are also on /publications/, and the full record (includi
 
 == PEER REVIEW ==
 - AI / computer science (conferences & workshops): ACM SIGKDD main conference (KDD), NeurIPS AI4Mat, ICLR AI4Mat, ICML AI4Physics.
-- Chemistry / materials (journals): ACS Catalysis, Energy & Fuels, Journal of Water Process Engineering, Synthetic Metals, Organic Letters, ACS Applied Energy Materials.
+- Chemistry / materials (journals): ACS Catalysis, Energy & Fuels, Journal of Water Process Engineering, Synthetic Metals, Organic Letters, ACS Applied Energy Materials, Nanomaterials.
 
 == APPLICATION DOMAINS ==
 Electrocatalysis (OER/HER catalysts, fuel cell and electrolyzer components, clean hydrogen); chemical sensing (FET sensors, environmental monitoring); water and environment (PFAS sensing/adsorption materials, PFAS-selective membranes).

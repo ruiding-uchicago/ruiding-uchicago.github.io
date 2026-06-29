@@ -130,7 +130,7 @@ permalink: /education/
 
 <div class="publication-item">
     <div class="publication-title">Journals &mdash; Chemistry / Materials</div>
-    <div class="publication-authors">ACS Catalysis &middot; Energy &amp; Fuels &middot; Journal of Water Process Engineering &middot; Synthetic Metals &middot; Organic Letters &middot; ACS Applied Energy Materials</div>
+    <div class="publication-authors">ACS Catalysis &middot; Energy &amp; Fuels &middot; Journal of Water Process Engineering &middot; Synthetic Metals &middot; Organic Letters &middot; ACS Applied Energy Materials &middot; Nanomaterials</div>
 </div>
 
 <div class="section-header mt-8">
