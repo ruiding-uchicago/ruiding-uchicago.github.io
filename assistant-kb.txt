@@ -76,6 +76,10 @@ The selected highlights are also on /publications/, and the full record (includi
 - 2024 AI+Science Research Initiative, Data Science Institute, UChicago: BRAINIAC.
 - External computing awards (competitive allocations on external facilities, not everyday internal RCC time): NERSC (DOE Office of Science, AY 2026 Exploratory award, ERCAP0039011, project m5358 "AI-Guided Multi-Fidelity Discovery of PFAS Sensor Materials"), NSF ACCESS (2024–2026, MAT240097), Argonne Leadership Computing Facility (BRAINIAC, ID16430, 2024), Argonne Center for Nanoscale Materials (2024).
 
+== PEER REVIEW ==
+- AI / computer science (conferences & workshops): ACM SIGKDD main conference (KDD), NeurIPS AI4Mat, ICLR AI4Mat, ICML AI4Physics.
+- Chemistry / materials (journals): ACS Catalysis, Energy & Fuels, Journal of Water Process Engineering, Synthetic Metals, Organic Letters, ACS Applied Energy Materials.
+
 == APPLICATION DOMAINS ==
 Electrocatalysis (OER/HER catalysts, fuel cell and electrolyzer components, clean hydrogen); chemical sensing (FET sensors, environmental monitoring); water and environment (PFAS sensing/adsorption materials, PFAS-selective membranes).
 

@@ -120,6 +120,20 @@ permalink: /education/
 </div>
 
 <div class="section-header mt-8">
+    <h2 class="section-title">Peer Review</h2>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">Conferences &amp; Workshops &mdash; AI / Computer Science</div>
+    <div class="publication-authors">ACM SIGKDD Main Conference (KDD) &middot; NeurIPS AI4Mat &middot; ICLR AI4Mat &middot; ICML AI4Physics</div>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">Journals &mdash; Chemistry / Materials</div>
+    <div class="publication-authors">ACS Catalysis &middot; Energy &amp; Fuels &middot; Journal of Water Process Engineering &middot; Synthetic Metals &middot; Organic Letters &middot; ACS Applied Energy Materials</div>
+</div>
+
+<div class="section-header mt-8">
     <h2 class="section-title">Mentorship &amp; Service</h2>
 </div>
 
