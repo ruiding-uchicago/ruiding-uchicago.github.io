@@ -80,10 +80,24 @@
   btn.addEventListener('click', dismiss);
   addEventListener('keydown', function (e) { if (open && e.key === 'Escape') dismiss(); });
 
-  /* wheel down (unless the 3D map is wheel-zoom engaged) or an upward swipe
-     leaves the splash — both route through the same morph */
+  /* wheel leaves the splash. Accumulated (trackpads emit tiny deltas):
+     not engaged → any decisive scroll, either direction, enters the site;
+     wheel-zoom engaged → zooming keeps the wheel, but a sustained downward
+     roll past the dolly clamp pushes through into the page. */
+  var acc = 0, accT = 0;
   splash.addEventListener('wheel', function (e) {
-    if (open && e.deltaY > 30 && !fig.classList.contains('hr3d-engaged')) dismiss();
+    if (!open) return;
+    var t = Date.now();
+    if (t - accT > 500) acc = 0;
+    accT = t;
+    var d = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? innerHeight : 1);
+    if (fig.classList.contains('hr3d-engaged')) {
+      acc = d > 0 ? acc + d : 0;          /* only sustained down-rolls count */
+      if (acc > 520) dismiss();
+    } else {
+      acc += Math.abs(d);
+      if (acc > 50) dismiss();
+    }
   }, { passive: true });
   var ty0 = -1;
   splash.addEventListener('touchstart', function (e) { ty0 = e.touches[0].clientY; }, { passive: true });
