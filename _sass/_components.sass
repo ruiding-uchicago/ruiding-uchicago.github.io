@@ -21,6 +21,220 @@
   height: 100%
   display: block
 
+// hero variant — the map owns the first viewport. Aspect floored at 8:5 so the
+// tuned 3D camera never sees a portrait frame; short viewports cap via max-height.
+.hard-region.hr-hero
+  height: unquote("clamp(380px, 82vh, 720px)")   // fallback (no aspect-ratio support)
+
+@supports (aspect-ratio: 1)
+  .hard-region.hr-hero
+    height: auto
+    aspect-ratio: unquote("8 / 5")
+    max-height: 86vh
+    min-height: 380px
+
+@media (max-width: $breakpoint-md)
+  .hard-region.hr-hero
+    height: clamp(320px, 80vw, 460px)   // phones stay 2D; keep the tuned label layout
+    aspect-ratio: auto
+    max-height: none
+    min-height: 0
+
+// ---------- first-entry splash: the map takes the whole viewport ----------
+// while it is up, nav chrome and the mascot wait outside the door
+html.hr-splashing aside,
+html.hr-splashing body > header,
+html.hr-splashing #magos-canvas,
+html.hr-splashing #magos-hit,
+html.hr-splashing #magos-label,
+html.hr-splashing #magos-summon
+  visibility: hidden !important
+
+// the map's own caption yields the top-left corner to the masthead;
+// the legend stays on stage, docked to the bottom-left corner
+html.hr-splashing .hr-head
+  visibility: hidden
+
+html.hr-splashing .hr-legend
+  top: auto
+  bottom: unquote("max(#{$spacing-6}, 9vh)")   // rides above the projected DATA COST caption
+  left: $spacing-6
+
+.hr-splash-brand
+  position: absolute
+  top: $spacing-6
+  left: $spacing-6
+  z-index: 3
+  display: flex
+  flex-direction: column
+  gap: 0.45rem
+  pointer-events: none
+
+.hsb-name
+  font-size: unquote("clamp(2rem, 4vw, 3rem)")
+  font-weight: $font-weight-bold
+  letter-spacing: -0.02em
+  line-height: 1.1
+  color: var(--color-text)
+
+.hsb-sub
+  font-family: var(--font-mono)
+  font-size: 0.85rem
+  font-weight: $font-weight-medium
+  letter-spacing: 0.14em
+  text-transform: uppercase
+  color: var(--color-primary)
+
+.hsb-hint
+  font-family: var(--font-mono)
+  font-size: 0.72rem
+  letter-spacing: 0.1em
+  text-transform: uppercase
+  color: var(--color-text-muted)
+
+// honest hints: sampling verb follows the pointer type; the orbit line exists
+// only once 3D is live (the figure is the splash's first child, hence ~)
+.hsb-hint-tap,
+.hsb-hint-orbit
+  display: none
+
+@media (pointer: coarse)
+  .hsb-hint-sample
+    display: none
+  .hsb-hint-tap
+    display: block
+
+#hard-region.hr3d-on ~ .hr-splash-brand .hsb-hint-orbit
+  display: block
+
+// staged reveal: name → subtitle → hints (the last lands as the beacons ignite)
+@media (prefers-reduced-motion: no-preference)
+  .hsb-name
+    animation: hsb-in .8s $ease-out-expo .2s backwards
+  .hsb-sub
+    animation: hsb-in .8s $ease-out-expo .6s backwards
+  .hsb-hint
+    animation: hsb-in .8s $ease-out-expo 3.4s backwards
+
+@keyframes hsb-in
+  from
+    opacity: 0
+    transform: translateY(10px)
+  to
+    opacity: 1
+    transform: none
+
+.hr-splash
+  position: fixed
+  inset: 0
+  z-index: 9980            // below the mascot (9990), above everything else
+  background: var(--color-bg)
+  transition: opacity .38s ease
+
+.hr-splash.out
+  opacity: 0
+  pointer-events: none
+
+.hr-splash .hard-region.hr-hero
+  position: absolute
+  inset: 0
+  height: 100%
+  max-height: none
+  min-height: 0
+  aspect-ratio: auto
+  margin: 0
+  border: none
+  border-radius: 0
+
+// FLIP morph (splash dismiss): the map, fixed fullscreen, docks into its page
+// slot via transform only — top/left/width/height would thrash the 3D module's
+// ResizeObserver into GL backing-store reallocations. JS sets the transform.
+.hard-region.hr-hero.hr-morph
+  position: fixed
+  inset: 0
+  z-index: 9981
+  height: auto
+  max-height: none
+  min-height: 0
+  aspect-ratio: auto
+  margin: 0
+  border: none
+  border-radius: 0
+  transform-origin: 0 0
+  transition: transform .45s $ease-out-expo, border-radius .45s $ease-out-expo
+
+// corner toggle on the in-page map → re-enter fullscreen
+.hr-fullscreen
+  position: absolute
+  right: $spacing-3
+  bottom: $spacing-3
+  z-index: 3
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 34px
+  height: 34px
+  padding: 0
+  border: 1px solid var(--color-border-strong)
+  border-radius: $radius-sm
+  background: var(--color-bg-secondary)
+  color: var(--color-text-muted)
+  cursor: pointer
+  transition: color .2s ease, border-color .2s ease, box-shadow .2s ease
+
+.hr-fullscreen[hidden]
+  display: none
+
+.hr-fullscreen:hover,
+.hr-fullscreen:focus-visible
+  color: var(--color-text)
+  border-color: var(--color-primary)
+
+// while fullscreen, the corner toggle yields to the avatar exit button
+.hr-splash .hr-fullscreen
+  display: none
+
+// …and the x-axis caption lifts clear of it (2D splash only: in 3D the
+// caption rides a JS-projected anchor and needs no clearance)
+.hr-splash .hr-axis-x
+  margin-top: -44px
+
+.hr-splash .hr3d-on .hr-axis-x
+  margin-top: 0
+
+.hr-splash-enter
+  position: absolute
+  right: $spacing-6
+  bottom: $spacing-6
+  z-index: 3               // above the map's own caption layers
+  display: flex
+  align-items: center
+  gap: $spacing-3
+  padding: 6px 16px 6px 6px
+  border: 1px solid var(--color-border-strong)
+  border-radius: 999px
+  background: var(--color-bg-secondary)
+  color: var(--color-text)
+  font-family: var(--font-mono)
+  font-size: 0.82rem
+  font-weight: $font-weight-medium
+  letter-spacing: 0.08em
+  text-transform: uppercase
+  cursor: pointer
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease
+
+.hr-splash-enter img
+  width: 52px
+  height: 52px
+  border-radius: 50%
+  object-fit: cover
+  display: block
+
+.hr-splash-enter:hover,
+.hr-splash-enter:focus-visible
+  border-color: var(--color-primary)
+  transform: translateY(-1px)
+
 .hr-head
   position: absolute
   top: $spacing-4
@@ -32,7 +246,7 @@
   position: absolute
   transform: translate(-50%, -50%)
   font-family: var(--font-mono)
-  font-size: 0.74rem
+  font-size: 0.88rem
   letter-spacing: 0.1em
   text-transform: uppercase
   color: var(--color-text-light)
@@ -41,10 +255,11 @@
   z-index: 2
   transition: transform .45s $ease-out-expo, text-shadow .45s ease
 
-// idle region tour highlight (cycled by hard-region.js); glows in each zone's own colour
+// idle region tour highlight (cycled by hard-region.js); weight on vellum,
+// glow only in the dark hololith theme (see the dark block below the legend)
 .hr-label.lit
   transform: translate(-50%, -50%) scale(1.22)
-  text-shadow: 0 0 12px currentColor
+  font-weight: $font-weight-semibold
   z-index: 3
 
 .hr-label.hard
@@ -64,7 +279,7 @@
   border-radius: $radius-md
   color: var(--color-text-muted)
   font-family: var(--font-sans)
-  font-size: 0.78rem
+  font-size: 0.88rem
   letter-spacing: 0
   text-transform: none
   white-space: nowrap
@@ -93,7 +308,7 @@
   align-items: center
   gap: 7px
   font-family: var(--font-mono)
-  font-size: .58rem
+  font-size: .68rem
   letter-spacing: .09em
   text-transform: uppercase
   color: var(--color-text-light)
@@ -119,7 +334,19 @@
   height: 7px
   border-radius: 50%
   background: var(--color-primary)
-  box-shadow: 0 0 6px var(--color-primary)
+
+// glow is dark-hololith grammar only; the light vellum theme keeps crisp ink
+@media (prefers-color-scheme: dark)
+  .hr-label.lit
+    text-shadow: 0 0 12px currentColor
+  .hr-fullscreen:hover,
+  .hr-fullscreen:focus-visible
+    box-shadow: 0 0 12px rgba(229, 72, 77, 0.3)
+  .hr-splash-enter:hover,
+  .hr-splash-enter:focus-visible
+    box-shadow: 0 0 18px rgba(229, 72, 77, 0.35)
+  .hl-hard::before
+    box-shadow: 0 0 6px var(--color-primary)
 
 // zone labels take their class color
 .hr-label.z-easy
@@ -133,7 +360,7 @@
   display: block
   margin-top: 4px
   font-family: var(--font-sans)
-  font-size: 0.6rem
+  font-size: 0.7rem
   font-weight: 400
   letter-spacing: 0
   text-transform: none
@@ -158,7 +385,7 @@
 
 .hb-title
   font-family: var(--font-mono)
-  font-size: 0.62rem
+  font-size: 0.72rem
   font-weight: $font-weight-medium
   letter-spacing: 0.03em
   text-transform: uppercase
@@ -168,7 +395,7 @@
 
 .hb-item
   font-family: var(--font-mono)
-  font-size: 0.58rem
+  font-size: 0.68rem
   letter-spacing: 0.05em
   text-transform: uppercase
   color: var(--color-text-muted)
@@ -223,7 +450,7 @@
 .hr-axis
   position: absolute
   font-family: var(--font-mono)
-  font-size: 0.575rem
+  font-size: 0.68rem
   letter-spacing: 0.14em
   text-transform: uppercase
   color: var(--color-text-light)
@@ -245,6 +472,97 @@
     height: unquote("clamp(360px, 96vw, 460px)")   // taller / squarer so the phase diagram isn't a cramped strip
   .hr-label
     font-size: 0.64rem
+
+// ---------- Hard Region 3D hololith (hard-region-3d.js; gated by -boot.js) ----------
+// the 3D canvas sits between the 2D canvas and every HTML caption;
+// hr3d-on appears only after the first successfully rendered frame
+.hr3d-canvas
+  position: absolute
+  inset: 0
+  width: 100%
+  height: 100%
+  display: block
+  z-index: 1
+  opacity: 0
+  pointer-events: none
+  transition: opacity .3s ease
+
+.hr3d-on .hr3d-canvas
+  opacity: 1
+  pointer-events: auto
+  cursor: crosshair   // the OS cursor is the measurement reticle
+
+.hr3d-on .hr3d-canvas.hr3d-drag
+  cursor: grabbing
+
+// projected HTML labels (typography follows the 2D map's node labels)
+.hr3d-labels
+  position: absolute
+  inset: 0
+  z-index: 2
+  overflow: hidden
+  pointer-events: none
+  opacity: 0
+  transition: opacity .3s ease
+
+.hr3d-on .hr3d-labels
+  opacity: 1
+
+.hr3d-labels span
+  position: absolute
+  left: 0
+  top: 0
+  font-family: var(--font-mono)
+  font-size: 0.72rem
+  font-weight: $font-weight-medium
+  letter-spacing: 0.06em
+  white-space: nowrap
+  will-change: transform
+
+.hr3d-n-bench
+  color: var(--color-accent-teal)
+
+.hr3d-n-disc
+  color: var(--color-accent)
+
+.hr3d-n-hard
+  color: var(--color-primary)
+  pointer-events: auto
+  cursor: pointer
+
+.hr3d-n-hard.hot
+  text-shadow: 0 0 10px currentColor
+
+.hr3d-n-hard:focus-visible
+  outline: 1px dashed var(--color-primary)
+  outline-offset: 3px
+  text-shadow: 0 0 10px currentColor
+
+// live survey readout + click-scan stamps (real field() samples only)
+.hr3d-readout, .hr3d-stamp
+  font-size: 0.66rem
+  font-weight: $font-weight-semibold
+  letter-spacing: 0.08em
+  color: var(--color-text-muted)
+  transition: opacity .45s ease
+
+.hr3d-zcap
+  font-size: 0.66rem
+  letter-spacing: 0.12em
+  text-transform: uppercase
+  color: var(--color-text-light)
+  opacity: .8
+
+// while 3D is live the axis captions ride projected anchors (js sets left/top);
+// they hold opacity 0 during the entrance, then this eases the fade-in
+.hr3d-on .hr-axis-x,
+.hr3d-on .hr-axis-y
+  transform: translate(-50%, -50%)
+  transition: opacity .6s ease
+
+// engaged wheel-zoom hint state
+.hr3d-engaged .hr-head
+  color: var(--color-text-muted)
 
 // ---------- T³ Text → Twin → Translation strip ----------
 .t3-strip

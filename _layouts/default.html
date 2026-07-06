@@ -6,6 +6,15 @@
 <meta name="author" content="{{ page.author | default: site.author | escape }}">
 <meta name="generator" content="Jekyll v{{ jekyll.version }}">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
+{% assign meta_description = page.description | default: "Rui (Ray) Ding — Schmidt AI in Science Fellow at the University of Chicago & Argonne. AI co-scientist systems — DToR, T³, RAPIDS — for materials and device discovery in the data-scarce, unbenchmarked regime." %}
+<meta name="description" content="{{ meta_description | escape }}">
+<meta property="og:title" content="{% if page.title %}{{ page.title | escape }} | {% endif %}{{ site.title | escape }}">
+<meta property="og:description" content="{{ meta_description | escape }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{ "/assets/og-image.png" | absolute_url }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="{{ "/favicon.svg" | relative_url }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ "/favicon.png" | relative_url }}">
 <meta name="assistant-endpoint" content="{{ site.assistant_endpoint }}">
 <link rel="preconnect" href="https://ruiding.goatcounter.com">
 {% if site.show_frame %}

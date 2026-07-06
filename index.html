@@ -4,6 +4,21 @@ title: "Home"
 ---
 
 <article class="page-container fade-in">
+    <div id="hr-splash" class="hr-splash" role="dialog" aria-modal="true" aria-label="Interactive map of the research territory — press Enter or click the avatar to continue to the site" hidden>
+        <div class="hr-splash-brand" aria-hidden="true">
+            <span class="hsb-name">Rui (Ray) Ding</span>
+            <span class="hsb-sub">AI &times; complex functional materials / devices</span>
+            <span class="hsb-hint hsb-hint-sample">click to sample</span>
+            <span class="hsb-hint hsb-hint-tap">tap to sample</span>
+            <span class="hsb-hint hsb-hint-orbit">drag to orbit &middot; scroll to zoom</span>
+        </div>
+        <button id="hr-splash-enter" class="hr-splash-enter" type="button" aria-label="Enter the site">
+            <img src="headshot.jpg" alt="">
+            <span>enter &crarr;</span>
+        </button>
+    </div>
+    <script defer src="/assets/js/hard-region-splash.js"></script>
+
     <div class="profile dot-grid p-6 mb-8">
         <img src="headshot.jpg" alt="Rui (Ray) Ding" class="profile-image">
         <div class="profile-content">
@@ -29,7 +44,7 @@ title: "Home"
         <h2 class="section-title">The AI Co-Scientist Stack</h2>
     </div>
 
-    <figure class="hard-region" id="hard-region" role="img" aria-label="An interactive phase diagram: dense benchmark data points in the easy lowlands; fuel cells, electrolyzers, FET sensors, PFAS membranes, and OER catalysts glowing in the hard region of high complexity and high data cost. Click anywhere to sample the space.">
+    <figure class="hard-region hr-hero" id="hard-region" role="img" aria-label="An interactive phase diagram: dense benchmark data points in the easy lowlands; fuel cells, electrolyzers, FET sensors, PFAS membranes, and OER catalysts glowing in the hard region of high complexity and high data cost. Click anywhere to sample the space.">
         <canvas id="hr-canvas" aria-hidden="true"></canvas>
         <figcaption class="hr-head eyebrow">Mapping the hard region &middot; click to sample</figcaption>
         <div class="hr-legend" aria-hidden="true">
@@ -56,8 +71,12 @@ title: "Home"
         </div>
         <span class="hr-axis hr-axis-x">system complexity &rarr;</span>
         <span class="hr-axis hr-axis-y">data cost &rarr;</span>
+        <button id="hr-fullscreen" class="hr-fullscreen" type="button" title="Fullscreen" aria-label="View the map fullscreen" hidden>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 1H1v4M9 1h4v4M5 13H1V9M9 13h4V9"/></svg>
+        </button>
     </figure>
     <script defer src="/assets/js/hard-region.js"></script>
+    <script defer src="/assets/js/hard-region-3d-boot.js"></script>
 
     <div class="grid grid-cols-3 my-8">
         <div class="feature-card">
