@@ -54,6 +54,7 @@ plugins:
 
 exclude:
   - 2025_updates
+  - tools      # structure bake pipeline (repo-only, never shipped)
   - vendor
   - Gemfile
   - Gemfile.lock

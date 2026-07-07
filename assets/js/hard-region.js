@@ -116,13 +116,21 @@
     benchPts = [
       { u: 0.10, v: 0.10,  label: 'QM9' },
       { u: 0.17, v: 0.165, label: 'Materials Project' },
-      { u: 0.30, v: 0.085, label: 'OC20' }
+      { u: 0.30, v: 0.085, label: 'OC20' },
+      { u: 0.045, v: 0.045, label: 'PubChem' },
+      { u: 0.235, v: 0.045, label: 'AFLOW' },
+      { u: 0.07, v: 0.21, label: 'OQMD', m: 1 },
+      { u: 0.16, v: 0.04, label: 'MD17', m: 1 },
+      { u: 0.24, v: 0.20, label: 'MatBench', m: 1 }
     ];
     /* half-charted: active discovery fields with partial data */
     discPts = [
       { u: 0.36, v: 0.36, label: 'perovskites' },
       { u: 0.50, v: 0.30, label: 'MOFs' },
-      { u: 0.55, v: 0.44, label: 'alloys' }
+      { u: 0.55, v: 0.44, label: 'alloys' },
+      { u: 0.37, v: 0.26, label: 'zeolites' },
+      { u: 0.47, v: 0.40, label: '2D materials' },
+      { u: 0.46, v: 0.24, label: 'battery cathodes', m: 1 }
     ];
     /* the systems I actually work on, and why each is hard */
     hardPts = [
@@ -323,7 +331,7 @@
       ctx.arc(bx, by, bAct ? 4 : 2.6, 0, 6.2832);
       ctx.fill();
       ctx.shadowBlur = 0;
-      if (showLabels || bAct) {
+      if ((showLabels || bAct) && !bp.m) {
         ctx.globalAlpha = bAct ? 1 : 0.8 * dimOther;
         ctx.fillText(bp.label, bx + 8, by + 3);
       }
@@ -339,7 +347,7 @@
       ctx.globalAlpha = 0.95 * (dAct ? 1 : dimOther);
       diamond(dxx, dyy, dAct ? 4.8 : 3.4);
       ctx.shadowBlur = 0;
-      if (showLabels || dAct) {
+      if ((showLabels || dAct) && !dp.m) {
         ctx.globalAlpha = dAct ? 1 : 0.8 * dimOther;
         ctx.fillText(dp.label, dxx + 8, dyy + 3);
       }

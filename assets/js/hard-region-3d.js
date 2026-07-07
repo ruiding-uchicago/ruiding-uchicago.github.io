@@ -3,7 +3,7 @@
 const M=Math,RAF=requestAnimationFrame;
 const NOW=()=>performance.now();
 
-/* ---------- ported from hard-region.js (seed 20260610, identical output) ---------- */
+/* ---------- ported from hard-region.js (seed 20260610) ---------- */
 function makeNoise(seed) {
   var p=new Uint8Array(512),s=seed >>> 0||1,i,j,t;
   function rnd() { s=(s*1664525+1013904223) >>> 0;return s/4294967296;}
@@ -37,15 +37,23 @@ function smooth(a,b,x) {
 function field(u,v) {
   return fbm(u*3.1+7,v*3.1+3)*(0.28+0.92*smooth(0.18,0.95,(u+v)/2));
 }
-/* node data — identical coordinates/copy to hard-region.js */
+/* node data — as in hard-region.js */
 const BENCH=[
   { u: 0.10, v: 0.10, label: 'QM9' },
   { u: 0.17, v: 0.165, label: 'Materials Project' },
-  { u: 0.30, v: 0.085, label: 'OC20' }];
+  { u: 0.30, v: 0.085, label: 'OC20' },
+  { u: 0.045, v: 0.045, label: 'PubChem' },
+  { u: 0.235, v: 0.045, label: 'AFLOW' },
+  { u: 0.07, v: 0.21, label: 'OQMD', m: 1 },
+  { u: 0.16, v: 0.04, label: 'MD17', m: 1 },
+  { u: 0.24, v: 0.20, label: 'MatBench', m: 1 }];
 const DISC=[
   { u: 0.36, v: 0.36, label: 'perovskites' },
   { u: 0.50, v: 0.30, label: 'MOFs' },
-  { u: 0.55, v: 0.44, label: 'alloys' }];
+  { u: 0.55, v: 0.44, label: 'alloys' },
+  { u: 0.37, v: 0.26, label: 'zeolites' },
+  { u: 0.47, v: 0.40, label: '2D materials' },
+  { u: 0.46, v: 0.24, label: 'battery cathodes', m: 1 }];
 const HARD=[
   { u: 0.63, v: 0.74, label: 'fuel cell components', dx: -8, dy: 14,
     why: 'Catalyst, ionomer, membrane and GDL all couple. One data point means building and testing a full assembly.' },
@@ -59,18 +67,18 @@ const HARD=[
     why: 'Long synthesis-structure-property chains, dozens of coupled variables, no standard descriptors.' }];
 
 /* ---------- world: x = complexity, y = data cost (depth), z = difficulty ---------- */
-const HW = 1.0, HD = 0.625;     // half width / half depth of the footprint
-const HS = 1.1;                 // z per field unit → peak ≈ 0.55 × map width
-const HMAX = 0.8;               // R8 bake scale (field max is 0.788)
+const HW = 1.0, HD = 0.625;   // half width / half depth of the footprint
+const HS = 1.1;               // z per field unit → peak ≈ 0.55 × map width
+const HMAX = 0.8;             // R8 bake scale (field max is 0.788)
 const PZ = -0.045, PM = 0.16;   // plinth z and margin beyond the footprint
 const TXW=256,TXH=160,GN=129,GM=81,FOV0=0.52;
-const AZ0 = -0.44, POL0 = 0.62, R0 = 2.90, TG0 = [-0.02, -0.03, 0.36];   // hero pose (tightened)
-/* entrance: near-top-down long lens, radius fits the map depth exactly */
+const AZ0 = -0.44, POL0 = 0.645, R0 = 3.42, TG0 = [-0.02, -0.075, 0.375];   // hero pose (D-R1 reframe)
+/* entrance: near-top-down long lens fits the map depth */
 const POLE=1.32,FOVE=0.36,ENT_R=HD*M.sin(POLE)/M.tan(FOVE/2),ENT_END=2.75;
-const POSE = [   // tour poses: teal lowlands / discovery foothills / massif + bullets panel / hero
-  [-0.02,0.44,R0*0.92,-0.15,-0.18,0.12],
-  [-0.14,0.60,R0,-0.02,0.02,0.24],
-  [-0.88,0.37,R0*1.02,0.50,0.42,0.26],
+const POSE = [   // tour poses: lowlands / foothills / massif+bullets / hero
+  [-0.02,0.44,R0*0.78,-0.15,-0.18,0.12],
+  [-0.14,0.60,R0*0.85,-0.02,0.02,0.24],
+  [-0.88,0.37,R0*0.865,0.50,0.42,0.26],
   [AZ0,POL0,R0,...TG0]];
 const wx=u=>(u*2-1)*HW,wy=v=>(v*2-1)*HD;
 const clamp01=x=>x<0?0:x>1?1:x;
@@ -103,12 +111,12 @@ const TERR_VS = `#version 300 es
 in vec3 aPos;uniform mat4 uMVP;uniform vec3 uDim;uniform float uLift,uPz;out vec2 vUV;out vec3 vW;
 void main(){vec3 w=vec3((aPos.x*2.-1.)*uDim.x,(aPos.y*2.-1.)*uDim.y,mix(uPz,aPos.z*uDim.z,uLift));
 vUV=aPos.xy;vW=w;gl_Position=uMVP*vec4(w,1.);}`;
-/* one program, four passes: 0 body, 1 additive glow skin (dark), 2 plinth, 3 entrance ring */
+/* one program, 4 passes: 0 body, 1 glow skin (dark), 2 plinth, 3 entrance ring */
 const TERR_FS = `#version 300 es
 precision highp float;
 in vec2 vUV;in vec3 vW;uniform sampler2D uH;uniform vec3 uDim;uniform vec2 uTexel;
 uniform vec3 uEye,uSun,uTeal,uChamp,uCrim,uBase,uFog,uPlate,uInk;
-uniform float uHMax,uPass,uGlow,uBodyA,uFillA,uTime,uClip,uSkinA,uRL,uRA;uniform vec4 uScan[4];out vec4 o;
+uniform float uHMax,uPass,uGlow,uBodyA,uFillA,uTime,uClip,uSkinA,uRL,uRA,uXd;uniform vec4 uScan[4];out vec4 o;
 float hf(vec2 uv){return texture(uH,uv).r*uHMax;}
 ${IGN}
 void main(){
@@ -152,6 +160,7 @@ void main(){
   float ln=(1.-smoothstep(0.,max(fwidth(h)*2.3,1e-4),abs(h-uRL)))*inside*uRA;
   col=ramp*ln;A=ln;
  }
+ col=mix(col,uGlow>.5?vec3(0.):uBase,uXd);
  col+=(ign(gl_FragCoord.xy)-.5)*(2./255.);
  o=vec4(col,A);}`;
 const LINE_VS = `#version 300 es
@@ -159,8 +168,8 @@ in vec3 aPos;in vec4 aCol;in float aS;uniform mat4 uMVP;out vec4 vC;out float vS
 void main(){vC=aCol;vS=aS;gl_Position=uMVP*vec4(aPos,1.);}`;
 const LINE_FS = `#version 300 es
 precision highp float;
-in vec4 vC;in float vS;uniform float uDash,uTime;out vec4 o;
-void main(){if(uDash>.5&&fract(vS-uTime)>.45)discard;o=vec4(vC.rgb*vC.a,vC.a);}`;
+in vec4 vC;in float vS;uniform float uDash,uTime,uA;out vec4 o;
+void main(){if(uDash>.5&&fract(vS-uTime)>.45)discard;float a=vC.a*uA;o=vec4(vC.rgb*a,a);}`;
 const PT_VS = `#version 300 es
 in vec3 aP;in float aPh;uniform mat4 uMVP;
 uniform float uSize,uTime,uShape,uDPR,uClip,uStg;uniform int uHot,uSel;
@@ -186,7 +195,7 @@ void main(){
 /* ---------- module state (singleton) ---------- */
 let S=null;
 const mP=new Float32Array(16),mV=new Float32Array(16),mVP=new Float32Array(16);
-/* GL/DOM shorthands: uniform1f/3f, MVP upload, buffer bind/upload, terrain draw, blend */
+/* GL/DOM shorthands */
 const CE=t=>document.createElement(t);
 const AH=e=>e.setAttribute('aria-hidden','true');
 const AL=(p,n)=>S.gl.getAttribLocation(p,n);
@@ -233,7 +242,7 @@ function cssColor(s,fb) {
 }
 const mixc=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];
 
-/* every hue comes from the CSS custom properties; re-read on scheme change */
+/* hues from CSS custom props; re-read on scheme change */
 function readColors() {
   const cs=getComputedStyle(document.documentElement);
   const g=(n,fb)=>cssColor(cs.getPropertyValue(n),fb).slice(0,3);
@@ -274,11 +283,11 @@ function lineGeom() {   // plinth rim, footprint rim, axes/ticks, z ruler, stems
   HARD.forEach(n => stem(n, [...col.crim, dark ? 0.55 : 0.7], 0.055));   // beacon pylons
   return { pos: new Float32Array(P),col: new Float32Array(C) };
 }
-function buildArcs() {   // expedition arcs: benchmark lowlands → hard beacons, draped on the field
+function buildArcs() {   // expedition arcs: lowlands → beacons, draped on the field
   const paths=[[BENCH[0],HARD[3],0.10],[BENCH[1],HARD[2],-0.14]],N=44;
   const P=new Float32Array(N*6),T=new Float32Array(N*2),Sv=new Float32Array(N*2);
   let k=0;
-  paths.forEach(([a, b, off]) => {   // gently bowed quadratic in (u,v), lifted off the surface
+  paths.forEach(([a, b, off]) => {   // bowed quadratic in (u,v), lifted
     const mu=(a.u+b.u)/2-(b.v-a.v)*off,mv=(a.v+b.v)/2+(b.u-a.u)*off;
     let len=0,pu=0,pv=0;
     for (let i=0;i<N;i++,k++) {
@@ -368,9 +377,9 @@ function project(x,y,z) {
   };
 }
 
-/* ---------- auto-survey probe (advanceAuto ported from hard-region.js) ---------- */
+/* ---------- auto-survey probe (ported) ---------- */
 function arnd() { S.auto.seed=(S.auto.seed*1664525+1013904223) >>> 0;return S.auto.seed/4294967296;}
-const probeOn=now=>S.visible&&S.entDone&&!S.drag&&(now-S.lastUserT>4000);
+const probeOn=now=>S.visible&&S.entDone&&!S.drag&&S.ex<0&&(now-S.lastUserT>4000);
 const fmt=(u,v)=>'CX '+u.toFixed(2)+' · COST '+v.toFixed(2)+' · DIFF '+field(u,v).toFixed(2);
 function advanceAuto(now,dt) {
   const a=S.auto;
@@ -415,12 +424,12 @@ function stamp(u,v) {
   },3100);
 }
 
-/* ---------- terrain raycast for click-scan ---------- */
+/* ---------- terrain raycast ---------- */
 function pickTerrain(px,py) {
   const e=S.eye,tg=S.target;
   let fx=tg[0]-e[0],fy=tg[1]-e[1],fz=tg[2]-e[2];
   let l=M.hypot(fx,fy,fz);fx/=l;fy/=l;fz/=l;
-  let rx = fy, ry = -fx;                                       // right = fwd × +z
+  let rx = fy, ry = -fx;   // right = fwd × +z
   l=M.hypot(rx,ry)||1;rx/=l;ry/=l;
   const ux = ry * fz, uy = -rx * fz, uz = rx * fy - ry * fx;   // up = right × fwd
   const th=M.tan(FOV0/2),asp=S.W/M.max(1,S.H);
@@ -468,10 +477,33 @@ function selectHard(i) {
     S.info.querySelector('p').textContent = HARD[i].why;
   }
 }
+function exEnter(gi) {   // examine any node; full ceremony = hard five
+  const hd=gi>=14,n=hd?HARD[gi-14]:gi<8?BENCH[gi]:DISC[gi-8];
+  S.lastUserT=NOW();
+  if (!S.holo) {   // severed: the pre-holo behavior
+    if (hd) { selectHard(gi-14);return;}
+    if (S.info) S.info.hidden=true;
+    S.sel=-1;spawnScan(n.u,n.v,1);stamp(n.u,n.v);
+    return;
+  }
+  const wasH=S.ex>=14;
+  S.ex=gi;S.sel=hd?gi-14:-1;
+  S.holo.ex(gi);
+  S.fig.classList.toggle('hr3d-exd',hd);
+  if (hd) S.fly=[AZ0,0.5,1.55,wx(n.u),wy(n.v),nodeZ(n,0.055)+0.17];   // close-up
+  else if (wasH) S.fly=POSE[3];
+}
+function exExit() {   // Esc / click-away
+  if (S.ex<0) return;
+  if (S.ex>=14) S.fly=POSE[3];
+  S.ex=-1;S.sel=-1;S.lastUserT=NOW();
+  if (S.holo) S.holo.unx();
+  S.fig.classList.remove('hr3d-exd');
+}
 const tf3=(el,x,y,shift)=>{
   el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) translate(' + shift + ')';
 };
-const LBL3 = { 0: [-8, -14], 4: [-10, 30] };   // 3D-only label nudge: fuel cells clears the PFAS label
+const LBL3 = { 0: [-8, -14], 4: [-10, 30] };   // 3D label nudge: fuel cells clears PFAS
 function updateLabels(now) {
   if (S.sel >= 0 && S.info && S.info.hidden) S.sel = -1;   // 2D idle retired the why-card
   const px=[],rc=[],mid=project(S.target[0],S.target[1],S.target[2]).w;
@@ -482,7 +514,9 @@ function updateLabels(now) {
     px.push({ cls,i,x: p.x,y: p.y,w: p.w });
     const el = S.spans[cls][i], hd = cls === 'hard', o = hd ? (LBL3[i] || [n.dx, n.dy]) : [8, 3];
     tf3(el, p.x + o[0], p.y + o[1] + el._ty, hd ? '-100%,-50%' : '0,-50%');
-    const a=((1-0.72*fade(p.w))*(p.w>0?1:0) *
+    const mv = !n.m || (S.overN && S.overN.cls === cls && S.overN.i === i) ||
+      S.ex === (cls==='bench'?i:cls==='disc'?8+i:14+i) ? 1 : 0;   // minor label: hover pick / examine
+    const a=(mv*(1-0.72*fade(p.w))*(p.w>0?1:0) *
       ent(field(n.u, n.v), i, hd ? 0.09 : 0.04)).toFixed(2);
     el.style.opacity=a;
     if (hd) el.classList.toggle('hot', i === S.hot || i === S.sel);
@@ -490,8 +524,8 @@ function updateLabels(now) {
     if (+a > 0.02) rc.push({ el,x: p.x+o[0]-(hd?w:0),y: p.y+o[1]-9,w,h: 18,p: hd?1:2 });
   });
   S.nodePx=px;
-  if (!S.entT0) return;   // 2D layout owns the shared captions until the entrance begins
-  S.zones.forEach(z => {   // hand the three existing zone labels their 3D anchors
+  if (!S.entT0) return;   // 2D owns the shared captions pre-entrance
+  S.zones.forEach(z => {   // zone labels ride 3D anchors
     if (!z.el) return;
     const p=project(wx(z.u),wy(z.v),field(z.u,z.v)*HS+0.04);
     z.el.style.left = p.x.toFixed(1) + 'px'; z.el.style.top = p.y.toFixed(1) + 'px';
@@ -513,7 +547,7 @@ function updateLabels(now) {
     B.y+=ty;   // later labels dodge the resolved spot
     B.el._ty+=(ty-B.el._ty)*0.2;
   }
-  const ax = (el, x, y, z) => {   // axis captions: projected anchors, hidden until the skin lands
+  const ax = (el, x, y, z) => {   // axis captions on projected anchors
     if (!el) return;
     const p=project(x,y,z);
     el.style.left = p.x.toFixed(1) + 'px'; el.style.top = p.y.toFixed(1) + 'px';
@@ -524,10 +558,10 @@ function updateLabels(now) {
   ax(S.axisY,-HW-0.12,wy(0.40),PZ);
   const pz=project(-HW,-HD,0.72*HS);
   tf3(S.zcap, pz.x+10, pz.y, '0,-50%');
-  const dh=M.abs(S.cam.az-AZ0)+M.abs(S.cam.pol-POL0);   // z ruler caption reads at hero only
+  const dh=M.abs(S.cam.az-AZ0)+M.abs(S.cam.pol-POL0);   // z caption at hero only
   S.zcap.style.opacity=((S.entDone||S.entT>2.2?0.8:0)*(1-0.85*fade(pz.w))*(1-ss(0.3,0.6,dh))).toFixed(2);
-  const pr = probeOn(now) && S.auto.init;   // survey readout: auto probe, or live hover measurement
-  const hv = !pr&&S.pointerOver&&!S.drag&&!S.overN&&S.entDone&&S.hov;
+  const pr = probeOn(now) && S.auto.init;   // readout: probe or live hover
+  const hv = !pr&&S.pointerOver&&!S.drag&&!S.overN&&!S.overV&&S.entDone&&S.hov;
   S.readout.style.opacity = pr||hv ? '1' : '0';
   if (pr||hv) {
     const a=hv?S.hov:S.auto;
@@ -547,7 +581,7 @@ function updateLabels(now) {
 /* ---------- render ---------- */
 function draw(now) {
   const gl=S.gl,col=S.col,dark=S.dark,tSec=(now-S.t0)/1000;
-  const T=S.prog.terr,L=S.prog.line;
+  const T=S.prog.terr,L=S.prog.line,dA=1-0.4*S.exDim;   // examine dim
   updMatrices();
   gl.viewport(0,0,gl.drawingBufferWidth,gl.drawingBufferHeight);
   gl.clearColor(col.bg[0],col.bg[1],col.bg[2],1);
@@ -564,17 +598,17 @@ function draw(now) {
   U3(T.uBase,col.bg);U3(T.uFog,col.fog);U3(T.uPlate,col.plate);U3(T.uInk,col.ink);
   gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,S.tex);gl.uniform1i(T.uH,0);
   F1(T.uHMax,HMAX);F1(T.uGlow,dark?1:0);F1(T.uBodyA,dark?0.66:0.93);
-  F1(T.uFillA,0.22);F1(T.uTime,tSec);F1(T.uClip,S.clipF);F1(T.uSkinA,S.skinA);
+  F1(T.uFillA,0.22);F1(T.uTime,tSec);F1(T.uClip,S.clipF);F1(T.uSkinA,S.skinA);F1(T.uXd,S.exDim*0.4);
   F1(T.uLift,1);F1(T.uPz,PZ+0.004);
   gl.uniform4fv(T.uScan,S.scanArr);
-  /* plinth: flat contour map + grid, opaque */
+  /* plinth: flat contour map + grid */
   gl.uniform1f(T.uPass,2);
-  F1(T.uRA, S.entr ? 0.5 : 0);   // entrance: flat-map ink brightens under the lifting rings
+  F1(T.uRA, S.entr ? 0.5 : 0);   // entrance: flat-map ink brightens
   gl.depthMask(true);gl.disable(gl.BLEND);
   bindAttr(T.p, 'aPos', S.buf.plate, 3);
   gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
   gl.enable(gl.BLEND);gl.depthMask(false);
-  if (S.entr) {   // entrance laminae: one lifted, zone-colored isoline pass per level
+  if (S.entr) {   // entrance laminae: lifted isoline pass per level
     gl.uniform1f(T.uPass,3);
     BFP();
     bindAttr(T.p, 'aPos', S.buf.terr, 3);
@@ -586,9 +620,9 @@ function draw(now) {
     }
     F1(T.uLift,1);
   }
-  /* rims, axes, z ruler, stems/pylons — staged in during the entrance */
+  /* rims, axes, z ruler, stems/pylons — staged in */
   gl.useProgram(L.p);
-  MVPU(L);F1(L.uDash,0);
+  MVPU(L);F1(L.uDash,0);F1(L.uA,dA);
   gl.blendFunc(gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
   bindAttr(L.p, 'aPos', S.buf.linePos, 3);
   bindAttr(L.p, 'aCol', S.buf.lineCol, 4);
@@ -635,10 +669,12 @@ function draw(now) {
     SCR.set([X,Y,hz+0.008,0]);BD(S.buf.probePt,SCR);
     drawPoints(S.buf.probePt,1,3,22,c,0.85,0);
   }
-  /* the three node classes: teal circles, champagne diamonds, crimson beacons */
-  drawPoints(S.buf.bench,BENCH.length,0,9,col.teal,0.95,0.04);
-  drawPoints(S.buf.disc,DISC.length,1,11,col.champ,0.95,0.04);
-  drawPoints(S.buf.hard,HARD.length,2,30,col.crim,1,0.09);
+  /* node classes: teal circles, champagne diamonds, crimson beacons */
+  drawPoints(S.buf.bench,BENCH.length,0,9,col.teal,0.95*dA,0.04);
+  drawPoints(S.buf.disc,DISC.length,1,11,col.champ,0.95*dA,0.04);
+  drawPoints(S.buf.hard,HARD.length,2,30,col.crim,dA,0.09);
+  if (S.holo) S.holo.d(tSec);
+  if (S.vex) { try { S.vex.d(tSec);} catch (e) { S.vex=null;} }   // severed on first fault
   gl.depthMask(true);
 }
 function drawPoints(buf,n,shape,size,c,alpha,stg) {
@@ -647,7 +683,7 @@ function drawPoints(buf,n,shape,size,c,alpha,stg) {
   MVPU(Q);
   F1(Q.uSize,size);F1(Q.uTime,(S.nowMs-S.t0)/1000);F1(Q.uShape,shape);
   F1(Q.uDPR,S.dpr);F1(Q.uA,alpha);F1(Q.uGlow,S.dark?1:0);
-  F1(Q.uClip, S.clipF); F1(Q.uStg, stg);   // entrance ignite: skin-clip + per-node stagger
+  F1(Q.uClip, S.clipF); F1(Q.uStg, stg);   // entrance ignite stagger
   gl.uniform1i(Q.uHot,shape===2?S.hot:-1);
   gl.uniform1i(Q.uSel,shape===2?S.sel:-1);
   U3(Q.uCol,c);
@@ -667,8 +703,8 @@ function bindAttr(p,name,buf,size) {
   gl.vertexAttribPointer(l,size,gl.FLOAT,false,0,0);
 }
 
-/* ---------- entrance: the contours lift (spec §A) ---------- */
-function entCam(eT) {   // owns camera + skin clip + ring lifts while the entrance runs
+/* ---------- entrance: the contours lift ---------- */
+function entCam(eT) {   // camera + skin clip + ring lifts during the entrance
   const c=S.cam,e=ss(0,1,(eT-0.32)/1.5),l=ss(0,1,(eT-1.30)/1.15);
   c.pol=lerp(POLE,POL0,e);S.fov=lerp(FOVE,FOV0,e);
   S.str = lerp(HD * M.sin(POLE) * S.W / (M.max(1, S.H) * HW), 1, e);   // flat start matches the stretched 2D map
@@ -678,7 +714,7 @@ function entCam(eT) {   // owns camera + skin clip + ring lifts while the entran
   S.clipF=ss(0,1,sk)*1.02;
   S.skinA=ss(0,0.08,sk)*(1-ss(0.9,1,sk));
   const aB=S.dark?1.25:0.95,fin=ss(0,0.25,eT);
-  for (let i = 0; i < 7; i++) {   // rings rise lowest-first, fade as the skin passes them
+  for (let i = 0; i < 7; i++) {   // rings rise lowest-first, fade under the skin
     S.rLift[i]=eoExpo(clamp01((eT-0.42-i*0.075)/0.80));
     S.rA[i]=aB*fin*(1-ss(0,0.06,S.clipF-(0.26+i*0.1)));
   }
@@ -696,11 +732,18 @@ function tick(now) {
     entCam(eT);
     if (S.entr) {
       S.entT=eT;
-      if (eT>=ENT_END) { S.entr=false;S.entDone=true;S.entT=9;S.clipF=9;S.skinA=0;S.lastUserT=now;}
+      if (eT>=ENT_END) { S.entr=false;S.entDone=true;S.entT=9;S.clipF=9;S.skinA=0;S.lastUserT=now;loadHolo();}
     }
   } else {
     if (!S.drag) { c.az += c.azv; c.pol += c.polv; c.azv *= 0.9; c.polv *= 0.9; }   // damped inertia
-    if (probeOn(now)&&!S.pointerOver) {   // tour camera: never moves under a parked cursor
+    if (S.fly) {   // examine/return flight; a drag cancels it
+      const p=S.fly,k=1-M.exp(-dt/380);
+      let d=M.abs(p[0]-c.az)+M.abs(p[1]-c.pol)+M.abs(p[2]-c.r);
+      c.az+=(p[0]-c.az)*k;c.pol+=(p[1]-c.pol)*k;c.r+=(p[2]-c.r)*k;
+      c.azv=c.polv=0;
+      for (let i=0;i<3;i++) { d+=M.abs(p[3+i]-S.target[i]);S.target[i]+=(p[3+i]-S.target[i])*k;}
+      if (d<0.005) S.fly=null;
+    } else if (probeOn(now)&&!S.pointerOver) {   // tour camera: never moves under a parked cursor
       let z=-1;
       for (let i = 0; i < 3; i++) if (S.zones[i].el && S.zones[i].el.classList.contains('lit')) z = i;
       const p=POSE[z<0?3:z],k=1-M.exp(-dt/380);
@@ -709,12 +752,13 @@ function tick(now) {
       for (let i=0;i<3;i++) S.target[i]+=(p[3+i]-S.target[i])*k;
     }
     c.az = M.min(AZ0 + 0.96, M.max(AZ0 - 0.96, c.az));   // ±55° around the hero pose
-    c.pol = M.min(1.187, M.max(0.314, c.pol));           // 18°–68°
-    c.r=M.min(R0*1.6,M.max(R0*0.8,c.r));
+    c.pol = M.min(1.187, M.max(0.314, c.pol));   // 18°–68°
+    c.r=M.min(R0*1.5,M.max(lerp(R0*0.75,0.9,S.exDim),c.r));   // examine relaxes the close clamp
   }
+  S.exDim+=((S.ex>=14?1:0)-S.exDim)*(1-M.exp(-dt/240));   // hard-five ceremony dim
   advanceAuto(now,dt);
   draw(now);
-  if (!S.shown) {   // first good frame → schedule the reveal (2D intro finishes underneath)
+  if (!S.shown) {   // first good frame → schedule the reveal
     if (S.gl.getError()!==S.gl.NO_ERROR) { teardown();return;}
     S.shown=true;
     S.showAt=now+(window.__HR3D_FAST?250:1600);   // same-session re-entry skips the hold
@@ -726,6 +770,12 @@ function tick(now) {
   }
   updateLabels(now);
   S.raf=RAF(tick);
+}
+function loadHolo() {   // strategium holograms + vex: separate hulls, failure = silent no-op
+  const c={ B: BENCH,D: DISC,H: HARD,wx,wy,field,HS,mVP };
+  ['holo','vex'].forEach(n=>import('/assets/js/hard-region-'+n+'.js')
+    .then(m=>{ try { if (S&&S.entDone&&!S[n]) S[n]=m.mk(S,c);} catch (e) {} })
+    .catch(()=>{}));
 }
 function setRunning(on) {
   if (!S) return;
@@ -749,7 +799,7 @@ function disengage() {
   S.fig.classList.remove('hr3d-engaged');
   if (S.head) S.head.textContent=S.headText;
 }
-function setHot(i) { S.hot = i; }   // label class follows in updateLabels (hot or selected)
+function setHot(i) { S.hot = i; }   // label class follows in updateLabels
 function bindEvents() {
   const cv=S.canvas,fig=S.fig;
   const on=(t,ev,fn,opts)=>{
@@ -762,7 +812,7 @@ function bindEvents() {
   };
   on(fig, 'pointerenter', () => { S.pointerOver = true; });
   on(fig, 'pointerleave', () => {
-    S.pointerOver=false;S.lastUserT=NOW();
+    S.pointerOver=false;S.lastUserT=NOW();S.overN=null;
     disengage();setHot(-1);
   });
   on(fig, 'pointerdown', () => engage(), true);   // first pointerdown engages wheel
@@ -770,7 +820,7 @@ function bindEvents() {
     e.stopPropagation();   // keep the 2D map's click handler out
     if (e.button!==0) return;
     if (S.entr) S.entT0 = -1e9;   // input fast-forwards the entrance
-    S.lastUserT=NOW();
+    S.lastUserT=NOW();S.fly=null;   // hands-on stops flight
     S.drag=true;S.moved=0;S.downT=NOW();
     S.px=e.clientX;S.py=e.clientY;
     cv.style.cursor = '';
@@ -789,8 +839,9 @@ function bindEvents() {
     }
     const p=xy(e),nn=nearestNode(p.x,p.y);
     setHot(nn && nn.cls === 'hard' ? nn.i : -1);
-    cv.style.cursor = nn ? 'pointer' : '';
-    S.lastUserT=NOW();S.overN=!!nn;S.hx=p.x;S.hy=p.y;   // hover = live measurement
+    S.overV=!!(S.vex&&S.vex.pk(p.x,p.y,S.hov));
+    cv.style.cursor = nn||S.overV ? 'pointer' : '';
+    S.lastUserT=NOW();S.overN=nn;S.hx=p.x;S.hy=p.y;   // hover = live measurement
     if (!nn&&(S.mvN=!S.mvN)) S.hov=pickTerrain(p.x,p.y);
   });
   on(cv, 'pointerup', e => {
@@ -799,21 +850,25 @@ function bindEvents() {
     cv.classList.remove('hr3d-drag');
     S.lastUserT=NOW();
     if (S.moved>=5||NOW()-S.downT>500) return;
-    const p = xy(e), nn = nearestNode(p.x, p.y);   // click: node pick or odradek scan
-    if (nn && nn.cls === 'hard') { selectHard(nn.i); return; }
-    if (S.info) S.info.hidden=true;
-    S.sel=-1;
-    const hit = nn ? (nn.cls === 'bench' ? BENCH : DISC)[nn.i] : pickTerrain(p.x, p.y);
-    if (hit) { spawnScan(hit.u,hit.v,1);stamp(hit.u,hit.v);}
+    const p = xy(e), hit = pickTerrain(p.x, p.y);   // click: vex → node examine → odradek scan
+    if (S.vex&&S.vex.pk(p.x,p.y,hit)) { S.vex.go();return;}
+    const nn=nearestNode(p.x,p.y);
+    if (nn) { exEnter(nn.cls==='bench'?nn.i:nn.cls==='disc'?8+nn.i:14+nn.i);return;}
+    if (S.ex>=0) exExit();
+    else { if (S.info) S.info.hidden=true;S.sel=-1;}
+    if (hit) { S.hov=hit;spawnScan(hit.u,hit.v,1);stamp(hit.u,hit.v);if (S.vex) S.vex.tp(hit.u,hit.v);}
   });
   on(cv, 'pointercancel', () => { S.drag = false; cv.classList.remove('hr3d-drag'); });
   on(fig, 'wheel', e => {
     if (!S.eng) return;   // page scrolls until the figure is engaged
     e.preventDefault();
-    S.cam.r*=1+M.max(-80,M.min(80,e.deltaY))*0.0016;
+    S.fly=null;S.cam.r*=1+M.max(-80,M.min(80,e.deltaY))*0.0016;
     S.lastUserT=NOW();
   },{ passive: false });
-  on(window, 'keydown', e => { if (e.key === 'Escape') disengage(); });
+  on(window, 'keydown', e => {   // Esc: examine first (capture beats splash), then wheel
+    if (e.key!=='Escape') return;
+    if (S.ex>=0) { exExit();e.stopPropagation();} else disengage();
+  },true);
   on(document, 'visibilitychange', () => setRunning(true));
 }
 
@@ -836,8 +891,8 @@ function buildDOM() {
     if (cls === 'hard') {
       el.tabIndex = 0;   // Tab cycles the five hard systems
       const i=S.spans.hard.length;
-      el.addEventListener('focus', () => selectHard(i));
-      el.addEventListener('click', e => { e.stopPropagation(); selectHard(i); });
+      el.addEventListener('focus', () => exEnter(14 + i));
+      el.addEventListener('click', e => { e.stopPropagation(); exEnter(14 + i); });
     } else AH(el);
     lay.appendChild(el);
     S.spans[cls].push(el);
@@ -857,7 +912,7 @@ function buildDOM() {
   S.readout.style.opacity = '0';
   S.zcap = sp('hr3d-zcap', 'z: discovery difficulty');
   fig.appendChild(lay);
-  /* existing captions: save inline styles, then drive projected anchors */
+  /* save caption styles; then drive projected anchors */
   S.saved=[];
   const keep = el => { if (el) S.saved.push([el, el.getAttribute('style')]); return el; };
   const zEls = fig.querySelectorAll('.hr-label');
@@ -883,7 +938,7 @@ function resize() {
 function bindObservers() {
   S.io=new IntersectionObserver(en=>{ S.visible=en[0].isIntersecting;setRunning(true);});
   S.io.observe(S.fig);
-  S.ro = new ResizeObserver(resize);   // RO exists on every WebGL2-gated browser
+  S.ro = new ResizeObserver(resize);   // RO exists wherever WebGL2 does
   S.ro.observe(S.fig);
   const watch=(q,fn)=>{
     const mq=matchMedia(q);
@@ -903,7 +958,7 @@ export function init(fig) {
     const l=M.hypot(-0.42,-0.55,0.72);
     S={
       fig,unbind: [],stamps: [],scans: [],scanArr: new Float32Array(16),
-      nodePx: [],hot: -1,sel: -1,frame: 0,lost: false,
+      nodePx: [],hot: -1,sel: -1,ex: -1,exDim: 0,fly: null,frame: 0,lost: false,
       cam: { az: AZ0,pol: POL0,r: R0,azv: 0,polv: 0 },
       target: TG0.slice(),fov: FOV0,str: 1,clipF: 0,skinA: 0,
       rLift: [0,0,0,0,0,0,0],rA: [0,0,0,0,0,0,0],entT: 0,
@@ -925,7 +980,7 @@ export function init(fig) {
       if (!S) return;
       if (S.restoredOnce) { teardown(); return; }   // one restore attempt only
       S.restoredOnce=true;
-      try { buildGL();S.lost=false;setRunning(true);} catch (e) { teardown();}
+      try { buildGL();S.holo=S.vex=null;loadHolo();S.lost=false;setRunning(true);} catch (e) { teardown();}
     };
     const CV=S.canvas,AE=(t,f)=>{ CV.addEventListener(t,f);S.unbind.push(()=>CV.removeEventListener(t,f));};
     AE('webglcontextlost',onLost);AE('webglcontextrestored',onRestored);
@@ -945,7 +1000,7 @@ function teardown() {
     st.unbind.forEach(fn=>{ try { fn();} catch (e) {} });
     if (st.io) st.io.disconnect();
     if (st.ro) st.ro.disconnect();
-    st.fig.classList.remove('hr3d-on', 'hr3d-engaged');
+    st.fig.classList.remove('hr3d-on', 'hr3d-engaged', 'hr3d-exd');
     if (st.head&&st.headText) st.head.textContent=st.headText;
     (st.saved || []).forEach(sv => {   // restore the 2D layout untouched
       sv[1] === null ? sv[0].removeAttribute('style') : sv[0].setAttribute('style', sv[1]);
@@ -953,6 +1008,8 @@ function teardown() {
     if (!st.hadTab) st.fig.removeAttribute('tabindex');
     if (st.gl&&!st.gl.isContextLost()) {
       const gl=st.gl;
+      if (st.holo) st.holo.x();
+      if (st.vex) st.vex.x();
       Object.keys(st.buf||{}).forEach(k=>gl.deleteBuffer(st.buf[k]));
       Object.keys(st.prog||{}).forEach(k=>gl.deleteProgram(st.prog[k].p));
       if (st.tex) gl.deleteTexture(st.tex);

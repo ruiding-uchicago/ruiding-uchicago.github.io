@@ -432,6 +432,7 @@ html.hr-splashing .hr-legend
   border: 1px solid var(--color-border-strong)
   border-radius: $radius-md
   z-index: 3
+  pointer-events: none   // a read-out, not a control: map clicks pass through
 
 .hr-info strong
   display: block
@@ -563,6 +564,55 @@ html.hr-splashing .hr-legend
 // engaged wheel-zoom hint state
 .hr3d-engaged .hr-head
   color: var(--color-text-muted)
+
+// ---------- H2 examine mode (hard-region-holo.js fills the panel) ----------
+// structure caption line: real data in mono, between title and copy
+.hr-info .hr-cap
+  display: block
+  margin-top: 3px
+  font-family: var(--font-mono)
+  font-size: .66rem
+  letter-spacing: .05em
+  color: var(--color-text)
+  opacity: .8
+
+.hr-info .hr-cap:empty
+  display: none
+
+// hard-five ceremony variant: larger panel, caption prominent
+.hr-info.hr-examine
+  max-width: unquote("min(58ch, 72%)")
+  padding: $spacing-3 $spacing-4
+  border-color: var(--color-primary)
+
+.hr-info.hr-examine strong
+  font-size: .7rem
+
+.hr-info.hr-examine .hr-cap
+  font-size: .8rem
+  letter-spacing: .07em
+  opacity: .95
+
+.hr-info.hr-examine p
+  font-size: .82rem
+
+// ceremony dim: every caption but the selection yields (the per-frame JS
+// writes inline opacities, hence the !important)
+.hr3d-exd .hr3d-labels span[class^='hr3d-n-']:not(.hot)
+  opacity: .25 !important
+
+.hr3d-exd .hr-label
+  opacity: .35 !important
+
+.hr3d-exd .hr-legend,
+.hr3d-exd .hr-bullets
+  opacity: .35
+  transition: opacity .3s ease
+
+// fullscreen splash: the legend owns bottom-left — the panel rides above it
+.hr-splash .hr-info
+  left: $spacing-6
+  bottom: unquote("calc(max(#{$spacing-6}, 9vh) + 92px)")
 
 // ---------- T³ Text → Twin → Translation strip ----------
 .t3-strip
