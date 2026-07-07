@@ -145,7 +145,7 @@ WWWWW
 .....`,`
 .....
 .WWW.
-.WWW.
+.WVW.
 .....
 .....`];
 /* ---------- shaders: rigid-group mats, sun lambert, dissolve, column ---------- */
@@ -361,7 +361,7 @@ export function mk(S,ctx){
         +0.048+M.sin(t*1.9+2.6)*0.0035;
       const kk=1-M.exp(-dt*4.5);
       kx+=(ax2-kx)*kk;ky+=(ay2-ky)*kk;kz+=(az2-kz)*(1-M.exp(-dt*6));
-      const km=rot(M.atan2(S.eye[1]-ky,S.eye[0]-kx)+HPI,0);   // face the operator
+      const km=rot(yaw+M.sin(t*0.8)*0.3,0);   // follow his heading + slow scan sweep
       km[12]=kx;km[13]=ky;km[14]=kz;
       mul(7,km,ID);
       const cu=mode===2?tu:u,cv=mode===2?tv:v;   // column stands at the destination
