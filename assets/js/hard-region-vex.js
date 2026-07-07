@@ -6,14 +6,18 @@
    a silent no-op. One VBO, ≤2 draw calls (body; teleport column, additive).
    Walks to the cursor, wanders toward the survey probe's ping site when idle,
    stands by the examined node, TELEPORTS on map click (noise-ordered
-   per-voxel dissolve + light column), and clicking him opens the chat. */
+   per-voxel dissolve + light column), and clicking him opens the chat.
+   His SERVO-SKULL familiar (the page pet's bone drone, voxelized) rides the
+   same mesh as rigid group 7: it orbits his shoulder on a ~6 s drift, springs
+   after him when he walks, yaw-billboards its face to the camera, dissolves
+   and re-forms with him, and clicking it also opens the chat. */
 const M=Math,PI2=M.PI*2,HPI=M.PI/2;
 /* ---------- the voxel Vex: palette + 5 depth slices (front y0 → back y4),
    each 21 rows (z20 top → z0 feet) × 13 cols (x0 staff-side → x12) ---------- */
 const PAL={V:[26,9,16],M:[38,38,46],E:[255,42,0],q:[57,230,201],D:[90,14,18],
   R:[143,22,22],r:[186,42,34],G:[32,32,43],g:[61,61,76],L:[110,110,130],
   S:[168,168,188],O:[122,87,18],Y:[200,148,28],y:[242,200,75],o:[216,100,28],
-  C:[255,90,31],W:[232,229,210],x:[70,255,126]};
+  C:[255,90,31],W:[232,229,210],x:[70,255,126],w:[184,176,154],F:[150,28,10]};
 const SL=[`
 .............
 .............
@@ -120,10 +124,34 @@ const SL=[`
 .............
 .............
 .............`];
+/* servo-skull familiar: 4 depth slices (front y0 → back y3), 5 rows (z28 top
+   → z24) × 5 cols. Bone dome W/w, recessed sockets (V dead, F dim ember),
+   nasal shadow + 1-voxel jaw stub, 1-voxel antenna mast. */
+const KS=[`
+.....
+.WWW.
+W.W.W
+.WwW.
+..w..`,`
+..g..
+WWWWW
+WVWFW
+WWWWW
+.....`,`
+.....
+WWWWW
+WWWWW
+WWWWW
+.....`,`
+.....
+.WWW.
+.WWW.
+.....
+.....`];
 /* ---------- shaders: rigid-group mats, sun lambert, dissolve, column ---------- */
 const VSH=`#version 300 es
 in vec3 aP;in vec2 aM;in vec4 aC;in vec4 aX;
-uniform mat4 uVP,uM[7];uniform vec3 uSun,uCol;uniform float uPh,uLt,uCA;
+uniform mat4 uVP,uM[8];uniform vec3 uSun,uCol;uniform float uPh,uLt,uCA;
 out vec4 vC;
 const vec3 NR[6]=vec3[6](vec3(1,0,0),vec3(-1,0,0),vec3(0,1,0),vec3(0,-1,0),vec3(0,0,1),vec3(0,0,-1));
 void main(){
@@ -157,7 +185,8 @@ export function mk(S,ctx){
   const lP=gl.getAttribLocation(p,'aP'),lM=gl.getAttribLocation(p,'aM'),
     lC=gl.getAttribLocation(p,'aC'),lX=gl.getAttribLocation(p,'aX');
   /* ---- bake: parse slices → solid grid → merged mesh of exposed faces.
-     groups: 0 body+hood, 1 head, 2 leg L, 3 leg R, 4 staff arm, 5 pack ---- */
+     groups: 0 body+hood, 1 head, 2 leg L, 3 leg R, 4 staff arm, 5 pack,
+     7 servo-skull (own frame, keyed at z24+ so lookups never cross) ---- */
   const VZ=0.0031,fr=v=>v-M.floor(v);
   const vox=new Map(),at=(x,y,z)=>vox.get(x+(y<<4)+(z<<7));
   const GRP=(x,y,z,c)=>'VMEq'.indexOf(c)>=0?1:y===4&&z>7?5:x<4?4:z<3?(x<8?2:3):0;
@@ -165,6 +194,12 @@ export function mk(S,ctx){
     for (let x=0;x<13;x++){
       const c=row[x];
       if (c&&c!=='.') vox.set(x+(y<<4)+((20-ri)<<7),{ c: PAL[c],e: c==='E'||c==='q',g: GRP(x,y,20-ri,c) });
+    }
+  }));
+  KS.forEach((s,y)=>s.split('\n').filter(r=>r).forEach((row,ri)=>{
+    for (let x=0;x<5;x++){
+      const c=row[x];
+      if (c&&c!=='.') vox.set(x+(y<<4)+((28-ri)<<7),{ c: PAL[c],e: c==='F',g: 7 });
     }
   }));
   const NRM=[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];
@@ -175,7 +210,8 @@ export function mk(S,ctx){
   vox.forEach((vx,k)=>{
     const x=k&15,y=(k>>4)&7,z=k>>7,h=fr(M.sin(++vi*12.9898)*43758.5453);
     const jit=vx.e?1:0.93+0.12*fr(h*7.3);
-    const cx=(x-7)*VZ,cy=(y-2)*VZ,cz=(z+0.5)*VZ;
+    const sk=vx.g===7,Vz=sk?0.0045:VZ;   // the familiar bakes chunkier, centered on itself
+    const cx=(x-(sk?2:7))*Vz,cy=(y-(sk?1.5:2))*Vz,cz=(sk?z-26:z+0.5)*Vz;
     for (let d=0;d<6;d++){
       const n=NRM[d],nb=at(x+n[0],y+n[1],z+n[2]);
       if (nb&&nb.g===vx.g) continue;   // faces survive across group seams
@@ -188,8 +224,8 @@ export function mk(S,ctx){
       const shd=vx.e?1:jit*(1-0.07*oc);
       const c0=M.min(255,vx.c[0]*shd),c1=M.min(255,vx.c[1]*shd),c2=M.min(255,vx.c[2]*shd);
       for (let a=-1;a<2;a+=2) for (let b=-1;b<2;b+=2){
-        fp.push(cx+(n[0]+t1[0]*a+t2[0]*b)*VZ*0.5,cy+(n[1]+t1[1]*a+t2[1]*b)*VZ*0.5,
-          cz+(n[2]+t1[2]*a+t2[2]*b)*VZ*0.5,vx.g,d,cx,cy,cz,h);
+        fp.push(cx+(n[0]+t1[0]*a+t2[0]*b)*Vz*0.5,cy+(n[1]+t1[1]*a+t2[1]*b)*Vz*0.5,
+          cz+(n[2]+t1[2]*a+t2[2]*b)*Vz*0.5,vx.g,d,cx,cy,cz,h);
         cb.push(c0,c1,c2,vx.e?255:0);
       }
       ix.push(nv,nv+1,nv+2,nv+1,nv+3,nv+2);nv+=4;
@@ -217,7 +253,7 @@ export function mk(S,ctx){
     bC=buf(gl.ARRAY_BUFFER,new Uint8Array(cb)),
     bI=buf(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(ix));
   /* ---- rigid-part mats (column major, pure rigid: normals reuse rotation) ---- */
-  const uMA=new Float32Array(112),ID=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
+  const uMA=new Float32Array(128),ID=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
   const rot=(a,ax)=>{
     const c=M.cos(a),s=M.sin(a);
     return ax?[1,0,0,0,0,c,s,0,0,-s,c,0,0,0,0,1]:[c,s,0,0,-s,c,0,0,0,0,1,0,0,0,0,1];
@@ -232,6 +268,7 @@ export function mk(S,ctx){
   };
   /* ---- state ---- */
   let u=0.30,v=0.32,tu=u,tv=v,yaw=0,hd=-HPI,ph=0,wk=0,he=0,uPh=0,colA=0;
+  let kx=0,ky=0,kz=0;   // servo-skull spring position (world)
   let mode=2,tpT=0,swp=0,lt=0,st0=0,rt=0,dwell=0,tap=-9,hlT=-9,hlN=8,sd=11,frz=0;
   const rnd=()=>(sd=(sd*1664525+1013904223)>>>0)/4294967296;
   const cl=x=>x<0.06?0.06:x>0.94?0.94:x;
@@ -240,14 +277,15 @@ export function mk(S,ctx){
   const wpt=(a,b)=>{ const w=(a-u)*KX,d=(b-v)*KY;return M.hypot(w,d);};
   let dbg=0;
   try { dbg=sessionStorage.getItem('vex-dbg');} catch (e) {}
+  const pj=(a,b,c)=>{
+    const m=ctx.mVP,w=m[3]*a+m[7]*b+m[11]*c+m[15];
+    return { x: ((m[0]*a+m[4]*b+m[8]*c+m[12])/w*0.5+0.5)*S.W,
+      y: (0.5-(m[1]*a+m[5]*b+m[9]*c+m[13])/w*0.5)*S.H,w };
+  };
   if (dbg) window.__hrVex={
-    get st() { return { u,v,tu,tv,mode,yaw,ph,wk,uPh,colA };},
-    get scr() {
-      const m=ctx.mVP,a=ctx.wx(u),b=ctx.wy(v),c=ctx.field(u,v)*ctx.HS+0.03;
-      const w=m[3]*a+m[7]*b+m[11]*c+m[15];
-      return { x: ((m[0]*a+m[4]*b+m[8]*c+m[12])/w*0.5+0.5)*S.W,
-        y: (0.5-(m[1]*a+m[5]*b+m[9]*c+m[13])/w*0.5)*S.H,w };
-    },
+    get st() { return { u,v,tu,tv,mode,yaw,ph,wk,uPh,colA,kx,ky,kz };},
+    get scr() { return pj(ctx.wx(u),ctx.wy(v),ctx.field(u,v)*ctx.HS+0.03);},
+    get scrK() { return pj(kx,ky,kz);},
     set frz(k) { frz=k;},
     set pose(o) { for (const k in o){ if (k==='u') u=o[k];else if (k==='v') v=o[k];
       else if (k==='yaw') yaw=o[k];else if (k==='ph') ph=o[k];else if (k==='wk') wk=o[k];} }
@@ -260,7 +298,10 @@ export function mk(S,ctx){
       if (!frz){
         if (mode===2){   // teleport: dissolve out → column → dissolve in
           const T=t-tpT;
-          if (T>=0.5&&!swp){ swp=1;u=tu;v=tv;}
+          if (T>=0.5&&!swp){   // swap sites; the familiar re-forms at his side
+            swp=1;u=tu;v=tv;
+            kx=ctx.wx(u)+0.02;ky=ctx.wy(v)+0.01;kz=ctx.field(u,v)*ctx.HS+0.048;
+          }
           uPh=T<0.45?T/0.45:T<0.55?1:M.max(0,1-(T-0.55)/0.45);
           colA=ss(0.08,0.28,T)*(1-ss(0.5,0.78,T));
           wk=M.max(0,wk-dt*4);
@@ -314,6 +355,15 @@ export function mk(S,ctx){
       mul(3,bz,piv(rot(-sw,1),0.0047,0,0.0105));
       mul(4,bz,piv(rot(arm,1),-0.0109,0,0.0357));
       mul(5,bz,piv(rot(-sw*0.06,1),0,0.0062,0.0372));
+      /* servo-skull: ~6 s orbit of his shoulder + own bob, soft-spring chase */
+      const oa=t*1.05,ax2=X+M.cos(oa)*0.022,ay2=Y+M.sin(oa)*0.022;
+      const az2=M.max(Z,ctx.field((kx-ctx.wx(0))/KX,(ky-ctx.wy(0))/KY)*ctx.HS)
+        +0.048+M.sin(t*1.9+2.6)*0.0035;
+      const kk=1-M.exp(-dt*4.5);
+      kx+=(ax2-kx)*kk;ky+=(ay2-ky)*kk;kz+=(az2-kz)*(1-M.exp(-dt*6));
+      const km=rot(M.atan2(S.eye[1]-ky,S.eye[0]-kx)+HPI,0);   // face the operator
+      km[12]=kx;km[13]=ky;km[14]=kz;
+      mul(7,km,ID);
       const cu=mode===2?tu:u,cv=mode===2?tv:v;   // column stands at the destination
       uMA.set(ID,96);uMA[108]=ctx.wx(cu);uMA[109]=ctx.wy(cv);uMA[110]=ctx.field(cu,cv)*ctx.HS;
       /* draw */
@@ -344,19 +394,19 @@ export function mk(S,ctx){
     tp(a,b) {   // map click = odradek scan → translocate to the sample site
       mode=2;tpT=lt;swp=0;tu=cl(a);tv=cl(b);
     },
-    pk(px,py,oc) {   // screen-space hit (≈18px), occluded by nearer terrain
+    pk(px,py,oc) {   // screen-space hit: him (≈18px) or his skull (≈12px)
       if (mode===2||!S.entDone) return false;
-      const m=ctx.mVP,gx=ctx.wx(u),gy=ctx.wy(v),gz=ctx.field(u,v)*ctx.HS+0.03;
-      const w=m[3]*gx+m[7]*gy+m[11]*gz+m[15];
-      if (w<=0) return false;
-      const sx=((m[0]*gx+m[4]*gy+m[8]*gz+m[12])/w*0.5+0.5)*S.W;
-      const sy=(0.5-(m[1]*gx+m[5]*gy+m[9]*gz+m[13])/w*0.5)*S.H;
-      if ((sx-px)*(sx-px)+(sy-py)*(sy-py)>324) return false;
-      if (oc){
-        const E=S.eye,ox=ctx.wx(oc.u),oy=ctx.wy(oc.v),oz=ctx.field(oc.u,oc.v)*ctx.HS;
-        if (M.hypot(ox-E[0],oy-E[1],oz-E[2])<M.hypot(gx-E[0],gy-E[1],gz-E[2])-0.05) return false;
-      }
-      return true;
+      const E=S.eye;
+      const hit=(gx,gy,gz,r2)=>{
+        const s2=pj(gx,gy,gz);
+        if (s2.w<=0||(s2.x-px)*(s2.x-px)+(s2.y-py)*(s2.y-py)>r2) return false;
+        if (oc){   // occluded by nearer terrain
+          const ox=ctx.wx(oc.u),oy=ctx.wy(oc.v),oz=ctx.field(oc.u,oc.v)*ctx.HS;
+          if (M.hypot(ox-E[0],oy-E[1],oz-E[2])<M.hypot(gx-E[0],gy-E[1],gz-E[2])-0.05) return false;
+        }
+        return true;
+      };
+      return hit(ctx.wx(u),ctx.wy(v),ctx.field(u,v)*ctx.HS+0.03,324)||hit(kx,ky,kz,144);
     },
     go() {   // click on Vex: the chat, exactly like the page pet
       tap=lt;hlT=lt;

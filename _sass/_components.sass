@@ -21,17 +21,14 @@
   height: 100%
   display: block
 
-// hero variant — the map owns the first viewport. Aspect floored at 8:5 so the
-// tuned 3D camera never sees a portrait frame; short viewports cap via max-height.
+// hero variant — the map owns the first viewport, ALWAYS at full container
+// width (aspect-ratio + max-height transferred the height cap into a width
+// cap on short windows, shrinking the figure next to its full-width
+// siblings). Only the height adapts: 84vh bounds short viewports and
+// 65vw - 245px tracks the content column ÷ 1.5, so the tuned 3D camera's
+// aspect can only ever widen past ~1.5 — never go portrait.
 .hard-region.hr-hero
-  height: unquote("clamp(380px, 82vh, 720px)")   // fallback (no aspect-ratio support)
-
-@supports (aspect-ratio: 1)
-  .hard-region.hr-hero
-    height: auto
-    aspect-ratio: unquote("8 / 5")
-    max-height: 86vh
-    min-height: 380px
+  height: unquote("clamp(380px, min(84vh, 65vw - 245px), 692px)")
 
 @media (max-width: $breakpoint-md)
   .hard-region.hr-hero
