@@ -1,4 +1,4 @@
-/* hard-region-vex.js — the Magos walks the table: Vex-7, the site's pixel
+/* hard-region-vex.js — the Magos walks the table: Vitruvius, the site's pixel
    tech-priest, dimension-lifted to a chunky voxel figure patrolling the
    hololith terrain. The one REAL entity on the table: opaque, sun-lit, in his
    own sprite palette (magos_pixel_pet.html PAL) — never a projection.
@@ -9,7 +9,7 @@
    per-voxel dissolve + light column), and clicking him opens the chat.
    His SERVO-SKULL familiar (the page pet's bone drone, voxelized) rides the
    same mesh as rigid group 7: it orbits his shoulder on a ~6 s drift, springs
-   after him when he walks, yaw-billboards its face to the camera, dissolves
+   after him when he walks, faces his heading with a slow scan sweep, dissolves
    and re-forms with him, and clicking it also opens the chat. */
 const M=Math,PI2=M.PI*2,HPI=M.PI/2;
 /* ---------- the voxel Vex: palette + 5 depth slices (front y0 → back y4),

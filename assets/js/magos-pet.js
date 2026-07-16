@@ -1,4 +1,4 @@
-/* magos-pet.js — Archmagos Vex-7, the site's resident tech-priest pet.
+/* magos-pet.js — Archmagos Vitruvius, the site's resident tech-priest pet.
    Adapted from the standalone magos_pixel_pet.html (built by Rui's partner)
    into a transparent, click-through overlay for the live site:
      - fullscreen canvas at pointer-events:none, so it NEVER blocks the page
@@ -11,7 +11,7 @@
 (function () {
 'use strict';
 if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-var TOUCH = matchMedia('(pointer: coarse)').matches;   // phones run a smaller, finger-dragged Vex-7 (no cursor to follow)
+var TOUCH = matchMedia('(pointer: coarse)').matches;   // phones run a smaller, finger-dragged Vitruvius (no cursor to follow)
 
 /* ════════════════════════════════════════════════════════════
    CONFIG · the knobs you are most likely to touch
@@ -298,7 +298,7 @@ const g  = cv.getContext('2d');
 // small click target that follows his body; the canvas stays click-through
 const hit = document.createElement('div');
 hit.id = 'magos-hit';
-hit.title = "Archmagos Vex-7 \u00b7 click: ask about Rui's work \u00b7 drag: carry \u00b7 double-click: hide";
+hit.title = "Archmagos Vitruvius \u00b7 click: ask about Rui's work \u00b7 drag: carry \u00b7 double-click: hide";
 hit.style.cssText = 'position:fixed;z-index:9991;cursor:grab;touch-action:none';
 document.body.appendChild(hit);
 
@@ -315,7 +315,7 @@ document.body.appendChild(label);
 const summon = document.createElement('button');
 summon.id = 'magos-summon';
 summon.type = 'button';
-summon.textContent = '\u2699 summon Vex-7';
+summon.textContent = '\u2699 summon Vitruvius';
 summon.title = 'Bring the tech-priest back';
 summon.style.cssText = 'position:fixed;left:14px;bottom:12px;z-index:9991;display:none;'
   + "font:600 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.04em;"
@@ -1236,9 +1236,9 @@ const VOX = {
     "This world invented the transformer twice: once in copper, once in code.",
   ],
   boot: [
-    "Boot sequence complete. Vex-7 at your service.",
-    "Vex-7 online. Blessings upon this terminal.",
-    "Vex-7 active. Guarding the shrine of the 2K Archmagos.",
+    "Boot sequence complete. Vitruvius at your service.",
+    "Vitruvius online. Blessings upon this terminal.",
+    "Vitruvius active. Guarding the shrine of the 2K Archmagos.",
   ],
 };
 

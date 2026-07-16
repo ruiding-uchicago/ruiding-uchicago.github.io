@@ -9,7 +9,7 @@
   var ENDPOINT = meta ? (meta.getAttribute('content') || '').trim() : '';
   var panel, logEl, inputEl, sendEl, tailEl, history = [], busy = false, built = false;
   var STORE = 'ask-chat';
-  var GREETING = "Vex-7 online. I keep the technical archive of the keeper — Rui Ding. Ask about his research, papers, funding, or how to reach him.";
+  var GREETING = "Vitruvius online. I keep the technical archive of the keeper — Rui Ding. Ask about his research, papers, funding, or how to reach him.";
 
   /* keep the conversation alive across page navigations within the tab */
   function persist() {
@@ -55,7 +55,7 @@
     panel.setAttribute('aria-label', "Ask about Rui Ding's work");
     panel.innerHTML =
       '<div class="ask-head">' +
-        '<span class="ask-title">Vox-Cogitator · Vex-7</span>' +
+        '<span class="ask-title">Vox-Cogitator · Vitruvius</span>' +
         '<button class="ask-x" aria-label="Close">×</button>' +
       '</div>' +
       '<div class="ask-log"></div>' +
