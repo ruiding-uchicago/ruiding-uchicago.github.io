@@ -6,6 +6,15 @@ date: 2026-05-18
 
 Our paper proposing the **Text-Twin-Translation (T<sup>3</sup>)** framework has been accepted to the **SIGKDD 2026 AI4Science Track** (CORE A*). The same work was a **Spotlight Oral at the ICLR 2026 AI4Mat workshop**, presented recently in Brazil.
 
+## Video walkthrough
+
+<video controls preload="metadata" playsinline style="width:100%;border-radius:12px;border:1px solid var(--color-border)">
+  <source src="/assets/video/t3-explainer.mp4" type="video/mp4">
+  Your browser does not support the video tag — <a href="/assets/video/t3-explainer.mp4">download the video</a>.
+</video>
+
+A narrated walkthrough of the full T<sup>3</sup> pipeline — from literature extraction to the device digital twin to PFAS-probe screening.
+
 ## What T<sup>3</sup> does
 
 T<sup>3</sup> is our answer to the data scarcity that pervades ML for complex nanomaterial/device applications. The workflow:
