@@ -19,9 +19,9 @@ permalink: /publications/
 <div class="publication-item">
     <div class="publication-title">Text-Twin-Translation (T<sup>3</sup>): A Full-Stack Machine Learning Framework for Functional Material-Device Systems Discovery</div>
     <div class="publication-authors">Rui Ding*, Zixin Ding*, Rodrigo P. Ferreira*, Yuxin Chen, Junhong Chen</div>
-    <div class="publication-venue">SIGKDD 2026, AI4Science Track &middot; Spotlight Oral at ICLR 2026 AI4Mat Workshop</div>
+    <div class="publication-venue">Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '26), AI4Science Track, pp. 10831&ndash;10841 &middot; Spotlight Oral at ICLR 2026 AI4Mat Workshop</div>
     <span class="tag tag-primary">Spotlight Oral</span>
-    <p class="text-sm mt-2"><a href="https://openreview.net/forum?id=7QfGX651NZ" target="_blank">OpenReview</a> &middot; <a href="https://github.com/ruiding-uchicago/T3_FET_sensor" target="_blank">Code</a></p>
+    <p class="text-sm mt-2"><a href="https://dl.acm.org/doi/10.1145/3770855.3819013" target="_blank">ACM DL (doi:10.1145/3770855.3819013)</a> &middot; <a href="https://www.growkudos.com/publications/10.1145%25252F3770855.3819013/reader" target="_blank">Plain-language summary</a> &middot; <a href="https://openreview.net/forum?id=7QfGX651NZ" target="_blank">OpenReview</a> &middot; <a href="https://github.com/ruiding-uchicago/T3_FET_sensor" target="_blank">Code</a></p>
 </div>
 
 <div class="publication-item">

@@ -25,7 +25,7 @@ mathjax: true
     <h2 class="section-title">Text-Twin-Translation (T<sup>3</sup>) for Device Digital Twins</h2>
 </div>
 
-<p><strong>Text:</strong> an agentic pipeline, prompt-optimized with TextGrad, extracts structured knowledge graphs from raw publication corpora (21.8% BLEU improvement in knowledge extraction). <strong>Twin:</strong> a graph neural network that knows the device topology, trained as a digital twin of the coupled material&ndash;device system; on FET sensors it predicts sensitivity with 92.3% accuracy. <strong>Translation:</strong> the twin then screens 123.2 million PubChem compounds for out-of-distribution tasks such as PFAS-sensing probe design. Accepted at SIGKDD 2026 AI4Science; Spotlight Oral at ICLR 2026 AI4Mat.</p>
+<p><strong>Text:</strong> an agentic pipeline, prompt-optimized with TextGrad, extracts structured knowledge graphs from raw publication corpora (21.8% BLEU improvement in knowledge extraction). <strong>Twin:</strong> a graph neural network that knows the device topology, trained as a digital twin of the coupled material&ndash;device system; on FET sensors it predicts sensitivity with 92.3% accuracy. <strong>Translation:</strong> the twin then screens 123.2 million PubChem compounds for out-of-distribution tasks such as PFAS-sensing probe design. Published in the KDD 2026 proceedings (AI4Science Track, <a href="https://dl.acm.org/doi/10.1145/3770855.3819013">doi:10.1145/3770855.3819013</a>); Spotlight Oral at ICLR 2026 AI4Mat.</p>
 
 {% include t3-strip.html %}
 

@@ -8,7 +8,7 @@ Three threads of our work from the past two years are now mature enough to wire 
 
 **1. Hypothesis generation: DToR.** A local-first deep-research agent with a tree-structured orchestrator that adaptively expands and prunes research branches. Across 27 nanomaterials/device topics in a 44-agent benchmark, its reports achieved a ~79% mean pairwise win rate against commercial deep-research systems, running entirely on consumer-level hardware with open-source LLMs ([arXiv](https://arxiv.org/abs/2511.18303)).
 
-**2. Device digital twins: T<sup>3</sup>.** Text-Twin-Translation converts unstructured literature into structured knowledge (TextGrad-optimized extraction, +21.8% BLEU), trains a device-topology-aware GNN as a digital twin (92.3% sensitivity prediction accuracy), and screens candidates at scale: 123.2 million PubChem compounds ([OpenReview](https://openreview.net/forum?id=7QfGX651NZ), [code](https://github.com/ruiding-uchicago/T3_FET_sensor)).
+**2. Device digital twins: T<sup>3</sup>.** Text-Twin-Translation converts unstructured literature into structured knowledge (TextGrad-optimized extraction, +21.8% BLEU), trains a device-topology-aware GNN as a digital twin (92.3% sensitivity prediction accuracy), and screens candidates at scale: 123.2 million PubChem compounds ([ACM DL](https://dl.acm.org/doi/10.1145/3770855.3819013), [code](https://github.com/ruiding-uchicago/T3_FET_sensor)).
 
 **3. Rapid physical validation: RAPIDS.** An atomistic validation engine benchmarking MLIPs against DFT over 5,567 probe&ndash;target dimers and 18 tasks, packaged as a callable tool for autonomous agents ([OpenReview](https://openreview.net/forum?id=r2NSBJ4ip7)).
 
