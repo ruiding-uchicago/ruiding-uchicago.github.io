@@ -143,7 +143,7 @@ permalink: /education/
     <h2 class="section-title">Teaching</h2>
 </div>
 
-<p class="text-muted mb-4">Three principles, learned from running the discovery loop myself: connect theory to device behaviour a student can actually observe; make them implement and break the models rather than watch them run; and treat a defended validation as part of the result, not a formality at the end of it.</p>
+<p class="text-muted mb-4">Three principles, learned from running the discovery loop myself: connect theory to device behaviour a student can actually observe; make them implement and break the models rather than watch them run; and treat a defended validation as part of the result, not a formality.</p>
 
 <div class="publication-item">
     <div class="publication-title">Curriculum &mdash; NSF Research Traineeship, UChicago PME</div>
