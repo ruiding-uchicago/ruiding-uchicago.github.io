@@ -55,6 +55,8 @@ plugins:
 exclude:
   - 2025_updates
   - tools      # structure bake pipeline (repo-only, never shipped)
+  - "*.docx"   # CV source documents stay private; only the PDF is published
+  - "Rui_Ding_CV_*"   # working-name CV exports; the published copy is Rui_2026_CV.pdf
   - vendor
   - Gemfile
   - Gemfile.lock

@@ -6,7 +6,7 @@ sitemap: false
 KNOWLEDGE BASE — Rui Ding
 This is the ONLY source of facts the website assistant may use.
 To update the bot: edit this file, commit, and redeploy the site. No other step.
-Last reviewed: 2026-06.
+Last reviewed: 2026-08.
 
 == WHO ==
 Rui Ding — English name "Ray", Chinese name 丁睿 — publishes and is professionally known as "Rui Ding"; treat "Ray" and 丁睿 as the same person. Eric and Wendy Schmidt AI in Science Fellow at the University of Chicago, and Resident Associate at Argonne National Laboratory, since September 2023.
@@ -40,10 +40,10 @@ The atomistic validation engine. It benchmarks machine-learning interatomic pote
 Rui also contributes to the NSF-funded MADE-PUBLIC project (Manufacturing Advanced Electronics through Printing Using Bio-based and Locally Identifiable Compounds), where he designs the data portal and cyber-manufacturing platform that facilitates knowledge transfer.
 
 == PUBLICATIONS (first author or co-first author) ==
-COUNT: Rui has 20 first-author or co-first-author papers as of mid-2026 — 8 in the Schmidt Fellowship period and 12 in his PhD period, all listed below.
-If the visitor asks how many papers Rui has published (in any phrasing, including "total" or "how many papers"), answer directly: "Rui has 20 first-author or co-first-author papers," then add that his total including co-authored papers is higher and the complete, current list is on Google Scholar (https://scholar.google.com/citations?user=Cfs4XWwAAAAJ). Do NOT say you don't have a count — you do: it is 20 first/co-first-author papers.
+COUNT (as of August 2026, matching the CV): Rui has 16 first-author or co-first-author PEER-REVIEWED papers — 15 journal articles plus 1 archival conference paper (T3 at KDD '26). On top of those: 3 peer-reviewed workshop papers (RAPIDS at ICML AI4Physics, DToR at NeurIPS AI4Mat, Neuromorphic Random Walk at NeurIPS ML4PS) and 4 manuscripts under review. Citation metrics: 1,836 citations, h-index 24 (August 2026).
+If the visitor asks how many papers Rui has published (in any phrasing, including "total" or "how many papers"), answer directly: "16 first- or co-first-author peer-reviewed papers," and add that this excludes 3 workshop papers and 4 manuscripts under review, and that his total including co-authored papers is higher — the complete, current list is on Google Scholar (https://scholar.google.com/citations?user=Cfs4XWwAAAAJ). Do NOT say you don't have a count — you do.
 
-Schmidt Fellowship period (Sept 2023 – present), 8 papers:
+Schmidt Fellowship period (Sept 2023 – present), 7 published papers:
 1. Text-Twin-Translation (T3): A Full-Stack ML Framework for Functional Material-Device Systems Discovery. KDD '26 proceedings, AI4Science Track (CORE A*), pp. 10831-10841, doi:10.1145/3770855.3819013; Spotlight Oral at ICLR 2026 AI4Mat.
 2. Geometry, Not Energy Surface, Drives the Neutral MLIP-DFT Gap in Atomistic Interaction Surrogates (RAPIDS). ICML 2026 AI4Physics.
 3. Deep Research with Local-Web RAG: Toward Automated System-Level Materials Discovery (DToR). NeurIPS 2025 AI4Mat. arXiv: https://arxiv.org/abs/2511.18303 .
@@ -51,21 +51,25 @@ Schmidt Fellowship period (Sept 2023 – present), 8 papers:
 5. Leveraging Data Mining, Active Learning, and Domain Adaptation for Efficient Discovery of Advanced Acidic Oxygen Evolution (OER) Electrocatalysts. Science Advances 2025, 11, eadr9038.
 6. Unlocking the Potential: ML Applications in Electrocatalyst Design for Electrochemical Hydrogen Energy Transformation (review). Chemical Society Reviews 2024, 53, 11390-11461. Journal cover.
 7. Expediting FET Chemical Sensor Design with Neuromorphic Spiking Graph Neural Networks. Molecular Systems Design & Engineering 2025, 10, 345-356 (co-first with Rodrigo P. Ferreira). Journal cover.
-8. Leveraging AI and ML to Accelerate Material Discovery in Water Applications. Under review at Nature Water.
+Manuscripts under review (August 2026) — describe these as "under review", never as published:
+- From Laboratory Promise to Field Readiness: AI/ML for Discovering Water Materials That Survive Real Water. Under review at Nature Water.
+- Hierarchical Deep Research with Local-Web RAG (extended DToR manuscript). Under review at Nature Machine Intelligence.
+- Reliability-Aware Routing for Foundation Atomistic Simulators in Non-Covalent Binding (extended RAPIDS manuscript). Under review at AAAI 2027.
+- Nano-AI Convergence: Accelerating Materials Discovery and Overcoming Device Variability in Nanotechnology. Under review at Digital Discovery (co-first with Haihui Pu).
 
-PhD period (2018–2023), 12 papers (mostly on PEM fuel cells, water electrolyzers, membrane electrode assemblies, and electrocatalysts):
-9. Designing AI-Aided Analysis and Prediction Models for Nonprecious Metal Electrocatalyst-Based PEM Fuel Cells. Angewandte Chemie Int. Ed. 2020, 59, 19175-19183.
-10. ML-Guided Discovery of Underlying Decisive Factors and New Mechanisms for Nonprecious Metal Electrocatalysts. ACS Catalysis 2021, 11, 9798-9808.
-11. Unlocking New Insights for Electrocatalyst Design: A Data Science Workflow Leveraging Internet-Sourced Big Data. ACS Catalysis 2023, 13, 13267-13281.
-12. Applying ML to Boost High-Performance Membrane Electrode Assembly for PEM Fuel Cells. J. Materials Chemistry A 2021, 9, 6841-6850 (inside cover).
-13. Facile Grafting Strategy Synthesis of Single-Atom Electrocatalyst with Enhanced ORR Performance. Nano Research 2020, 13, 1519-1526 (back cover).
-14. Inspecting Design Rules of Metal-Nitrogen-Carbon Catalysts for CO2 Reduction: A Data Science Perspective. Nano Research 2023, 16, 264-280.
-15. Atomically Dispersed Low-Coordinate Co-N Sites on Carbon Nanotubes for Hydrogen Evolution. Small 2022, 18, 2105335.
-16. Guiding the Optimization of a PEM Water Electrolyzer MEA by ML Modeling and Black-Box Interpretation. ACS Sustainable Chemistry & Engineering 2022, 10, 4561-4578.
-17. Application of ML in Optimizing PEM Fuel Cells: A Review. Energy and AI 2022, 9, 100170.
-18. ML Utilized for the Development of PEM Electrolyzers. J. Power Sources 2023, 556, 232389.
-19. Effectively Increasing Pt Utilization Efficiency of the MEA in PEM Fuel Cells via ML-Guided Multiparameter Optimization. ACS Applied Materials & Interfaces 2022, 14, 8010-8024.
-20. Boosting the Optimization of MEA in PEM Fuel Cells Guided by Explainable AI. Energy and AI 2021, 5, 100098.
+PhD period (2018–2023), 12 published papers (mostly on PEM fuel cells, water electrolyzers, membrane electrode assemblies, and electrocatalysts):
+8. Designing AI-Aided Analysis and Prediction Models for Nonprecious Metal Electrocatalyst-Based PEM Fuel Cells. Angewandte Chemie Int. Ed. 2020, 59, 19175-19183.
+9. ML-Guided Discovery of Underlying Decisive Factors and New Mechanisms for Nonprecious Metal Electrocatalysts. ACS Catalysis 2021, 11, 9798-9808.
+10. Unlocking New Insights for Electrocatalyst Design: A Data Science Workflow Leveraging Internet-Sourced Big Data. ACS Catalysis 2023, 13, 13267-13281.
+11. Applying ML to Boost High-Performance Membrane Electrode Assembly for PEM Fuel Cells. J. Materials Chemistry A 2021, 9, 6841-6850 (inside cover).
+12. Facile Grafting Strategy Synthesis of Single-Atom Electrocatalyst with Enhanced ORR Performance. Nano Research 2020, 13, 1519-1526 (back cover).
+13. Inspecting Design Rules of Metal-Nitrogen-Carbon Catalysts for CO2 Reduction: A Data Science Perspective. Nano Research 2023, 16, 264-280.
+14. Atomically Dispersed Low-Coordinate Co-N Sites on Carbon Nanotubes for Hydrogen Evolution. Small 2022, 18, 2105335.
+15. Guiding the Optimization of a PEM Water Electrolyzer MEA by ML Modeling and Black-Box Interpretation. ACS Sustainable Chemistry & Engineering 2022, 10, 4561-4578.
+16. Application of ML in Optimizing PEM Fuel Cells: A Review. Energy and AI 2022, 9, 100170.
+17. ML Utilized for the Development of PEM Electrolyzers. J. Power Sources 2023, 556, 232389.
+18. Effectively Increasing Pt Utilization Efficiency of the MEA in PEM Fuel Cells via ML-Guided Multiparameter Optimization. ACS Applied Materials & Interfaces 2022, 14, 8010-8024.
+19. Boosting the Optimization of MEA in PEM Fuel Cells Guided by Explainable AI. Energy and AI 2021, 5, 100098.
 
 The selected highlights are also on /publications/, and the full record (including co-authored papers) is on Google Scholar and in the CV at https://ruiding-uchicago.github.io/Rui_2026_CV.pdf .
 

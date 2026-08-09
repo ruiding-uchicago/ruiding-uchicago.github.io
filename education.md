@@ -71,9 +71,15 @@ permalink: /education/
 </div>
 
 <div class="publication-item">
+    <div class="publication-title">ACM SIGKDD 2026 (KDD) &mdash; Main Conference</div>
+    <div class="publication-authors">Text-Twin-Translation (T<sup>3</sup>), AI for Sciences Track</div>
+    <div class="publication-venue">Jeju Island, Republic of Korea &mdash; 2026</div>
+</div>
+
+<div class="publication-item">
     <div class="publication-title">ICML 2026 AI4Physics Workshop</div>
     <div class="publication-authors">Poster: Geometry, Not Energy Surface, Drives the Neutral MLIP&ndash;DFT Gap (RAPIDS)</div>
-    <div class="publication-venue">July 2026 &mdash; upcoming</div>
+    <div class="publication-venue">Seoul, Republic of Korea &mdash; July 2026</div>
 </div>
 
 <div class="publication-item">
@@ -141,6 +147,12 @@ permalink: /education/
     <div class="publication-title">2026 Schmidt AI in Science Faculty Fellowship</div>
     <div class="publication-authors">Mentoring Omolola Ogbolumani (faculty, University of Lagos, Nigeria) &mdash; Human-in-the-Loop AI Design for Food, Energy, and Water Nexus (FEW-N) Optimization</div>
     <div class="publication-venue">University of Chicago, Jan.&ndash;Jun. 2026</div>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">NSF Research Traineeship &mdash; Curriculum Developer</div>
+    <div class="publication-authors">Created and open-sourced four end-to-end AI/ML modules built on published scientific datasets</div>
+    <div class="publication-venue">University of Chicago, 2026</div>
 </div>
 
 <div class="publication-item">

@@ -18,3 +18,8 @@ worker/.wrangler/
 
 # personal GIF/MP4 exports — video assets, not part of the website
 gif-exports/
+
+# CV working files — only the built PDF is published
+*.docx
+~$*
+Rui_Ding_CV_*
