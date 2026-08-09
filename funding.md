@@ -11,7 +11,7 @@ permalink: /funding/
 </div>
 
 <div class="card mt-8 mb-4">
-    <span class="tag tag-primary mb-4">2023&ndash;2026</span>
+    <span class="tag tag-primary mb-4">2023&ndash;Present</span>
     <h3 class="feature-title">Eric and Wendy Schmidt AI in Science Fellowship</h3>
     <p class="text-muted mb-2">Schmidt Sciences &mdash; Cohort 2</p>
     <p class="feature-description">Fellowship supporting AI-driven scientific research at the University of Chicago.</p>

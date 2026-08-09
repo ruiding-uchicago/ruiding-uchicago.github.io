@@ -56,7 +56,7 @@ mathjax: true
     <h2 class="section-title">Platforms Other People Can Use</h2>
 </div>
 
-<p>A discovery loop is only as durable as the plumbing under it. I am the lead designer and developer of the data platform for <strong>NSF MADE-PUBLIC</strong> (FMRG #2037026): a browser-accessible layer over Globus-based data lifecycle management, searchable metadata, interactive knowledge graphs, Bayesian experiment design, and simulation workflows &mdash; built so collaborators across institutions can use it without owning the stack. The same instinct shapes the rest of the work: RAPIDS ships as a verification service agents can call, and DToR and T<sup>3</sup> ship as open repositories rather than screenshots in a paper.</p>
+<p>A discovery loop is only as durable as the plumbing under it. I am the lead designer and developer of the data platform for <strong>NSF MADE-PUBLIC</strong> (FMRG #2037026): a browser-accessible layer over Globus-based data lifecycle management, searchable metadata, interactive knowledge graphs, Bayesian experiment design, and simulation workflows. Collaborators across institutions can use it without owning the stack. The same instinct shapes the rest of the work: RAPIDS ships as a verification service agents can call, and DToR and T<sup>3</sup> ship as open repositories rather than screenshots in a paper.</p>
 
 <div class="section-header mt-8">
     <span class="eyebrow">Where It Lands</span>

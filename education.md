@@ -147,7 +147,7 @@ permalink: /education/
 
 <div class="publication-item">
     <div class="publication-title">Curriculum &mdash; NSF Research Traineeship, UChicago PME</div>
-    <div class="publication-authors">Four open-source AI/ML modules for graduate students, each built on a published research dataset rather than a teaching toy: literature-mined electrocatalyst property prediction, device-stability modelling, LLM knowledge extraction from sensor papers, and a controlled comparison of text- versus image-based extraction. Every notebook runs end to end from shipped cache &mdash; no API key and no cost to the student. <a href="https://github.com/ruiding-uchicago/NRT_Training_Materials" target="_blank">Materials</a></div>
+    <div class="publication-authors">Four open-source AI/ML modules for graduate students, each built on a published research dataset rather than a teaching toy: literature-mined electrocatalyst property prediction, device-stability modelling, LLM knowledge extraction from sensor papers, and a controlled comparison of text- versus image-based extraction. Every notebook runs end to end from shipped cache, with no API key and no cost to the student. <a href="https://github.com/ruiding-uchicago/NRT_Training_Materials" target="_blank">Materials</a></div>
     <div class="publication-venue">University of Chicago, 2026</div>
 </div>
 
