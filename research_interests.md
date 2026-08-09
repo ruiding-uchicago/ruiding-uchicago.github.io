@@ -13,6 +13,8 @@ mathjax: true
 
 <p>Complex functional materials and devices sit in a regime mainstream ML-for-science rarely touches: the systems are complicated, every data point is expensive, and there is no database or benchmark to start from. That regime is what my research targets, with an AI co-scientist stack running from hypothesis generation through device digital twins to physical validation.</p>
 
+<p>The organizing idea: in this regime, autonomy is a decision problem before it is a robotics problem. The bottleneck is not how fast a platform can run experiments &mdash; it is knowing which experiment is worth running, and whether the model that proposed it can be trusted. My bias, learned from running the loop by hand, is to automate the step that returns the most information per run rather than the step that returns the most runs per day.</p>
+
 <div class="section-header mt-8">
     <span class="eyebrow">Pillar 01</span>
     <h2 class="section-title">Data-Scarce, Unbenchmarked Materials &amp; Device Discovery</h2>
@@ -43,9 +45,18 @@ mathjax: true
     <h2 class="section-title">Rapid Physical Validation with RAPIDS &amp; Experiments</h2>
 </div>
 
-<p><strong>RAPIDS</strong> is the atomistic validation engine of the stack. It benchmarks machine-learning interatomic potentials against DFT on 5,567 probe&ndash;target dimer interactions across 18 benchmarks; the result is that geometry, not the energy surface, drives the neutral MLIP&ndash;DFT gap. It is also packaged as a tool autonomous LLM agents can call for fast physical sanity checks. The last gate is the one I was trained for: nanomaterial synthesis, device fabrication, and electrochemical testing in the wet lab.</p>
+<p><strong>RAPIDS</strong> is the atomistic validation engine of the stack. It benchmarks machine-learning interatomic potentials against DFT on 5,567 probe&ndash;target dimer interactions across 18 benchmarks; the result is that geometry, not the energy surface, drives the neutral MLIP&ndash;DFT gap. It is also packaged as a tool autonomous LLM agents can call for fast physical sanity checks &mdash; a verifier the agent has to answer to, not an oracle it can ignore.</p>
+
+<p>The last gate is the one I run myself: nanomaterial synthesis, device fabrication, and electrochemical testing at the bench. I have taken a full campaign through this loop by hand &mdash; literature mining to active learning to synthesis to a membrane-electrode assembly that outran a commercial catalyst (<a href="https://www.science.org/doi/10.1126/sciadv.adr9038">Science Advances, 2025</a>). Doing both sides is the point: a loop that never reaches the bench turns, but it does not close.</p>
 
 {% include fid-slider.html %}
+
+<div class="section-header mt-8">
+    <span class="eyebrow">Infrastructure</span>
+    <h2 class="section-title">Platforms Other People Can Use</h2>
+</div>
+
+<p>A discovery loop is only as durable as the plumbing under it. I am the lead designer and developer of the data platform for <strong>NSF MADE-PUBLIC</strong> (FMRG #2037026): a browser-accessible layer over Globus-based data lifecycle management, searchable metadata, interactive knowledge graphs, Bayesian experiment design, and simulation workflows &mdash; built so collaborators across institutions can use it without owning the stack. The same instinct shapes the rest of the work: RAPIDS ships as a verification service agents can call, and DToR and T<sup>3</sup> ship as open repositories rather than screenshots in a paper.</p>
 
 <div class="section-header mt-8">
     <span class="eyebrow">Where It Lands</span>

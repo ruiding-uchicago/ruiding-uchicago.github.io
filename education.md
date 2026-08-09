@@ -49,14 +49,14 @@ permalink: /education/
 </div>
 
 <div class="publication-item">
-    <div class="publication-title">Ph.D. in Engineering</div>
-    <div class="publication-authors">Nanjing University, China</div>
+    <div class="publication-title">Ph.D. in Materials Science and Engineering</div>
+    <div class="publication-authors">Nanjing University, China &mdash; machine learning, electrocatalysts, membrane-electrode assemblies, fuel cells, water electrolyzers</div>
     <div class="publication-venue">Sept. 2018 &ndash; Jun. 2023</div>
 </div>
 
 <div class="publication-item">
-    <div class="publication-title">Visiting Internship</div>
-    <div class="publication-authors">Hong Kong University of Science and Technology</div>
+    <div class="publication-title">Visiting Graduate Researcher</div>
+    <div class="publication-authors">Department of Chemical and Biological Engineering, Hong Kong University of Science and Technology</div>
     <div class="publication-venue">Oct. 2022 &ndash; Apr. 2023</div>
 </div>
 
@@ -140,6 +140,29 @@ permalink: /education/
 </div>
 
 <div class="section-header mt-8">
+    <h2 class="section-title">Teaching</h2>
+</div>
+
+<p class="text-muted mb-4">Three principles, learned from running the discovery loop myself: connect theory to device behaviour a student can actually observe; make them implement and break the models rather than watch them run; and treat a defended validation as part of the result, not a formality at the end of it.</p>
+
+<div class="publication-item">
+    <div class="publication-title">Curriculum &mdash; NSF Research Traineeship, UChicago PME</div>
+    <div class="publication-authors">Four open-source AI/ML modules for graduate students, each built on a published research dataset rather than a teaching toy: literature-mined electrocatalyst property prediction, device-stability modelling, LLM knowledge extraction from sensor papers, and a controlled comparison of text- versus image-based extraction. Every notebook runs end to end from shipped cache &mdash; no API key and no cost to the student. <a href="https://github.com/ruiding-uchicago/NRT_Training_Materials" target="_blank">Materials</a></div>
+    <div class="publication-venue">University of Chicago, 2026</div>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">Assessment design &mdash; AI+Science Hackathon</div>
+    <div class="publication-authors">Built the evaluation harness for the knowledge-graph track: a reference-free composite score, validated against a multi-model LLM-judge rubric, so six teams could be compared on evidence rather than impressions. <a href="https://github.com/chicago-aiscience/Clinical_KG_OS_LLM" target="_blank">Harness</a></div>
+    <div class="publication-venue">University of Chicago, 2026</div>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">Prepared to teach</div>
+    <div class="publication-authors">Introduction to materials science &middot; materials characterization &middot; computational materials science &middot; electrochemical energy materials &middot; nanomaterials. New electives developed: Machine Learning for Materials; Autonomous Materials Discovery.</div>
+</div>
+
+<div class="section-header mt-8">
     <h2 class="section-title">Mentorship &amp; Service</h2>
 </div>
 
@@ -150,14 +173,8 @@ permalink: /education/
 </div>
 
 <div class="publication-item">
-    <div class="publication-title">NSF Research Traineeship &mdash; Curriculum Developer</div>
-    <div class="publication-authors">Created and open-sourced four end-to-end AI/ML modules built on published scientific datasets</div>
-    <div class="publication-venue">University of Chicago, 2026</div>
-</div>
-
-<div class="publication-item">
-    <div class="publication-title">2026 AI+Science Hackathon</div>
-    <div class="publication-authors">Judge; source code &amp; dataset provider for the multi-agent framework track</div>
+    <div class="publication-title">2026 AI+Science Hackathon &mdash; Technical Lead</div>
+    <div class="publication-authors">Defined the multi-agent / knowledge-graph track: task design, curated dataset, evaluation harness, and judging</div>
     <div class="publication-venue">University of Chicago, April 2026</div>
 </div>
 
