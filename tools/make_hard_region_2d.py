@@ -79,31 +79,37 @@ def dust():
     return out
 
 def draw(bg, path_stem):
-    fig, ax = plt.subplots(figsize=(10, 6.2), dpi=200)
+    fig, ax = plt.subplots(figsize=(13, 7.6), dpi=200)
     fig.patch.set_facecolor(bg); ax.set_facecolor(bg)
 
-    N = 340
-    gx = np.linspace(0, 1, N); gy = np.linspace(0, 1, int(N*0.62))
+    # evaluate slightly past the frame so the wash bleeds off-edge instead of
+    # ending on a visible rectangle
+    XL, YL = (-0.02, 1.02), (-0.02, 1.06)
+    N = 360
+    gx = np.linspace(*XL, N); gy = np.linspace(*YL, int(N*0.62))
     Z = np.array([[field(u, v) for u in gx] for v in gy])
+    # pale hypsometric wash: one hue, monotonically deeper as difficulty rises
+    WASH = ["#ffffff","#fbf6f4","#f7efec","#f2e6e2","#ece0da","#e5d5ce","#ddc9c1","#d4bcb3","#cbafa5"]
+    ax.contourf(gx, gy, Z, levels=[-1]+LEVELS+[2], colors=WASH, zorder=0)
     ax.contour(gx, gy, Z, levels=LEVELS, colors=GRID, linewidths=0.7, zorder=1)
 
     dx, dy = zip(*dust())
-    ax.scatter(dx, dy, s=3.2, c=FAINT, alpha=0.30, linewidths=0, zorder=2)
+    ax.scatter(dx, dy, s=4.5, c=FAINT, alpha=0.30, linewidths=0, zorder=2)
 
-    def plot(group, color, marker, size, msize):
+    def plot(group, color, marker, size, msize, side="right"):
         for u, v, label, minor in group:
             ax.scatter([u], [v], s=size*(0.42 if minor else 1), c=color, marker=marker,
                        linewidths=0, zorder=4)
             if not minor:
-                left = u > 0.85          # keep right-edge labels inside the frame
-                ax.annotate(label, (u, v), xytext=(-8 if left else 8, 0),
+                left = side == "left" or u > 0.85   # keep labels inside the frame
+                ax.annotate(label, (u, v), xytext=(-11 if left else 11, 0),
                             textcoords="offset points", fontfamily=MONO, fontsize=msize,
                             color=INK, va="center", ha="right" if left else "left", zorder=5)
-    plot(BENCH, TEAL,   "o", 34, 8.2)
-    plot(DISC,  GOLD,   "D", 30, 8.2)
-    plot(HARD,  MAROON, "^", 52, 8.8)
+    plot(BENCH, TEAL,   "o", 62, 12.5)
+    plot(DISC,  GOLD,   "D", 56, 12.5)
+    plot(HARD,  MAROON, "^", 96, 13.5, side="left")
 
-    zone = dict(fontfamily=MONO, fontsize=9.6, color=MUTED, zorder=5)
+    zone = dict(fontfamily=MONO, fontsize=14.5, color=MUTED, zorder=5)
     ax.text(0.015, 0.315, "BENCHMARK-RICH", **zone)
     ax.text(0.325, 0.520, "ACTIVE DISCOVERY", **zone)
     ax.text(0.585, 0.985, "THE HARD REGION", **{**zone, "color": INK})
@@ -116,25 +122,25 @@ def draw(bg, path_stem):
                 textcoords=("axes fraction","axes fraction"),
                 arrowprops=dict(arrowstyle="-|>", color=FAINT, lw=0.9, shrinkA=0, shrinkB=0))
     ax.text(0.5, -0.075, "SYSTEM COMPLEXITY", transform=ax.transAxes, ha="center",
-            fontfamily=MONO, fontsize=9, color=MUTED)
+            fontfamily=MONO, fontsize=12.5, color=MUTED)
     ax.text(-0.052, 0.5, "DATA COST", transform=ax.transAxes, va="center", ha="center",
-            rotation=90, fontfamily=MONO, fontsize=9, color=MUTED)
+            rotation=90, fontfamily=MONO, fontsize=12.5, color=MUTED)
 
     handles = [Line2D([],[],marker=m,color="none",markerfacecolor=c,markeredgecolor="none",markersize=s,label=l)
-               for m,c,s,l in [("o",TEAL,6.2,"data-rich  ·  benchmarked"),
-                               ("D",GOLD,5.6,"active discovery"),
-                               ("^",MAROON,7.0,"data-scarce / unbenchmarked")]]
+               for m,c,s,l in [("o",TEAL,8.5,"data-rich  ·  benchmarked"),
+                               ("D",GOLD,7.8,"active discovery"),
+                               ("^",MAROON,9.5,"data-scarce / unbenchmarked")]]
     leg = ax.legend(handles=handles, loc="lower right", frameon=True,
                     facecolor=bg, edgecolor="none", framealpha=0.92,
-                    prop={"family":MONO,"size":8.4}, labelspacing=0.75,
+                    prop={"family":MONO,"size":11.5}, labelspacing=0.75,
                     handletextpad=0.7, borderpad=0.9)
     leg.set_zorder(6)
     for t in leg.get_texts(): t.set_color(MUTED)
 
-    ax.set_xlim(-0.02, 1.06); ax.set_ylim(-0.02, 1.06)
+    ax.set_xlim(*XL); ax.set_ylim(*YL)
     ax.set_xticks([]); ax.set_yticks([])
     for sp in ax.spines.values(): sp.set_visible(False)
-    fig.subplots_adjust(left=0.055, right=0.995, top=0.98, bottom=0.085)
+    fig.subplots_adjust(left=0.075, right=0.99, top=0.985, bottom=0.105)
     for ext in ("svg","png"):
         fig.savefig(f"{path_stem}.{ext}", facecolor=bg, format=ext)
     plt.close(fig)
