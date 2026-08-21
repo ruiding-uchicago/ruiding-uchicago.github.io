@@ -79,7 +79,7 @@ def dust():
     return out
 
 def draw(bg, path_stem):
-    fig, ax = plt.subplots(figsize=(13, 7.6), dpi=200)
+    fig, ax = plt.subplots(figsize=(16.5, 7.4), dpi=200)
     fig.patch.set_facecolor(bg); ax.set_facecolor(bg)
 
     # evaluate slightly past the frame so the wash bleeds off-edge instead of
@@ -94,7 +94,7 @@ def draw(bg, path_stem):
     ax.contour(gx, gy, Z, levels=LEVELS, colors=GRID, linewidths=0.7, zorder=1)
 
     dx, dy = zip(*dust())
-    ax.scatter(dx, dy, s=4.5, c=FAINT, alpha=0.30, linewidths=0, zorder=2)
+    ax.scatter(dx, dy, s=6.0, c=FAINT, alpha=0.30, linewidths=0, zorder=2)
 
     def plot(group, color, marker, size, msize, side="right"):
         for u, v, label, minor in group:
@@ -102,14 +102,14 @@ def draw(bg, path_stem):
                        linewidths=0, zorder=4)
             if not minor:
                 left = side == "left" or u > 0.85   # keep labels inside the frame
-                ax.annotate(label, (u, v), xytext=(-11 if left else 11, 0),
+                ax.annotate(label, (u, v), xytext=(-14 if left else 14, 0),
                             textcoords="offset points", fontfamily=MONO, fontsize=msize,
                             color=INK, va="center", ha="right" if left else "left", zorder=5)
-    plot(BENCH, TEAL,   "o", 62, 12.5)
-    plot(DISC,  GOLD,   "D", 56, 12.5)
-    plot(HARD,  MAROON, "^", 96, 13.5, side="left")
+    plot(BENCH, TEAL,   "o", 92, 15.9)
+    plot(DISC,  GOLD,   "D", 84, 15.9)
+    plot(HARD,  MAROON, "^", 142, 17.0, side="left")
 
-    zone = dict(fontfamily=MONO, fontsize=14.5, color=MUTED, zorder=5)
+    zone = dict(fontfamily=MONO, fontsize=18.0, color=MUTED, zorder=5)
     ax.text(0.015, 0.315, "BENCHMARK-RICH", **zone)
     ax.text(0.325, 0.520, "ACTIVE DISCOVERY", **zone)
     ax.text(0.585, 0.985, "THE HARD REGION", **{**zone, "color": INK})
@@ -122,17 +122,17 @@ def draw(bg, path_stem):
                 textcoords=("axes fraction","axes fraction"),
                 arrowprops=dict(arrowstyle="-|>", color=FAINT, lw=0.9, shrinkA=0, shrinkB=0))
     ax.text(0.5, -0.075, "SYSTEM COMPLEXITY", transform=ax.transAxes, ha="center",
-            fontfamily=MONO, fontsize=12.5, color=MUTED)
+            fontfamily=MONO, fontsize=15.5, color=MUTED)
     ax.text(-0.052, 0.5, "DATA COST", transform=ax.transAxes, va="center", ha="center",
-            rotation=90, fontfamily=MONO, fontsize=12.5, color=MUTED)
+            rotation=90, fontfamily=MONO, fontsize=15.5, color=MUTED)
 
     handles = [Line2D([],[],marker=m,color="none",markerfacecolor=c,markeredgecolor="none",markersize=s,label=l)
-               for m,c,s,l in [("o",TEAL,8.5,"data-rich  ·  benchmarked"),
-                               ("D",GOLD,7.8,"active discovery"),
-                               ("^",MAROON,9.5,"data-scarce / unbenchmarked")]]
+               for m,c,s,l in [("o",TEAL,10.5,"data-rich  ·  benchmarked"),
+                               ("D",GOLD,9.6,"active discovery"),
+                               ("^",MAROON,11.5,"data-scarce / unbenchmarked")]]
     leg = ax.legend(handles=handles, loc="lower right", frameon=True,
                     facecolor=bg, edgecolor="none", framealpha=0.92,
-                    prop={"family":MONO,"size":11.5}, labelspacing=0.75,
+                    prop={"family":MONO,"size":14.5}, labelspacing=0.75,
                     handletextpad=0.7, borderpad=0.9)
     leg.set_zorder(6)
     for t in leg.get_texts(): t.set_color(MUTED)
