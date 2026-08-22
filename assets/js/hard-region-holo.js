@@ -12,7 +12,7 @@ import { D } from './hr-holo-data.js';
 const M=Math,N=19,NR=N+1;   // +1 uniform slot: the examine base ring
 /* node order = main module's BENCH(8) + DISC(6) + HARD(5) */
 const KEYS=['bz','nacl','cu111','caf','spn','heu','asp','si',
-  'sto','mof','fcc','sod','mos2','lco','@mea','@ely','@fet','pfoa','@core'];
+  'sto','mof','fcc','sod','mos2','lco','@mea','@ely','@fet','pfoa','@moxide'];
 const TWEAK={ bz: 0.8,caf: 0.95,asp: 0.95,mof: 1.1,sod: 1.05,'@mea': 1.1,'@ely': 1.1,'@fet': 1.05 };
 const SC=[0.036,0.036,0.048],RISE=[0.05,0.05,0.036],LIFT=[0.012,0.012,0.055];   // per zone class
 /* examine panel data — node order above. CAP: structure caption (real data);
@@ -24,7 +24,7 @@ const CAP=['C₆H₆ · benzene · PubChem 241','NaCl · Fm3̄m · rock salt','C
   'sodalite · SOD cage','MoS₂ · 1H monolayer','LiCoO₂ · R3̄m layered',
   'MEA · membrane | catalyst | GDL','MEA · O₂ evolution · exploded stack',
   'FET · source | drain | channel + probe','PFOA · C₈HF₁₅O₂ · helical −CF₂− backbone',
-  'core–shell nanoparticle · ligand shell'];
+  'multimetallic oxide · mixed cation sites'];
 const CP=['134k small organic molecules, 13 DFT properties each. the first benchmark every molecular model meets.',
   '150k+ inorganic crystals with computed properties, one API call away. the reference atlas of crystal space.',
   '1.3M DFT relaxations of adsorbate–catalyst surfaces. adsorption ML at industrial scale.',
@@ -105,23 +105,20 @@ function fet() {   // chip: substrate, source/drain pads, channel, probe molecul
   L.push([0,0,0.28],[0,0,-0.2]);                        // probe → channel
   return { A,L };
 }
-function core() {   // core–shell nanoparticle + ligand shell
-  const A=[[0,0,0,3]],L=[],r=0.62,t=(1+M.sqrt(5))/2;
-  [[0,1,t],[0,-1,t],[0,1,-t],[0,-1,-t],[1,t,0],[-1,t,0],[1,-t,0],[-1,-t,0],[t,0,1],[-t,0,1],[t,0,-1],[-t,0,-1]]
-    .forEach(v=>{ const s=0.3/M.hypot(v[0],v[1],v[2]);A.push([v[0]*s,v[1]*s,v[2]*s,2]);});
-  for (let ax=0;ax<3;ax++) for (let k=0;k<18;k++) {   // 3 orthogonal shell rings
-    const p=j=>{ const a=(k+j)/18*2*M.PI,u=M.cos(a)*r,v=M.sin(a)*r;
-      return ax<1?[u,v,0]:ax<2?[u,0,v]:[0,u,v];};
-    L.push(p(0),p(1));
+function moxide() {   // multimetallic oxide: oxide lattice, several cations on the metal sites
+  const A=[],L=[],a=0.34,P=[];
+  for (let i=0;i<3;i++) for (let j=0;j<3;j++) for (let k=0;k<3;k++) {
+    const x=(i-1)*a,y=(j-1)*a,z=(k-1)*a,cat=(i+j+k)%2===0;
+    A.push([x,y,z,cat?1+((i*3+j*2+k)%3):0]);   // cation size varies = different metals
+    P.push([x,y,z]);
   }
-  for (let k=0;k<8;k++) {   // ligands
-    const a=k/8*2*M.PI,z=k%2?0.55:-0.55,q=M.sqrt(1-z*z);
-    const d=[M.cos(a)*q,M.sin(a)*q,z];
-    L.push(d.map(x=>x*r),d.map(x=>x*0.92));A.push([d[0]*0.97,d[1]*0.97,d[2]*0.97,0]);
+  for (let m=0;m<P.length;m++) for (let n=m+1;n<P.length;n++) {
+    const d=M.hypot(P[m][0]-P[n][0],P[m][1]-P[n][1],P[m][2]-P[n][2]);
+    if (d<a*1.05) L.push(P[m],P[n]);          // metal-oxygen bonds
   }
   return { A,L };
 }
-const DEV={ '@mea': mea,'@ely': ely,'@fet': fet,'@core': core };
+const DEV={ '@mea': mea,'@ely': ely,'@fet': fet,'@moxide': moxide };
 
 /* ---------- structure geometry: decode baked (Int8 ×120) or build device ---------- */
 function b64(s) {
@@ -200,7 +197,7 @@ export function mk(S,ctx) {
       const dt=M.min(0.1,(t-lt)||0);lt=t;
       const lit=z=>{ const e=S.zones[z]&&S.zones[z].el;return !!e&&e.classList.contains('lit');};
       const l0=lit(0),l1=lit(1),col=[S.col.teal,S.col.champ,S.col.crim];
-      const ov=S.overN,oi=ov?(ov.cls==='bench'?ov.i:ov.cls==='disc'?8+ov.i:14+ov.i):-1;
+      const oi=S.overG==null?-1:S.overG;   // slot, already translated by the host
       const q=S.ex>=0?S.ex:-1,xd=S.exDim||0,ek=1-M.exp(-dt*8);
       if (q>=0) lq=q;
       ringA+=((q>=0?0.55:0)-ringA)*ek;

@@ -64,7 +64,7 @@ const DISC=[
   { u: 0.375, v: 0.335, label: 'perovskites' },
   { u: 0.510, v: 0.400, label: 'MOFs' },
   { u: 0.565, v: 0.530, label: 'alloys' },
-  { u: 0.365, v: 0.205, label: 'zeolites' },
+  { u: 0.405, v: 0.215, label: 'zeolites' },
   { u: 0.470, v: 0.465, label: '2D materials' },
   { u: 0.450, v: 0.270, label: 'battery cathodes' }];
 const HARD=[   // disp: short on-map form; label (full name) still drives #hr-info
@@ -535,6 +535,14 @@ function exEnter(cls,i) {   // examine any node; full ceremony = hard five
   if (hd) S.fly=[AZ0,0.5,1.55,wx(n.u),wy(n.v),nodeZ(n,0.055)+0.17];   // close-up
   else if (wasH) S.fly=POSE[3];
 }
+function lblOver(cls, i) {   // label hover: caption AND hologram, same as the marker
+  const n = nodeOf(cls, i);
+  hoverInfo(cls, n);
+  S.overN = { cls, i };
+  S.overG = hGi(cls, i, n);
+  S.lastUserT = NOW();
+}
+function lblOut() { hoverInfo(null, null);S.overN = null;S.overG = -1;}
 function exExit() {   // Esc / click-away
   if (S.ex<0) return;
   if (S.ex>=14) S.fly=POSE[3];
@@ -858,7 +866,7 @@ function bindEvents() {
   };
   on(fig, 'pointerenter', () => { S.pointerOver = true; });
   on(fig, 'pointerleave', () => {
-    S.pointerOver=false;S.lastUserT=NOW();S.overN=null;
+    S.pointerOver=false;S.lastUserT=NOW();S.overN=null;S.overG=-1;
     disengage();setHot(-1);hoverInfo(null,null);
   });
   on(fig, 'pointerdown', () => engage(), true);   // first pointerdown engages wheel
@@ -888,6 +896,10 @@ function bindEvents() {
     S.overV=!!(S.vex&&S.vex.pk(p.x,p.y,S.hov));
     cv.style.cursor = nn||S.overV ? 'pointer' : '';
     S.lastUserT=NOW();S.overN=nn;S.hx=p.x;S.hy=p.y;   // hover = live measurement
+    /* holo indexes its own fixed slots, not the 16-slot visual roster: translate
+       here so a dataset without baked content resolves to -1 (show nothing)
+       instead of colliding with whatever occupies that slot number. */
+    S.overG=nn?hGi(nn.cls,nn.i,nodeOf(nn.cls,nn.i)):-1;
     hoverInfo(nn?nn.cls:null, nn?nodeOf(nn.cls,nn.i):null);
     if (!nn&&(S.mvN=!S.mvN)) S.hov=pickTerrain(p.x,p.y);
   });
@@ -940,12 +952,12 @@ function buildDOM() {
       el.tabIndex = 0;   // Tab cycles the five hard systems
       el.addEventListener('focus', () => exEnter('hard', i));
       el.addEventListener('click', e => { e.stopPropagation(); exEnter('hard', i); });
-      el.addEventListener('mouseenter', () => hoverInfo('hard', HARD[i]));
-      el.addEventListener('mouseleave', () => hoverInfo(null, null));
+      el.addEventListener('mouseenter', () => lblOver('hard', i));
+      el.addEventListener('mouseleave', () => lblOut());
     } else {
       AH(el);
-      el.addEventListener('mouseenter', () => hoverInfo(cls, nodeOf(cls, i)));
-      el.addEventListener('mouseleave', () => hoverInfo(null, null));
+      el.addEventListener('mouseenter', () => lblOver(cls, i));
+      el.addEventListener('mouseleave', () => lblOut());
     }
     lay.appendChild(el);
     S.spans[cls].push(el);
@@ -970,7 +982,7 @@ function buildDOM() {
   const keep = el => { if (el) S.saved.push([el, el.getAttribute('style')]); return el; };
   const zEls = fig.querySelectorAll('.hr-label');
   S.zones=[   // w/h: de-collision box, anchored clear of the cluster
-    { u: 0.26,v: 0.52,w: 210,h: 26,el: keep(zEls[0]) },
+    { u: 0.06,v: 0.70,w: 210,h: 26,el: keep(zEls[0]) },
     { u: 0.32,v: 0.62,w: 220,h: 26,el: keep(zEls[1]) },
     { u: 0.965,v: 1.17,w: 260,h: 34,el: keep(zEls[2]) }];
   RINGS.forEach(g=>{   // ring caption

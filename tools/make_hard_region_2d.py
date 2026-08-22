@@ -68,7 +68,7 @@ GROUPS = [("small molecules", "mol", -1, (0.000, -0.012)),
           ("pure crystals", "xtl", 1, None),
           ("simple surfaces", "srf", -1, None)]
 DISC  = [(0.375,0.335,"perovskites",0,""),(0.510,0.400,"MOFs",0,""),(0.565,0.530,"alloys",0,""),
-         (0.365,0.205,"zeolites",0,""),(0.470,0.465,"2D materials",0,""),(0.450,0.270,"battery cathodes",1,"")]
+         (0.405,0.215,"zeolites",0,""),(0.470,0.465,"2D materials",0,""),(0.450,0.270,"battery cathodes",1,"")]
 HARD  = [(0.67,0.78,"fuel cell membrane electrode assembly",0,""),(0.80,0.90,"water electrolyzer membrane electrode assembly",0,""),
          (0.94,0.71,"FET sensors",0,""),(0.80,0.68,"water pollutant sensing / adsorption composite membranes",0,""),
          (0.97,0.83,"multimetallic oxides",0,"")]

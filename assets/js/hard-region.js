@@ -161,7 +161,7 @@
       { u: 0.375, v: 0.335, label: 'perovskites' },
       { u: 0.510, v: 0.400, label: 'MOFs' },
       { u: 0.565, v: 0.530, label: 'alloys' },
-      { u: 0.365, v: 0.205, label: 'zeolites' },
+      { u: 0.405, v: 0.215, label: 'zeolites' },
       { u: 0.470, v: 0.465, label: '2D materials' },
       { u: 0.450, v: 0.270, label: 'battery cathodes' }
     ];
