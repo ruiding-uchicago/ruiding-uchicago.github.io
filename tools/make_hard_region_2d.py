@@ -5,6 +5,7 @@
 
 import math, numpy as np, matplotlib
 matplotlib.use("Agg")
+matplotlib.rcParams["mathtext.default"] = "regular"
 import matplotlib.pyplot as plt
 from matplotlib import font_manager as fm
 from matplotlib.lines import Line2D
@@ -178,6 +179,23 @@ def _atoms(ia, xyz, bonds, cls, col):
                s=[sz.get(cls[i], 14)*f for i in order], c=col,
                linewidths=0, zorder=2, alpha=0.95)
 
+
+# ---------- citation layer: representative landmark work per group / system ----------
+# Superscript on the label, full reference in the lower-right block. Every entry
+# verified against Crossref. Deliberately none in the hard region: no comparable
+# landmark for assembled multi-component devices turned up in an honest search.
+CITE = {"small molecules": 1, "pure crystals": 2, "simple surfaces": 3,
+        "perovskites": 4, "MOFs": 5, "alloys": 6, "2D materials": 7}
+SUP = {n: "$^{%d}$" % n for n in range(1, 8)}
+REFS = [(1, "Sch\u00fctt et al., J. Chem. Phys. 2018", "t"),
+        (2, "Merchant et al., Nature 2023", "t"),
+        (3, "Lan et al., npj Comput. Mater. 2023", "t"),
+        (4, "T. Wang et al., Matter 2023", "g"),
+        (5, "Kang et al., Nat. Mach. Intell. 2023", "g"),
+        (6, "Rao et al., Science 2022", "g"),
+        (7, "Harris et al., Small Methods 2024", "g")]
+sup = lambda lab: SUP[CITE[lab]] if lab in CITE else ""
+
 def draw(bg, path_stem):
     fig, ax = plt.subplots(figsize=(16.5, 7.4), dpi=200)
     fig.patch.set_facecolor(bg); ax.set_facecolor(bg)
@@ -214,11 +232,11 @@ def draw(bg, path_stem):
         ax.add_patch(Ellipse((cx, cy), w, h, fill=False, edgecolor=TEAL,
                              linewidth=1.0, linestyle=(0, (5, 4)), alpha=0.55, zorder=3))
         gx, gy = at if at else (cx, cy + up*(h/2 + (0.022 if up > 0 else 0.052)))
-        ax.text(gx, gy, gname,
+        ax.text(gx, gy, gname + sup(gname),
                 ha="left" if at else "center",
                 va="bottom" if (at or up > 0) else "top",
                 fontfamily=MONO, fontsize=15.9, color=INK, zorder=5)
-        tw = len(gname) * cw(15.9)
+        tw = (len(gname) + (1.1 if gname in CITE else 0)) * cw(15.9)
         gend = (gx + tw) if at else (gx + tw/2)
         if gname in GLYPH:
             draw_glyph(ax, GLYPH[gname], gend + 0.011 + 0.015, gy, 0.030, TEAL, ASPECT)
@@ -229,14 +247,14 @@ def draw(bg, path_stem):
             ax.scatter([u], [v], s=size*(1 if flat or not minor else 0.42), c=color,
                        marker=marker, linewidths=0, zorder=4)
             left = sec == "L" or (not sec and (side == "left" or u > 0.85))
-            ax.annotate(label, (u, v), xytext=(-11 if left else 11, 0),
+            ax.annotate(label + sup(label), (u, v), xytext=(-11 if left else 11, 0),
                         textcoords="offset points", fontfamily=MONO, fontsize=lsize,
                         color=lcol, va="center", ha="right" if left else "left", zorder=5)
             if label in GLYPH:
                 if gat == "mr":                  # just right of the marker itself
                     gx2 = u + 0.011 + gw/2
                 else:
-                    tw = len(label) * cw(lsize)
+                    tw = (len(label) + (1.1 if label in CITE else 0)) * cw(lsize)
                     gx2 = (u - off(lsize) - tw - 0.010 - gw/2) if left \
                           else (u + off(lsize) + tw + 0.010 + gw/2)
                 draw_glyph(ax, GLYPH[label], gx2, v, gw, color, ASPECT)
@@ -253,6 +271,13 @@ def draw(bg, path_stem):
     ax.text(1.000, 1.010, "THE HARD REGION:", ha="right", color=MAROON, **zone)
     ax.text(1.000, 0.958, "COMPLEX FUNCTIONAL MATERIALS / DEVICES", ha="right",
             fontfamily=MONO, fontsize=15.5, color=MAROON, zorder=5)
+
+    RX, RY, RS = 0.795, 0.315, 0.032
+    ax.text(RX, RY, "representative landmark work", fontfamily=MONO, fontsize=11.5,
+            color=MUTED, zorder=5)
+    for n, ref, tier in REFS:
+        ax.text(RX, RY - RS*n, SUP[n] + " " + ref, fontfamily=MONO, fontsize=10.5,
+                style="italic", color=(TEAL if tier == "t" else GOLD), alpha=0.9, zorder=5)
 
     # qualitative axes: arrows, no ticks
     ax.annotate("", xy=(1.0, -0.035), xytext=(0, -0.035), xycoords=("axes fraction","axes fraction"),
