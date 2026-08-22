@@ -38,33 +38,51 @@ function field(u,v) {
   return fbm(u*3.1+7,v*3.1+3)*(0.28+0.92*smooth(0.18,0.95,(u+v)/2));
 }
 /* node data — as in hard-region.js */
-const BENCH=[
-  { u: 0.10, v: 0.10, label: 'QM9' },
-  { u: 0.17, v: 0.165, label: 'Materials Project' },
-  { u: 0.30, v: 0.085, label: 'OC20' },
-  { u: 0.045, v: 0.045, label: 'PubChem' },
-  { u: 0.235, v: 0.045, label: 'AFLOW' },
-  { u: 0.07, v: 0.21, label: 'OQMD', m: 1 },
-  { u: 0.16, v: 0.04, label: 'MD17', m: 1 },
-  { u: 0.24, v: 0.20, label: 'MatBench', m: 1 }];
+const BENCH=[   // hi: holo/vex slot (fixed 8-slot idx, see hGi)
+  { u: 0.045, v: 0.055, label: 'PubChem', s:'R', hi: 3 },
+  { u: 0.100, v: 0.115, label: 'QM9', s:'R', hi: 0 },
+  { u: 0.045, v: 0.175, label: 'MD17', m: 1, s:'R', hi: 6 },
+  { u: 0.105, v: 0.215, label: 'ANI-1x', m: 1, s:'L' },
+  { u: 0.048, v: 0.252, label: 'SPICE', m: 1, s:'R' },
+  { u: 0.105, v: 0.292, label: 'PCQM4Mv2', m: 1, s:'L' },
+  { u: 0.175, v: 0.295, label: 'Materials Project', s:'R', hi: 1 },
+  { u: 0.245, v: 0.045, label: 'AFLOW', s:'R', hi: 4 },
+  { u: 0.180, v: 0.075, label: 'COD', m: 1, s:'R' },
+  { u: 0.262, v: 0.110, label: 'MatBench', m: 1, s:'L', hi: 7 },
+  { u: 0.178, v: 0.145, label: 'ICSD', m: 1, s:'R' },
+  { u: 0.250, v: 0.180, label: 'OQMD', m: 1, s:'R', hi: 5 },
+  { u: 0.180, v: 0.215, label: 'CSD', m: 1, s:'R' },
+  { u: 0.255, v: 0.250, label: 'OMat24', m: 1, s:'L' },
+  { u: 0.325, v: 0.080, label: 'OC20', s:'R', hi: 2 },
+  { u: 0.345, v: 0.155, label: 'OC22', m: 1, s:'L' }];
+/* rings: [name,up,cx,cy,rw,rh] */
+const RINGS=[
+  ['small molecules',1,0.075,0.1735,0.055,0.1435],
+  ['pure crystals',1,0.2185,0.17,0.0685,0.15],
+  ['simple surfaces',-1,0.335,0.1175,0.035,0.0625]];
 const DISC=[
-  { u: 0.36, v: 0.36, label: 'perovskites' },
-  { u: 0.50, v: 0.30, label: 'MOFs' },
-  { u: 0.55, v: 0.44, label: 'alloys' },
-  { u: 0.37, v: 0.26, label: 'zeolites' },
-  { u: 0.47, v: 0.40, label: '2D materials' },
-  { u: 0.46, v: 0.24, label: 'battery cathodes', m: 1 }];
-const HARD=[
-  { u: 0.63, v: 0.74, label: 'fuel cell components', dx: -8, dy: 14,
+  { u: 0.375, v: 0.335, label: 'perovskites' },
+  { u: 0.510, v: 0.400, label: 'MOFs' },
+  { u: 0.565, v: 0.530, label: 'alloys' },
+  { u: 0.365, v: 0.205, label: 'zeolites' },
+  { u: 0.470, v: 0.465, label: '2D materials' },
+  { u: 0.450, v: 0.270, label: 'battery cathodes' }];
+const HARD=[   // disp: short on-map form; label (full name) still drives #hr-info
+  { u: 0.67, v: 0.78, label: 'fuel cell membrane electrode assembly', disp: 'fuel cell MEA', dx: -10, dy: 4,
     why: 'Catalyst, ionomer, membrane and GDL all couple. One data point means building and testing a full assembly.' },
-  { u: 0.76, v: 0.92, label: 'electrolyzer components', dx: -10, dy: 4,
+  { u: 0.80, v: 0.90, label: 'water electrolyzer membrane electrode assembly', disp: 'water electrolyzer MEA', dx: -10, dy: 4,
     why: 'Same coupling as fuel cells, plus degradation that only shows up after hundreds of hours.' },
-  { u: 0.90, v: 0.69, label: 'FET sensors', dx: -10, dy: 4,
+  { u: 0.94, v: 0.71, label: 'FET sensors', dx: -10, dy: 4,
     why: 'Response depends on probe, channel, geometry and the water matrix at once. Published curves are rarely comparable.' },
-  { u: 0.71, v: 0.59, label: 'PFAS sensing/adsorption materials', dx: -10, dy: 4,
+  { u: 0.80, v: 0.68, label: 'water pollutant sensing / adsorption composite membranes', disp: 'water pollutant sensing membranes', dx: -10, dy: 4,
     why: 'ppt-level targets in real matrices full of competing ions. Public datasets: nearly none.' },
-  { u: 0.94, v: 0.84, label: 'complex nanomaterials', dx: -10, dy: 14,
+  { u: 0.97, v: 0.83, label: 'multimetallic oxides', dx: -10, dy: 4,
     why: 'Long synthesis-structure-property chains, dozens of coupled variables, no standard descriptors.' }];
+const hGi=(cls,i,n)=>cls==='hard'?14+i:cls==='disc'?8+i:(n.hi!=null?n.hi:-1);
+let CAP=null;   // #hr-info captions, lazy-shared with hard-region.js
+import('/assets/js/hard-region-captions.js').then(m=>{ CAP=m;}).catch(()=>{});
+const nodeOf=(cls,i)=>cls==='hard'?HARD[i]:cls==='disc'?DISC[i]:BENCH[i];
+const capFor=(cls,n)=>cls==='hard'||cls==='ring'?n.why:CAP&&CAP[cls==='disc'?'DISC_CAP':'BENCH_CAP'][n.label];
 
 /* ---------- world: x = complexity, y = data cost (depth), z = difficulty ---------- */
 const HW = 1.0, HD = 0.625;   // half width / half depth of the footprint
@@ -257,7 +275,7 @@ function readColors() {
     plate: dark?mixc(bg,[0,0,0],0.45):mixc(bg,[0.35,0.28,0.2],0.12),
     fog: dark?mixc(bg,[0,0,0],0.35):mixc(bg,[1,1,1],0.4)
   };
-  if (S.gl&&S.buf&&!S.gl.isContextLost()) { BD(S.buf.lineCol,lineGeom().col);paintArcs();}
+  if (S.gl&&S.buf&&!S.gl.isContextLost()) { BD(S.buf.lineCol,lineGeom().col);paintArcs();paintRings();}
 }
 
 /* ---------- geometry ---------- */
@@ -305,6 +323,17 @@ function paintArcs() {   // theme pass: arc ink champagne→crimson
   for (let i=0;i<S.arcN;i++) AC.set([...mixc(c.champ,c.crim,ss(0.25,0.92,S.arcT[i])),aA],i*4);
   BD(S.buf.arcCol,AC);
 }
+const ringPt=(g,t)=>{const u=g[2]+g[4]*M.cos(t),v=g[3]+g[5]*M.sin(t);return [wx(u),wy(v),field(u,v)*HS+0.02];};
+function buildRings() {
+  const N=48,P=[];
+  RINGS.forEach(g=>{ for (let i=0;i<N;i+=2) P.push(...ringPt(g,i/N*M.PI*2),...ringPt(g,(i+1)/N*M.PI*2));});
+  S.ringP=new Float32Array(P);S.ringN=P.length/3;
+}
+function paintRings() {
+  const c=S.col,AC=new Float32Array(S.ringN*4);
+  for (let i=0;i<S.ringN;i++) AC.set([...c.teal,0.55],i*4);
+  BD(S.buf.ringCol,AC);
+}
 
 /* ---------- GL build (also used on context-restore) ---------- */
 function buildGL() {
@@ -338,6 +367,7 @@ function buildGL() {
     return b;
   };
   if (!S.arcP) buildArcs();
+  if (!S.ringP) buildRings();
   const lines=lineGeom(),um=PM/(2*HW),vm=PM/(2*HD),pzu=PZ/HS;
   S.buf={
     terr: vbo(vtx),
@@ -346,12 +376,14 @@ function buildGL() {
     bench: vbo(ptData(BENCH,0.012)),disc: vbo(ptData(DISC,0.012)),hard: vbo(ptData(HARD,0.055)),
     probePt: vbo(new Float32Array(4)),probeLn: vbo(new Float32Array(14)),
     arcPos: vbo(S.arcP),arcS: vbo(S.arcS),arcCol: gl.createBuffer(),
+    ringPos: vbo(S.ringP),ringCol: gl.createBuffer(),
     terrIdx: gl.createBuffer()
   };
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,S.buf.terrIdx);
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,idx,gl.STATIC_DRAW);
   S.nLine=lines.pos.length/3;
   paintArcs();
+  paintRings();
   gl.disable(gl.CULL_FACE);
   gl.enable(gl.DEPTH_TEST);
 }
@@ -477,17 +509,27 @@ function selectHard(i) {
     S.info.querySelector('p').textContent = HARD[i].why;
   }
 }
-function exEnter(gi) {   // examine any node; full ceremony = hard five
-  const hd=gi>=14,n=hd?HARD[gi-14]:gi<8?BENCH[gi]:DISC[gi-8];
+function hoverInfo(cls,n) {   // hover/tap caption; S.ex (examine) owns the panel instead; S.sel keeps a hard click sticky
+  if (!S.info || S.ex>=0) return;
+  if (!cls) { if (S.sel<0) S.info.hidden=true; return;}
+  S.info.hidden=false;
+  S.info.classList.remove('hr-examine');
+  const c=S.info.querySelector('.hr-cap');
+  if (c) c.textContent='';
+  S.info.querySelector('strong').textContent=n.label;
+  S.info.querySelector('p').textContent=capFor(cls,n)||'';
+}
+function exEnter(cls,i) {   // examine any node; full ceremony = hard five
+  const hd=cls==='hard',n=hd?HARD[i]:cls==='disc'?DISC[i]:BENCH[i],gi=hGi(cls,i,n);
   S.lastUserT=NOW();
-  if (!S.holo) {   // severed: the pre-holo behavior
-    if (hd) { selectHard(gi-14);return;}
-    if (S.info) S.info.hidden=true;
+  if (!S.holo || gi<0) {   // severed: no hologram
+    if (hd) { selectHard(i);return;}
+    hoverInfo(cls,n);
     S.sel=-1;spawnScan(n.u,n.v,1);stamp(n.u,n.v);
     return;
   }
   const wasH=S.ex>=14;
-  S.ex=gi;S.sel=hd?gi-14:-1;
+  S.ex=gi;S.sel=hd?i:-1;
   S.holo.ex(gi);
   S.fig.classList.toggle('hr3d-exd',hd);
   if (hd) S.fly=[AZ0,0.5,1.55,wx(n.u),wy(n.v),nodeZ(n,0.055)+0.17];   // close-up
@@ -503,7 +545,7 @@ function exExit() {   // Esc / click-away
 const tf3=(el,x,y,shift)=>{
   el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) translate(' + shift + ')';
 };
-const LBL3 = { 0: [-8, -14], 4: [-10, 30] };   // 3D label nudge: fuel cells clears PFAS
+const LBL3 = { 0: [-8, -40], 1: [-10, 46], 3: [-10, 40], 4: [-10, -8] };
 function updateLabels(now) {
   if (S.sel >= 0 && S.info && S.info.hidden) S.sel = -1;   // 2D idle retired the why-card
   const px=[],rc=[],mid=project(S.target[0],S.target[1],S.target[2]).w;
@@ -514,24 +556,24 @@ function updateLabels(now) {
     px.push({ cls,i,x: p.x,y: p.y,w: p.w });
     const el = S.spans[cls][i], hd = cls === 'hard', o = hd ? (LBL3[i] || [n.dx, n.dy]) : [8, 3];
     tf3(el, p.x + o[0], p.y + o[1] + el._ty, hd ? '-100%,-50%' : '0,-50%');
-    const mv = !n.m || (S.overN && S.overN.cls === cls && S.overN.i === i) ||
-      S.ex === (cls==='bench'?i:cls==='disc'?8+i:14+i) ? 1 : 0;   // minor label: hover pick / examine
+    const mv = !n.m || (S.overN && S.overN.cls === cls && S.overN.i === i) ||   // minor label: hover pick / examine
+      (S.ex >= 0 && S.ex === hGi(cls, i, n)) ? 1 : 0;
     const a=(mv*(1-0.72*fade(p.w))*(p.w>0?1:0) *
       ent(field(n.u, n.v), i, hd ? 0.09 : 0.04)).toFixed(2);
     el.style.opacity=a;
     if (hd) el.classList.toggle('hot', i === S.hot || i === S.sel);
-    const w = n.label.length * 7.7;   // rect: ch·len wide, one line high
+    const w = (hd ? (n.disp || n.label) : n.label).length * 7.7;   // rect: ch·len wide, one line high
     if (+a > 0.02) rc.push({ el,x: p.x+o[0]-(hd?w:0),y: p.y+o[1]-9,w,h: 18,p: hd?1:2 });
   });
   S.nodePx=px;
   if (!S.entT0) return;   // 2D owns the shared captions pre-entrance
-  S.zones.forEach(z => {   // zone labels ride 3D anchors
+  S.zones.forEach(z => {
     if (!z.el) return;
     const p=project(wx(z.u),wy(z.v),field(z.u,z.v)*HS+0.04);
     z.el.style.left = p.x.toFixed(1) + 'px'; z.el.style.top = p.y.toFixed(1) + 'px';
     z.el.style.opacity=(1-0.5*fade(p.w)).toFixed(2);
-    const s=z.el.classList.contains('lit')?1.22:1,W=z.w*s,H=z.h*s;
-    if (p.w>0) rc.push({ x: p.x-W/2,y: p.y-H/2,w: W,h: H,p: 0 });
+    const rightAnchored=z.el.classList.contains('hard'),s=(z.el.classList.contains('lit')&&!rightAnchored)?1.22:1,W=z.w*s,H=z.h*s;
+    if (p.w>0) rc.push({ x: rightAnchored?p.x-W:p.x-W/2,y: p.y-H/2,w: W,h: H,p: 0 });
   });
   /* de-collide: zone titles anchor; hard, then disc/bench yield; damped */
   rc.sort((a,b)=>a.p-b.p);
@@ -655,6 +697,9 @@ function draw(now) {
     F1(L.uDash,0);
     const sl = AL(L.p, 'aS');
     gl.disableVertexAttribArray(sl);gl.vertexAttrib1f(sl,0);
+    bindAttr(L.p, 'aPos', S.buf.ringPos, 3);
+    bindAttr(L.p, 'aCol', S.buf.ringCol, 4);
+    gl.drawArrays(gl.LINES,0,S.ringN);
   }
   if (probeOn(now) && S.auto.init) {   // survey probe: scan column + surface reticle
     const a=S.auto,hz=field(a.u,a.v)*HS,X=wx(a.u),Y=wy(a.v);
@@ -772,7 +817,8 @@ function tick(now) {
   S.raf=RAF(tick);
 }
 function loadHolo() {   // strategium holograms + vex: separate hulls, failure = silent no-op
-  const c={ B: BENCH,D: DISC,H: HARD,wx,wy,field,HS,mVP };
+  const HB=BENCH.filter(n=>n.hi!=null).sort((a,b)=>a.hi-b.hi);
+  const c={ B: HB,D: DISC,H: HARD,wx,wy,field,HS,mVP };
   ['holo','vex'].forEach(n=>import('/assets/js/hard-region-'+n+'.js')
     .then(m=>{ try { if (S&&S.entDone&&!S[n]) S[n]=m.mk(S,c);} catch (e) {} })
     .catch(()=>{}));
@@ -813,7 +859,7 @@ function bindEvents() {
   on(fig, 'pointerenter', () => { S.pointerOver = true; });
   on(fig, 'pointerleave', () => {
     S.pointerOver=false;S.lastUserT=NOW();S.overN=null;
-    disengage();setHot(-1);
+    disengage();setHot(-1);hoverInfo(null,null);
   });
   on(fig, 'pointerdown', () => engage(), true);   // first pointerdown engages wheel
   on(cv, 'pointerdown', e => {
@@ -842,6 +888,7 @@ function bindEvents() {
     S.overV=!!(S.vex&&S.vex.pk(p.x,p.y,S.hov));
     cv.style.cursor = nn||S.overV ? 'pointer' : '';
     S.lastUserT=NOW();S.overN=nn;S.hx=p.x;S.hy=p.y;   // hover = live measurement
+    hoverInfo(nn?nn.cls:null, nn?nodeOf(nn.cls,nn.i):null);
     if (!nn&&(S.mvN=!S.mvN)) S.hov=pickTerrain(p.x,p.y);
   });
   on(cv, 'pointerup', e => {
@@ -853,7 +900,7 @@ function bindEvents() {
     const p = xy(e), hit = pickTerrain(p.x, p.y);   // click: vex → node examine → odradek scan
     if (S.vex&&S.vex.pk(p.x,p.y,hit)) { S.vex.go();return;}
     const nn=nearestNode(p.x,p.y);
-    if (nn) { exEnter(nn.cls==='bench'?nn.i:nn.cls==='disc'?8+nn.i:14+nn.i);return;}
+    if (nn) { exEnter(nn.cls,nn.i);return;}
     if (S.ex>=0) exExit();
     else { if (S.info) S.info.hidden=true;S.sel=-1;}
     if (hit) { S.hov=hit;spawnScan(hit.u,hit.v,1);stamp(hit.u,hit.v);if (S.vex) S.vex.tp(hit.u,hit.v);}
@@ -885,15 +932,21 @@ function buildDOM() {
   S.spans={ bench: [],disc: [],hard: [] };
   const mk=(n,cls)=>{
     const el = CE('span');
-    el.className = 'hr3d-n-' + cls;
-    el.textContent=n.label;
+    el.className = 'hr3d-n-' + cls + (n.s?' hr3d-n-sec':'');
+    el.textContent = cls==='hard' ? (n.disp||n.label) : n.label;
     el._ty=0;   // damped de-collision offset
+    const i=S.spans[cls].length;
     if (cls === 'hard') {
       el.tabIndex = 0;   // Tab cycles the five hard systems
-      const i=S.spans.hard.length;
-      el.addEventListener('focus', () => exEnter(14 + i));
-      el.addEventListener('click', e => { e.stopPropagation(); exEnter(14 + i); });
-    } else AH(el);
+      el.addEventListener('focus', () => exEnter('hard', i));
+      el.addEventListener('click', e => { e.stopPropagation(); exEnter('hard', i); });
+      el.addEventListener('mouseenter', () => hoverInfo('hard', HARD[i]));
+      el.addEventListener('mouseleave', () => hoverInfo(null, null));
+    } else {
+      AH(el);
+      el.addEventListener('mouseenter', () => hoverInfo(cls, nodeOf(cls, i)));
+      el.addEventListener('mouseleave', () => hoverInfo(null, null));
+    }
     lay.appendChild(el);
     S.spans[cls].push(el);
   };
@@ -916,10 +969,19 @@ function buildDOM() {
   S.saved=[];
   const keep = el => { if (el) S.saved.push([el, el.getAttribute('style')]); return el; };
   const zEls = fig.querySelectorAll('.hr-label');
-  S.zones=[   // w/h: label boxes for de-collision
-    { u: 0.13,v: 0.33,w: 232,h: 56,el: keep(zEls[0]) },
-    { u: 0.41,v: 0.48,w: 192,h: 56,el: keep(zEls[1]) },
-    { u: 0.42,v: 1.03,w: 150,h: 23,el: keep(zEls[2]) }];
+  S.zones=[   // w/h: de-collision box, anchored clear of the cluster
+    { u: 0.26,v: 0.52,w: 210,h: 26,el: keep(zEls[0]) },
+    { u: 0.32,v: 0.62,w: 220,h: 26,el: keep(zEls[1]) },
+    { u: 0.965,v: 1.17,w: 260,h: 34,el: keep(zEls[2]) }];
+  RINGS.forEach(g=>{   // ring caption
+    const el=sp('hr3d-ring-lbl', g[0]);
+    el.removeAttribute('aria-hidden');el.tabIndex=0;
+    const show=()=>hoverInfo('ring',{ label: g[0],why: CAP&&CAP.RING_CAP[g[0]] });
+    const hide=()=>{ if (!S.overN) hoverInfo(null,null);};
+    el.addEventListener('mouseenter',show);el.addEventListener('focus',show);
+    el.addEventListener('mouseleave',hide);el.addEventListener('blur',hide);
+    S.zones.push({ u: g[2],v: g[3]+g[1]*(g[5]+0.03),w: 150,h: 24,el });
+  });
   S.axisX = keep(fig.querySelector('.hr-axis-x'));
   S.axisY = keep(fig.querySelector('.hr-axis-y'));
   S.head = fig.querySelector('.hr-head');

@@ -259,11 +259,33 @@ html.hr-splashing .hr-legend
   font-weight: $font-weight-semibold
   z-index: 3
 
+// anchored by "left" like the other two zone titles (3D's projection code
+// only ever writes left/top), but right-hugging: -100% X puts the anchor
+// at the block's right edge so it grows leftward, never past the frame
 .hr-label.hard
   color: var(--color-primary)
   font-weight: $font-weight-medium
+  text-align: right
   pointer-events: auto
   cursor: help
+  transform: translate(-100%, -50%)
+
+// no size pop for this one (still gets the shared .lit weight/z-index bump):
+// it is already the biggest block and sits right above the beacons it names
+.hr-label.hard.lit
+  transform: translate(-100%, -50%)
+
+// second line of the hard title: "complex functional materials / devices",
+// a size step down from the domain title itself, wraps on narrow viewports
+// instead of clipping past the figure edge
+.hr-label.hard .hr-sub2
+  display: block
+  margin-top: 3px
+  font-size: 0.82em
+  font-weight: $font-weight-normal
+  letter-spacing: 0.06em
+  white-space: normal
+  max-width: 42ch
 
 .hr-tip
   position: absolute
@@ -363,7 +385,7 @@ html.hr-splashing .hr-legend
   text-transform: none
   color: var(--color-text-muted)
   white-space: normal
-  max-width: 17ch
+  max-width: 24ch
   line-height: 1.28
 
 // hard-region characteristics, revealed while the tour highlights that zone
@@ -517,6 +539,13 @@ html.hr-splashing .hr-legend
   white-space: nowrap
   will-change: transform
 
+// pointer-events on despite the layer being none: a visitor aiming at the
+// readable word (not the few-px marker) still reaches the caption trigger
+.hr3d-n-bench,
+.hr3d-n-disc
+  pointer-events: auto
+  cursor: help
+
 .hr3d-n-bench
   color: var(--color-accent-teal)
 
@@ -535,6 +564,30 @@ html.hr-splashing .hr-legend
   outline: 1px dashed var(--color-primary)
   outline-offset: 3px
   text-shadow: 0 0 10px currentColor
+
+// roster-marked secondary dataset labels: smaller, lighter than the primaries
+.hr3d-n-sec
+  font-size: 0.62rem
+  font-weight: $font-weight-normal
+  color: var(--color-text-muted)
+
+// sub-basin group captions (small molecules / pure crystals / simple
+// surfaces) — level 2, same rank (size + lowercase case) as a system-name
+// diamond (alloys, MOFs...); hoverable/focusable for the #hr-info caption
+.hr3d-ring-lbl
+  position: absolute
+  left: 0
+  top: 0
+  transform: translate(-50%, -50%)
+  color: var(--color-text-light)
+  white-space: nowrap
+  pointer-events: auto
+  cursor: help
+  transition: opacity .3s ease
+
+.hr3d-ring-lbl:focus-visible
+  outline: 1px dashed var(--color-text-light)
+  outline-offset: 3px
 
 // live survey readout + click-scan stamps (real field() samples only)
 .hr3d-readout, .hr3d-stamp

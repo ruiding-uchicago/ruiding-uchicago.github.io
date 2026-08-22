@@ -102,7 +102,28 @@
   }
 
   /* ---------- point classes ---------- */
-  var pts = [], hardPts = [], benchPts = [], discPts = [];
+  var pts = [], hardPts = [], benchPts = [], discPts = [], rings = [];
+  var GROUPS = [
+    { key: 'mol', name: 'small molecules', up: 1 },
+    { key: 'xtl', name: 'pure crystals', up: 1 },
+    { key: 'srf', name: 'simple surfaces', up: -1 }
+  ];
+  var RING_PAD = 0.025;
+  function buildRings() {
+    rings = GROUPS.map(function (g) {
+      var us = [], vs = [], i;
+      for (i = 0; i < benchPts.length; i++) {
+        if (benchPts[i].g === g.key) { us.push(benchPts[i].u); vs.push(benchPts[i].v); }
+      }
+      var minU = Math.min.apply(null, us), maxU = Math.max.apply(null, us);
+      var minV = Math.min.apply(null, vs), maxV = Math.max.apply(null, vs);
+      return {
+        name: g.name, up: g.up,
+        cx: (minU + maxU) / 2, cy: (minV + maxV) / 2,
+        w: (maxU - minU) + 2 * RING_PAD, h: (maxV - minV) + 2 * RING_PAD
+      };
+    });
+  }
   function buildPoints() {
     pts = [];
     var s = 99, n = 0, guard = 0;
@@ -112,37 +133,49 @@
       var density = (1 - u) * (1 - v) * 1.25 + 0.015;
       if (rnd() < density) { pts.push([u, v]); n++; }
     }
-    /* charted territory: big public databases & benchmarks */
+    /* charted territory: three sub-basins along the complexity axis —
+       small molecules, then pure crystals, then simple surfaces. every
+       point is labelled now (level 3: uniform small muted ink, side per
+       'sec' so labels alternate left/right and never share a row) */
     benchPts = [
-      { u: 0.10, v: 0.10,  label: 'QM9' },
-      { u: 0.17, v: 0.165, label: 'Materials Project' },
-      { u: 0.30, v: 0.085, label: 'OC20' },
-      { u: 0.045, v: 0.045, label: 'PubChem' },
-      { u: 0.235, v: 0.045, label: 'AFLOW' },
-      { u: 0.07, v: 0.21, label: 'OQMD', m: 1 },
-      { u: 0.16, v: 0.04, label: 'MD17', m: 1 },
-      { u: 0.24, v: 0.20, label: 'MatBench', m: 1 }
+      { u: 0.045, v: 0.055, label: 'PubChem', g: 'mol', sec: 'R' },
+      { u: 0.100, v: 0.115, label: 'QM9', g: 'mol', sec: 'R' },
+      { u: 0.045, v: 0.175, label: 'MD17', g: 'mol', sec: 'R' },
+      { u: 0.105, v: 0.215, label: 'ANI-1x', g: 'mol', sec: 'L' },
+      { u: 0.048, v: 0.252, label: 'SPICE', g: 'mol', sec: 'R' },
+      { u: 0.105, v: 0.292, label: 'PCQM4Mv2', g: 'mol', sec: 'L' },
+      { u: 0.175, v: 0.295, label: 'Materials Project', g: 'xtl', sec: 'R' },
+      { u: 0.245, v: 0.045, label: 'AFLOW', g: 'xtl', sec: 'R' },
+      { u: 0.180, v: 0.075, label: 'COD', g: 'xtl', sec: 'R' },
+      { u: 0.262, v: 0.110, label: 'MatBench', g: 'xtl', sec: 'L' },
+      { u: 0.178, v: 0.145, label: 'ICSD', g: 'xtl', sec: 'R' },
+      { u: 0.250, v: 0.180, label: 'OQMD', g: 'xtl', sec: 'R' },
+      { u: 0.180, v: 0.215, label: 'CSD', g: 'xtl', sec: 'R' },
+      { u: 0.255, v: 0.250, label: 'OMat24', g: 'xtl', sec: 'L' },
+      { u: 0.325, v: 0.080, label: 'OC20', g: 'srf', sec: 'R' },
+      { u: 0.345, v: 0.155, label: 'OC22', g: 'srf', sec: 'L' }
     ];
-    /* half-charted: active discovery fields with partial data */
+    buildRings();
+    /* half-charted: active discovery fields, all full-rank labelled points */
     discPts = [
-      { u: 0.36, v: 0.36, label: 'perovskites' },
-      { u: 0.50, v: 0.30, label: 'MOFs' },
-      { u: 0.55, v: 0.44, label: 'alloys' },
-      { u: 0.37, v: 0.26, label: 'zeolites' },
-      { u: 0.47, v: 0.40, label: '2D materials' },
-      { u: 0.46, v: 0.24, label: 'battery cathodes', m: 1 }
+      { u: 0.375, v: 0.335, label: 'perovskites' },
+      { u: 0.510, v: 0.400, label: 'MOFs' },
+      { u: 0.565, v: 0.530, label: 'alloys' },
+      { u: 0.365, v: 0.205, label: 'zeolites' },
+      { u: 0.470, v: 0.465, label: '2D materials' },
+      { u: 0.450, v: 0.270, label: 'battery cathodes' }
     ];
     /* the systems I actually work on, and why each is hard */
     hardPts = [
-      { u: 0.63, v: 0.74, label: 'fuel cell components', dx: -8, dy: 14, align: 'right',
+      { u: 0.67, v: 0.78, label: 'fuel cell membrane electrode assembly', dx: -10, dy: 4, align: 'right',
         why: 'Catalyst, ionomer, membrane and GDL all couple. One data point means building and testing a full assembly.' },
-      { u: 0.76, v: 0.92, label: 'electrolyzer components', dx: -10, dy: 4, align: 'right',
+      { u: 0.80, v: 0.90, label: 'water electrolyzer membrane electrode assembly', dx: -10, dy: 4, align: 'right',
         why: 'Same coupling as fuel cells, plus degradation that only shows up after hundreds of hours.' },
-      { u: 0.90, v: 0.69, label: 'FET sensors', dx: -10, dy: 4, align: 'right',
+      { u: 0.94, v: 0.71, label: 'FET sensors', dx: -10, dy: 4, align: 'right',
         why: 'Response depends on probe, channel, geometry and the water matrix at once. Published curves are rarely comparable.' },
-      { u: 0.71, v: 0.59, label: 'PFAS sensing/adsorption materials', dx: -10, dy: 4, align: 'right',
+      { u: 0.80, v: 0.68, label: 'water pollutant sensing / adsorption composite membranes', dx: -10, dy: 4, align: 'right',
         why: 'ppt-level targets in real matrices full of competing ions. Public datasets: nearly none.' },
-      { u: 0.94, v: 0.84, label: 'complex nanomaterials', dx: -10, dy: 14, align: 'right',
+      { u: 0.97, v: 0.83, label: 'multimetallic oxides', dx: -10, dy: 4, align: 'right',
         why: 'Long synthesis-structure-property chains, dozens of coupled variables, no standard descriptors.' }
     ];
   }
@@ -214,6 +247,48 @@
     ctx.globalAlpha = 1;
   }
 
+  /* dashed teal ring per sub-basin, plus its group label just outside */
+  function drawRings() {
+    var i, r;
+    ctx.save();
+    ctx.setLineDash([4, 4]);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = COL.teal;
+    ctx.globalAlpha = 0.55;
+    for (i = 0; i < rings.length; i++) {
+      r = rings[i];
+      ctx.beginPath();
+      ctx.ellipse(r.cx * W, (1 - r.cy) * H, (r.w / 2) * W, (r.h / 2) * H, 0, 0, 6.2832);
+      ctx.stroke();
+    }
+    ctx.restore();
+    /* level 2: the ring names rank with the system names (alloys, MOFs,
+       FET sensors...) — same size, same lowercase case, muted ink */
+    ctx.font = (W > 480 ? '500 9.5px' : '500 8px') + ' "JetBrains Mono", monospace';
+    ctx.fillStyle = COL.text;
+    ctx.textAlign = 'center';
+    ctx.globalAlpha = 0.85;
+    var lastRight = -1e9;
+    for (i = 0; i < rings.length; i++) {
+      r = rings[i];
+      var txt = r.name;
+      var tw = ctx.measureText(txt).width / 2 + 4;
+      var lx = Math.max(tw, Math.min(W - tw, r.cx * W));   // keep clear of the frame edge
+      if (lx - tw < lastRight) lx = lastRight + tw;   // and clear of the previous group label
+      lastRight = lx + tw;
+      var ly = (1 - (r.cy + r.up * (r.h / 2 + 0.022))) * H;
+      ctx.textBaseline = r.up > 0 ? 'bottom' : 'top';
+      ctx.fillText(txt, lx, ly);
+      /* cache a hover hit-box for the caption panel */
+      r.hitX0 = lx - tw; r.hitX1 = lx + tw;
+      r.hitY0 = r.up > 0 ? ly - 13 : ly - 2;
+      r.hitY1 = r.up > 0 ? ly + 2 : ly + 13;
+    }
+    ctx.textBaseline = 'alphabetic';
+    ctx.textAlign = 'left';
+    ctx.globalAlpha = 1;
+  }
+
   function diamond(x, y, r) {
     ctx.beginPath();
     ctx.moveTo(x, y - r);
@@ -222,6 +297,19 @@
     ctx.lineTo(x - r, y);
     ctx.closePath();
     ctx.fill();
+  }
+
+  /* word-wrap the long device names (uses whatever font is already set) so
+     they don't run the full width of the map into other chrome */
+  function wrapLabel(text, maxWidth) {
+    var words = text.split(' '), lines = [], cur = '', i, test;
+    for (i = 0; i < words.length; i++) {
+      test = cur ? cur + ' ' + words[i] : words[i];
+      if (cur && ctx.measureText(test).width > maxWidth) { lines.push(cur); cur = words[i]; }
+      else cur = test;
+    }
+    if (cur) lines.push(cur);
+    return lines;
   }
 
   /* ---------- draw ---------- */
@@ -315,6 +403,10 @@
     var showLabels = W > 480;
     var aZone = mouse.on ? -1 : tourZone;   // region tour: which point group to emphasise
     var dimOther = (DIM && aZone >= 0) ? 0.14 : 1;
+
+    /* the three sub-basin rings + group labels sit beneath the points,
+       visible at every width (phones keep rings + group labels, drop the rest) */
+    drawRings();
     ctx.font = '500 9.5px "JetBrains Mono", monospace';
 
     /* teal: charted, benchmarked */
@@ -331,12 +423,19 @@
       ctx.arc(bx, by, bAct ? 4 : 2.6, 0, 6.2832);
       ctx.fill();
       ctx.shadowBlur = 0;
-      if ((showLabels || bAct) && !bp.m) {
-        ctx.globalAlpha = bAct ? 1 : 0.8 * dimOther;
-        ctx.fillText(bp.label, bx + 8, by + 3);
+      /* level 3: every basin point is labelled now, one uniform small
+         muted size — no more visually-privileged five */
+      if (showLabels || bAct) {
+        ctx.save();
+        ctx.font = '500 8.5px "JetBrains Mono", monospace';
+        ctx.fillStyle = COL.text;
+        ctx.globalAlpha = (bAct ? 1 : 0.85) * dimOther;
+        ctx.textAlign = bp.sec === 'L' ? 'right' : 'left';
+        ctx.fillText(bp.label, bx + (bp.sec === 'L' ? -7 : 7), by + 3);
+        ctx.restore();
       }
     }
-    /* champagne diamonds: active discovery */
+    /* champagne diamonds: active discovery, all full-rank now */
     for (k = 0; k < discPts.length; k++) {
       var dp = discPts[k];
       var dxx = dp.u * W, dyy = (1 - dp.v) * H;
@@ -347,7 +446,7 @@
       ctx.globalAlpha = 0.95 * (dAct ? 1 : dimOther);
       diamond(dxx, dyy, dAct ? 4.8 : 3.4);
       ctx.shadowBlur = 0;
-      if ((showLabels || dAct) && !dp.m) {
+      if (showLabels || dAct) {
         ctx.globalAlpha = dAct ? 1 : 0.8 * dimOther;
         ctx.fillText(dp.label, dxx + 8, dyy + 3);
       }
@@ -372,7 +471,11 @@
         ctx.globalAlpha = hAct ? 1 : (0.6 + 0.3 * tw) * dimOther;
         ctx.fillStyle = COL.hard;
         ctx.textAlign = hp.align;
-        ctx.fillText(hp.label, hx + hp.dx, hy + hp.dy);
+        var hlines = wrapLabel(hp.label, 172);   // long device names: wrap so they clear the legend
+        var hlh = 12;
+        for (var li = 0; li < hlines.length; li++) {
+          ctx.fillText(hlines[li], hx + hp.dx, hy + hp.dy + (li - (hlines.length - 1) / 2) * hlh);
+        }
       }
     }
     ctx.textAlign = 'left';
@@ -472,38 +575,102 @@
     requestAnimationFrame(tick);
   }
 
+  /* ---------- captions: per-node one-liners for #hr-info, lazily loaded
+     (severable — a load failure just means hover doesn't caption yet) ---------- */
+  var CAP = null;
+  import('/assets/js/hard-region-captions.js').then(function (m) { CAP = m; }).catch(function () {});
+
   /* ---------- events ---------- */
   function localXY(e) {
     var r = canvas.getBoundingClientRect();
     return { x: e.clientX - r.left, y: e.clientY - r.top };
   }
-  function hardHit(x, y) {
-    for (var k = 0; k < hardPts.length; k++) {
-      var hx = hardPts[k].u * W, hy = (1 - hardPts[k].v) * H;
-      var dx = x - hx, dy = y - hy;
-      if (dx * dx + dy * dy < 196) return hardPts[k];
+  /* does (x,y) land on a label's own rendered text, not just its marker?
+     lets a visitor aim at the readable word, not a few-px dot. */
+  function labelHit(x, y, anchorX, anchorY, label, fontPx, align, wrap) {
+    ctx.font = '500 ' + fontPx + 'px "JetBrains Mono", monospace';
+    var lines = wrap ? wrapLabel(label, wrap) : [label];
+    var lh = fontPx + 3;
+    var top = anchorY - (lines.length * lh) / 2 - 4;
+    var bot = anchorY + (lines.length * lh) / 2 + 4;
+    if (y < top || y > bot) return false;
+    var maxW = 0, li;
+    for (li = 0; li < lines.length; li++) maxW = Math.max(maxW, ctx.measureText(lines[li]).width);
+    var left, right;
+    if (align === 'right') { right = anchorX + 4; left = anchorX - maxW - 4; }
+    else { left = anchorX - 4; right = anchorX + maxW + 4; }
+    return x >= left && x <= right;
+  }
+  /* nearest captionable thing under the pointer: hard beacon > discovery
+     diamond > basin dot > ring name. Checks both the marker and its label,
+     so aiming at the readable text works as well as the dot. Returns
+     {label, cap} or null. */
+  function pickHover(x, y) {
+    var k, showLabels = W > 480;
+    for (k = 0; k < hardPts.length; k++) {
+      var hp = hardPts[k], hx = hp.u * W, hy = (1 - hp.v) * H;
+      var hdx = x - hx, hdy = y - hy;
+      if (hdx * hdx + hdy * hdy < 196 ||
+          (showLabels && labelHit(x, y, hx + hp.dx, hy + hp.dy, hp.label, 9.5, hp.align, 172))) {
+        return { label: hp.label, cap: hp.why };
+      }
+    }
+    for (k = 0; k < discPts.length; k++) {
+      var dp = discPts[k], dxx = dp.u * W, dyy = (1 - dp.v) * H;
+      var ddx = x - dxx, ddy = y - dyy;
+      if (ddx * ddx + ddy * ddy < 121 ||
+          (showLabels && labelHit(x, y, dxx + 8, dyy + 3, dp.label, 9.5, 'left', 0))) {
+        return { label: dp.label, cap: CAP && CAP.DISC_CAP[dp.label] };
+      }
+    }
+    for (k = 0; k < benchPts.length; k++) {
+      var bp = benchPts[k], bx = bp.u * W, by = (1 - bp.v) * H;
+      var bdx = x - bx, bdy = y - by;
+      var bLeft = bp.sec === 'L';
+      if (bdx * bdx + bdy * bdy < 64 ||
+          (showLabels && labelHit(x, y, bx + (bLeft ? -7 : 7), by + 3, bp.label, 8.5, bLeft ? 'right' : 'left', 0))) {
+        return { label: bp.label, cap: CAP && CAP.BENCH_CAP[bp.label] };
+      }
+    }
+    for (k = 0; k < rings.length; k++) {
+      var r = rings[k];
+      if (r.hitX0 != null && x >= r.hitX0 && x <= r.hitX1 && y >= r.hitY0 && y <= r.hitY1) {
+        return { label: r.name, cap: CAP && CAP.RING_CAP[r.name] };
+      }
     }
     return null;
   }
+  function showHover(hov) {
+    if (!info) return;
+    if (!hov) { info.hidden = true; return; }
+    info.hidden = false;
+    info.querySelector('strong').textContent = hov.label;
+    info.querySelector('p').textContent = hov.cap || '';
+  }
+  /* once the 3D module takes over (.hr3d-on) it owns #hr-info and clicks;
+     the 2D map keeps running underneath (contours/probe) but must not
+     fight the 3D hover/click caption logic for the same panel */
+  function is3D() { return fig.classList.contains('hr3d-on'); }
   if (!PRM) {
     fig.addEventListener('pointermove', function (e) {
       var p = localXY(e);
       mouse.x = p.x; mouse.y = p.y; mouse.on = true;
-      fig.style.cursor = hardHit(p.x, p.y) ? 'pointer' : 'crosshair';
+      if (is3D()) return;
+      var hov = pickHover(p.x, p.y);
+      fig.style.cursor = hov ? 'pointer' : 'crosshair';
+      showHover(hov);
     }, { passive: true });
     fig.addEventListener('pointerleave', function () {
       mouse.on = false;
       lastUserT = performance.now();
+      if (is3D()) return;
+      if (info) info.hidden = true;
     });
     fig.addEventListener('pointerdown', function (e) {
+      if (is3D()) return;
       var p = localXY(e);
-      var hit = hardHit(p.x, p.y);
-      if (hit && info) {
-        info.hidden = false;
-        info.querySelector('strong').textContent = hit.label;
-        info.querySelector('p').textContent = hit.why;
-        return;
-      }
+      var hov = pickHover(p.x, p.y);
+      if (hov) { showHover(hov); return; }   // tap-to-reveal on touch devices
       if (info) info.hidden = true;
       var u = p.x / W, v = 1 - p.y / H;
       ripples.push({ x: p.x, y: p.y, t: performance.now() });
