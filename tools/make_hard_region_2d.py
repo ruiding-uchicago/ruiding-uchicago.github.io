@@ -184,7 +184,7 @@ def draw(bg, path_stem):
 
     # evaluate slightly past the frame so the wash bleeds off-edge instead of
     # ending on a visible rectangle
-    XL, YL = (-0.02, 1.02), (-0.02, 1.06)
+    XL, YL = (-0.02, 1.05), (-0.02, 1.06)
     N = 360
     gx = np.linspace(*XL, N); gy = np.linspace(*YL, int(N*0.62))
     Z = np.array([[field(u, v) for u in gx] for v in gy])
@@ -223,7 +223,7 @@ def draw(bg, path_stem):
         if gname in GLYPH:
             draw_glyph(ax, GLYPH[gname], gend + 0.011 + 0.015, gy, 0.030, TEAL, ASPECT)
 
-    def plot(group, color, marker, size, lsize, lcol, side="right", flat=False, gw=GW):
+    def plot(group, color, marker, size, lsize, lcol, side="right", flat=False, gw=GW, gat="far"):
         for u, v, label, minor, *rest in group:
             sec = rest[1] if len(rest) > 1 else ""
             ax.scatter([u], [v], s=size*(1 if flat or not minor else 0.42), c=color,
@@ -233,16 +233,19 @@ def draw(bg, path_stem):
                         textcoords="offset points", fontfamily=MONO, fontsize=lsize,
                         color=lcol, va="center", ha="right" if left else "left", zorder=5)
             if label in GLYPH:
-                tw = len(label) * cw(lsize)
-                far = (u - off(lsize) - tw - 0.010 - GW/2) if left \
-                      else (u + off(lsize) + tw + 0.010 + GW/2)
-                draw_glyph(ax, GLYPH[label], far, v, gw, color, ASPECT)
+                if gat == "mr":                  # just right of the marker itself
+                    gx2 = u + 0.011 + gw/2
+                else:
+                    tw = len(label) * cw(lsize)
+                    gx2 = (u - off(lsize) - tw - 0.010 - gw/2) if left \
+                          else (u + off(lsize) + tw + 0.010 + gw/2)
+                draw_glyph(ax, GLYPH[label], gx2, v, gw, color, ASPECT)
 
     # level 3 — the basin's dataset names: one uniform small grey
     plot(BENCH, TEAL,   "o", 56, 12.5, MUTED, flat=True)
     # level 2 — system labels, same rank as the group names below
     plot(DISC,  GOLD,   "D", 84, 15.9, INK, flat=True)
-    plot(HARD,  MAROON, "^", 142, 15.9, INK, side="left", gw=0.032)
+    plot(HARD,  MAROON, "^", 142, 15.9, INK, side="left", gw=0.032, gat="mr")
 
     zone = dict(fontfamily=MONO, fontsize=18.5, zorder=5)
     ax.text(0.020, 0.470, "BENCHMARK-RICH DOMAINS", color=TEAL, **zone)
