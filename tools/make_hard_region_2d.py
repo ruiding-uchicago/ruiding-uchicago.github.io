@@ -63,12 +63,14 @@ BENCH = [
   (0.180, 0.215, "CSD", 1, "xtl", "R"),    (0.255, 0.250, "OMat24", 1, "xtl", "L"),
   # group 3 — simple surfaces (slab + adsorbate)
   (0.325, 0.080, "OC20", 0, "srf", ""), (0.345, 0.155, "OC22", 1, "srf", "L")]
-GROUPS = [("small molecules", "mol", 1), ("pure crystals", "xtl", 1), ("simple surfaces", "srf", -1)]
+GROUPS = [("small molecules", "mol", -1, (0.000, -0.012)),
+          ("pure crystals", "xtl", 1, None),
+          ("simple surfaces", "srf", -1, None)]
 DISC  = [(0.36,0.36,"perovskites",0,""),(0.50,0.30,"MOFs",0,""),(0.55,0.44,"alloys",0,""),
          (0.37,0.26,"zeolites",0,""),(0.47,0.40,"2D materials",0,""),(0.46,0.24,"battery cathodes",1,"")]
-HARD  = [(0.67,0.78,"fuel cell components",0,""),(0.80,0.90,"electrolyzer components",0,""),
-         (0.94,0.71,"FET sensors",0,""),(0.75,0.63,"PFAS sensing / adsorption",0,""),
-         (0.97,0.83,"complex nanomaterials",0,"")]
+HARD  = [(0.67,0.78,"fuel cell membrane electrode assembly",0,""),(0.80,0.90,"water electrolyzer membrane electrode assembly",0,""),
+         (0.94,0.71,"FET sensors",0,""),(0.80,0.68,"water pollutant sensing / adsorption composite membranes",0,""),
+         (0.97,0.83,"multimetallic oxides",0,"")]
 
 TEAL, GOLD, MAROON = "#008b7f", "#9a7712", "#a82424"
 INK, MUTED, FAINT = "#141413", "#5d574f", "#8a847b"
@@ -108,15 +110,17 @@ def draw(bg, path_stem):
 
     from matplotlib.patches import Ellipse
     PAD = 0.025
-    for gname, key, up in GROUPS:                      # basin sub-regions by system type
+    for gname, key, up, at in GROUPS:                      # basin sub-regions by system type
         pts = [(b[0], b[1]) for b in BENCH if b[4] == key]
         us, vs = [p[0] for p in pts], [p[1] for p in pts]
         cx, cy = (min(us)+max(us))/2, (min(vs)+max(vs))/2
         w, h = (max(us)-min(us))+2*PAD, (max(vs)-min(vs))+2*PAD
         ax.add_patch(Ellipse((cx, cy), w, h, fill=False, edgecolor=TEAL,
                              linewidth=1.0, linestyle=(0, (5, 4)), alpha=0.55, zorder=3))
-        ax.text(cx, cy + up*(h/2 + (0.022 if up > 0 else 0.052)), gname.upper(), ha="center",
-                va="bottom" if up > 0 else "top",
+        gx, gy = at if at else (cx, cy + up*(h/2 + (0.022 if up > 0 else 0.052)))
+        ax.text(gx, gy, gname.upper(),
+                ha="left" if at else "center",
+                va="bottom" if (at or up > 0) else "top",
                 fontfamily=MONO, fontsize=15.9, color=INK, zorder=5)
 
     def plot(group, color, marker, size, lsize, lcol, side="right", flat=False):
@@ -135,12 +139,12 @@ def draw(bg, path_stem):
     plot(DISC,  GOLD,   "D", 84, 15.9, INK, flat=True)
     plot(HARD,  MAROON, "^", 142, 15.9, INK, side="left")
 
-    zone = dict(fontfamily=MONO, fontsize=18.5, color=INK, zorder=5)
-    ax.text(0.020, 0.470, "BENCHMARK-RICH DOMAINS", **zone)
-    ax.text(0.325, 0.520, "ACTIVE DISCOVERY DOMAINS", **zone)
-    ax.text(1.000, 1.010, "THE HARD REGION:", ha="right", **zone)
+    zone = dict(fontfamily=MONO, fontsize=18.5, zorder=5)
+    ax.text(0.020, 0.470, "BENCHMARK-RICH DOMAINS", color=TEAL, **zone)
+    ax.text(0.325, 0.520, "ACTIVE DISCOVERY DOMAINS", color=GOLD, **zone)
+    ax.text(1.000, 1.010, "THE HARD REGION:", ha="right", color=MAROON, **zone)
     ax.text(1.000, 0.958, "COMPLEX FUNCTIONAL MATERIALS / DEVICES", ha="right",
-            fontfamily=MONO, fontsize=15.5, color=INK, zorder=5)
+            fontfamily=MONO, fontsize=15.5, color=MAROON, zorder=5)
 
     # qualitative axes: arrows, no ticks
     ax.annotate("", xy=(1.0, -0.035), xytext=(0, -0.035), xycoords=("axes fraction","axes fraction"),
