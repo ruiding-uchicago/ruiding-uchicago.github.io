@@ -115,36 +115,32 @@ def draw(bg, path_stem):
         w, h = (max(us)-min(us))+2*PAD, (max(vs)-min(vs))+2*PAD
         ax.add_patch(Ellipse((cx, cy), w, h, fill=False, edgecolor=TEAL,
                              linewidth=1.0, linestyle=(0, (5, 4)), alpha=0.55, zorder=3))
-        ax.text(cx, cy + up*(h/2+0.022), gname.upper(), ha="center",
+        ax.text(cx, cy + up*(h/2 + (0.022 if up > 0 else 0.052)), gname.upper(), ha="center",
                 va="bottom" if up > 0 else "top",
-                fontfamily=MONO, fontsize=14, color=INK, zorder=5)
+                fontfamily=MONO, fontsize=15.9, color=INK, zorder=5)
 
-    def plot(group, color, marker, size, msize, side="right"):
+    def plot(group, color, marker, size, lsize, lcol, side="right", flat=False):
         for u, v, label, minor, *rest in group:
             sec = rest[1] if len(rest) > 1 else ""
-            ax.scatter([u], [v], s=size*(0.42 if minor else 1), c=color, marker=marker,
-                       linewidths=0, zorder=4)
-            if minor and sec:      # smaller, lighter label for a secondary entry
-                l = sec == "L"
-                ax.annotate(label, (u, v), xytext=(-9 if l else 9, 0),
-                            textcoords="offset points", fontfamily=MONO, fontsize=12.5,
-                            color=MUTED, va="center", ha="right" if l else "left", zorder=5)
-            if not minor:
-                sec_l = (rest[1] if len(rest) > 1 else "") == "L"
-                left = sec_l or side == "left" or u > 0.85   # keep labels inside the frame
-                ax.annotate(label, (u, v), xytext=(-14 if left else 14, 0),
-                            textcoords="offset points", fontfamily=MONO, fontsize=msize,
-                            color=INK, va="center", ha="right" if left else "left", zorder=5)
-    plot(BENCH, TEAL,   "o", 92, 12.5)
-    plot(DISC,  GOLD,   "D", 84, 15.9)
-    plot(HARD,  MAROON, "^", 142, 17.0, side="left")
+            ax.scatter([u], [v], s=size*(1 if flat or not minor else 0.42), c=color,
+                       marker=marker, linewidths=0, zorder=4)
+            left = sec == "L" or (not sec and (side == "left" or u > 0.85))
+            ax.annotate(label, (u, v), xytext=(-11 if left else 11, 0),
+                        textcoords="offset points", fontfamily=MONO, fontsize=lsize,
+                        color=lcol, va="center", ha="right" if left else "left", zorder=5)
 
-    zone = dict(fontfamily=MONO, fontsize=18.0, color=MUTED, zorder=5)
-    ax.text(0.020, 0.395, "BENCHMARK-RICH", **zone)
-    ax.text(0.325, 0.520, "ACTIVE DISCOVERY", **zone)
-    ax.text(0.235, 1.005, "THE HARD REGION:", **{**zone, "color": INK})
-    ax.text(0.235, 0.958, "COMPLEX FUNCTIONAL MATERIALS / DEVICES",
-            fontfamily=MONO, fontsize=13.5, color=INK, zorder=5)
+    # level 3 — the basin's dataset names: one uniform small grey
+    plot(BENCH, TEAL,   "o", 56, 12.5, MUTED, flat=True)
+    # level 2 — system labels, same rank as the group names below
+    plot(DISC,  GOLD,   "D", 84, 15.9, INK, flat=True)
+    plot(HARD,  MAROON, "^", 142, 15.9, INK, side="left")
+
+    zone = dict(fontfamily=MONO, fontsize=18.5, color=INK, zorder=5)
+    ax.text(0.020, 0.470, "BENCHMARK-RICH DOMAINS", **zone)
+    ax.text(0.325, 0.520, "ACTIVE DISCOVERY DOMAINS", **zone)
+    ax.text(1.000, 1.010, "THE HARD REGION:", ha="right", **zone)
+    ax.text(1.000, 0.958, "COMPLEX FUNCTIONAL MATERIALS / DEVICES", ha="right",
+            fontfamily=MONO, fontsize=15.5, color=INK, zorder=5)
 
     # qualitative axes: arrows, no ticks
     ax.annotate("", xy=(1.0, -0.035), xytext=(0, -0.035), xycoords=("axes fraction","axes fraction"),
