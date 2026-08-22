@@ -51,14 +51,24 @@ def field(u, v):
 LEVELS = [0.26,0.36,0.46,0.56,0.66,0.76,0.86]
 
 # ---- roster (same coordinates as the site) ----
-BENCH = [(0.10,0.10,"QM9",0),(0.17,0.165,"Materials Project",0),(0.30,0.085,"OC20",0),
-         (0.045,0.045,"PubChem",0),(0.235,0.045,"AFLOW",0),
-         (0.07,0.21,"OQMD",1),(0.16,0.04,"MD17",1),(0.24,0.20,"MatBench",1)]
-DISC  = [(0.36,0.36,"perovskites",0),(0.50,0.30,"MOFs",0),(0.55,0.44,"alloys",0),
-         (0.37,0.26,"zeolites",0),(0.47,0.40,"2D materials",0),(0.46,0.24,"battery cathodes",1)]
-HARD  = [(0.63,0.74,"fuel cell components",0),(0.76,0.92,"electrolyzer components",0),
-         (0.90,0.69,"FET sensors",0),(0.71,0.59,"PFAS sensing / adsorption",0),
-         (0.94,0.84,"complex nanomaterials",0)]
+BENCH = [
+  # group 1 — small molecules (enumerated / computed single molecules)
+  (0.045, 0.055, "PubChem", 0, "mol", ""), (0.095, 0.120, "QM9", 0, "mol", ""),
+  (0.045, 0.175, "MD17", 1, "mol", "R"),   (0.105, 0.215, "ANI-1x", 1, "mol", "L"),
+  (0.055, 0.250, "SPICE", 1, "mol", ""),   (0.105, 0.292, "PCQM4Mv2", 1, "mol", ""),
+  # group 2 — pure crystals (periodic bulk, computed and experimental)
+  (0.175, 0.295, "Materials Project", 0, "xtl", ""), (0.245, 0.045, "AFLOW", 0, "xtl", ""),
+  (0.175, 0.115, "ICSD", 1, "xtl", "R"),   (0.232, 0.100, "COD", 1, "xtl", "R"),
+  (0.183, 0.175, "OQMD", 1, "xtl", "R"),   (0.256, 0.212, "CSD", 1, "xtl", "R"),
+  (0.196, 0.248, "OMat24", 1, "xtl", "R"), (0.262, 0.148, "MatBench", 1, "xtl", ""),
+  # group 3 — simple surfaces (slab + adsorbate)
+  (0.325, 0.080, "OC20", 0, "srf", ""), (0.345, 0.155, "OC22", 1, "srf", "L")]
+GROUPS = [("small molecules", "mol", 1), ("pure crystals", "xtl", 1), ("simple surfaces", "srf", -1)]
+DISC  = [(0.36,0.36,"perovskites",0,""),(0.50,0.30,"MOFs",0,""),(0.55,0.44,"alloys",0,""),
+         (0.37,0.26,"zeolites",0,""),(0.47,0.40,"2D materials",0,""),(0.46,0.24,"battery cathodes",1,"")]
+HARD  = [(0.63,0.74,"fuel cell components",0,""),(0.76,0.92,"electrolyzer components",0,""),
+         (0.90,0.69,"FET sensors",0,""),(0.71,0.59,"PFAS sensing / adsorption",0,""),
+         (0.94,0.84,"complex nanomaterials",0,"")]
 
 TEAL, GOLD, MAROON = "#008b7f", "#9a7712", "#a82424"
 INK, MUTED, FAINT = "#141413", "#5d574f", "#8a847b"
@@ -96,10 +106,29 @@ def draw(bg, path_stem):
     dx, dy = zip(*dust())
     ax.scatter(dx, dy, s=6.0, c=FAINT, alpha=0.30, linewidths=0, zorder=2)
 
+    from matplotlib.patches import Ellipse
+    PAD = 0.025
+    for gname, key, up in GROUPS:                      # basin sub-regions by system type
+        pts = [(b[0], b[1]) for b in BENCH if b[4] == key]
+        us, vs = [p[0] for p in pts], [p[1] for p in pts]
+        cx, cy = (min(us)+max(us))/2, (min(vs)+max(vs))/2
+        w, h = (max(us)-min(us))+2*PAD, (max(vs)-min(vs))+2*PAD
+        ax.add_patch(Ellipse((cx, cy), w, h, fill=False, edgecolor=TEAL,
+                             linewidth=1.0, linestyle=(0, (5, 4)), alpha=0.55, zorder=3))
+        ax.text(cx, cy + up*(h/2+0.022), gname.upper(), ha="center",
+                va="bottom" if up > 0 else "top",
+                fontfamily=MONO, fontsize=14, color=FAINT, zorder=5)
+
     def plot(group, color, marker, size, msize, side="right"):
-        for u, v, label, minor in group:
+        for u, v, label, minor, *rest in group:
+            sec = rest[1] if len(rest) > 1 else ""
             ax.scatter([u], [v], s=size*(0.42 if minor else 1), c=color, marker=marker,
                        linewidths=0, zorder=4)
+            if minor and sec:      # smaller, lighter label for a secondary entry
+                l = sec == "L"
+                ax.annotate(label, (u, v), xytext=(-9 if l else 9, 0),
+                            textcoords="offset points", fontfamily=MONO, fontsize=12.5,
+                            color=MUTED, va="center", ha="right" if l else "left", zorder=5)
             if not minor:
                 left = side == "left" or u > 0.85   # keep labels inside the frame
                 ax.annotate(label, (u, v), xytext=(-14 if left else 14, 0),
@@ -110,7 +139,7 @@ def draw(bg, path_stem):
     plot(HARD,  MAROON, "^", 142, 17.0, side="left")
 
     zone = dict(fontfamily=MONO, fontsize=18.0, color=MUTED, zorder=5)
-    ax.text(0.015, 0.315, "BENCHMARK-RICH", **zone)
+    ax.text(0.020, 0.395, "BENCHMARK-RICH", **zone)
     ax.text(0.325, 0.520, "ACTIVE DISCOVERY", **zone)
     ax.text(0.585, 0.985, "THE HARD REGION", **{**zone, "color": INK})
 
