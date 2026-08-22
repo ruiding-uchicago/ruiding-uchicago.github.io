@@ -118,7 +118,7 @@ def draw(bg, path_stem):
         ax.add_patch(Ellipse((cx, cy), w, h, fill=False, edgecolor=TEAL,
                              linewidth=1.0, linestyle=(0, (5, 4)), alpha=0.55, zorder=3))
         gx, gy = at if at else (cx, cy + up*(h/2 + (0.022 if up > 0 else 0.052)))
-        ax.text(gx, gy, gname.upper(),
+        ax.text(gx, gy, gname,
                 ha="left" if at else "center",
                 va="bottom" if (at or up > 0) else "top",
                 fontfamily=MONO, fontsize=15.9, color=INK, zorder=5)
