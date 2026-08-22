@@ -11,7 +11,7 @@ from matplotlib.lines import Line2D
 
 for w in ("400","500","700"):
     fm.fontManager.addfont(f"/tmp/hrfont/JetBrainsMono-{w}.ttf")
-MONO = "JetBrains Mono"
+MONO = "Arial"   # static figure only; the live map keeps JetBrains Mono
 
 # ---- ported verbatim from assets/js/hard-region.js (seed 20260610) ----
 def make_noise(seed):
@@ -53,22 +53,22 @@ LEVELS = [0.26,0.36,0.46,0.56,0.66,0.76,0.86]
 # ---- roster (same coordinates as the site) ----
 BENCH = [
   # group 1 — small molecules (enumerated / computed single molecules)
-  (0.045, 0.055, "PubChem", 0, "mol", ""), (0.095, 0.120, "QM9", 0, "mol", ""),
-  (0.045, 0.175, "MD17", 1, "mol", "R"),   (0.105, 0.215, "ANI-1x", 1, "mol", "L"),
-  (0.055, 0.250, "SPICE", 1, "mol", ""),   (0.105, 0.292, "PCQM4Mv2", 1, "mol", ""),
+  (0.045, 0.055, "PubChem", 0, "mol", "R"), (0.100, 0.115, "QM9", 0, "mol", "R"),
+  (0.045, 0.175, "MD17", 1, "mol", "R"),    (0.105, 0.215, "ANI-1x", 1, "mol", "L"),
+  (0.048, 0.252, "SPICE", 1, "mol", "R"),   (0.105, 0.292, "PCQM4Mv2", 1, "mol", "L"),
   # group 2 — pure crystals (periodic bulk, computed and experimental)
-  (0.175, 0.295, "Materials Project", 0, "xtl", ""), (0.245, 0.045, "AFLOW", 0, "xtl", ""),
-  (0.175, 0.115, "ICSD", 1, "xtl", "R"),   (0.232, 0.100, "COD", 1, "xtl", "R"),
-  (0.183, 0.175, "OQMD", 1, "xtl", "R"),   (0.256, 0.212, "CSD", 1, "xtl", "R"),
-  (0.196, 0.248, "OMat24", 1, "xtl", "R"), (0.262, 0.148, "MatBench", 1, "xtl", ""),
+  (0.175, 0.295, "Materials Project", 0, "xtl", "R"), (0.245, 0.045, "AFLOW", 0, "xtl", "R"),
+  (0.180, 0.075, "COD", 1, "xtl", "R"),    (0.262, 0.110, "MatBench", 1, "xtl", "L"),
+  (0.178, 0.145, "ICSD", 1, "xtl", "R"),   (0.250, 0.180, "OQMD", 1, "xtl", "R"),
+  (0.180, 0.215, "CSD", 1, "xtl", "R"),    (0.255, 0.250, "OMat24", 1, "xtl", "L"),
   # group 3 — simple surfaces (slab + adsorbate)
   (0.325, 0.080, "OC20", 0, "srf", ""), (0.345, 0.155, "OC22", 1, "srf", "L")]
 GROUPS = [("small molecules", "mol", 1), ("pure crystals", "xtl", 1), ("simple surfaces", "srf", -1)]
 DISC  = [(0.36,0.36,"perovskites",0,""),(0.50,0.30,"MOFs",0,""),(0.55,0.44,"alloys",0,""),
          (0.37,0.26,"zeolites",0,""),(0.47,0.40,"2D materials",0,""),(0.46,0.24,"battery cathodes",1,"")]
-HARD  = [(0.63,0.74,"fuel cell components",0,""),(0.76,0.92,"electrolyzer components",0,""),
-         (0.90,0.69,"FET sensors",0,""),(0.71,0.59,"PFAS sensing / adsorption",0,""),
-         (0.94,0.84,"complex nanomaterials",0,"")]
+HARD  = [(0.67,0.78,"fuel cell components",0,""),(0.80,0.90,"electrolyzer components",0,""),
+         (0.94,0.71,"FET sensors",0,""),(0.75,0.63,"PFAS sensing / adsorption",0,""),
+         (0.97,0.83,"complex nanomaterials",0,"")]
 
 TEAL, GOLD, MAROON = "#008b7f", "#9a7712", "#a82424"
 INK, MUTED, FAINT = "#141413", "#5d574f", "#8a847b"
@@ -117,7 +117,7 @@ def draw(bg, path_stem):
                              linewidth=1.0, linestyle=(0, (5, 4)), alpha=0.55, zorder=3))
         ax.text(cx, cy + up*(h/2+0.022), gname.upper(), ha="center",
                 va="bottom" if up > 0 else "top",
-                fontfamily=MONO, fontsize=14, color=FAINT, zorder=5)
+                fontfamily=MONO, fontsize=14, color=INK, zorder=5)
 
     def plot(group, color, marker, size, msize, side="right"):
         for u, v, label, minor, *rest in group:
@@ -130,18 +130,21 @@ def draw(bg, path_stem):
                             textcoords="offset points", fontfamily=MONO, fontsize=12.5,
                             color=MUTED, va="center", ha="right" if l else "left", zorder=5)
             if not minor:
-                left = side == "left" or u > 0.85   # keep labels inside the frame
+                sec_l = (rest[1] if len(rest) > 1 else "") == "L"
+                left = sec_l or side == "left" or u > 0.85   # keep labels inside the frame
                 ax.annotate(label, (u, v), xytext=(-14 if left else 14, 0),
                             textcoords="offset points", fontfamily=MONO, fontsize=msize,
                             color=INK, va="center", ha="right" if left else "left", zorder=5)
-    plot(BENCH, TEAL,   "o", 92, 15.9)
+    plot(BENCH, TEAL,   "o", 92, 12.5)
     plot(DISC,  GOLD,   "D", 84, 15.9)
     plot(HARD,  MAROON, "^", 142, 17.0, side="left")
 
     zone = dict(fontfamily=MONO, fontsize=18.0, color=MUTED, zorder=5)
     ax.text(0.020, 0.395, "BENCHMARK-RICH", **zone)
     ax.text(0.325, 0.520, "ACTIVE DISCOVERY", **zone)
-    ax.text(0.585, 0.985, "THE HARD REGION", **{**zone, "color": INK})
+    ax.text(0.235, 1.005, "THE HARD REGION:", **{**zone, "color": INK})
+    ax.text(0.235, 0.958, "COMPLEX FUNCTIONAL MATERIALS / DEVICES",
+            fontfamily=MONO, fontsize=13.5, color=INK, zorder=5)
 
     # qualitative axes: arrows, no ticks
     ax.annotate("", xy=(1.0, -0.035), xytext=(0, -0.035), xycoords=("axes fraction","axes fraction"),
@@ -154,17 +157,6 @@ def draw(bg, path_stem):
             fontfamily=MONO, fontsize=15.5, color=MUTED)
     ax.text(-0.052, 0.5, "DATA COST", transform=ax.transAxes, va="center", ha="center",
             rotation=90, fontfamily=MONO, fontsize=15.5, color=MUTED)
-
-    handles = [Line2D([],[],marker=m,color="none",markerfacecolor=c,markeredgecolor="none",markersize=s,label=l)
-               for m,c,s,l in [("o",TEAL,10.5,"data-rich  ·  benchmarked"),
-                               ("D",GOLD,9.6,"active discovery"),
-                               ("^",MAROON,11.5,"data-scarce / unbenchmarked")]]
-    leg = ax.legend(handles=handles, loc="lower right", frameon=True,
-                    facecolor=bg, edgecolor="none", framealpha=0.92,
-                    prop={"family":MONO,"size":14.5}, labelspacing=0.75,
-                    handletextpad=0.7, borderpad=0.9)
-    leg.set_zorder(6)
-    for t in leg.get_texts(): t.set_color(MUTED)
 
     ax.set_xlim(*XL); ax.set_ylim(*YL)
     ax.set_xticks([]); ax.set_yticks([])
