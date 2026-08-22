@@ -66,8 +66,8 @@ BENCH = [
 GROUPS = [("small molecules", "mol", -1, (0.000, -0.012)),
           ("pure crystals", "xtl", 1, None),
           ("simple surfaces", "srf", -1, None)]
-DISC  = [(0.36,0.36,"perovskites",0,""),(0.50,0.30,"MOFs",0,""),(0.55,0.44,"alloys",0,""),
-         (0.37,0.26,"zeolites",0,""),(0.47,0.40,"2D materials",0,""),(0.46,0.24,"battery cathodes",1,"")]
+DISC  = [(0.375,0.335,"perovskites",0,""),(0.510,0.400,"MOFs",0,""),(0.565,0.530,"alloys",0,""),
+         (0.365,0.205,"zeolites",0,""),(0.470,0.465,"2D materials",0,""),(0.450,0.270,"battery cathodes",1,"")]
 HARD  = [(0.67,0.78,"fuel cell membrane electrode assembly",0,""),(0.80,0.90,"water electrolyzer membrane electrode assembly",0,""),
          (0.94,0.71,"FET sensors",0,""),(0.80,0.68,"water pollutant sensing / adsorption composite membranes",0,""),
          (0.97,0.83,"multimetallic oxides",0,"")]
@@ -90,6 +90,94 @@ def dust():
         if rnd() < (1-u)*(1-v)*1.25 + 0.015: out.append((u, v))
     return out
 
+
+# ---------- structure glyphs: the same baked structures the live 3D map floats
+#            above each node (assets/js/hr-holo-data.js), projected to 2D ----------
+import base64, re as _re
+def load_structures(path="assets/js/hr-holo-data.js"):
+    src = open(path).read()
+    out = {}
+    for m in _re.finditer(r'(\w+):"([^"]*)"', src[src.index("export const D={"):]):
+        pos, bonds, cls = m.group(2).split("|")
+        P = base64.b64decode(pos)
+        xyz = [[(P[i]-256 if P[i] > 127 else P[i])/120.0 for i in (j, j+1, j+2)]
+               for j in range(0, len(P), 3)]
+        B = base64.b64decode(bonds)
+        out[m.group(1)] = (xyz, [(B[i], B[i+1]) for i in range(0, len(B), 2)],
+                           [int(c) for c in cls])
+    return out
+STRUCT = load_structures()
+
+# which structure stands for which label (the live map's own assignments)
+GLYPH = {"small molecules": "bz", "pure crystals": "nacl", "simple surfaces": "cu111",
+         "perovskites": "sto", "MOFs": "mof", "alloys": "fcc", "zeolites": "sod",
+         "2D materials": "mos2", "battery cathodes": "lco",
+         "water pollutant sensing / adsorption composite membranes": "pfoa",
+         "multimetallic oxides": "oxide*", "FET sensors": "fet*",
+         "fuel cell membrane electrode assembly": "mea*",
+         "water electrolyzer membrane electrode assembly": "meaO2*"}
+
+def _rot(v):                       # fixed three-quarter view
+    import math
+    a, b = 0.62, -0.38
+    ca, sa, cb, sb = math.cos(a), math.sin(a), math.cos(b), math.sin(b)
+    x, y, z = v
+    x, z = x*ca + z*sa, -x*sa + z*ca
+    y, z = y*cb - z*sb, y*sb + z*cb
+    return x, y, z
+
+def draw_glyph(ax, key, cx, cy, w, col, ratio):
+    """cx,cy = glyph centre in data coords; w = width in data-x; ratio = data-x per data-y
+    at equal physical size, so the inset renders square."""
+    h = w * ratio
+    ia = ax.inset_axes([cx - w/2, cy - h/2, w, h], transform=ax.transData, zorder=6)
+    ia.set_xticks([]); ia.set_yticks([]); ia.set_facecolor("none")
+    for sp in ia.spines.values(): sp.set_visible(False)
+    ia.set_xlim(-1.15, 1.15); ia.set_ylim(-1.15, 1.15)
+
+    if key.endswith("*"):                       # parametric device schematics
+        k = key[:-1]
+        if k in ("mea", "meaO2"):               # membrane | catalyst | GDL stack
+            for i, (yy, ww, al) in enumerate([(-0.62, 1.55, .30), (-0.24, 1.75, .55),
+                                              (0.14, 1.75, .55), (0.52, 1.55, .30)]):
+                ia.add_patch(plt.Rectangle((-ww/2, yy), ww, 0.26, facecolor=col,
+                                           alpha=al, edgecolor=col, linewidth=.7))
+            ia.plot([-0.85, 0.85], [-0.05, -0.05], color=col, lw=1.6)   # membrane
+            if k == "meaO2":
+                for bx, by, br in [(-0.45, 0.92, .11), (0.05, 1.02, .08), (0.5, 0.88, .13)]:
+                    ia.add_patch(plt.Circle((bx, by), br, fill=False, edgecolor=col, lw=.9))
+        elif k == "fet":                        # source | channel | gate + probe
+            ia.add_patch(plt.Rectangle((-1.0, -0.85), 2.0, 0.34, facecolor=col,
+                                       alpha=.22, edgecolor=col, linewidth=.7))
+            for sx in (-0.82, 0.42):
+                ia.add_patch(plt.Rectangle((sx, -0.45), 0.4, 0.36, facecolor=col,
+                                           alpha=.65, edgecolor="none"))
+            ia.plot([-0.5, 0.5], [-0.3, -0.3], color=col, lw=2.2)       # channel
+            for px, py in [(-0.12, 0.28), (0.12, 0.42), (-0.02, 0.62)]:
+                ia.add_patch(plt.Circle((px, py), 0.10, color=col))
+            ia.plot([-0.12, 0.12, -0.02], [0.28, 0.42, 0.62], color=col, lw=.8)
+        else:                                   # multimetallic oxide lattice
+            xyz, bonds, cls = STRUCT["nacl"]
+            cls = [(i*7 % 3) for i in range(len(xyz))]     # mixed metal occupancy
+            _atoms(ia, xyz, bonds, cls, col)
+        return
+    xyz, bonds, cls = STRUCT[key]
+    _atoms(ia, xyz, bonds, cls, col)
+
+def _atoms(ia, xyz, bonds, cls, col):
+    pr = [_rot(v) for v in xyz]
+    for i, j in bonds:
+        if i < len(pr) and j < len(pr):
+            ia.plot([pr[i][0], pr[j][0]], [pr[i][1], pr[j][1]],
+                    color=col, lw=0.7+0.5*max(0.34, min(1.0, (18.0/max(1,len(pr)))**0.6)),
+                    alpha=0.6, zorder=1, solid_capstyle="round")
+    order = sorted(range(len(pr)), key=lambda i: pr[i][2])
+    f = max(0.34, min(1.0, (18.0/max(1, len(pr)))**0.6))
+    sz = {0: 9, 1: 15, 2: 22, 3: 30}
+    ia.scatter([pr[i][0] for i in order], [pr[i][1] for i in order],
+               s=[sz.get(cls[i], 14)*f for i in order], c=col,
+               linewidths=0, zorder=2, alpha=0.95)
+
 def draw(bg, path_stem):
     fig, ax = plt.subplots(figsize=(16.5, 7.4), dpi=200)
     fig.patch.set_facecolor(bg); ax.set_facecolor(bg)
@@ -109,6 +197,14 @@ def draw(bg, path_stem):
     ax.scatter(dx, dy, s=6.0, c=FAINT, alpha=0.30, linewidths=0, zorder=2)
 
     from matplotlib.patches import Ellipse
+    # inches per data unit on each axis -> glyph aspect correction + label metrics
+    ipx = (13.0 if False else fig.get_size_inches()[0]) * (0.99 - 0.075) / (XL[1]-XL[0])
+    ipy = fig.get_size_inches()[1] * (0.985 - 0.105) / (YL[1]-YL[0])
+    ASPECT = ipx / ipy
+    GW = 0.024                                  # glyph width in data-x
+    cw = lambda pt: pt * 0.5 / 72.0 / ipx       # Arial average advance, in data-x
+    off = lambda pt: 11.0 / 72.0 / ipx
+
     PAD = 0.025
     for gname, key, up, at in GROUPS:                      # basin sub-regions by system type
         pts = [(b[0], b[1]) for b in BENCH if b[4] == key]
@@ -122,8 +218,12 @@ def draw(bg, path_stem):
                 ha="left" if at else "center",
                 va="bottom" if (at or up > 0) else "top",
                 fontfamily=MONO, fontsize=15.9, color=INK, zorder=5)
+        tw = len(gname) * cw(15.9)
+        gend = (gx + tw) if at else (gx + tw/2)
+        if gname in GLYPH:
+            draw_glyph(ax, GLYPH[gname], gend + 0.011 + 0.015, gy, 0.030, TEAL, ASPECT)
 
-    def plot(group, color, marker, size, lsize, lcol, side="right", flat=False):
+    def plot(group, color, marker, size, lsize, lcol, side="right", flat=False, gw=GW):
         for u, v, label, minor, *rest in group:
             sec = rest[1] if len(rest) > 1 else ""
             ax.scatter([u], [v], s=size*(1 if flat or not minor else 0.42), c=color,
@@ -132,16 +232,21 @@ def draw(bg, path_stem):
             ax.annotate(label, (u, v), xytext=(-11 if left else 11, 0),
                         textcoords="offset points", fontfamily=MONO, fontsize=lsize,
                         color=lcol, va="center", ha="right" if left else "left", zorder=5)
+            if label in GLYPH:
+                tw = len(label) * cw(lsize)
+                far = (u - off(lsize) - tw - 0.010 - GW/2) if left \
+                      else (u + off(lsize) + tw + 0.010 + GW/2)
+                draw_glyph(ax, GLYPH[label], far, v, gw, color, ASPECT)
 
     # level 3 — the basin's dataset names: one uniform small grey
     plot(BENCH, TEAL,   "o", 56, 12.5, MUTED, flat=True)
     # level 2 — system labels, same rank as the group names below
     plot(DISC,  GOLD,   "D", 84, 15.9, INK, flat=True)
-    plot(HARD,  MAROON, "^", 142, 15.9, INK, side="left")
+    plot(HARD,  MAROON, "^", 142, 15.9, INK, side="left", gw=0.032)
 
     zone = dict(fontfamily=MONO, fontsize=18.5, zorder=5)
     ax.text(0.020, 0.470, "BENCHMARK-RICH DOMAINS", color=TEAL, **zone)
-    ax.text(0.325, 0.520, "ACTIVE DISCOVERY DOMAINS", color=GOLD, **zone)
+    ax.text(0.260, 0.610, "ACTIVE DISCOVERY DOMAINS", color=GOLD, **zone)
     ax.text(1.000, 1.010, "THE HARD REGION:", ha="right", color=MAROON, **zone)
     ax.text(1.000, 0.958, "COMPLEX FUNCTIONAL MATERIALS / DEVICES", ha="right",
             fontfamily=MONO, fontsize=15.5, color=MAROON, zorder=5)
