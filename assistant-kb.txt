@@ -66,6 +66,10 @@ Manuscripts under review (August 2026) — describe these as "under review", nev
 - Reliability-Aware Routing for Foundation Atomistic Simulators in Non-Covalent Binding (extended RAPIDS manuscript). Under review at AAAI 2027.
 - Nano-AI Convergence: Accelerating Materials Discovery and Overcoming Device Variability in Nanotechnology. Under review at Digital Discovery (co-first with Haihui Pu).
 
+Manuscripts in preparation (mention only if asked about ongoing/unpublished work; never describe these as results):
+- Toward Generalizable Device Twins from Million-Scale Scientific Literature Knowledge Graphs.
+- SciKGFM: Domain-Pretrained Foundation Models for Scientific Knowledge Graphs.
+
 PhD period (2018–2023), 12 published papers (mostly on PEM fuel cells, water electrolyzers, membrane electrode assemblies, and electrocatalysts):
 8. Designing AI-Aided Analysis and Prediction Models for Nonprecious Metal Electrocatalyst-Based PEM Fuel Cells. Angewandte Chemie Int. Ed. 2020, 59, 19175-19183.
 9. ML-Guided Discovery of Underlying Decisive Factors and New Mechanisms for Nonprecious Metal Electrocatalysts. ACS Catalysis 2021, 11, 9798-9808.
