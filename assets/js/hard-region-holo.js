@@ -130,9 +130,11 @@ function structGeom(key) {
   if (key[0] === '@') {
     const g=DEV[key](),r=1e-6,rr=p=>M.hypot(p[0],p[1],p[2]);
     const mr=M.max(...g.A.map(rr),...g.L.map(rr),r);
-    g.A.forEach(p=>{ p[0]/=mr;p[1]/=mr;p[2]/=mr;});
-    g.L.forEach(p=>{ p[0]/=mr;p[1]/=mr;p[2]/=mr;});
-    return g;
+    /* normalize into fresh arrays: a generator may legitimately put the same
+       point object in L once per bond it joins, and dividing in place would
+       then scale it once per occurrence (mr<1 inflates rather than shrinks). */
+    const nz=p=>[p[0]/mr,p[1]/mr,p[2]/mr,p[3]];
+    return { A: g.A.map(nz),L: g.L.map(nz) };
   }
   const [p,b,s]=D[key].split('|'),P=b64(p),Bd=b64(b),A=[],L=[];
   for (let i=0;i<s.length;i++) A.push([P[i*3]/120,P[i*3+1]/120,P[i*3+2]/120,+s[i]]);
