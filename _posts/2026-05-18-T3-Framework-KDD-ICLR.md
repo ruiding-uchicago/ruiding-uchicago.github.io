@@ -17,6 +17,15 @@ Our paper proposing the **Text-Twin-Translation (T<sup>3</sup>)** framework has 
 
 A narrated walkthrough of the full T<sup>3</sup> pipeline — from literature extraction to the device digital twin to PFAS-probe screening.
 
+## In 70 seconds
+
+<video controls muted preload="metadata" playsinline style="width:100%;border-radius:12px;border:1px solid var(--color-border)">
+  <source src="/assets/video/t3-cinema.mp4" type="video/mp4">
+  Your browser does not support the video tag — <a href="/assets/video/t3-cinema.mp4">download the video</a>.
+</video>
+
+A silent motion summary that follows one paper through the pipeline: one sentence becomes one device record, the record becomes a device twin, and one candidate out of 123 million is the one that binds PFOS over its interferents. Every number on screen comes from the paper.
+
 ## What T<sup>3</sup> does
 
 T<sup>3</sup> is our answer to the data scarcity that pervades ML for complex nanomaterial/device applications. The workflow:
