@@ -665,6 +665,8 @@ html.hr-splashing .hr-legend
   bottom: unquote("calc(max(#{$spacing-6}, 9vh) + 92px)")
 
 // ---------- T³ Text → Twin → Translation strip ----------
+// Three panel SVGs (230×250 each) in a grid; base styles are the END state
+// so reduced-motion and pre-play visitors see the finished diagram.
 .t3-strip
   margin: $spacing-8 0
   padding: $spacing-4
@@ -672,10 +674,30 @@ html.hr-splashing .hr-legend
   border-radius: $radius-lg
   background: var(--color-bg-secondary)
 
+.t3-panels
+  display: grid
+  grid-template-columns: 1fr 18px 1fr 18px 1fr
+  align-items: center
+  gap: $spacing-2
+
 .t3-svg
   display: block
   width: 100%
   height: auto
+
+.t3-sep
+  display: block
+  width: 18px
+  height: 14px
+  svg
+    display: block
+    width: 100%
+    height: 100%
+  path
+    fill: none
+    stroke: var(--color-text-light)
+    stroke-width: 1.4
+    opacity: .7
 
 .t3-cap
   font-family: var(--font-mono)
@@ -684,11 +706,45 @@ html.hr-splashing .hr-legend
   text-transform: uppercase
   fill: var(--color-text-light)
 
-.t3-arrow
+.t3-note
+  font-family: var(--font-mono)
+  font-size: 6.8px
+  letter-spacing: .3px
+  fill: var(--color-text-muted)
+  &.gold
+    fill: var(--color-accent)
+
+.t3-n-axis
+  fill: var(--color-text-light)
+
+.t3-arr
   fill: none
   stroke: var(--color-text-light)
-  stroke-width: 1.2
-  opacity: .7
+  stroke-width: 1.1
+  stroke-linecap: round
+  stroke-linejoin: round
+  opacity: .8
+  &.gold
+    stroke: var(--color-accent)
+    opacity: 1
+
+// cards (prompt / JSON / critique)
+.t3-card
+  rect
+    fill: var(--color-bg-elevated)
+    stroke: var(--color-border-strong)
+    stroke-width: 1
+  text
+    font-family: var(--font-mono)
+    font-size: 7.5px
+    fill: var(--color-text)
+  .t3-sub
+    font-size: 6.8px
+    fill: var(--color-text-light)
+
+.t3-c-prompt rect
+  stroke: var(--color-accent)
+  stroke-width: 1.4
 
 .t3-paper rect
   fill: var(--color-bg-elevated)
@@ -696,31 +752,161 @@ html.hr-splashing .hr-legend
 
 .t3-paper line
   stroke: var(--color-text-light)
-  stroke-width: 1.5
+  stroke-width: 1.4
   opacity: .6
 
 .tf
-  fill: var(--color-bg-elevated)
-  stroke: var(--color-primary)
-  stroke-opacity: .55
   transform-box: fill-box
   transform-origin: center
+  rect
+    fill: var(--color-bg-elevated)
+    stroke: var(--color-primary)
+    stroke-opacity: .55
+  text
+    font-family: var(--font-mono)
+    font-size: 6.8px
+    fill: var(--color-text-muted)
 
+// typed device graph
 .t3-edge
   stroke: var(--color-text-muted)
   stroke-width: 1.2
-  opacity: .8
+  opacity: .75
+  &.cap
+    stroke-dasharray: 3 2
+  &.chem
+    stroke-dasharray: 1 2
+    stroke-linecap: round
+  &.cond
+    stroke-dasharray: 4 2 1 2
 
 .t3-node
   fill: var(--color-bg-elevated)
   stroke: var(--color-primary)
   stroke-width: 1.5
+  transform-box: fill-box
+  transform-origin: center
+  &.tns
+    stroke: var(--color-accent-teal)
+  &.tnc
+    stroke: var(--color-accent)
+  &.hub
+    fill: var(--color-primary)
+    fill-opacity: .18
 
-.t3-nlabel
+.t3-key text,
+.t3-nlabels text
   font-family: var(--font-mono)
-  font-size: 7.5px
-  letter-spacing: .5px
+  font-size: 6.8px
+  letter-spacing: .3px
   fill: var(--color-text-light)
+
+.t3-key text
+  fill: var(--color-text-muted)
+
+// omission cues: the drawn graph is a subset of the paper's device graph
+.t3-ghost
+  fill: none
+  stroke: var(--color-text-muted)
+  stroke-width: 1
+  stroke-dasharray: 2 1.5
+  opacity: .35
+
+.t3-ghosts
+  line
+    stroke: var(--color-text-muted)
+    stroke-width: 1
+    stroke-dasharray: 2 2
+    opacity: .3
+  text
+    font-family: var(--font-mono)
+    font-size: 6.8px
+    fill: var(--color-text-light)
+    opacity: .7
+
+.t3-pfos text
+  font-family: var(--font-mono)
+  font-size: 6.8px
+  letter-spacing: .3px
+  fill: var(--color-text-light)
+
+.t3-ekey
+  line
+    stroke: var(--color-text-muted)
+    stroke-width: 1.2
+    opacity: .75
+    &.cap
+      stroke-dasharray: 3 2
+    &.chem
+      stroke-dasharray: 1 2
+      stroke-linecap: round
+    &.cond
+      stroke-dasharray: 4 2 1 2
+  text
+    font-family: var(--font-mono)
+    font-size: 6.8px
+    letter-spacing: .3px
+    fill: var(--color-text-muted)
+
+.t3-bracket
+  fill: none
+  stroke: var(--color-text-light)
+  stroke-width: 1
+  opacity: .8
+
+.t3-fp rect
+  fill: var(--color-text-muted)
+  opacity: .8
+  transform-box: fill-box
+  transform-origin: 50% 100%
+
+.t3-gate
+  circle
+    fill: var(--color-bg-elevated)
+    stroke: var(--color-text-muted)
+    stroke-width: 1.2
+    transform-box: fill-box
+    transform-origin: center
+  text
+    font-family: var(--font-mono)
+    font-size: 9px
+    fill: var(--color-text)
+
+.t3-pill
+  rect
+    fill: var(--color-bg-elevated)
+    stroke: var(--color-border-strong)
+    stroke-width: 1
+  text
+    font-family: var(--font-mono)
+    font-size: 6.8px
+    fill: var(--color-text-muted)
+  .t3-num
+    font-size: 7px
+    fill: var(--color-text)
+  &.sens
+    rect
+      stroke: var(--color-accent)
+      fill: var(--color-accent)
+      fill-opacity: .14
+    text
+      fill: var(--color-text)
+    .t3-num
+      font-size: 7.5px
+      fill: var(--color-accent)
+
+// translation: fixed device, candidate cloud, selectivity row
+.t3-dev
+  .t3-edge
+    opacity: .5
+  .t3-node
+    stroke-width: 1.2
+
+.t3-slot
+  fill: none
+  stroke: var(--color-accent)
+  stroke-width: 1.3
+  stroke-dasharray: 2 2
 
 .t3-scan
   stroke: var(--color-primary)
@@ -729,11 +915,53 @@ html.hr-splashing .hr-legend
 
 .t3-c
   fill: var(--color-text-light)
-  opacity: .3
+  opacity: .18
 
 .t3-c.win
   fill: var(--color-accent)
   opacity: 1
+
+.t3-flow
+  fill: var(--color-primary)
+  opacity: 0
+
+.t3-base
+  stroke: var(--color-border-strong)
+  stroke-width: 1
+
+.t3-hit
+  fill: var(--color-bg-elevated)
+  stroke: var(--color-accent)
+  stroke-width: 1.3
+  transform-box: fill-box
+  transform-origin: center
+  &.ref
+    stroke: var(--color-text-light)
+    stroke-dasharray: 2 1.5
+  &.sel
+    fill: var(--color-accent)
+    stroke: var(--color-accent)
+
+.t3-bar
+  fill: var(--color-text-light)
+  opacity: .5
+  transform-box: fill-box
+  &.up
+    transform-origin: 50% 100%
+  &.dn
+    transform-origin: 50% 0%
+  &.stub
+    opacity: .3
+  &.sel
+    fill: var(--color-accent)
+    opacity: 1
+
+.t3-check
+  fill: none
+  stroke: var(--color-accent)
+  stroke-width: 1.4
+  stroke-linecap: round
+  stroke-linejoin: round
 
 .t3-legend
   display: grid
@@ -741,15 +969,14 @@ html.hr-splashing .hr-legend
   gap: $spacing-3
   margin-top: $spacing-3
 
-.t3-legend summary
+.t3-leg h4
   font-family: var(--font-mono)
   font-size: .68rem
+  font-weight: normal
   letter-spacing: .1em
   text-transform: uppercase
   color: var(--color-text-muted)
-  cursor: pointer
-  &:hover
-    color: var(--color-primary)
+  margin: 0
 
 .t3-legend p
   font-size: .8rem
@@ -757,48 +984,199 @@ html.hr-splashing .hr-legend
   margin: $spacing-2 0 0
 
 @media (max-width: $breakpoint-sm)
+  .t3-panels
+    grid-template-columns: 1fr
+    gap: $spacing-3
+  .t3-p1
+    margin-bottom: -12%
+  .t3-sep
+    margin: 0 auto
+    svg
+      transform: rotate(90deg)
   .t3-legend
     grid-template-columns: 1fr
 
-// staged playback — runs once when .play lands (set by site.js)
-@media (prefers-reduced-motion: no-preference)
+// staged playback — runs once when .play lands (set by site.js). Beats:
+//   0–3.4 s  prompt loop (prompt → JSON → critique → textual gradient ×2)
+//   3.4–5.3  tuned prompt reads the corpus into field chips
+//   5.2–7.7  typed device graph assembles, message-passing bloom
+//   7.6–9.8  graph + fingerprint → gate γ → LDL / UDL / sensitivity
+//   9.4–12.4 fixed device, probe slot, candidates stream in (3 × .8 s)
+//   12.4–13.6 scan, top five light up
+//   13.3–15.2 selectivity row, one PFAS-selective hit, DFT·MD check
+// Ends ~15.2 s; data-cycle 26 s holds the end frame ~10 s. On phones
+// (≤ 640 px) the end state is shown without staging: the figure is taller
+// than the viewport there and the single .play trigger would fire off-screen.
+=t3-fade($d, $t: .5s)
+  opacity: 0
+  animation: t3-fade $t ease-out $d forwards
+
+=t3-draw($d, $t: .5s)
+  stroke-dasharray: 1
+  stroke-dashoffset: 1
+  animation: t3-draw $t $ease-out-expo $d forwards
+
+=t3-pop($d, $t: .5s)
+  transform: scale(0)
+  animation: t3-pop $t $ease-out-expo $d forwards
+
+@media (prefers-reduced-motion: no-preference) and (min-width: #{$breakpoint-sm + 1})
   .t3-strip.play
+    // ── Text ──
+    .t3-c-prompt
+      +t3-fade(.2s)
+      rect
+        stroke: var(--color-border-strong)
+        stroke-width: 1
+        animation: t3-gold .4s ease-out 3.2s forwards
+    .t3-n-extract
+      +t3-fade(.6s)
+    .t3-a1
+      +t3-draw(.6s)
+    .t3-c-json
+      +t3-fade(1s)
+    .t3-a2
+      +t3-draw(1.3s)
+    .t3-c-crit
+      +t3-fade(1.6s)
+    .t3-a3
+      +t3-draw(2s, .6s)
+      animation-iteration-count: 2
+    .t3-n-grad
+      +t3-fade(2.1s)
+    .t3-a4
+      +t3-draw(3.4s, .4s)
     .t3-paper
-      opacity: 0
-      animation: t3-fade .85s $ease-out-expo forwards
+      +t3-fade(3.6s, .6s)
     .tp2
-      animation-delay: .21s
+      animation-delay: 3.75s
+    .tp3
+      animation-delay: 3.9s
+    .t3-n-papers
+      +t3-fade(4s)
+    .t3-a5
+      +t3-draw(4.1s, .3s)
     .tf
-      transform: scale(0)
-      animation: t3-pop .5s $ease-out-expo forwards
+      +t3-pop(4.2s, .45s)
     @for $i from 1 through 12
       .tf:nth-of-type(#{$i})
-        animation-delay: #{.55 + $i * 0.07}s
-    .t3-edge
-      stroke-dasharray: 1
-      stroke-dashoffset: 1
-      animation: t3-draw .7s $ease-out-expo forwards
-    @for $i from 1 through 5
-      .t3-edge:nth-of-type(#{$i})
-        animation-delay: #{1.5 + $i * 0.17}s
-    .t3-node
-      transform-box: fill-box
-      transform-origin: center
-      transform: scale(0)
-      animation: t3-pop .55s $ease-out-expo forwards
-    @for $i from 1 through 5
-      .tn#{$i}
-        animation-delay: #{1.4 + $i * 0.14}s
-    .t3-nlabel
+        animation-delay: #{4.14 + $i * 0.06}s
+
+    // ── Twin ──
+    .t3-key
+      +t3-fade(5.2s)
+    .t3-graph .t3-node
+      +t3-pop(5.3s, .5s)
+    .t3-graph .t3-node
+      &:nth-of-type(2)
+        animation-delay: 5.4s
+      &:nth-of-type(3)
+        animation-delay: 5.5s
+      &:nth-of-type(4)
+        animation-delay: 5.6s
+      &:nth-of-type(5)
+        animation-delay: 5.7s
+      &:nth-of-type(6)
+        animation-delay: 5.8s
+      &:nth-of-type(7)
+        animation-delay: 5.9s
+      &:nth-of-type(8)
+        animation-delay: 6s
+      &:nth-of-type(9)
+        animation-delay: 6.1s
+      &:nth-of-type(10)
+        animation-delay: 6.2s
+      &:nth-of-type(11)
+        animation-delay: 6.3s
+    .t3-graph .hub
+      animation: t3-pop .5s $ease-out-expo 5.3s forwards, t3-hubflash .8s ease-in-out 6.9s
+    .t3-graph .t3-edge
       opacity: 0
-      animation: t3-fade .55s ease-out forwards
-      animation-delay: 2.5s
-    .t3-scan
-      animation: t3-scan 1.4s ease-in-out 3.2s both
+      animation: t3-fade-edge .4s ease-out 5.5s forwards, t3-bloom .8s ease-in-out 6.9s
+    @for $i from 1 through 11
+      .t3-graph .t3-edge:nth-of-type(#{$i})
+        animation-delay: #{5.41 + $i * 0.09}s, 6.9s
+    .t3-graph .t3-nlabels,
+    .t3-ekey,
+    .t3-ghosts
+      +t3-fade(6.5s)
+    .t3-ag0
+      +t3-draw(7.5s, .4s)
+    .t3-ag
+      +t3-draw(7.7s, .4s)
+    .t3-n-graph
+      +t3-fade(7.8s)
+    .t3-fp rect
+      transform: scaleY(0)
+      animation: t3-grow .35s $ease-out-expo 7.6s forwards
+    @for $i from 1 through 9
+      .t3-fp rect:nth-of-type(#{$i})
+        animation-delay: #{7.56 + $i * 0.04}s
+    .t3-n-fp
+      +t3-fade(7.9s)
+    .t3-af
+      +t3-draw(8s, .3s)
+    .t3-gate circle
+      +t3-pop(8.2s, .45s)
+    .t3-gate text,
+    .t3-n-gate
+      +t3-fade(8.3s)
+    .t3-ao
+      +t3-draw(8.4s, .4s)
+    .t3-pill
+      +t3-fade(8.7s, .4s)
+      &.p2
+        animation-delay: 8.8s
+      &.sens
+        animation-delay: 8.9s
+        rect
+          fill-opacity: 0
+          stroke: var(--color-border-strong)
+          animation: t3-sensfill .5s ease-out 9.2s forwards
+        .t3-num
+          +t3-fade(9.3s, .4s)
+
+    // ── Translation ──
+    .t3-dev
+      +t3-fade(9.4s, .6s)
     .t3-c
-      animation: t3-dim .7s ease-out 3.6s both
+      opacity: 0
+      animation: t3-fade-c .4s ease-out 9.6s forwards, t3-dim .5s ease-out 12.8s forwards
     .t3-c.win
-      animation: t3-win .85s $ease-out-expo 3.7s both
+      fill: var(--color-text-light)
+      animation: t3-fade-c .4s ease-out 9.6s forwards, t3-win .6s $ease-out-expo 13s forwards
+    .t3-n-cloud
+      +t3-fade(9.8s)
+    .t3-flow
+      animation: t3-flow .8s ease-in-out 10s 3
+    .t3-slot
+      animation: t3-slotpulse .8s ease-in-out 10s 3
+    .t3-scan
+      animation: t3-scan 1.2s ease-in-out 12.4s both
+    .t3-n-dft,
+    .t3-base,
+    .t3-n-axis,
+    .t3-n-ref
+      +t3-fade(13.3s)
+    .t3-hit
+      +t3-pop(13.4s, .45s)
+    @for $i from 1 through 6
+      .t3-hit:nth-of-type(#{$i})
+        animation-delay: #{13.32 + $i * 0.08}s
+    .t3-hit.sel
+      fill: var(--color-bg-elevated)
+      animation: t3-pop .45s $ease-out-expo 13.72s forwards, t3-selfill .4s ease-out 14.5s forwards
+    .t3-bar
+      transform: scaleY(0)
+      animation: t3-grow .5s $ease-out-expo 13.7s forwards
+    @for $i from 1 through 6
+      .t3-bar:nth-of-type(#{$i})
+        animation-delay: #{13.62 + $i * 0.08}s
+    .t3-n-tag,
+    .t3-n-tag2
+      +t3-fade(14.6s)
+    .t3-check
+      +t3-draw(14.8s, .4s)
 
 @keyframes t3-fade
   from
@@ -806,15 +1184,89 @@ html.hr-splashing .hr-legend
   to
     opacity: 1
 
+@keyframes t3-fade-edge
+  from
+    opacity: 0
+  to
+    opacity: .75
+
+@keyframes t3-fade-c
+  from
+    opacity: 0
+  to
+    opacity: .55
+
 @keyframes t3-pop
   from
     transform: scale(0)
   to
     transform: scale(1)
 
+@keyframes t3-grow
+  from
+    transform: scaleY(0)
+  to
+    transform: scaleY(1)
+
 @keyframes t3-draw
   to
     stroke-dashoffset: 0
+
+@keyframes t3-gold
+  from
+    stroke: var(--color-border-strong)
+    stroke-width: 1
+  to
+    stroke: var(--color-accent)
+    stroke-width: 1.4
+
+@keyframes t3-bloom
+  0%
+    stroke-width: 1.2
+    stroke: var(--color-text-muted)
+  45%
+    stroke-width: 2.4
+    stroke: var(--color-primary)
+  100%
+    stroke-width: 1.2
+    stroke: var(--color-text-muted)
+
+@keyframes t3-hubflash
+  0%
+    fill-opacity: .18
+  45%
+    fill-opacity: .7
+  100%
+    fill-opacity: .18
+
+@keyframes t3-sensfill
+  from
+    fill-opacity: 0
+    stroke: var(--color-border-strong)
+  to
+    fill-opacity: .14
+    stroke: var(--color-accent)
+
+@keyframes t3-flow
+  0%
+    opacity: 0
+    transform: translate(0, 0)
+  15%
+    opacity: 1
+  85%
+    opacity: 1
+    transform: translate(-87px, -8px)
+  100%
+    opacity: 0
+    transform: translate(-87px, -8px)
+
+@keyframes t3-slotpulse
+  0%
+    stroke-width: 1.3
+  85%
+    stroke-width: 2.6
+  100%
+    stroke-width: 1.3
 
 @keyframes t3-scan
   0%
@@ -824,7 +1276,7 @@ html.hr-splashing .hr-legend
     opacity: 1
   100%
     opacity: 0
-    transform: translateX(172px)
+    transform: translateX(92px)
 
 @keyframes t3-dim
   from
@@ -834,9 +1286,17 @@ html.hr-splashing .hr-legend
 
 @keyframes t3-win
   from
-    opacity: .4
+    opacity: .55
+    fill: var(--color-text-light)
   to
     opacity: 1
+    fill: var(--color-accent)
+
+@keyframes t3-selfill
+  from
+    fill: var(--color-bg-elevated)
+  to
+    fill: var(--color-accent)
 
 // ---------- Autonomous Discovery Loop ----------
 .disc-loop

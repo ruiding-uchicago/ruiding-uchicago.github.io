@@ -1,60 +1,203 @@
-<figure class="t3-strip anim-onview auto-cycle" data-cycle="13000" role="img" aria-label="Three-stage diagram: papers are distilled into structured fields, the fields assemble into a device topology graph, and the graph scans a candidate cloud where a few candidates light up.">
-<svg class="t3-svg" viewBox="0 0 720 235" aria-hidden="true">
-  <text class="t3-cap" x="105" y="16" text-anchor="middle">Text</text>
-  <text class="t3-cap" x="360" y="16" text-anchor="middle">Twin</text>
-  <text class="t3-cap" x="610" y="16" text-anchor="middle">Translation</text>
+<figure class="t3-strip anim-onview auto-cycle" data-cycle="26000" role="img" aria-label="Three-stage diagram of T3. Text: an LLM critic refines an extraction prompt with textual gradients, then the prompt turns 1,600 plus FET sensor papers into structured records. Twin: each record becomes a typed device graph of parts, sensing interface and process conditions; a graph network fused with the probe's fingerprint predicts detection limits and sensitivity. Translation: with the device fixed and only the probe swapped, 123 million PubChem molecules are scored; the top five go to DFT and MD, and one is selective for PFOS over interferents where beta-cyclodextrin is not.">
+<div class="t3-panels">
 
-  <path class="t3-arrow" d="M222 125 H 252 l -7 -5 m 7 5 l -7 5"/>
-  <path class="t3-arrow" d="M474 125 H 504 l -7 -5 m 7 5 l -7 5"/>
+<!-- ── Panel 1: Text ── -->
+<svg class="t3-svg t3-p1" viewBox="0 0 230 250" aria-hidden="true">
+  <text class="t3-cap" x="115" y="14" text-anchor="middle">Text</text>
 
+  <g class="t3-card t3-c-prompt"><rect x="16" y="36" width="52" height="26" rx="3"/><text x="42" y="53" text-anchor="middle">prompt</text></g>
+  <text class="t3-note t3-n-extract" x="115" y="42" text-anchor="middle">LLM extracts</text>
+  <path class="t3-arr t3-a1" pathLength="1" d="M68 49 H 158 l -6 -4 m 6 4 l -6 4"/>
+  <g class="t3-card t3-c-json"><rect x="162" y="36" width="52" height="26" rx="3"/><text x="188" y="53" text-anchor="middle">JSON</text></g>
+  <path class="t3-arr t3-a2" pathLength="1" d="M188 62 V 97 H 145 l 6 -4 m -6 4 l 6 4"/>
+  <g class="t3-card t3-c-crit"><rect x="89" y="84" width="52" height="26" rx="3"/><text x="115" y="95" text-anchor="middle">critique</text><text class="t3-sub" x="115" y="105" text-anchor="middle">vs expert</text></g>
+  <path class="t3-arr t3-a3 gold" pathLength="1" d="M89 97 H 42 V 66 l -4 6 m 4 -6 l 4 6"/>
+  <text class="t3-note t3-n-grad gold" x="48" y="79">textual gradient</text>
+
+  <path class="t3-arr t3-a4" pathLength="1" d="M24 62 V 120 l -4 -6 m 4 6 l 4 -6"/>
   <g class="t3-papers">
-    <g class="t3-paper tp1" transform="translate(28,52)">
-      <rect width="54" height="68" rx="4"/>
-      <line x1="9" y1="16" x2="45" y2="16"/><line x1="9" y1="28" x2="45" y2="28"/>
-      <line x1="9" y1="40" x2="38" y2="40"/><line x1="9" y1="52" x2="45" y2="52"/>
-    </g>
-    <g class="t3-paper tp2" transform="translate(44,106) rotate(-4)">
-      <rect width="54" height="68" rx="4"/>
-      <line x1="9" y1="16" x2="45" y2="16"/><line x1="9" y1="28" x2="40" y2="28"/>
-      <line x1="9" y1="40" x2="45" y2="40"/>
-    </g>
+    <g class="t3-paper tp1" transform="translate(14,126)"><rect width="46" height="58" rx="3"/><line x1="8" y1="14" x2="38" y2="14"/><line x1="8" y1="24" x2="38" y2="24"/><line x1="8" y1="34" x2="30" y2="34"/><line x1="8" y1="44" x2="38" y2="44"/></g>
+    <g class="t3-paper tp2" transform="translate(22,134)"><rect width="46" height="58" rx="3"/><line x1="8" y1="14" x2="38" y2="14"/><line x1="8" y1="24" x2="32" y2="24"/><line x1="8" y1="34" x2="38" y2="34"/><line x1="8" y1="44" x2="34" y2="44"/></g>
+    <g class="t3-paper tp3" transform="translate(30,142)"><rect width="46" height="58" rx="3"/><line x1="8" y1="14" x2="38" y2="14"/><line x1="8" y1="24" x2="38" y2="24"/><line x1="8" y1="34" x2="28" y2="34"/><line x1="8" y1="44" x2="38" y2="44"/></g>
   </g>
-  <g class="t3-fields" transform="translate(126,72)">
-    <rect class="tf" x="0" y="0" width="26" height="11" rx="2"/><rect class="tf" x="32" y="0" width="26" height="11" rx="2"/><rect class="tf" x="64" y="0" width="26" height="11" rx="2"/>
-    <rect class="tf" x="0" y="18" width="26" height="11" rx="2"/><rect class="tf" x="32" y="18" width="26" height="11" rx="2"/><rect class="tf" x="64" y="18" width="26" height="11" rx="2"/>
-    <rect class="tf" x="0" y="36" width="26" height="11" rx="2"/><rect class="tf" x="32" y="36" width="26" height="11" rx="2"/><rect class="tf" x="64" y="36" width="26" height="11" rx="2"/>
-    <rect class="tf" x="0" y="54" width="26" height="11" rx="2"/><rect class="tf" x="32" y="54" width="26" height="11" rx="2"/><rect class="tf" x="64" y="54" width="26" height="11" rx="2"/>
-  </g>
-
-  <g class="t3-graph" transform="translate(282,42)">
-    <line class="t3-edge" pathLength="1" x1="60" y1="38" x2="98" y2="88"/>
-    <line class="t3-edge" pathLength="1" x1="140" y1="30" x2="60" y2="38"/>
-    <line class="t3-edge" pathLength="1" x1="98" y1="88" x2="28" y2="128"/>
-    <line class="t3-edge" pathLength="1" x1="98" y1="88" x2="150" y2="120"/>
-    <line class="t3-edge" pathLength="1" x1="140" y1="30" x2="98" y2="88"/>
-    <circle class="t3-node tn1" cx="60" cy="38" r="7"/>
-    <circle class="t3-node tn2" cx="140" cy="30" r="7"/>
-    <circle class="t3-node tn3" cx="98" cy="88" r="9"/>
-    <circle class="t3-node tn4" cx="28" cy="128" r="7"/>
-    <circle class="t3-node tn5" cx="150" cy="120" r="7"/>
-    <text class="t3-nlabel" x="60" y="24" text-anchor="middle">probe</text>
-    <text class="t3-nlabel" x="140" y="16" text-anchor="middle">target</text>
-    <text class="t3-nlabel" x="98" y="108" text-anchor="middle">channel</text>
-    <text class="t3-nlabel" x="28" y="146" text-anchor="middle">medium</text>
-    <text class="t3-nlabel" x="150" y="138" text-anchor="middle">env</text>
-  </g>
-
-  <g class="t3-cands" transform="translate(528,40)">
-    <line class="t3-scan" x1="0" y1="-6" x2="0" y2="160"/>
-    <circle class="t3-c" cx="8" cy="14" r="3"/><circle class="t3-c" cx="46" cy="8" r="3"/><circle class="t3-c" cx="86" cy="18" r="3"/><circle class="t3-c" cx="124" cy="10" r="3"/><circle class="t3-c" cx="158" cy="20" r="3"/>
-    <circle class="t3-c" cx="18" cy="52" r="3"/><circle class="t3-c win" cx="60" cy="44" r="3"/><circle class="t3-c" cx="98" cy="56" r="3"/><circle class="t3-c" cx="136" cy="48" r="3"/><circle class="t3-c" cx="166" cy="58" r="3"/>
-    <circle class="t3-c" cx="10" cy="90" r="3"/><circle class="t3-c" cx="50" cy="96" r="3"/><circle class="t3-c" cx="92" cy="86" r="3"/><circle class="t3-c win" cx="130" cy="94" r="3"/><circle class="t3-c" cx="162" cy="98" r="3"/>
-    <circle class="t3-c" cx="22" cy="128" r="3"/><circle class="t3-c" cx="58" cy="136" r="3"/><circle class="t3-c" cx="96" cy="126" r="3"/><circle class="t3-c" cx="134" cy="138" r="3"/><circle class="t3-c win" cx="74" cy="158" r="3"/>
+  <text class="t3-note t3-n-papers" x="46" y="216" text-anchor="middle">1,600+ papers</text>
+  <path class="t3-arr t3-a5" pathLength="1" d="M79 156 H 89 l -5 -4 m 5 4 l -5 4"/>
+  <g class="t3-fields" transform="translate(100,122)">
+    <g class="tf"><rect x="0" y="0" width="58" height="12" rx="2"/><text x="29" y="8.5" text-anchor="middle">channel</text></g>
+    <g class="tf"><rect x="62" y="0" width="58" height="12" rx="2"/><text x="91" y="8.5" text-anchor="middle">electrode</text></g>
+    <g class="tf"><rect x="0" y="17" width="58" height="12" rx="2"/><text x="29" y="25.5" text-anchor="middle">dielectric</text></g>
+    <g class="tf"><rect x="62" y="17" width="58" height="12" rx="2"/><text x="91" y="25.5" text-anchor="middle">substrate</text></g>
+    <g class="tf"><rect x="0" y="34" width="58" height="12" rx="2"/><text x="29" y="42.5" text-anchor="middle">probe</text></g>
+    <g class="tf"><rect x="62" y="34" width="58" height="12" rx="2"/><text x="91" y="42.5" text-anchor="middle">target</text></g>
+    <g class="tf"><rect x="0" y="51" width="58" height="12" rx="2"/><text x="29" y="59.5" text-anchor="middle">medium</text></g>
+    <g class="tf"><rect x="62" y="51" width="58" height="12" rx="2"/><text x="91" y="59.5" text-anchor="middle">anneal</text></g>
+    <g class="tf"><rect x="0" y="68" width="58" height="12" rx="2"/><text x="29" y="76.5" text-anchor="middle">pH</text></g>
+    <g class="tf"><rect x="62" y="68" width="58" height="12" rx="2"/><text x="91" y="76.5" text-anchor="middle">temp</text></g>
+    <g class="tf"><rect x="0" y="85" width="58" height="12" rx="2"/><text x="29" y="93.5" text-anchor="middle">LDL·UDL</text></g>
+    <g class="tf"><rect x="62" y="85" width="58" height="12" rx="2"/><text x="91" y="93.5" text-anchor="middle">sens.</text></g>
   </g>
 </svg>
+
+<span class="t3-sep" aria-hidden="true"><svg viewBox="0 0 18 14"><path d="M1 7 H 15 l -5 -4 m 5 4 l -5 4"/></svg></span>
+
+<!-- ── Panel 2: Twin ── -->
+<svg class="t3-svg t3-p2" viewBox="0 0 230 250" aria-hidden="true">
+  <text class="t3-cap" x="115" y="14" text-anchor="middle">Twin</text>
+
+  <g class="t3-key">
+    <circle class="t3-node tnd" cx="10" cy="28" r="3"/><text x="17" y="30.5">device</text>
+    <circle class="t3-node tns" cx="10" cy="39" r="3"/><text x="17" y="41.5">sensing</text>
+    <circle class="t3-node tnc" cx="10" cy="50" r="3"/><text x="17" y="52.5">condition</text>
+    <circle class="t3-ghost" cx="10" cy="61" r="3"/><text x="17" y="63.5">… gates, electrolyte</text>
+  </g>
+
+  <g class="t3-graph">
+    <g class="t3-ghosts">
+      <line x1="12" y1="102" x2="70" y2="100"/>
+      <line x1="104" y1="128" x2="70" y2="100"/>
+      <line x1="134" y1="80" x2="118" y2="60"/>
+      <line x1="186" y1="52" x2="152" y2="104"/>
+      <circle class="t3-ghost" cx="12" cy="102" r="5"/>
+      <circle class="t3-ghost" cx="104" cy="128" r="5"/>
+      <circle class="t3-ghost" cx="134" cy="80" r="4.5"/>
+      <circle class="t3-ghost" cx="186" cy="52" r="4.5"/>
+      <text x="112" y="131">…</text>
+    </g>
+    <line class="t3-edge" x1="30" y1="86" x2="70" y2="100"/>
+    <line class="t3-edge" x1="30" y1="124" x2="70" y2="100"/>
+    <line class="t3-edge cap" x1="70" y1="144" x2="70" y2="100"/>
+    <line class="t3-edge chem" x1="118" y1="60" x2="70" y2="100"/>
+    <line class="t3-edge cap" x1="152" y1="104" x2="70" y2="100"/>
+    <line class="t3-edge cap" x1="70" y1="176" x2="70" y2="144"/>
+    <line class="t3-edge chem" x1="118" y1="60" x2="156" y2="40"/>
+    <line class="t3-edge cond" x1="156" y1="40" x2="152" y2="104"/>
+    <line class="t3-edge cond" x1="26" y1="170" x2="70" y2="100"/>
+    <line class="t3-edge cond" x1="196" y1="80" x2="152" y2="104"/>
+    <line class="t3-edge cond" x1="196" y1="128" x2="152" y2="104"/>
+
+    <circle class="t3-node tnd hub" cx="70" cy="100" r="9"/>
+    <circle class="t3-node tnd" cx="30" cy="86" r="6"/>
+    <circle class="t3-node tnd" cx="30" cy="124" r="6"/>
+    <circle class="t3-node tnd" cx="70" cy="144" r="6"/>
+    <circle class="t3-node tnd" cx="70" cy="176" r="6"/>
+    <circle class="t3-node tns" cx="118" cy="60" r="7"/>
+    <circle class="t3-node tns" cx="156" cy="40" r="6"/>
+    <circle class="t3-node tns" cx="152" cy="104" r="6"/>
+    <circle class="t3-node tnc" cx="26" cy="170" r="5"/>
+    <circle class="t3-node tnc" cx="196" cy="80" r="5"/>
+    <circle class="t3-node tnc" cx="196" cy="128" r="5"/>
+
+    <g class="t3-nlabels">
+      <text x="70" y="84" text-anchor="middle">channel</text>
+      <text x="30" y="76" text-anchor="middle">source</text>
+      <text x="30" y="140" text-anchor="middle">drain</text>
+      <text x="80" y="147">dielectric</text>
+      <text x="80" y="179">substrate</text>
+      <text x="118" y="48" text-anchor="middle">probe</text>
+      <text x="156" y="29" text-anchor="middle">target</text>
+      <text x="152" y="118" text-anchor="middle">medium</text>
+      <text x="26" y="182" text-anchor="middle">anneal</text>
+      <text x="196" y="70" text-anchor="middle">pH</text>
+      <text x="196" y="142" text-anchor="middle">temp</text>
+    </g>
+  </g>
+
+  <g class="t3-ekey">
+    <line x1="152" y1="154" x2="166" y2="154"/><text x="170" y="156.5">electrical</text>
+    <line class="cap" x1="152" y1="164" x2="166" y2="164"/><text x="170" y="166.5">capacitive</text>
+    <line class="chem" x1="152" y1="174" x2="166" y2="174"/><text x="170" y="176.5">chemical</text>
+    <line class="cond" x1="152" y1="184" x2="166" y2="184"/><text x="170" y="186.5">condition</text>
+  </g>
+
+  <g class="t3-readout">
+    <path class="t3-bracket t3-ag0" pathLength="1" d="M20 190 H 120"/>
+    <path class="t3-arr t3-ag" pathLength="1" d="M70 191 V 203 l -4 -5 m 4 5 l 4 -5"/>
+    <text class="t3-note t3-n-graph" x="64" y="201" text-anchor="end">graph</text>
+    <g class="t3-fp">
+      <rect x="10" y="209" width="2" height="11"/><rect x="14" y="212" width="3" height="8"/><rect x="19" y="207" width="2" height="13"/><rect x="23" y="211" width="2" height="9"/><rect x="27" y="206" width="3" height="14"/><rect x="32" y="213" width="2" height="7"/><rect x="36" y="208" width="2" height="12"/><rect x="40" y="210" width="3" height="10"/><rect x="45" y="207" width="2" height="13"/>
+    </g>
+    <text class="t3-note t3-n-fp" x="28" y="233" text-anchor="middle">fingerprint</text>
+    <path class="t3-arr t3-af" pathLength="1" d="M49 214 H 59 l -4 -3 m 4 3 l -4 3"/>
+    <g class="t3-gate"><circle cx="70" cy="214" r="9"/><text x="70" y="217.5" text-anchor="middle">γ</text></g>
+    <text class="t3-note t3-n-gate" x="70" y="233" text-anchor="middle">gate</text>
+    <path class="t3-arr t3-ao" pathLength="1" d="M79 214 H 92 V 200 H 104 l -4 -3 m 4 3 l -4 3"/>
+    <path class="t3-arr t3-ao" pathLength="1" d="M79 214 H 104 l -4 -3 m 4 3 l -4 3"/>
+    <path class="t3-arr t3-ao" pathLength="1" d="M79 214 H 92 V 228 H 104 l -4 -3 m 4 3 l -4 3"/>
+    <g class="t3-pill"><rect x="106" y="194.5" width="84" height="11" rx="5.5"/><text x="110" y="202.5">LDL</text><text class="t3-num" x="186" y="202.5" text-anchor="end">87.7%</text></g>
+    <g class="t3-pill p2"><rect x="106" y="208.5" width="84" height="11" rx="5.5"/><text x="110" y="216.5">UDL</text><text class="t3-num" x="186" y="216.5" text-anchor="end">85.1%</text></g>
+    <g class="t3-pill sens"><rect x="106" y="222.5" width="84" height="11" rx="5.5"/><text x="110" y="230.5">sensitivity</text><text class="t3-num" x="186" y="230.5" text-anchor="end">92.3%</text></g>
+  </g>
+</svg>
+
+<span class="t3-sep" aria-hidden="true"><svg viewBox="0 0 18 14"><path d="M1 7 H 15 l -5 -4 m 5 4 l -5 4"/></svg></span>
+
+<!-- ── Panel 3: Translation ── -->
+<svg class="t3-svg t3-p3" viewBox="0 0 230 250" aria-hidden="true">
+  <text class="t3-cap" x="115" y="14" text-anchor="middle">Translation</text>
+
+  <g class="t3-dev">
+    <line class="t3-edge" x1="26" y1="66" x2="56" y2="80"/>
+    <line class="t3-edge" x1="26" y1="94" x2="56" y2="80"/>
+    <line class="t3-edge cap" x1="94" y1="90" x2="56" y2="80"/>
+    <line class="t3-edge chem" x1="88" y1="62" x2="56" y2="80"/>
+    <line class="t3-edge chem" x1="88" y1="62" x2="112" y2="46"/>
+    <line class="t3-edge cond" x1="112" y1="46" x2="94" y2="90"/>
+    <circle class="t3-node tnd" cx="56" cy="80" r="7"/>
+    <circle class="t3-node tnd" cx="26" cy="66" r="4"/>
+    <circle class="t3-node tnd" cx="26" cy="94" r="4"/>
+    <circle class="t3-node tns" cx="94" cy="90" r="4"/>
+    <circle class="t3-node tns" cx="112" cy="46" r="5"/>
+    <circle class="t3-slot" cx="88" cy="62" r="7"/>
+    <g class="t3-nlabels">
+      <text x="78" y="51" text-anchor="middle">probe</text>
+      <text x="112" y="35" text-anchor="middle">PFOS</text>
+      <text x="56" y="110" text-anchor="middle">fixed device</text>
+    </g>
+    <g class="t3-pfos" transform="translate(52,20)">
+      <path class="t3-edge" d="M1 12 l4 -4 l4 4 l4 -4 l4 4 l4 -4 l4 4 l4 -4"/>
+      <text x="13" y="5.5" text-anchor="middle">F</text>
+      <text x="17" y="19.5" text-anchor="middle">F</text>
+      <text x="31" y="10.5">SO3−</text>
+    </g>
+  </g>
+
+  <g class="t3-cands" transform="translate(130,30)">
+    <line class="t3-scan" x1="0" y1="-4" x2="0" y2="88"/>
+    <circle class="t3-c" cx="5" cy="8" r="2.4"/><circle class="t3-c" cx="22" cy="3" r="3"/><circle class="t3-c" cx="41" cy="14" r="2.2"/><circle class="t3-c" cx="63" cy="5" r="2.8"/><circle class="t3-c" cx="84" cy="11" r="2.1"/><circle class="t3-c" cx="12" cy="27" r="3.1"/><circle class="t3-c win" cx="34" cy="30" r="2.7"/><circle class="t3-c" cx="55" cy="24" r="2.3"/><circle class="t3-c" cx="72" cy="35" r="3"/><circle class="t3-c win" cx="88" cy="27" r="2.6"/><circle class="t3-c" cx="3" cy="46" r="2.5"/><circle class="t3-c" cx="26" cy="52" r="2.1"/><circle class="t3-c win" cx="47" cy="44" r="3.1"/><circle class="t3-c" cx="67" cy="57" r="2.4"/><circle class="t3-c" cx="86" cy="49" r="2.8"/><circle class="t3-c" cx="16" cy="68" r="2.9"/><circle class="t3-c win" cx="38" cy="74" r="2.4"/><circle class="t3-c" cx="58" cy="70" r="3.2"/><circle class="t3-c win" cx="78" cy="76" r="2.6"/><circle class="t3-c" cx="48" cy="60" r="2"/><circle class="t3-c" cx="8" cy="82" r="2.3"/>
+  </g>
+  <circle class="t3-flow" cx="175" cy="70" r="3"/>
+  <text class="t3-note t3-n-cloud" x="175" y="124" text-anchor="middle">123 M PubChem</text>
+
+  <g class="t3-sel">
+    <text class="t3-note t3-n-dft" x="96" y="140" text-anchor="middle">DFT binding: PFOS vs DDS · TCAA</text>
+    <line class="t3-base" x1="14" y1="186" x2="176" y2="186"/>
+    <text class="t3-note t3-n-axis" x="181" y="172">ΔΔE</text>
+    <text class="t3-note t3-n-axis" x="181" y="182">+ interf.</text>
+    <text class="t3-note t3-n-axis" x="181" y="196">− PFOS</text>
+    <text class="t3-note t3-n-ref" x="30" y="149" text-anchor="middle">β-CD</text>
+    <text class="t3-note t3-n-ref" x="108" y="149" text-anchor="middle">top 5</text>
+    <circle class="t3-hit ref" cx="30" cy="158" r="5"/>
+    <circle class="t3-hit" cx="56" cy="158" r="5"/>
+    <circle class="t3-hit" cx="82" cy="158" r="5"/>
+    <circle class="t3-hit" cx="108" cy="158" r="5"/>
+    <circle class="t3-hit sel" cx="134" cy="158" r="5"/>
+    <circle class="t3-hit" cx="160" cy="158" r="5"/>
+    <rect class="t3-bar up" x="26" y="170" width="8" height="16"/>
+    <rect class="t3-bar up stub" x="52" y="182" width="8" height="4"/>
+    <rect class="t3-bar up stub" x="78" y="182" width="8" height="4"/>
+    <rect class="t3-bar up stub" x="104" y="182" width="8" height="4"/>
+    <rect class="t3-bar dn sel" x="130" y="186" width="8" height="14"/>
+    <rect class="t3-bar up stub" x="156" y="182" width="8" height="4"/>
+    <path class="t3-check" pathLength="1" d="M128 206 l 4 4 l 8 -9"/>
+    <text class="t3-note t3-n-tag gold" x="134" y="226" text-anchor="middle">PFAS-selective</text>
+    <text class="t3-note t3-n-tag2" x="134" y="238" text-anchor="middle">DFT · MD (in silico)</text>
+  </g>
+</svg>
+
+</div>
 <figcaption class="t3-legend">
-  <details open><summary>Text</summary><p>AI reads the literature and extracts structured device knowledge.</p></details>
-  <details open><summary>Twin</summary><p>The full device context becomes a topology-aware graph.</p></details>
-  <details open><summary>Translation</summary><p>The twin ranks new candidate materials and molecules.</p></details>
+  <div class="t3-leg"><h4>Text</h4><p>An LLM critic compares each extraction with an expert answer and rewrites the prompt. The tuned prompt then reads 1,600+ FET sensor papers into structured records.</p></div>
+  <div class="t3-leg"><h4>Twin</h4><p>Each record becomes a device graph: parts, sensing interface, and process conditions, linked by physical couplings. A graph network plus the probe's fingerprint predicts detection limits and sensitivity.</p></div>
+  <div class="t3-leg"><h4>Translation</h4><p>The device is held fixed and only the probe is swapped. 123 M PubChem molecules are scored; the top hits go to DFT and MD, and one binds PFOS over interferents where the literature probe does not.</p></div>
 </figcaption>
 </figure>
