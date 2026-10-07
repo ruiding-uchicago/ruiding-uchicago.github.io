@@ -46,18 +46,26 @@ permalink: /funding/
 </div>
 
 <div class="section-header mt-8">
+    <h2 class="section-title">Industry AI Research Support</h2>
+</div>
+
+<div class="grid grid-cols-2 mt-4 mb-4">
+    <div class="card">
+        <span class="tag tag-primary mb-4">2026</span>
+        <h3 class="feature-title">Anthropic Claude Usage Credits Award ($20K)</h3>
+        <p class="text-muted mb-2">MIT&ndash;Anthropic AI for Science Study</p>
+        <p class="feature-description">Model credits for the agent systems behind the discovery loop.</p>
+    </div>
+    <div class="card">
+        <span class="tag tag-primary mb-4">2026</span>
+        <h3 class="feature-title">Google Cloud Research Credits Program</h3>
+        <p class="text-muted mb-2">Project #441314083982</p>
+        <p class="feature-description">Cloud compute for literature-scale compilation and screening.</p>
+    </div>
+</div>
+
+<div class="section-header mt-8">
     <h2 class="section-title">External Computing Awards</h2>
-</div>
-
-<div class="publication-item">
-    <div class="publication-title">Claude Usage Credits Award ($20K), MIT&ndash;Anthropic AI for Science Study</div>
-    <div class="publication-authors">Model credits for the agent systems behind the discovery loop</div>
-    <div class="publication-venue">2026</div>
-</div>
-
-<div class="publication-item">
-    <div class="publication-title">Google Cloud Research Credits Program (project #441314083982)</div>
-    <div class="publication-venue">2026</div>
 </div>
 
 <div class="publication-item">
