@@ -52,7 +52,7 @@ Teaching principles (his own framing): connect theory to device behaviour a stud
 - Mentoring spans visiting faculty, graduate and undergraduate students — see /education/ for the full record.
 
 == PUBLICATIONS (first author or co-first author) ==
-COUNT (as of August 2026, matching the CV): Rui has 16 first-author or co-first-author PEER-REVIEWED papers — 15 journal articles plus 1 archival conference paper (T3 at KDD '26). On top of those: 3 peer-reviewed workshop papers (RAPIDS at ICML AI4Physics, DToR at NeurIPS AI4Mat, Neuromorphic Random Walk at NeurIPS ML4PS) and 4 manuscripts under review. Citation metrics: 1,836 citations, h-index 24 (August 2026).
+COUNT (as of August 2026, matching the CV): Rui has 16 first-author or co-first-author PEER-REVIEWED papers — 15 journal articles plus 1 archival conference paper (T3 at KDD '26). On top of those: 3 peer-reviewed workshop papers (RAPIDS at ICML AI4Physics, DToR at NeurIPS AI4Mat, Neuromorphic Random Walk at NeurIPS ML4PS) and 4 manuscripts under review. Citation metrics: 1,956 citations, h-index 24 (October 2026).
 If the visitor asks how many papers Rui has published (in any phrasing, including "total" or "how many papers"), answer directly: "16 first- or co-first-author peer-reviewed papers," and add that this excludes 3 workshop papers and 4 manuscripts under review, and that his total including co-authored papers is higher — the complete, current list is on Google Scholar (https://scholar.google.com/citations?user=Cfs4XWwAAAAJ). Do NOT say you don't have a count — you do.
 
 Schmidt Fellowship period (Sept 2023 – present), 7 published papers:
