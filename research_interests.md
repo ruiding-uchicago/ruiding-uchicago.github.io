@@ -58,6 +58,8 @@ mathjax: true
 
 <p>A discovery loop is only as durable as the plumbing under it. I am the lead designer and developer of the data platform for <strong>NSF MADE-PUBLIC</strong> (FMRG #2037026): a browser-accessible layer over Globus-based data lifecycle management, searchable metadata, interactive knowledge graphs, Bayesian experiment design, and simulation workflows. Collaborators across institutions can use it without owning the stack. The same instinct shapes the rest of the work: RAPIDS ships as a verification service agents can call, and DToR and T<sup>3</sup> ship as open repositories rather than screenshots in a paper.</p>
 
+<p>The newest layer is the <strong>Autonomous Research Compiler (ARC)</strong>, built on that foundation: a long-horizon in-silico closed loop that compiles literature-derived device states, routes candidate hypotheses through specialist modules and executable physics checks, and revises the research plan when verification comes back adverse or inconclusive. ARC is also where the loop reaches real instruments. I am the technical lead for the AI/ML thrust of <strong>PoLARIS</strong>, the $20M University of Chicago and Argonne node of the NSF Programmable Cloud Laboratories network, where a first control panel now sends workflow instructions to PolyBot, Argonne's self-driving laboratory, and monitors it in real time against a prototype digital twin of the cell.</p>
+
 <div class="section-header mt-8">
     <span class="eyebrow">Where It Lands</span>
     <h2 class="section-title">Application Domains</h2>

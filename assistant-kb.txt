@@ -6,7 +6,7 @@ sitemap: false
 KNOWLEDGE BASE — Rui Ding
 This is the ONLY source of facts the website assistant may use.
 To update the bot: edit this file, commit, and redeploy the site. No other step.
-Last reviewed: 2026-08.
+Last reviewed: 2026-10.
 
 == WHO ==
 Rui Ding — English name "Ray", Chinese name 丁睿 — publishes and is professionally known as "Rui Ding"; treat "Ray" and 丁睿 as the same person. Eric and Wendy Schmidt AI in Science Fellow at the University of Chicago, and Resident Associate at Argonne National Laboratory, since September 2023.
@@ -44,6 +44,10 @@ The atomistic validation engine. It benchmarks machine-learning interatomic pote
 
 Rui is the LEAD DESIGNER AND DEVELOPER of the data platform for the NSF-funded MADE-PUBLIC project (Manufacturing Advanced Electronics through Printing Using Bio-based and Locally Identifiable Compounds, FMRG #2037026): a browser-accessible layer over Globus-based data lifecycle management, searchable metadata, interactive knowledge graphs, Bayesian experiment design, and simulation workflows, built so collaborators across institutions can use it without owning the stack. If asked about his software or systems-engineering ability, this platform plus the open repositories (DToR, T3, RAPIDS — RAPIDS is packaged as a verification service that agents can call) is the evidence.
 
+ARC (Autonomous Research Compiler) — the newest layer, built on the MADE-PUBLIC foundation. A long-horizon in-silico closed loop: it compiles literature-derived device states (a frozen contract of 13 device families, 93 variants, 231 functional positions, 22 connection types; 1,388,735 papers compiled into 5,550,692 typed device graphs), routes candidate hypotheses through specialist scientific modules and executable physics checks, and revises the research plan when verification comes back adverse or inconclusive (the verifier fails closed: a check that verified nothing returns "inconclusive", never "pass"). On 25 computational co-design problems it averages 94.71/100, against 74.38 and 70.30 for two commercial frontier models under the same solver-based evaluation. Rui is ARC's lead architect, developer and first author. Poster accepted at MRS Fall 2026 (Symposium MT01); the paper is submitted to AI4Mat at NeurIPS 2026 and is UNDER REVIEW — describe results as submitted work, not as published.
+
+PoLARIS — Rui is the TECHNICAL LEAD for the AI/ML thrust of PoLARIS, the $20 million University of Chicago and Argonne node of the NSF Programmable Cloud Laboratories network. ARC is hosted on that infrastructure; a first control panel sends workflow instructions to PolyBot, Argonne's self-driving laboratory, and monitors it in real time, with a prototype digital twin of the PolyBot cell. An autonomous campaign on a polymer system is running with the PolyBot team.
+
 == TEACHING ==
 Teaching principles (his own framing): connect theory to device behaviour a student can actually observe; make students implement and break models rather than watch them run; treat a defended validation as part of the result rather than a formality.
 - Curriculum, NSF Research Traineeship at UChicago PME (2026): created and open-sourced four AI/ML modules for graduate students, each built on a published research dataset rather than a teaching toy — literature-mined electrocatalyst property prediction, device-stability modelling, LLM knowledge extraction from sensor papers, and a controlled comparison of text- vs image-based extraction. Every notebook runs end to end from shipped cache, with no API key and no cost to the student. Materials: https://github.com/ruiding-uchicago/NRT_Training_Materials .
@@ -52,7 +56,7 @@ Teaching principles (his own framing): connect theory to device behaviour a stud
 - Mentoring spans visiting faculty, graduate and undergraduate students — see /education/ for the full record.
 
 == PUBLICATIONS (first author or co-first author) ==
-COUNT (as of August 2026, matching the CV): Rui has 16 first-author or co-first-author PEER-REVIEWED papers — 15 journal articles plus 1 archival conference paper (T3 at KDD '26). On top of those: 3 peer-reviewed workshop papers (RAPIDS at ICML AI4Physics, DToR at NeurIPS AI4Mat, Neuromorphic Random Walk at NeurIPS ML4PS) and 4 manuscripts under review. Citation metrics: 1,956 citations, h-index 24 (October 2026).
+COUNT (as of August 2026, matching the CV): Rui has 16 first-author or co-first-author PEER-REVIEWED papers — 15 journal articles plus 1 archival conference paper (T3 at KDD '26). On top of those: 4 peer-reviewed workshop papers (RAPIDS at ICML AI4Physics, DToR at NeurIPS AI4Mat, Neuromorphic Random Walk at NeurIPS ML4PS, and a clinical knowledge-graph canonicalization study in the GenAI4Health 2026 main track) and 5 manuscripts under review. Citation metrics: 1,956 citations, h-index 24 (October 2026).
 If the visitor asks how many papers Rui has published (in any phrasing, including "total" or "how many papers"), answer directly: "16 first- or co-first-author peer-reviewed papers," and add that this excludes 3 workshop papers and 4 manuscripts under review, and that his total including co-authored papers is higher — the complete, current list is on Google Scholar (https://scholar.google.com/citations?user=Cfs4XWwAAAAJ). Do NOT say you don't have a count — you do.
 
 Schmidt Fellowship period (Sept 2023 – present), 7 published papers:
@@ -69,8 +73,9 @@ Manuscripts under review (August 2026) — describe these as "under review", nev
 - Reliability-Aware Routing for Foundation Atomistic Simulators in Non-Covalent Binding (extended RAPIDS manuscript). Under review at AAAI 2027.
 - Nano-AI Convergence: Accelerating Materials Discovery and Overcoming Device Variability in Nanotechnology. Under review at Digital Discovery (co-first with Haihui Pu).
 
+Manuscripts under review also include: Compiling Literature into Device States for Verifier-Gated Closed-Loop Design (ARC), submitted to AI4Mat at NeurIPS 2026.
+
 Manuscripts in preparation (mention only if asked about ongoing/unpublished work; never describe these as results):
-- Toward Generalizable Device Twins from Million-Scale Scientific Literature Knowledge Graphs.
 - SciKGFM: Domain-Pretrained Foundation Models for Scientific Knowledge Graphs.
 
 PhD period (2018–2023), 12 published papers (mostly on PEM fuel cells, water electrolyzers, membrane electrode assemblies, and electrocatalysts):
@@ -94,9 +99,12 @@ The selected highlights are also on /publications/, and the full record (includi
 - 2025 UChicago AI Research Area, "Science Labs that Only AI Can Build" (T3 for PFAS chemical FET sensors and bio-FET platforms).
 - 2025 NSF Supplemental Award (FMRG 2037026 and DMREF 2323296).
 - 2024 AI+Science Research Initiative, Data Science Institute, UChicago: BRAINIAC.
+- 2026 MIT-Anthropic AI for Science study: Claude usage credits award, $20,000 (model credits for the agent systems behind the discovery loop).
+- 2026 Google Cloud Research Credits Program award (project #441314083982).
 - External computing awards (competitive allocations on external facilities, not everyday internal RCC time): NERSC (DOE Office of Science, AY 2026 Exploratory award, ERCAP0039011, project m5358 "AI-Guided Multi-Fidelity Discovery of PFAS Sensor Materials"), NSF ACCESS (2024–2026, MAT240097), Argonne Leadership Computing Facility (BRAINIAC, ID16430, 2024), Argonne Center for Nanoscale Materials (2024).
 
 == PEER REVIEW ==
+- Community standards: co-author of TRACE-AI (Transparent Reporting for Agentic Catalysis Enabled by Artificial Intelligence), community guidelines and a publication checklist, Chem Catalysis 6, 101755 (2026), doi:10.1016/j.checat.2026.101755.
 - AI / computer science (conferences & workshops): ACM SIGKDD main conference (KDD), NeurIPS AI4Mat, ICLR AI4Mat, ICML AI4Physics.
 - Chemistry / materials (journals): ACS Catalysis, Energy & Fuels, Journal of Water Process Engineering, Synthetic Metals, Organic Letters, ACS Applied Energy Materials, Nanomaterials.
 
@@ -116,6 +124,8 @@ Electrocatalysis (OER/HER catalysts, fuel cell and water electrolyzer membrane e
 Rui is open to collaboration. Two kinds especially: (1) materials/device experimental scientists who want AI to accelerate their discovery, and (2) ML/AI researchers who want a real, high-impact downstream application for their methods. The best way to start a conversation is email: ruiding@uchicago.edu.
 
 == SELECTED TALKS & PRESENTATIONS ==
+- MRS Fall 2026, Symposium MT01, Boston MA, Dec 2026: poster on ARC (accepted).
+- NSF National Network of AI-Programmable Cloud Laboratories Summit (PoLARIS kickoff), Washington DC, 2026: PoLARIS platform demonstration.
 - ICLR 2026 AI4Mat workshop (Spotlight Oral, T3), Brazil, 2026.
 - NeurIPS 2025 AI4Mat (DToR) and ML4PS (Neuromorphic Random Walk), San Diego, Dec 2025.
 - 248th Electrochemical Society (ECS) Meeting, Chicago, Oct 2025.

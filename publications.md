@@ -162,6 +162,12 @@ permalink: /publications/
     <p class="text-sm mt-2"><a href="https://ml4physicalsciences.github.io/2025/files/NeurIPS_ML4PS_2025_54.pdf" target="_blank">Paper (PDF)</a></p>
 </div>
 
+<div class="publication-item">
+    <div class="publication-title">1 in 4 Committed Links, 1 in 34 Mentions: When Aggregate Metrics Hide Canonicalization Failures in Clinical Knowledge Graphs</div>
+    <div class="publication-authors"><strong>Rui Ding</strong>, Shira M. Lupkin, and Nicole Tebaldi</div>
+    <div class="publication-venue">GenAI4Health 2026 — Main Track</div>
+</div>
+
 <div class="section-header mt-8">
     <h2 class="section-title">Manuscripts Under Review</h2>
 </div>
@@ -190,14 +196,14 @@ permalink: /publications/
     <div class="publication-venue">Under review at Digital Discovery</div>
 </div>
 
-<div class="section-header mt-8">
-    <h2 class="section-title">Manuscripts in Preparation</h2>
+<div class="publication-item">
+    <div class="publication-title">Compiling Literature into Device States for Verifier-Gated Closed-Loop Design (ARC)</div>
+    <div class="publication-authors"><strong>Rui Ding</strong> et al.</div>
+    <div class="publication-venue">Submitted to AI4Mat, at NeurIPS 2026</div>
 </div>
 
-<div class="publication-item">
-    <div class="publication-title">Toward Generalizable Device Twins from Million-Scale Scientific Literature Knowledge Graphs</div>
-    <div class="publication-authors"><strong>Rui Ding</strong> et al.</div>
-    <div class="publication-venue">In preparation</div>
+<div class="section-header mt-8">
+    <h2 class="section-title">Manuscripts in Preparation</h2>
 </div>
 
 <div class="publication-item">

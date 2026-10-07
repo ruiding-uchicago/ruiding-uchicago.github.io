@@ -71,6 +71,18 @@ permalink: /education/
 </div>
 
 <div class="publication-item">
+    <div class="publication-title">MRS Fall 2026 &mdash; Symposium MT01</div>
+    <div class="publication-authors">Poster: Autonomous Research Compiler &mdash; An AI Researcher for Functional Materials and Devices</div>
+    <div class="publication-venue">Boston, MA &mdash; December 2026</div>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">NSF National Network of AI-Programmable Cloud Laboratories Summit (PoLARIS kickoff)</div>
+    <div class="publication-authors">Platform demonstration: PoLARIS</div>
+    <div class="publication-venue">Washington, DC &mdash; 2026</div>
+</div>
+
+<div class="publication-item">
     <div class="publication-title">ACM SIGKDD 2026 (KDD) &mdash; Main Conference</div>
     <div class="publication-authors">Text-Twin-Translation (T<sup>3</sup>), AI for Sciences Track</div>
     <div class="publication-venue">Jeju Island, Republic of Korea &mdash; 2026</div>
@@ -137,6 +149,11 @@ permalink: /education/
 <div class="publication-item">
     <div class="publication-title">Journals &mdash; Chemistry / Materials</div>
     <div class="publication-authors">ACS Catalysis &middot; Energy &amp; Fuels &middot; Journal of Water Process Engineering &middot; Synthetic Metals &middot; Organic Letters &middot; ACS Applied Energy Materials &middot; Nanomaterials</div>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">Community Standards &mdash; TRACE-AI</div>
+    <div class="publication-authors">Co-author, <em>Transparent Reporting for Agentic Catalysis Enabled by Artificial Intelligence</em>: community guidelines and a publication checklist. <em>Chem Catalysis</em> 6, 101755 (2026). <a href="https://doi.org/10.1016/j.checat.2026.101755" target="_blank">doi:10.1016/j.checat.2026.101755</a></div>
 </div>
 
 <div class="section-header mt-8">

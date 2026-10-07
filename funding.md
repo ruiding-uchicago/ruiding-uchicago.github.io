@@ -50,6 +50,17 @@ permalink: /funding/
 </div>
 
 <div class="publication-item">
+    <div class="publication-title">Claude Usage Credits Award ($20K), MIT&ndash;Anthropic AI for Science Study</div>
+    <div class="publication-authors">Model credits for the agent systems behind the discovery loop</div>
+    <div class="publication-venue">2026</div>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">Google Cloud Research Credits Program (project #441314083982)</div>
+    <div class="publication-venue">2026</div>
+</div>
+
+<div class="publication-item">
     <div class="publication-title">Compute Allocation Award, NERSC &mdash; DOE Office of Science (ERCAP0039011)</div>
     <div class="publication-authors">AI-Guided Multi-Fidelity Discovery of PFAS Sensor Materials &mdash; Project m5358</div>
     <div class="publication-venue">2026 &middot; AY 2026 Exploratory</div>
