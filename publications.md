@@ -142,6 +142,12 @@ permalink: /publications/
 </div>
 
 <div class="publication-item">
+    <div class="publication-title">PALM: Physics-Aware Leakage Minimizer</div>
+    <div class="publication-authors">Rodrigo P. Ferreira, Ruijie Zhu, <strong>Rui Ding</strong>, Haihui Pu, Yuxin Chen, and Junhong Chen</div>
+    <div class="publication-venue">Machine Learning and the Physical Sciences (ML4PS), at NeurIPS 2026</div>
+</div>
+
+<div class="publication-item">
     <div class="publication-title">Geometry, Not Energy Surface, Drives the Neutral MLIP–DFT Gap in Atomistic Interaction Surrogates (RAPIDS)</div>
     <div class="publication-authors"><strong>Rui Ding</strong>*, Zixin Ding*, Rodrigo P. Ferreira*, Yuxin Chen, and Junhong Chen</div>
     <div class="publication-venue">AI4Physics, at ICML 2026</div>

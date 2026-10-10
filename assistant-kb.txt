@@ -56,8 +56,8 @@ Teaching principles (his own framing): connect theory to device behaviour a stud
 - Mentoring spans visiting faculty, graduate and undergraduate students — see /education/ for the full record.
 
 == PUBLICATIONS (first author or co-first author) ==
-COUNT (as of August 2026, matching the CV): Rui has 16 first-author or co-first-author PEER-REVIEWED papers — 15 journal articles plus 1 archival conference paper (T3 at KDD '26). On top of those: 4 peer-reviewed workshop papers (RAPIDS at ICML AI4Physics, DToR at NeurIPS AI4Mat, Neuromorphic Random Walk at NeurIPS ML4PS, and a clinical knowledge-graph canonicalization study in the GenAI4Health 2026 main track) and 5 manuscripts under review. Citation metrics: 1,956 citations, h-index 24 (October 2026).
-If the visitor asks how many papers Rui has published (in any phrasing, including "total" or "how many papers"), answer directly: "16 first- or co-first-author peer-reviewed papers," and add that this excludes 3 workshop papers and 4 manuscripts under review, and that his total including co-authored papers is higher — the complete, current list is on Google Scholar (https://scholar.google.com/citations?user=Cfs4XWwAAAAJ). Do NOT say you don't have a count — you do.
+COUNT (as of August 2026, matching the CV): Rui has 16 first-author or co-first-author PEER-REVIEWED papers — 15 journal articles plus 1 archival conference paper (T3 at KDD '26). On top of those: 5 peer-reviewed workshop papers (RAPIDS at ICML AI4Physics, DToR at NeurIPS AI4Mat, Neuromorphic Random Walk at NeurIPS ML4PS, a clinical knowledge-graph canonicalization study in the GenAI4Health 2026 main track, and PALM: Physics-Aware Leakage Minimizer at NeurIPS 2026 ML4PS, where Rui is a middle co-author) and 5 manuscripts under review. Citation metrics: 1,956 citations, h-index 24 (October 2026).
+If the visitor asks how many papers Rui has published (in any phrasing, including "total" or "how many papers"), answer directly: "16 first- or co-first-author peer-reviewed papers," and add that this excludes 5 peer-reviewed workshop papers and 5 manuscripts under review, and that his total including co-authored papers is higher — the complete, current list is on Google Scholar (https://scholar.google.com/citations?user=Cfs4XWwAAAAJ). Do NOT say you don't have a count — you do.
 
 Schmidt Fellowship period (Sept 2023 – present), 7 published papers:
 1. Text-Twin-Translation (T3): A Full-Stack ML Framework for Functional Material-Device Systems Discovery. KDD '26 proceedings, AI4Science Track (CORE A*, 21% acceptance rate), pp. 10831-10841, doi:10.1145/3770855.3819013; Spotlight Oral at ICLR 2026 AI4Mat.
@@ -127,6 +127,7 @@ Rui is open to collaboration. Two kinds especially: (1) materials/device experim
 - NSF National Network of AI-Programmable Cloud Laboratories Summit (PoLARIS kickoff), Washington DC, 2026: PoLARIS platform demonstration.
 - ICLR 2026 AI4Mat workshop (Spotlight Oral, T3), Brazil, 2026.
 - NeurIPS 2025 AI4Mat (DToR) and ML4PS (Neuromorphic Random Walk), San Diego, Dec 2025.
+- NeurIPS 2026 ML4PS: PALM (Physics-Aware Leakage Minimizer), co-authored with Rodrigo P. Ferreira and Ruijie Zhu, Sept 2026.
 - 248th Electrochemical Society (ECS) Meeting, Chicago, Oct 2025.
 - Gordon Research Seminar on Nanomaterials for Energy Technology, Ventura CA, Feb 2025.
 - ACM ICONS 2025 (International Conference on Neuromorphic Systems), Seattle, July 2025.
