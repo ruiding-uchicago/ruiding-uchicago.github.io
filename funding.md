@@ -49,12 +49,18 @@ permalink: /funding/
     <h2 class="section-title">Industry AI Research Support</h2>
 </div>
 
-<div class="grid grid-cols-2 mt-4 mb-4">
+<div class="grid grid-cols-3 mt-4 mb-4">
     <div class="card">
         <span class="tag tag-primary mb-4">2026</span>
         <h3 class="feature-title">Anthropic Claude Usage Credits Award ($20K)</h3>
         <p class="text-muted mb-2">MIT&ndash;Anthropic AI for Science Study</p>
         <p class="feature-description">Model credits for the agent systems behind the discovery loop.</p>
+    </div>
+    <div class="card">
+        <span class="tag tag-primary mb-4">2026</span>
+        <h3 class="feature-title">OpenAI ChatGPT for Academic Researchers</h3>
+        <p class="text-muted mb-2">Pro-level research workspace &mdash; 5 seats, 12 months</p>
+        <p class="feature-description">Model and coding-agent access for the group&rsquo;s research loop (&asymp;$12K in subscription value).</p>
     </div>
     <div class="card">
         <span class="tag tag-primary mb-4">2026</span>
