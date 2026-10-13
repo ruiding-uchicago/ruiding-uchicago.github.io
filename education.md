@@ -67,7 +67,13 @@ permalink: /education/
 </div>
 
 <div class="section-header mt-8">
-    <h2 class="section-title">Selected Presentations (2024&ndash;2026)</h2>
+    <h2 class="section-title">Selected Presentations (2024&ndash;2027)</h2>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">SLAS2027 International Conference and Exhibition</div>
+    <div class="publication-authors">Poster: Compiling Literature into Device States for Verifier-Gated Closed-Loop Design (ARC)</div>
+    <div class="publication-venue">San Diego, CA &mdash; January&ndash;February 2027</div>
 </div>
 
 <div class="publication-item">
