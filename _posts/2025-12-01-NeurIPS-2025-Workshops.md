@@ -17,10 +17,10 @@ Across 27 nanomaterials/device topics, DToR reports outperformed commercial deep
 
 <video controls preload="metadata" playsinline style="width:100%;border-radius:12px;border:1px solid var(--color-border)">
   <source src="/assets/video/dtor-explainer.mp4" type="video/mp4">
-  Your browser does not support the video tag &mdash; <a href="/assets/video/dtor-explainer.mp4">download the video</a>.
+  Your browser does not support the video tag. <a href="/assets/video/dtor-explainer.mp4">Download the video</a>.
 </video>
 
-A narrated walkthrough of DToR &mdash; how the tree-structured orchestrator expands, prunes, and out-researches commercial deep-research systems on local hardware.
+A narrated walkthrough of DToR: how the tree-structured orchestrator expands, prunes, and out-researches commercial deep-research systems on local hardware.
 
 ## ML4PS Workshop: Neuromorphic Random Walk
 

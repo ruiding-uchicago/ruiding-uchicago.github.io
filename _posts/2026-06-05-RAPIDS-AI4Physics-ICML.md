@@ -8,10 +8,10 @@ Our paper **"Geometry, Not Energy Surface, Drives the Neutral MLIP&ndash;DFT Gap
 
 <video controls preload="metadata" playsinline style="width:100%;border-radius:12px;border:1px solid var(--color-border)">
   <source src="/assets/video/rapids-explainer.mp4" type="video/mp4">
-  Your browser does not support the video tag &mdash; <a href="/assets/video/rapids-explainer.mp4">download the video</a>.
+  Your browser does not support the video tag. <a href="/assets/video/rapids-explainer.mp4">Download the video</a>.
 </video>
 
-A narrated walkthrough of RAPIDS &mdash; what the MLIP&ndash;DFT benchmark measures, and why geometry turns out to be the culprit.
+A narrated walkthrough of RAPIDS: what the MLIP&ndash;DFT benchmark measures, and why geometry turns out to be the culprit.
 
 RAPIDS is the rapid physical validation engine of our autonomous discovery stack. It benchmarks machine-learning interatomic potentials (MLIPs) against DFT across **5,567 probe&ndash;target dimer interactions** and **18 benchmark tasks**. The finding behind the title: geometric representation, not the energy surface itself, drives the neutral MLIP&ndash;DFT gap.
 

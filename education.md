@@ -61,7 +61,7 @@ permalink: /education/
 </div>
 
 <div class="publication-item">
-    <div class="publication-title">B.Eng.</div>
+    <div class="publication-title">B.Eng. in Renewable Energy Science and Engineering</div>
     <div class="publication-authors">Nanjing University, China</div>
     <div class="publication-venue">Sept. 2014 &ndash; Jun. 2018</div>
 </div>
@@ -125,6 +125,7 @@ permalink: /education/
 
 <div class="publication-item">
     <div class="publication-title">Gordon Research Seminar on Nanomaterials for Energy Technology</div>
+    <div class="publication-authors">Contributed Talk: Versatile Machine Learning Approaches for Discovering Nanomaterials and Devices in Renewable Energy</div>
     <div class="publication-venue">Ventura, CA &mdash; February 2025</div>
 </div>
 
@@ -135,7 +136,14 @@ permalink: /education/
 
 <div class="publication-item">
     <div class="publication-title">Knowledge-Guided Machine Learning Workshop</div>
+    <div class="publication-authors">Invited Presentation: Journey to a Nanomaterials/Devices Copilot</div>
     <div class="publication-venue">University of Michigan &mdash; August 2025</div>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">NSF MADE-PUBLIC Annual Retreat</div>
+    <div class="publication-authors">Project Presentation: Cybermanufacturing Platform of the MADE-PUBLIC Project</div>
+    <div class="publication-venue">Northwestern University and Iowa State University &mdash; 2024&ndash;2025</div>
 </div>
 
 <div class="publication-item">
@@ -170,7 +178,7 @@ permalink: /education/
 
 <div class="publication-item">
     <div class="publication-title">Curriculum &mdash; NSF Research Traineeship, UChicago PME</div>
-    <div class="publication-authors">Four open-source AI/ML modules for graduate students, each built on a published research dataset rather than a teaching toy: literature-mined electrocatalyst property prediction, device-stability modelling, LLM knowledge extraction from sensor papers, and a controlled comparison of text- versus image-based extraction. Every notebook runs end to end from shipped cache, with no API key and no cost to the student. <a href="https://github.com/ruiding-uchicago/NRT_Training_Materials" target="_blank">Materials</a></div>
+    <div class="publication-authors">Eight self-contained, open-source AI/ML notebooks for graduate students, each built on a published research dataset rather than a teaching toy, covering literature-mined electrocatalyst property prediction, device-stability modelling, LLM knowledge extraction from sensor papers, and a controlled comparison of text- versus image-based extraction. Every notebook runs end to end from shipped cache, with no API key and no cost to the student. <a href="https://github.com/ruiding-uchicago/NRT_Training_Materials" target="_blank">Materials</a></div>
     <div class="publication-venue">University of Chicago, 2026</div>
 </div>
 
@@ -204,7 +212,7 @@ permalink: /education/
 <div class="publication-item">
     <div class="publication-title">AI+Science Schmidt Fellows Speaker Series</div>
     <div class="publication-authors">Host Representative</div>
-    <div class="publication-venue">University of Chicago, 2024&ndash;2026</div>
+    <div class="publication-venue">University of Chicago, 2023&ndash;2026</div>
 </div>
 
 <div class="publication-item">
@@ -215,7 +223,13 @@ permalink: /education/
 
 <div class="publication-item">
     <div class="publication-title">Research Experience for Nigerian Undergraduates (RENEU)</div>
-    <div class="publication-authors">Mentee: Covenant Amoo &mdash; LLM for FET Sensor Knowledge Extraction</div>
+    <div class="publication-authors">Mentee: Covenant Amoo (Obafemi Awolowo University) &mdash; LLM for FET Sensor Knowledge Extraction</div>
+    <div class="publication-venue">University of Chicago, 2025</div>
+</div>
+
+<div class="publication-item">
+    <div class="publication-title">Undergraduate Research Mentoring</div>
+    <div class="publication-authors">Mentee: Maya Martinez (UChicago PME) &mdash; MD simulation of PFAS adsorption on Ni-HHB / Ni-HHTP MOFs. Mentee: Samuel Effendy (University of Illinois Chicago, Computer Science) &mdash; data portal development.</div>
     <div class="publication-venue">University of Chicago, 2025</div>
 </div>
 

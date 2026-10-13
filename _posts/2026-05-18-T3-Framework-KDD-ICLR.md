@@ -6,22 +6,22 @@ date: 2026-05-18
 
 Our paper proposing the **Text-Twin-Translation (T<sup>3</sup>)** framework has been accepted to the **SIGKDD 2026 AI4Science Track** (CORE A*). The same work was a **Spotlight Oral at the ICLR 2026 AI4Mat workshop**, presented recently in Brazil.
 
-> **Update:** the paper is now published in the proceedings and available in the ACM Digital Library &mdash; *Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining* (KDD&nbsp;'26), pp.&nbsp;10831&ndash;10841, [doi:10.1145/3770855.3819013](https://dl.acm.org/doi/10.1145/3770855.3819013). There is also a [plain-language summary on Kudos](https://www.growkudos.com/publications/10.1145%25252F3770855.3819013/reader) for readers outside the field.
+> **Update:** the paper is now published in the proceedings and available in the ACM Digital Library: *Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining* (KDD&nbsp;'26), pp.&nbsp;10831&ndash;10841, [doi:10.1145/3770855.3819013](https://dl.acm.org/doi/10.1145/3770855.3819013). There is also a [plain-language summary on Kudos](https://www.growkudos.com/publications/10.1145%25252F3770855.3819013/reader) for readers outside the field.
 
 ## Video walkthrough
 
 <video controls preload="metadata" playsinline style="width:100%;border-radius:12px;border:1px solid var(--color-border)">
   <source src="/assets/video/t3-explainer.mp4" type="video/mp4">
-  Your browser does not support the video tag — <a href="/assets/video/t3-explainer.mp4">download the video</a>.
+  Your browser does not support the video tag. <a href="/assets/video/t3-explainer.mp4">Download the video</a>.
 </video>
 
-A narrated walkthrough of the full T<sup>3</sup> pipeline — from literature extraction to the device digital twin to PFAS-probe screening.
+A narrated walkthrough of the full T<sup>3</sup> pipeline: from literature extraction to the device digital twin to PFAS-probe screening.
 
 ## In 70 seconds
 
 <video controls muted preload="metadata" playsinline style="width:100%;border-radius:12px;border:1px solid var(--color-border)">
   <source src="/assets/video/t3-cinema.mp4" type="video/mp4">
-  Your browser does not support the video tag — <a href="/assets/video/t3-cinema.mp4">download the video</a>.
+  Your browser does not support the video tag. <a href="/assets/video/t3-cinema.mp4">Download the video</a>.
 </video>
 
 A silent motion summary that follows one paper through the pipeline: one sentence becomes one device record, the record becomes a device twin, and one candidate out of 123 million is the one that binds PFOS over its interferents. Every number on screen comes from the paper.

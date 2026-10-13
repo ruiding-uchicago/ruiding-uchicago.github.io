@@ -14,7 +14,7 @@ A research loop runs on that state. A device twin shared across all 93 variants 
 
 <video controls preload="metadata" playsinline style="width:100%;border-radius:12px;border:1px solid var(--color-border)">
   <source src="/assets/video/arc-console.mp4" type="video/mp4">
-  Your browser does not support the video tag &mdash; <a href="/assets/video/arc-console.mp4">download the video</a>.
+  Your browser does not support the video tag. <a href="/assets/video/arc-console.mp4">Download the video</a>.
 </video>
 
 One closed-loop run, replayed: *"Can a remote-gate FET report ppt-class PFOS in tap water, and at what bias?"* Agents search, propose, and screen; the verifier returns its verdicts with the evidence, including the ones it refuses to call.

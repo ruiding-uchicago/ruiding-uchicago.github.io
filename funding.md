@@ -60,7 +60,7 @@ permalink: /funding/
         <span class="tag tag-primary mb-4">2026</span>
         <h3 class="feature-title">OpenAI ChatGPT for Academic Researchers</h3>
         <p class="text-muted mb-2">Pro-level research workspace &mdash; 5 seats, 12 months</p>
-        <p class="feature-description">Model and coding-agent access for the group&rsquo;s research loop (&asymp;$12K in subscription value).</p>
+        <p class="feature-description">Model and coding-agent access for the group&rsquo;s research loop.</p>
     </div>
     <div class="card">
         <span class="tag tag-primary mb-4">2026</span>

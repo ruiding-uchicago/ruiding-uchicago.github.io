@@ -171,7 +171,7 @@ permalink: /publications/
 <div class="publication-item">
     <div class="publication-title">1 in 4 Committed Links, 1 in 34 Mentions: When Aggregate Metrics Hide Canonicalization Failures in Clinical Knowledge Graphs</div>
     <div class="publication-authors"><strong>Rui Ding</strong>, Shira M. Lupkin, and Nicole Tebaldi</div>
-    <div class="publication-venue">GenAI4Health 2026 — Main Track</div>
+    <div class="publication-venue">GenAI4Health 2026 (Main Track)</div>
 </div>
 
 <div class="section-header mt-8">
@@ -187,13 +187,13 @@ permalink: /publications/
 <div class="publication-item">
     <div class="publication-title">Hierarchical Deep Research with Local-Web RAG: Toward Automated System-Level Materials Discovery</div>
     <div class="publication-authors"><strong>Rui Ding</strong>, Peng Gong, Rodrigo P. Ferreira, Yuxin Chen, and Junhong Chen</div>
-    <div class="publication-venue">Under review at Nature Machine Intelligence — extended manuscript</div>
+    <div class="publication-venue">Under review at Nature Machine Intelligence (extended manuscript based on the NeurIPS 2025 AI4Mat version)</div>
 </div>
 
 <div class="publication-item">
     <div class="publication-title">Reliability-Aware Routing for Foundation Atomistic Simulators in Non-Covalent Binding</div>
     <div class="publication-authors"><strong>Rui Ding</strong>, Zixin Ding, Rodrigo P. Ferreira, Yuxin Chen, and Junhong Chen</div>
-    <div class="publication-venue">Under review at AAAI 2027 — extended manuscript</div>
+    <div class="publication-venue">Under review at AAAI 2027 (extended manuscript based on the ICML 2026 AI4Physics version)</div>
 </div>
 
 <div class="publication-item">

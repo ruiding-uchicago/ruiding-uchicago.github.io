@@ -50,7 +50,7 @@ PoLARIS — Rui is the TECHNICAL LEAD for the AI/ML thrust of PoLARIS, the $20 m
 
 == TEACHING ==
 Teaching principles (his own framing): connect theory to device behaviour a student can actually observe; make students implement and break models rather than watch them run; treat a defended validation as part of the result rather than a formality.
-- Curriculum, NSF Research Traineeship at UChicago PME (2026): created and open-sourced four AI/ML modules for graduate students, each built on a published research dataset rather than a teaching toy — literature-mined electrocatalyst property prediction, device-stability modelling, LLM knowledge extraction from sensor papers, and a controlled comparison of text- vs image-based extraction. Every notebook runs end to end from shipped cache, with no API key and no cost to the student. Materials: https://github.com/ruiding-uchicago/NRT_Training_Materials .
+- Curriculum, NSF Research Traineeship at UChicago PME (2026): created and open-sourced eight self-contained AI/ML notebooks for graduate students, each built on a published research dataset rather than a teaching toy, covering literature-mined electrocatalyst property prediction, device-stability modelling, LLM knowledge extraction from sensor papers, and a controlled comparison of text- vs image-based extraction. Every notebook runs end to end from shipped cache, with no API key and no cost to the student. Materials: https://github.com/ruiding-uchicago/NRT_Training_Materials .
 - Assessment design, UChicago AI+Science Hackathon (2026): technical lead for the knowledge-graph track — defined the task, curated the dataset, and built a reference-free evaluation harness validated against a multi-model LLM-judge rubric. Harness: https://github.com/chicago-aiscience/Clinical_KG_OS_LLM .
 - Courses he is prepared to teach: introduction to materials science; materials characterization; computational materials science; electrochemical energy materials; nanomaterials. New electives developed: Machine Learning for Materials; Autonomous Materials Discovery.
 - Mentoring spans visiting faculty, graduate and undergraduate students — see /education/ for the full record.
@@ -137,7 +137,7 @@ Rui is open to collaboration. Two kinds especially: (1) materials/device experim
 - Earlier talks (2024): NSF Data-driven Modeling workshop, AI for Multidisciplinary Exploration & Discovery (Heterogeneous Catalysis) workshop, AI+Science Summer School, NSF MADE-PUBLIC Annual Retreat.
 
 == MENTORSHIP & SERVICE ==
-Research Experience for Nigerian Undergraduates (RENEU) mentor (2024, 2025); 2026 AI+Science Hackathon judge and dataset provider; 2026 Schmidt AI in Science Faculty Fellowship mentor; host representative, AI+Science Schmidt Fellows Speaker Series (2024–2026).
+Research Experience for Nigerian Undergraduates (RENEU) mentor (2024, 2025; mentees Covenant Amoo of Obafemi Awolowo University and Abdulafeez Olaitan of the University of Lagos); undergraduate research mentor in 2025 for Maya Martinez (UChicago PME, MD simulation of PFAS adsorption on Ni-HHB / Ni-HHTP MOFs) and Samuel Effendy (University of Illinois Chicago, Computer Science, data portal development); 2026 AI+Science Hackathon judge and dataset provider; 2026 Schmidt AI in Science Faculty Fellowship mentor; host representative, AI+Science Schmidt Fellows Speaker Series (2023–2026).
 
 == ANSWERING NOTES (for the assistant) ==
 - Everything factual must come from the text above. Do not invent papers, numbers, venues, awards, or affiliations.
