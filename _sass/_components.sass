@@ -1796,10 +1796,16 @@ html.hr-splashing .hr-legend
     transform: translateY(-6px)
 
 // ---------- homepage video card ----------
+// Third column of the profile row, top-aligned with the headshot.
 // Click-to-load facade: nothing is requested from YouTube until the
 // visitor presses play, and the poster frame keeps the 16:9 window.
 .yt-card
-  margin: 0 0 $spacing-8
+  flex: 0 0 auto
+  align-self: flex-start
+  width: unquote("clamp(170px, 26%, 276px)")
+  // .5em matches the global img margin, so the card's top edge sits
+  // level with the top of the headshot next to it
+  margin: .5em 0 0
 
 .yt-frame
   position: relative
@@ -1836,6 +1842,7 @@ html.hr-splashing .hr-legend
   display: block
   width: 100%
   height: 100%
+  margin: 0
   object-fit: cover
   transition: opacity $transition-base, transform $transition-base
 
@@ -1855,17 +1862,17 @@ html.hr-splashing .hr-legend
   display: flex
   align-items: center
   justify-content: center
-  width: 72px
-  height: 50px
-  border-radius: 12px
+  width: 52px
+  height: 36px
+  border-radius: 9px
   background: rgba(16, 12, 12, .72)
   border: 1px solid rgba(255, 255, 255, .28)
   pointer-events: none
   transition: background $transition-base, transform $transition-base
 
 .yt-badge svg
-  width: 20px
-  height: 22px
+  width: 14px
+  height: 16px
   fill: #fff
 
 .yt-play:hover .yt-badge
@@ -1873,15 +1880,21 @@ html.hr-splashing .hr-legend
   transform: translate(-50%, -50%) scale(1.06)
 
 .yt-cap
-  display: flex
-  flex-wrap: wrap
-  align-items: baseline
-  gap: $spacing-2 $spacing-3
-  margin-top: $spacing-3
+  margin: $spacing-2 0 0
+  line-height: 1.35
 
 .yt-cap .eyebrow
-  margin-bottom: 0
+  margin-bottom: 1px
 
 .yt-cap a
-  font-size: $font-size-sm
+  font-family: var(--font-mono)
+  font-size: .72rem
+  letter-spacing: .02em
   color: var(--color-link)
+
+@media (max-width: $breakpoint-md)
+  .yt-card
+    width: 100%
+    max-width: 320px
+  .yt-cap
+    text-align: center
