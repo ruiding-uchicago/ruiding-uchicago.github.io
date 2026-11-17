@@ -1794,3 +1794,94 @@ html.hr-splashing .hr-legend
   100%
     opacity: 0
     transform: translateY(-6px)
+
+// ---------- homepage video card ----------
+// Click-to-load facade: nothing is requested from YouTube until the
+// visitor presses play, and the poster frame keeps the 16:9 window.
+.yt-card
+  margin: 0 0 $spacing-8
+
+.yt-frame
+  position: relative
+  aspect-ratio: unquote("16 / 9")
+  border: 1px solid var(--color-border)
+  border-radius: $radius-lg
+  overflow: hidden
+  background: #000
+  box-shadow: var(--shadow-card)
+  transition: border-color $transition-base, box-shadow $transition-base
+
+.yt-frame:hover
+  border-color: var(--color-border-strong)
+  box-shadow: var(--shadow-hover)
+
+.yt-frame iframe
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  border: 0
+
+.yt-play
+  display: block
+  width: 100%
+  height: 100%
+  padding: 0
+  border: 0
+  background: #000
+  cursor: pointer
+
+.yt-play img
+  display: block
+  width: 100%
+  height: 100%
+  object-fit: cover
+  transition: opacity $transition-base, transform $transition-base
+
+.yt-play:hover img
+  opacity: .82
+  transform: scale(1.02)
+
+.yt-play:focus-visible
+  outline: 2px solid var(--color-primary)
+  outline-offset: 2px
+
+.yt-badge
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 72px
+  height: 50px
+  border-radius: 12px
+  background: rgba(16, 12, 12, .72)
+  border: 1px solid rgba(255, 255, 255, .28)
+  pointer-events: none
+  transition: background $transition-base, transform $transition-base
+
+.yt-badge svg
+  width: 20px
+  height: 22px
+  fill: #fff
+
+.yt-play:hover .yt-badge
+  background: var(--color-primary)
+  transform: translate(-50%, -50%) scale(1.06)
+
+.yt-cap
+  display: flex
+  flex-wrap: wrap
+  align-items: baseline
+  gap: $spacing-2 $spacing-3
+  margin-top: $spacing-3
+
+.yt-cap .eyebrow
+  margin-bottom: 0
+
+.yt-cap a
+  font-size: $font-size-sm
+  color: var(--color-link)

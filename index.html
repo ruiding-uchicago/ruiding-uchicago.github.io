@@ -19,6 +19,38 @@ title: "Home"
     </div>
     <script defer src="/assets/js/hard-region-splash.js"></script>
 
+    <figure class="yt-card" id="yt-intro" data-yt="sQxDVACQDy8">
+        <div class="yt-frame">
+            <button class="yt-play" type="button" aria-label="Play the video: Rui (Ray) Ding, Schmidt AI in Science Fellow at UChicago">
+                <img src="https://i.ytimg.com/vi/sQxDVACQDy8/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+                <span class="yt-badge">
+                    <svg viewBox="0 0 16 18" aria-hidden="true"><path d="M1 1v16l14-8z"/></svg>
+                </span>
+            </button>
+        </div>
+        <figcaption class="yt-cap">
+            <span class="eyebrow">Video &middot; UChicago Data Science Institute</span>
+            <a href="https://www.youtube.com/watch?v=sQxDVACQDy8" target="_blank" rel="noopener">Rui (Ray) Ding &mdash; Schmidt AI in Science Fellow at UChicago</a>
+        </figcaption>
+    </figure>
+    <script>
+    (function () {
+      var fig = document.getElementById('yt-intro');
+      if (!fig) return;
+      var btn = fig.querySelector('.yt-play');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + fig.getAttribute('data-yt') + '?autoplay=1&rel=0';
+        f.title = 'Rui (Ray) Ding | Schmidt AI in Science Fellow at UChicago';
+        f.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+        f.setAttribute('allowfullscreen', '');
+        f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+        btn.parentNode.replaceChild(f, btn);
+      });
+    })();
+    </script>
+
     <div class="profile dot-grid p-6 mb-8">
         <img src="headshot.jpg" alt="Rui (Ray) Ding" class="profile-image">
         <div class="profile-content">
