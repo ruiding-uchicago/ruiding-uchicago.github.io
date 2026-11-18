@@ -33,35 +33,64 @@ title: "Home"
                 </li>
             </ul>
         </div>
-        <figure class="yt-card" id="yt-intro" data-yt="sQxDVACQDy8">
-            <div class="yt-frame">
-                <button class="yt-play" type="button" aria-label="Play the video: Rui (Ray) Ding, Schmidt AI in Science Fellow at UChicago">
-                    <img src="https://i.ytimg.com/vi/sQxDVACQDy8/hq2.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+    </div>
+
+    <div class="video-duo">
+        <figure class="vd-card dot-grid">
+            <div class="yt-frame" data-yt="sQxDVACQDy8" data-yt-title="Rui (Ray) Ding | Schmidt AI in Science Fellow at UChicago">
+                <button class="yt-play" type="button" aria-label="Play the interview: Rui (Ray) Ding, Schmidt AI in Science Fellow at UChicago">
+                    <img src="https://i.ytimg.com/vi/sQxDVACQDy8/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/sQxDVACQDy8/hqdefault.jpg'">
                     <span class="yt-badge">
                         <svg viewBox="0 0 16 18" aria-hidden="true"><path d="M1 1v16l14-8z"/></svg>
                     </span>
                 </button>
             </div>
-            <figcaption class="yt-cap">
-                <span class="eyebrow">Intro &middot; UChicago DSI</span>
-                <a href="https://www.youtube.com/watch?v=sQxDVACQDy8" target="_blank" rel="noopener">Watch on YouTube</a>
+            <figcaption class="vd-cap">
+                <span class="eyebrow vd-eyebrow">Interview &middot; UChicago DSI</span>
+                <h2 class="vd-title">The AI co-scientist stack</h2>
+                <p class="vd-text">What I build and why: mining the literature, device digital twins, and deciding which experiment is worth running in the data-scarce regime.</p>
+                <a class="vd-link" href="https://www.youtube.com/watch?v=sQxDVACQDy8" target="_blank" rel="noopener">Watch the interview <span aria-hidden="true">&rarr;</span></a>
+            </figcaption>
+        </figure>
+
+        <figure class="vd-card vd-new-card dot-grid">
+            <div class="yt-frame" data-yt="zXRvC8sEWI0" data-yt-title="A low-cost, open-source self-driving lab and its Isaac Sim digital twin">
+                <button class="yt-play" type="button" aria-label="Play the demo: a low-cost self-driving lab running a vial pick, weigh, dose and stir cycle alongside its Isaac Sim digital twin">
+                    <img src="https://i.ytimg.com/vi/zXRvC8sEWI0/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/zXRvC8sEWI0/hqdefault.jpg'">
+                    <span class="yt-badge">
+                        <svg viewBox="0 0 16 18" aria-hidden="true"><path d="M1 1v16l14-8z"/></svg>
+                    </span>
+                </button>
+            </div>
+            <figcaption class="vd-cap">
+                <span class="eyebrow vd-eyebrow"><span class="vd-flag">New</span> Embodied self-driving lab</span>
+                <h2 class="vd-title">A self-driving lab for under $250</h2>
+                <p class="vd-text">A low-cost, open-source self-driving lab I built from under $250 of hardware: a VLM agent runs vial pick, weigh, dose and stir workflows on a hobby-grade robot arm, mirrored frame for frame by an Isaac Sim digital twin.</p>
+                <ul class="vd-specs">
+                    <li>VLM agent</li>
+                    <li>6-DoF hobby arm</li>
+                    <li>Isaac Sim twin</li>
+                    <li>open source</li>
+                </ul>
+                <a class="vd-link" href="https://www.youtube.com/watch?v=zXRvC8sEWI0" target="_blank" rel="noopener">Watch the demo <span aria-hidden="true">&rarr;</span></a>
             </figcaption>
         </figure>
     </div>
     <script>
+    /* Click-to-load: YouTube is contacted only once a visitor presses play. */
     (function () {
-      var fig = document.getElementById('yt-intro');
-      if (!fig) return;
-      var btn = fig.querySelector('.yt-play');
-      if (!btn) return;
-      btn.addEventListener('click', function () {
-        var f = document.createElement('iframe');
-        f.src = 'https://www.youtube-nocookie.com/embed/' + fig.getAttribute('data-yt') + '?autoplay=1&rel=0';
-        f.title = 'Rui (Ray) Ding | Schmidt AI in Science Fellow at UChicago';
-        f.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-        f.setAttribute('allowfullscreen', '');
-        f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-        btn.parentNode.replaceChild(f, btn);
+      [].forEach.call(document.querySelectorAll('.yt-frame[data-yt]'), function (frame) {
+        var btn = frame.querySelector('.yt-play');
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+          var f = document.createElement('iframe');
+          f.src = 'https://www.youtube-nocookie.com/embed/' + frame.getAttribute('data-yt') + '?autoplay=1&rel=0';
+          f.title = frame.getAttribute('data-yt-title') || '';
+          f.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+          f.setAttribute('allowfullscreen', '');
+          f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+          btn.parentNode.replaceChild(f, btn);
+        });
       });
     })();
     </script>

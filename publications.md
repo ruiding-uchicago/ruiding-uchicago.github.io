@@ -193,7 +193,7 @@ permalink: /publications/
 <div class="publication-item">
     <div class="publication-title">Reliability-Aware Routing for Foundation Atomistic Simulators in Non-Covalent Binding</div>
     <div class="publication-authors"><strong>Rui Ding</strong>, Zixin Ding, Rodrigo P. Ferreira, Yuxin Chen, and Junhong Chen</div>
-    <div class="publication-venue">Under review at AAAI 2027 (extended manuscript based on the ICML 2026 AI4Physics version)</div>
+    <div class="publication-venue">Submitted to Digital Discovery, invited manuscript (extended version of the ICML 2026 AI4Physics paper)</div>
 </div>
 
 <div class="publication-item">
@@ -205,7 +205,7 @@ permalink: /publications/
 <div class="publication-item">
     <div class="publication-title">Compiling Literature into Device States for Verifier-Gated Closed-Loop Design (ARC)</div>
     <div class="publication-authors"><strong>Rui Ding</strong> et al.</div>
-    <div class="publication-venue">Submitted to AI4Mat, at NeurIPS 2026</div>
+    <div class="publication-venue">Under review</div>
 </div>
 
 <div class="section-header mt-8">

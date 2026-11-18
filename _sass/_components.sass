@@ -1795,18 +1795,11 @@ html.hr-splashing .hr-legend
     opacity: 0
     transform: translateY(-6px)
 
-// ---------- homepage video card ----------
-// Third column of the profile row, top-aligned with the headshot.
-// Click-to-load facade: nothing is requested from YouTube until the
-// visitor presses play, and the poster frame keeps the 16:9 window.
-.yt-card
-  flex: 0 0 auto
-  align-self: flex-start
-  width: unquote("clamp(170px, 26%, 276px)")
-  // .5em matches the global img margin, so the card's top edge sits
-  // level with the top of the headshot next to it
-  margin: .5em 0 0
-
+// ---------- homepage video pair ----------
+// The two videos sit side by side directly under the profile block, so a
+// first-time visitor meets both before scrolling. Click-to-load facade:
+// nothing is requested from YouTube until the visitor presses play, and
+// the poster frame holds the 16:9 window open meanwhile.
 .yt-frame
   position: relative
   aspect-ratio: unquote("16 / 9")
@@ -1862,39 +1855,116 @@ html.hr-splashing .hr-legend
   display: flex
   align-items: center
   justify-content: center
-  width: 52px
-  height: 36px
-  border-radius: 9px
+  width: 64px
+  height: 44px
+  border-radius: 11px
   background: rgba(16, 12, 12, .72)
   border: 1px solid rgba(255, 255, 255, .28)
   pointer-events: none
   transition: background $transition-base, transform $transition-base
 
 .yt-badge svg
-  width: 14px
-  height: 16px
+  width: 17px
+  height: 19px
   fill: #fff
 
 .yt-play:hover .yt-badge
   background: var(--color-primary)
   transform: translate(-50%, -50%) scale(1.06)
 
-.yt-cap
-  margin: $spacing-2 0 0
+// The pair itself: equal halves, so neither video reads as the secondary one.
+.video-duo
+  display: grid
+  grid-template-columns: 1fr 1fr
+  gap: $spacing-6
+  margin: 0 0 $spacing-8
+
+.vd-card
+  display: flex
+  flex-direction: column
+  min-width: 0
+  margin: 0
+  padding: $spacing-4
+  // background-color, not the shorthand: .dot-grid supplies the image
+  background-color: var(--color-bg-elevated)
+  border: 1px solid var(--color-border)
+  border-radius: $radius-lg
+  box-shadow: var(--shadow-card)
+  transition: border-color $transition-base, box-shadow $transition-base
+
+.vd-card:hover
+  border-color: var(--color-border-strong)
+  box-shadow: var(--shadow-hover)
+
+// the newest build carries the one accent edge on the page
+.vd-card.vd-new-card
+  border-left: 3px solid var(--color-primary)
+
+.vd-card .yt-frame
+  border-radius: $radius-md
+
+.vd-cap
+  display: flex
+  flex-direction: column
+  flex: 1 1 auto
+  margin: $spacing-3 0 0
   line-height: 1.35
 
-.yt-cap .eyebrow
-  margin-bottom: 1px
+.vd-eyebrow
+  display: flex
+  align-items: center
+  gap: $spacing-2
+  margin-bottom: $spacing-2
 
-.yt-cap a
+.vd-flag
+  display: inline-block
+  padding: 2px 7px
+  border-radius: $radius-full
+  background: var(--color-primary)
+  color: #fff
+  font-size: .625rem
+  letter-spacing: .1em
+
+.vd-title
+  margin: 0 0 $spacing-2
+  font-size: $font-size-lg
+  font-weight: $font-weight-semibold
+  line-height: 1.25
+
+.vd-text
+  margin: 0 0 $spacing-3
+  color: var(--color-text-muted)
+  font-size: $font-size-sm
+  line-height: 1.55
+
+.vd-specs
+  display: flex
+  flex-wrap: wrap
+  gap: 6px
+  margin: 0 0 $spacing-3
+  padding: 0
+  list-style: none
+
+.vd-specs li
+  margin: 0
+  padding: 3px 9px
+  border: 1px solid var(--color-border)
+  border-radius: $radius-full
+  background: var(--color-bg-secondary)
+  font-family: var(--font-mono)
+  font-size: .66rem
+  letter-spacing: .02em
+  color: var(--color-text-muted)
+
+// pins the link to the card's bottom edge so both cards' links line up
+.vd-link
+  margin-top: auto
   font-family: var(--font-mono)
   font-size: .72rem
   letter-spacing: .02em
   color: var(--color-link)
 
 @media (max-width: $breakpoint-md)
-  .yt-card
-    width: 100%
-    max-width: 320px
-  .yt-cap
-    text-align: center
+  .video-duo
+    grid-template-columns: 1fr
+    gap: $spacing-4
