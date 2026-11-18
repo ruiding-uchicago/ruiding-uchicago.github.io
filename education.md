@@ -190,7 +190,7 @@ permalink: /education/
 
 <div class="publication-item">
     <div class="publication-title">Prepared to teach</div>
-    <div class="publication-authors">Introduction to materials science &middot; materials characterization &middot; computational materials science &middot; electrochemical energy materials &middot; nanomaterials. New electives developed: Machine Learning for Materials; Autonomous Materials Discovery.</div>
+    <div class="publication-authors"><strong>AI / ML electives developed:</strong> Machine Learning for Materials &middot; Autonomous Materials Discovery &middot; Data Science and Machine Learning for Chemical Engineering. These are the courses I most want to teach; the NRT notebooks above are the working prototype for them.<br><br><strong>Materials science core:</strong> introduction to materials science &middot; materials characterization &middot; computational materials science &middot; electrochemical energy materials &middot; nanomaterials.<br><br><strong>Chemical engineering core:</strong> thermodynamics &middot; transport phenomena &middot; chemical reaction engineering &middot; modeling and simulation &middot; unit-operations laboratory. Further electives: electrochemical engineering and energy systems &middot; catalysis and interfacial engineering.</div>
 </div>
 
 <div class="section-header mt-8">

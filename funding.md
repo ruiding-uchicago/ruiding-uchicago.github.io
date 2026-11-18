@@ -18,6 +18,13 @@ permalink: /funding/
 </div>
 
 <div class="card mb-4">
+    <span class="tag tag-primary mb-4">2026 &middot; Co-Organizer</span>
+    <h3 class="feature-title">Schmidt Sciences Community Initiatives Award ($90,990)</h3>
+    <p class="text-muted mb-2">Schmidt Sciences &mdash; University of Chicago</p>
+    <p class="feature-description"><strong>Project:</strong> Self-Driving Labs from First Principles: Build, Break, Understand &mdash; a three-day intensive workshop and closed-loop SDL hackathon for roughly 40 participants, scheduled mid-2027. I design the scientific arc that takes teams from an AI-proposed hypothesis through computational verification to a physical run, and the integration with PoLARIS.</p>
+</div>
+
+<div class="card mb-4">
     <span class="tag tag-primary mb-4">2026 &middot; PI</span>
     <h3 class="feature-title">AI in Science Schmidt Fellowship Seed Fund ($33K)</h3>
     <p class="text-muted mb-2">University of Chicago</p>
@@ -64,9 +71,9 @@ permalink: /funding/
     </div>
     <div class="card">
         <span class="tag tag-primary mb-4">2026</span>
-        <h3 class="feature-title">Google Cloud Research Credits Program</h3>
-        <p class="text-muted mb-2">Project #441314083982</p>
-        <p class="feature-description">Cloud compute for literature-scale compilation and screening.</p>
+        <h3 class="feature-title">Google Cloud Research Credits Program ($5K)</h3>
+        <p class="text-muted mb-2">Gemini model credits &middot; Project #441314083982</p>
+        <p class="feature-description">Model and cloud compute for literature-scale compilation and screening.</p>
     </div>
 </div>
 
