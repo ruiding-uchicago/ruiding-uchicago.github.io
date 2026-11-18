@@ -37,7 +37,7 @@ title: "Home"
 
     <div class="video-duo">
         <figure class="vd-card dot-grid">
-            <div class="yt-frame" data-yt="sQxDVACQDy8" data-yt-title="Rui (Ray) Ding | Schmidt AI in Science Fellow at UChicago">
+            <div class="yt-frame" data-yt="sQxDVACQDy8" data-yt-start="2" data-yt-title="Rui (Ray) Ding | Schmidt AI in Science Fellow at UChicago">
                 <button class="yt-play" type="button" aria-label="Play the interview: Rui (Ray) Ding, Schmidt AI in Science Fellow at UChicago">
                     <img src="https://i.ytimg.com/vi/sQxDVACQDy8/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/sQxDVACQDy8/hqdefault.jpg'">
                     <span class="yt-badge">
@@ -49,7 +49,7 @@ title: "Home"
                 <span class="eyebrow vd-eyebrow">Interview &middot; UChicago DSI</span>
                 <h2 class="vd-title">The AI co-scientist stack</h2>
                 <p class="vd-text">What I build and why: mining the literature, device digital twins, and deciding which experiment is worth running in the data-scarce regime.</p>
-                <a class="vd-link" href="https://www.youtube.com/watch?v=sQxDVACQDy8" target="_blank" rel="noopener">Watch the interview <span aria-hidden="true">&rarr;</span></a>
+                <a class="vd-link" href="https://www.youtube.com/watch?v=sQxDVACQDy8&amp;t=2s" target="_blank" rel="noopener">Watch the interview <span aria-hidden="true">&rarr;</span></a>
             </figcaption>
         </figure>
 
@@ -84,7 +84,8 @@ title: "Home"
         if (!btn) return;
         btn.addEventListener('click', function () {
           var f = document.createElement('iframe');
-          f.src = 'https://www.youtube-nocookie.com/embed/' + frame.getAttribute('data-yt') + '?autoplay=1&rel=0';
+          var start = frame.getAttribute('data-yt-start');
+          f.src = 'https://www.youtube-nocookie.com/embed/' + frame.getAttribute('data-yt') + '?autoplay=1&rel=0' + (start ? '&start=' + start : '');
           f.title = frame.getAttribute('data-yt-title') || '';
           f.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
           f.setAttribute('allowfullscreen', '');
